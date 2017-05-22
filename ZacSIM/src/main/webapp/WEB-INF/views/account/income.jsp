@@ -4,6 +4,15 @@
 <html>
 <head>
   <c:import url="../module2/head.jsp"/>
+  <style type="text/css">
+  
+  .btnPadding{
+  padding-top: 5px;
+  padding-bottom: 2px;
+  padding-left: 12px;
+  padding-right: 12px;
+  }
+  </style>
 </head>
 <body class="skin-blue">
     <div class="wrapper">
@@ -37,11 +46,12 @@
 						<form action="${pageContext.request.contextPath}/" method="post">
 							<div class="box-body">
 								<div class="form-group">
-									<b>기간 선택:</b>&nbsp;&nbsp;
+									<b>기간 선택:</b>
+									&nbsp;&nbsp;
 									<input name="start" type="date" style="width: 150px; height: 25px;">
 									&nbsp;~&nbsp;
 									<input name="end" type="date" style="width: 150px; height: 25px;">
-									<input class="" type="submit" value="검색"/>
+									<input class="btn btn-default btnPadding" style="height: 25px;" type="submit" value="검색"/>
 								</div>
 							</div><!-- /.box-body -->
 						</form>
