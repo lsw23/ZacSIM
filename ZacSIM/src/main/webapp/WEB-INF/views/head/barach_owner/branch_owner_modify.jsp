@@ -93,7 +93,7 @@
 								<div style="height: 30px;">&nbsp;</div>
 								<div class="margin-right-15 templatemo-inline-block">
 									<input type="checkbox" name="tel_chk" id="tel_chk" value="">
-									<label for="c3" class="font-weight-400"><span></span>사업자 연락처와 동일</label>
+									<label for="tel_chk" class="font-weight-400"><span></span>사업자 연락처와 동일</label>
 								</div>
 							</div>
 						</div>
@@ -230,6 +230,28 @@
 	    }
 	</script>
 	<!-- 주소 API end-->
+	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('#branch_owner_pw').keyup(function(){
+			 $('font[name=pw_check]').text('');
+		});
+		
+		$('#pw_confirm').keyup(function(){
+			if($('#branch_owner_pw').val()!=$('#pw_confirm').val()){
+			 $('font[name=pw_check]').text('');
+			 $('font[name=pw_check]').html("비밀번호가 일치하지 않습니다");
+			}else{
+			 $('font[name=pw_check]').text('');
+			}
+		});
+		
+		$('#tel_chk').click(function(){
+			var tel = $('#branch_owner_tel').val();
+			$('#branch_tel').val(tel);
+		});	
+	});
+	</script>
 </body>
 </html>
 					
