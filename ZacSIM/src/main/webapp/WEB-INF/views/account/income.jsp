@@ -34,11 +34,17 @@
 						<div class="box-header">
 							<h3 class="box-title"><b>월별 수입 목록</b></h3>
 						</div><!-- /.box-header -->
-						<div class="box-body">  
-							<div class="form-group">
-								<input type="date" class="form-control"> ~ <input type="date" class="form-control">
-							</div>
-						</div><!-- /.box-body -->
+						<form action="${pageContext.request.contextPath}/" method="post">
+							<div class="box-body">
+								<div class="form-group">
+									<b>기간 선택:</b>&nbsp;&nbsp;
+									<input name="start" type="date" style="width: 150px; height: 25px;">
+									&nbsp;~&nbsp;
+									<input name="end" type="date" style="width: 150px; height: 25px;">
+									<input class="" type="submit" value="검색"/>
+								</div>
+							</div><!-- /.box-body -->
+						</form>
 					</div><!-- /.box -->
              	</div><!-- /.col -->
  	  		</div>
@@ -54,6 +60,6 @@
     </div><!-- ./wrapper -->
 
     <!-- script -->
-    <c:import url="../module2/js.jsp"/>	  
+    <c:import url="../module2/jsscript.jsp"/>	  
 </body>
 </html>
