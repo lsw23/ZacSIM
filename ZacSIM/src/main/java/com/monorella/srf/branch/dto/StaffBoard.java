@@ -1,19 +1,12 @@
 package com.monorella.srf.branch.dto;
 
 public class StaffBoard {
-	private int staffboard_no;
-	private String staffboard_pw;
-	private String staffboard_title;
-	private String staffboard_content;
-	private String staff_name;
-	private String staffboard_date;
-	private int staffboard_recnt;
-	public int getStaffboard_recnt() {
-		return staffboard_recnt;
-	}
-	public void setStaffboard_recnt(int staffboard_recnt) {
-		this.staffboard_recnt = staffboard_recnt;
-	}
+	private int staffboard_no;				//게시판 번호
+	private String staffboard_pw;			//게시판 비번
+	private String staffboard_title;		//게시판 제목
+	private String staffboard_content;		//게시판 내용
+	private String staff_name;				//직원 이름
+	private String staffboard_date;			//게시판 날짜 
 	public int getStaffboard_no() {
 		return staffboard_no;
 	}
@@ -54,7 +47,9 @@ public class StaffBoard {
 	public String toString() {
 		return "StaffBoard [staffboard_no=" + staffboard_no + ", staffboard_pw=" + staffboard_pw + ", staffboard_title="
 				+ staffboard_title + ", staffboard_content=" + staffboard_content + ", staff_name=" + staff_name
-				+ ", staffboard_date=" + staffboard_date + ", staffboard_recnt=" + staffboard_recnt + "]";
+				+ ", staffboard_date=" + staffboard_date + "]";
 	}
+	
+	
 	
 }

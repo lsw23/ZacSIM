@@ -1,12 +1,12 @@
 package com.monorella.srf.branch.dto;
 
-public class StaffBoardReply {
-		private int staffboardreply_no;        // 댓글 번호
-	    private int staffboard_no;   // 게시글 번호
-	    private String staffboardreply_pw;
-	    private String staffboardreply_content;    // 댓글 내용
-	    private String staffboard_name;        // 댓글 작성자
-	    private String staffboardreply_date;        // 댓글 작성일자
+public class StaffBoardReply {	
+		private int staffboardreply_no;        			// 댓글 번호
+	    private int staffboard_no;   					// 게시글 번호
+	    private String staffboardreply_pw;				// 댓글 비밀번호
+	    private String staffboardreply_content;    		// 댓글 내용
+	    private String staffboard_name;       		 	// 댓글 작성자
+	    private String staffboardreply_date;        	// 댓글 작성일자
 		
 	    public int getStaffboardreply_no() {
 			return staffboardreply_no;
