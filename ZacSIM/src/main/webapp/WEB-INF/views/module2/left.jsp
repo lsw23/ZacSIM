@@ -23,7 +23,7 @@
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <!-- active -->
           <ul class="sidebar-menu">
-            <li class="header">메인 메뉴</li>
+            <li class="header">Main Menu</li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
@@ -66,29 +66,33 @@
                 <li><a href="${pageContext.request.contextPath}/room/room_dashboard"><i class="fa fa-circle-o"></i>열람실 현황</a></li>
               </ul>
             </li>
-            <li>
-              <a href="${pageContext.request.contextPath}/staffboard/staffboard_list">
-                <i class="fa fa-envelope"></i> <span>공지사항</span>
-                <small class="label pull-right bg-yellow">12</small>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-credit-card"></i> <span>회계</span>
+                <i class="fa fa-angle-left pull-right"></i>
               </a>
+              <ul class="treeview-menu">
+                <li><a href="${pageContext.request.contextPath}/room/room_form"><i class="fa fa-circle-o"></i>수입</a></li>
+                <li><a href="${pageContext.request.contextPath}/room/room_main"><i class="fa fa-circle-o"></i>지출</a></li>
+              </ul>
             </li>
-            <li id="attendance">
 
-              <a href="${pageContext.request.contextPath}/calendar/calendar">
-                <i class="fa fa-calendar"></i> <span>일정</span>
-              </a>
-            </li>
+            
             <li id="attendance">
               <a href="${pageContext.request.contextPath}/attendance/attendance_form">
                 <i class="fa fa-bell-o"></i> <span>출결번호</span>
               </a>
             </li>
             
+            
+            <li class="header">Sub Menu</li>
+            <li>
+              <a href="${pageContext.request.contextPath}/staffboard/staffboard_list">
+                <i class="fa fa-envelope"></i> <span>공지사항</span>
+                <small class="label pull-right bg-yellow">12</small>
+              </a>
+            </li>
             <li><a href="${pageContext.request.contextPath}/charges/charges_form"><i class="fa fa-book"></i> 요금제 설정</a></li>
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-danger"></i> Important</a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-warning"></i> Warning</a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-info"></i> Information</a></li>
        
           </ul>
         </section>
