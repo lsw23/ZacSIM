@@ -8,6 +8,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/templatemo-style.css" rel="stylesheet">
+
 </head>
 <body>
 	<!-- Left column -->
@@ -90,7 +91,7 @@
 								<div style="height: 30px;">&nbsp;</div>
 								<div class="margin-right-15 templatemo-inline-block">
 									<input type="checkbox" name="tel_chk" id="tel_chk" value="">
-									<label for="c3" class="font-weight-400"><span></span>사업자 연락처와 동일</label>
+									<label for="tel_chk" class="font-weight-400"><span></span>사업자 연락처와 동일</label>
 								</div>
 							</div>
 						</div>
@@ -242,6 +243,7 @@
 		$('#branch_owner_pw').keyup(function(){
 			 $('font[name=pw_check]').text('');
 		});
+		
 		$('#pw_confirm').keyup(function(){
 			if($('#branch_owner_pw').val()!=$('#pw_confirm').val()){
 			 $('font[name=pw_check]').text('');
@@ -250,6 +252,11 @@
 			 $('font[name=pw_check]').text('');
 			}
 		});
+		
+		$('#tel_chk').click(function(){
+			var tel = $('#branch_owner_tel').val();
+			$('#branch_tel').val(tel);
+		});	
 	});
 	</script>
 </body>
