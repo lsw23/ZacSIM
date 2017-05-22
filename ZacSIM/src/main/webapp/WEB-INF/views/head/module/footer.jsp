@@ -6,6 +6,6 @@
 						<a href="http://www.templatemo.com" target="_parent">templatemo</a>
 					</p>
 					<p>
-						Quoted by Academy K-Smart | Team.<a>Zac<b>SIM</b></a> 
+						Quoted by Academy K-Smart | Team.<a href="${pageContext.request.contextPath}/">Zac<b>SIM</b></a> 
 					</p>
 				</footer>
