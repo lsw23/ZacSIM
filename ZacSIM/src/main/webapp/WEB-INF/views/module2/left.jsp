@@ -72,7 +72,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="${pageContext.request.contextPath}/room/room_form"><i class="fa fa-circle-o"></i>수입</a></li>
+                <li><a href="${pageContext.request.contextPath}/account/income"><i class="fa fa-circle-o"></i>수입</a></li>
                 <li><a href="${pageContext.request.contextPath}/room/room_main"><i class="fa fa-circle-o"></i>지출</a></li>
               </ul>
             </li>

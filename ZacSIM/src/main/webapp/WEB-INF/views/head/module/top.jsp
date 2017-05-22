@@ -8,7 +8,7 @@
 							<li><a href="" class="active">Kang Sung Hwan</a></li>
 							<li><a href="">Yang Ji Hun</a></li>
 							<li><a href="">Lee Jun Young</a></li>
-							<li><a href="login.html">Pack Sung Min</a></li>
+							<li><a href="login.html">Pack Suck Min</a></li>
 							<li><a href="login.html">Lee Seung Wook</a></li>
 						</ul>
 					</nav>
