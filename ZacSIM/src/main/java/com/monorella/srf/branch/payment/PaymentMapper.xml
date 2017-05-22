@@ -1,0 +1,66 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monorella.srf.branch.payment.PaymentMapper">
+
+	<insert id="insertPayment" parameterType="com.monorella.srf.branch.dto.Payment">
+		INSERT INTO branch_pay_tb(
+ 			branch_owner_cd
+			, room_cd
+			, seat_cd
+			, member_cd
+			, pay_amount
+			, discount_amount
+			, total_amount
+			, pay_date
+			, pay_due
+			)
+			
+			<!-- , pay_option) -->
+		VALUES(
+ 			#{branch_owner_cd}
+			, #{room_cd}
+			, #{seat_cd}
+			, #{member_cd}
+			, #{pay_amount}
+			, #{discount_amount}
+			, #{total_amount}
+			, #{pay_date} 
+			, #{pay_due}
+			<!-- , #{pay_option} -->
+
+		)
+	</insert>
+
+	<update id="modifyPaymentSeat" parameterType="com.monorella.srf.branch.dto.Payment">
+		UPDATE branch_saet_tb 
+            SET 
+            seat_appoint = 'Y'
+        WHERE seat_cd = #{seat_cd}
+    </update>
+    
+    <update id="modifyPaymentMember" parameterType="com.monorella.srf.branch.dto.Payment">
+		UPDATE branch_member_tb 
+            SET 
+            seat_cd = #{seat_cd}
+            , member_date = CURRENT_DATE()
+            , member_regi_date = now()
+            , member_end_date = #{pay_date}
+        WHERE member_cd = #{member_cd}
+    </update>
+    
+	<select id="detailMember" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">
+		SELECT 
+			member_cd 
+			, branch_owner_cd 
+			, staff_id 
+			, member_nm 
+			, member_sex 
+			, member_tel 
+			, member_addr
+			, member_age 
+			, member_seat_state
+			FROM branch_member_tb 
+			WHERE member_nm = #{member_nm}
+	</select>
+    
+</mapper>

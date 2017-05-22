@@ -1,0 +1,13 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.monorella.srf.branch.login.LoginMapper">
+	<select id="loginBranchOwner" parameterType="com.monorella.srf.branch.dto.BranchOwner" resultType="com.monorella.srf.branch.dto.BranchOwner">
+		SELECT bo.branch_owner_cd , b.branch_addr 
+		FROM branch_owner_tb bo
+		INNER JOIN branch b  
+		ON bo.branch_owner_cd = b.branch_owner_cd
+		WHERE bo.branch_owner_id = #{branch_owner_id} 
+		AND bo.branch_owner_pw = #{branch_owner_pw};
+	</select>
+</mapper>
