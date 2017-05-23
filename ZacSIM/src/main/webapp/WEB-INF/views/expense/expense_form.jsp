@@ -9,25 +9,6 @@
 <!-- JS -->
 <c:import url="../module2/jsscript.jsp" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $('.__count_range input[count_range]').click(function(e){
-        e.preventDefault();
-        var type = $(this).attr('count_range');
-        var $count = $(this).parent().children('input.count');
-        var count_val = $count.val(); // min 1
-        if(type=='m'){
-            if(count_val<1){
-                return;
-            }
-            $count.val(parseInt(count_val)-1);
-        }else if(type=='p'){
-            $count.val(parseInt(count_val)+1);
-        }
-    });
-});
-</script>
-
 </head>
 <body class="skin-blue">
 	<div class="wrapper">
@@ -60,7 +41,7 @@ $(document).ready(function(){
 							</div>
 							<!-- /.box-header -->
 							<!-- form start -->
-							<form id="addForm" role="form" action="${pageContext.request.contextPath}/staffboard/staffboard_pro" method="post">
+							<form id="addForm" role="form" action="${pageContext.request.contextPath}/expense/expense_form_pro" method="post">
 								<div class="box-body">
 									<div class="form-group">
 										<label for="exampleInputbranch_owner_cd">지점 대표 코드</label> 
@@ -83,11 +64,7 @@ $(document).ready(function(){
 									</div>
 									<div class="form-group">
 										<label for="exampleInputFile">지출 수량</label> 
-										<div>
-										  	<input type=text name=amount value=500> 
-											<input type=button value="증가" onClick="javascript:this.form.amount.value++;"> 
-											<input type=button value="감소" onClick="javascript:this.form.amount.value--;"> 
-										</div>
+										<input type="text" class="form-control" id="expense_amount" name="expense_amount" placeholder="담당자를 입력해주세요">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputFile">지출 담당자</label> 
@@ -101,6 +78,10 @@ $(document).ready(function(){
 										<label for="exampleInputFile">지출 합계</label> 
 										<input type="text" class="form-control" id="expense_total" name="expense_total">
 									</div>									
+								</div>
+								<div class="box-footer">
+									<button id="staffbutton" type="submit" class="btn btn-primary">글입력</button>
+									<button type="reset" class="btn btn-primary">초기화</button>
 								</div>
 							</form>
 						</div>
