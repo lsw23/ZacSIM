@@ -21,8 +21,8 @@
 		                  <form>
 		                  	<div class="form-group">
 		                      <label for="exampleInputPassword1">출결번호</label>
-		                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="회원의 출결번호를 입력해주세요.">
-		                      <button class="btn btn-block btn-info btn-flat">확인</button>
+		                      <input type="password" class="form-control" id="inout_num" name="inout_num" value="0023">
+		                      <button type="button" class="btn btn-block btn-info btn-flat" id="check_btn">확인</button>
 		                    </div>
 		                  </form>
 		                </div><!-- /.box-body -->
@@ -32,10 +32,10 @@
 		              <!-- Warning box -->
 		              <div class="box box-solid bg-yellow">
 		                <div class="box-header">
-		                  <h3 class="box-title"></h3>
+		                  <h3 class="box-title" id="input_date"></h3>
 		                </div>
-		                <div class="box-body">
-							홍길동님의 입실처리가 완료되었습니다.
+		                <div class="box-body" id="input_status">
+							
 		                </div><!-- /.box-body -->
 		              </div><!-- /.box -->
 		            </div><!-- /.col -->
@@ -44,6 +44,50 @@
 		</div>
 	</div>		
 	<!-- JS -->
-	<c:import url="../module2/jsscript.jsp" />			
+	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		$('#check_btn').click(function(){
+			console.log('확인 클릭');
+			var num = $('#inout_num').val();
+			console.log('num : '+ num);
+			
+			//현재 DATE 구하기  
+		      var now = new Date();
+		      var year= now.getFullYear();
+		      var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+		      var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+		      var now_date = year + '-' + mon + '-' + day;
+		      console.log('now_date :' + now_date);
+		      
+		    //현재 시간 구하기 
+		      var now_time = now.getHours();
+			  now_time += ':' + now.getMinutes();
+              now_time += ':' + now.getSeconds(); 
+		      
+              console.log('now_time :' + now_time);
+			
+			var attendancData = {"inout_num":num, "now_date":now_date};
+			
+			$.ajax({
+				url:'${pageContext.request.contextPath}/attendance/attendance_pro',
+				type:'POST',
+				data:attendancData,
+				
+				success:function(data){
+					console.log(now_date + ' , ' + now_time + ', ' + data.name + '님이 ,'+ data.status + '처리 되었습니다.');
+					$('#input_date').html(now_date +' '+ now_time);
+					$('#input_status').html('<h3>'+ data.name + '님이 ' + data.status + '하셨습니다. </h3>');
+				},
+				error:function(XHR, textStatus, error){
+					alert('출결번호가 일치하지 않거나 결제된 열람석이 존재하지 않습니다. [' + textStatus + ' :' + error+ ']');
+					
+				}
+			});
+			
+		});
+			
+			
+	</script>
+		
 </body>
 </html>

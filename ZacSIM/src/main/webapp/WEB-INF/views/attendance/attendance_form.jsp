@@ -38,15 +38,11 @@
 	                </div>
 	                <div class="box-body">
 	                  	출결번호 입력창: <button class="btn bg-orange btn-flat margin" id="input_btn">클릭해주세요.</button>
-	                  <p>
-	             		출결번호를 외부기기 점검 혹은 고장시 위 버튼을 클릭시 출결번호를 입력할 수 있는 창이 생성됩니다.
-	                  </p>
 	                </div><!-- /.box-body -->
 	              </div><!-- /.box -->
 	            </div><!-- /.col -->
 			</div><!-- row -->
-		</section><!-- content -->
-        
+	     </section><!-- content -->
         </div><!--content-wrapper -->
        </div><!-- wrapper --> 
 	
@@ -55,7 +51,7 @@
 	<script>
 		$('#input_btn').click(function(){
 			console.log('#input_btn 클릭');
-			window.open('${pageContext.request.contextPath}/attendance/attendance_input', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=600,width=500,height=700');
+			window.open('${pageContext.request.contextPath}/attendance/attendance_input', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=600,width=500,height=400');
 		});
 	</script>
 	
