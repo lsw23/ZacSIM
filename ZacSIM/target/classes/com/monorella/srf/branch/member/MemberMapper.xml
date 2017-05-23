@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.monorella.srf.branch.member.MemberMapper">
+
 	<!-- 신규회원 알림 -->
 	<select id="MemberNew" resultType="String" parameterType="com.monorella.srf.branch.dto.Member">
 		SELECT count(*) FROM branch_member_tb
@@ -55,7 +56,7 @@
 	</select>
 
 	<!-- 회원 검색 -->
-	<select id="MemberSearch" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
+	<select id="searchMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			 member_cd
 			 , member_nm AS member_nm
@@ -84,7 +85,7 @@
 				WHERE member_seat_state like concat('%',#{sv},'%')
 			</if>
 			</if> 
-	</select>	
+	</select>
 	
 	<!-- 회원 리스트 -->	
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
@@ -125,7 +126,7 @@
 	<select id="selectMemberCount" resultType="int">
         SELECT COUNT(*) FROM branch_member_tb
     </select>
-	
+
  	<!-- 요금제 자동등록 -->
   	<insert id="autoMemberCode" parameterType="com.monorella.srf.branch.dto.Member">
   		<selectKey resultType="String" keyProperty="member_cd" order="BEFORE">

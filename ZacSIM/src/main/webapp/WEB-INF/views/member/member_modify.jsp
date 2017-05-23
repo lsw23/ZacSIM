@@ -61,8 +61,8 @@
       <div class="content-wrapper">
 		  <section class="content-header">
 		    <h1>
-		       StudyRoom
-		      <small>웹 기반 독서실 관리프로그램</small>
+		       	독서실 회원
+		      <small>수정</small>
 		    </h1>
 		    <ol class="breadcrumb">
 		      <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
