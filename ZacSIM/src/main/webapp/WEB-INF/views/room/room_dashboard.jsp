@@ -47,16 +47,22 @@
 		                <th>퇴실</th>
 		                <th>만료예정</th>
 		                <th>총원</th>
+		                <th>결제 열람석 수</th>
+		                <th>미결제 열람석 수</th>
             		  </tr>
                     </thead>
                     <tbody>
-                       <tr>
-                        <td>201호</td>
-                        <td>1</td>
-                        <td>6</td>
-                        <td>0</td>
-                        <td>7</td>
-                      </tr> 
+                       <c:forEach var="rd" items="${roomdashlist}">
+                    	  <tr>
+	                        <td>${rd.room_nm}</td>
+	                        <td>${rd.seat_in}</td>
+	                        <td>${rd.seat_out}</td>
+	                        <td>${rd.room_out}</td>
+	                        <td>${rd.room_personnel}</td>
+	                        <td>${rd.pay_seat}</td>
+	                        <td>${rd.notpay_seat}</td>
+	                      </tr> 
+                       </c:forEach>
                     </tbody>
                   </table>
                   
