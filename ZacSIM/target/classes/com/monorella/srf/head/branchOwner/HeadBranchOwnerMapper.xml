@@ -2,6 +2,19 @@
 
 <mapper namespace="com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper">
 	
+	<!-- 사업자 삭제시 insert_num_list 테이블에 branch_owner_cd 및 레코드 한 줄 삭제 -->
+	<insert id="deleteBranchOwnerCode" parameterType="String">
+		DELETE FROM insert_num_list WHERE branch_owner_cd = #{branch_owner_cd};
+	</insert>
+	
+	<!-- 사업자 등록시 insert_num_list 테이블에 branch_owner_cd 및 레코드 한 줄 생성 -->
+	<insert id="insertBranchOwnerCode" parameterType="String">
+		INSERT INTO insert_num_list
+		(branch_owner_cd)
+		VALUES
+		(#{branch_owner_cd});
+	</insert>
+	
 	<!-- 사업자 정보 삭제 -->
 	<delete id="deleteBranchOwner" parameterType="String">
 		DELETE FROM branch_owner_tb WHERE branch_owner_cd = #{branch_owner_cd};
