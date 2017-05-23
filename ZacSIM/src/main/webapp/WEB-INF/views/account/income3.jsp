@@ -16,7 +16,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
   <link href="${pageContext.request.contextPath}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
   <!-- DATA TABLES -->
-  <link href="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+  <link href="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" /> 
   
   <style type="text/css">
 	  .btnPadding{
@@ -62,7 +62,7 @@
 									<input name="startDate" type="date" style="width: 150px; height: 25px;">
 									&nbsp;~&nbsp;
 									<input name="endDate" type="date" style="width: 150px; height: 25px;">
-									<input class="btnPadding" type="submit" value="검색"/>
+									<input id="search" class="btnPadding" type="submit" value="검색"/>
 									<p><small>(기간은 최소 하루 이상으로 선택해 주세요. ex.2017-01-01의 수입내역-> 2017-01-01 ~ 2017-01-02)</small></p>
 								</div>
 							</div><!-- /.box-body -->
@@ -72,9 +72,9 @@
              	<div class="col-md-12">
 					<div class="box box-default">
 						<div class="box-body">
+							 <p id="p1">기간: ${startDate} ~ ${endDate}</p>
+							 <p id="p2">금액 합계: ${total} 원</p>
 							 <table id="example2" class="table table-bordered table-striped">
-							 	<p>기간: ${startDate} ~ ${endDate}</p>
-							 	<p>금액 합계: ${total} 원</p>
 			                    <thead>
 									<tr>
 										<th>결제자 이름</th>
@@ -109,8 +109,7 @@
       </footer>
     </div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.3 -->
-    <script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+
     <!-- Bootstrap 3.3.2 JS -->
     <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- FastClick -->
@@ -124,18 +123,32 @@
 	<!-- DATA TABES SCRIPT -->
     <script src="${pageContext.request.contextPath}/resources/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
-    
+	<!-- jQuery 2.1.3 -->
+  	<script src="${pageContext.request.contextPath}/resources/plugins/jQuery/jQuery-2.1.3.min.js"></script>
+  
     <script type="text/javascript">
       $(function () {
         $('#example2').dataTable({
           "bPaginate": true,
           "bLengthChange": true, // jquery.dataTables.js 파일 내에 aLengthMenu로 find
-          "bFilter": false,
-          "bSort": false,
+          "bFilter": true,
+          "bSort": true,
           "bInfo": true,
           "bAutoWidth": true
         });
       });
-    </script> 
+    </script>
+    
+    <script type="text/javascript">
+	  	$(document).ready(function(){
+	  		$("#p1").hide();
+			$("#p2").hide();
+	  		
+			$('#search').click(function(){
+	  			$("#p1").show();
+	  			$("#p2").show();
+	  		});
+	  	});
+  	</script>
 </body>
 </html>

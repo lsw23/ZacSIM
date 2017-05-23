@@ -2,6 +2,9 @@ package com.monorella.srf.branch.income;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,29 +13,69 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.Payment;
+
 @Controller
 public class IncomeController {
 	
 	@Autowired
 	private IncomeDao incomeDao; 
 	
-	// 수입 목록 폼
-	@RequestMapping(value="/account/income", method=RequestMethod.GET)
+	// 수입 목록 검색
+	@RequestMapping(value="/income_list_search_pro", method=RequestMethod.POST)
 	public String selectIncomeList(Model model
 			, @RequestParam(value="startDate") String startDate
-			, @RequestParam(value="endDate") String endDate ){
-		System.out.println("AccountController-> selectIncomeList()");
+			, @RequestParam(value="endDate") String endDate 
+			, HttpSession session){
+		System.out.println("IncomeController-> SelectIncomeList()-> startDate: "+ startDate+ ", endDate: "+endDate);
 		// 오늘 날짜 및 해당 월 구하기 -----------------------------------------------------------
 		Date today = new Date();
 	    SimpleDateFormat simpleToday = new SimpleDateFormat("yyyy-MM-dd");
-	    SimpleDateFormat month = new SimpleDateFormat("M");
-	    
-	    // 기간 별 수입 목록 검색
-	    
-	    
-	    //System.out.println("DashboardController-> selectTodayStatus()-> simpleToday: "+ simpleToday.format(today));
- 		//System.out.println("DashboardController-> selectTodayStatus()-> month: "+ month.format(today));
+	    SimpleDateFormat month = new SimpleDateFormat("M");	     
 		
+		// 세선에서 사업자 코드 받기
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		String branch_owner_cd = branchOwner.getBranch_owner_cd();
+		
+		// 기간별 수입 목록 검색
+		List<Payment> pay = incomeDao.selectIncomeList(startDate, endDate, branch_owner_cd);
+		
+		// 기간 수입 합계
+		int total = incomeDao.selectIncomeSum(startDate, endDate, branch_owner_cd);
+		
+		//System.out.println("IncomeController-> IncomeForm()-> simpleToday: "+ simpleToday.format(today));
+ 		//System.out.println("IncomeController-> IncomeForm()-> month: "+ month.format(today));
+		
+		//System.out.println("IncomeController-> IncomeForm()-> pay: "+ pay);
+		
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		
+		model.addAttribute("today", simpleToday.format(today));
+	    model.addAttribute("month", month.format(today));
+		
+		model.addAttribute("pay", pay);
+		
+		model.addAttribute("total", total);
+		
+		
+		return "/account/income";
+	}
+	
+	// 수입 목록 폼
+	@RequestMapping(value="/account/income", method=RequestMethod.GET)
+	public String incomeForm(Model model){
+		System.out.println("AccountController-> selectIncomeList()");
+		
+		// 오늘 날짜 및 해당 월 구하기 -----------------------------------------------------------
+		Date today = new Date();
+	    SimpleDateFormat simpleToday = new SimpleDateFormat("yyyy-MM-dd");
+	    SimpleDateFormat month = new SimpleDateFormat("M");	    
+	    
+	    //System.out.println("IncomeController-> IncomeForm()-> simpleToday: "+ simpleToday.format(today));
+ 		//System.out.println("IncomeController-> IncomeForm()-> month: "+ month.format(today));
+	    
 	    model.addAttribute("today", simpleToday.format(today));
 	    model.addAttribute("month", month.format(today));
 	    
