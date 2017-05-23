@@ -1,7 +1,7 @@
 package com.monorella.srf.branch.dto;
 
 public class Payment {
-	private String pay_cd;
+	private int pay_cd;
 	private String branch_owner_cd;
 	private String room_cd;
 	private String seat_cd;
@@ -13,10 +13,10 @@ public class Payment {
 	private String pay_due;
 	private String pay_option;
 	private String member_nm;
-	public String getPay_cd() {
+	public int getPay_cd() {
 		return pay_cd;
 	}
-	public void setPay_cd(String pay_cd) {
+	public void setPay_cd(int pay_cd) {
 		this.pay_cd = pay_cd;
 	}
 	public String getBranch_owner_cd() {

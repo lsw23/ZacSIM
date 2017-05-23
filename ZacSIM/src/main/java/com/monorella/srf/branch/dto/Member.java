@@ -5,18 +5,19 @@ public class Member {
 	private String branch_owner_cd;
 	private String staff_id;
 	private int seat_cd;
-	private String inout_num;
+	private int inout_num;
 	private String member_nm;
 	private String member_sex;
 	private String member_tel;
 	private String member_addr;
 	private int member_age;
 	private String member_date;
-	private String member_regi_date;
+	private String member_regi_date; 
 	private String member_end_date;
 	private String member_seat_state;
 	private String member_regi_path;
 	private String member_use_pur;
+
 	public String getMember_cd() {
 		return member_cd;
 	}
@@ -41,10 +42,10 @@ public class Member {
 	public void setSeat_cd(int seat_cd) {
 		this.seat_cd = seat_cd;
 	}
-	public String getInout_num() {
+	public int getInout_num() {
 		return inout_num;
 	}
-	public void setInout_num(String inout_num) {
+	public void setInout_num(int inout_num) {
 		this.inout_num = inout_num;
 	}
 	public String getMember_nm() {

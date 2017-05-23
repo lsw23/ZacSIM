@@ -36,6 +36,12 @@
 	
 	<div class="row">
             <div class="col-xs-12">
+            <div class="box box-primary">
+            <h4>dd</h4>
+            <input type="date" class="form-control" id="expense_date" name="expense_date">
+            <input type="date" class="form-control" id="expense_date" name="expense_date">
+            </div>
+            
               <div class="box">  
                 <div class="box-body table-responsive no-padding">
                   <table class="table ">

@@ -53,6 +53,7 @@
               <ul class="treeview-menu">
                 <li><a href="${pageContext.request.contextPath}/member/member_form"><i class="fa fa-circle-o"></i> 회원 등록</a></li>
                 <li><a href="${pageContext.request.contextPath}/member/member_list"><i class="fa fa-circle-o"></i> 회원 목록</a></li>
+                <li><a href="${pageContext.request.contextPath}/member/member_exit"><i class="fa fa-circle-o"></i> 회원 입퇴실</a></li>
               </ul>
             </li>
             <li class="treeview">

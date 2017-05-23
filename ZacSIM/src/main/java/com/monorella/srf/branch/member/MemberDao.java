@@ -53,7 +53,7 @@ public class MemberDao {
 		memberList = sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.searchMember", map);
 		return memberList;
 	}	
-	
+
 	// 회원리스트 메서드
 	public List<Member> selectMemberList(int currentPage, int pagePerRow) {
 		Map<String, Integer> map = new HashMap<String, Integer>();

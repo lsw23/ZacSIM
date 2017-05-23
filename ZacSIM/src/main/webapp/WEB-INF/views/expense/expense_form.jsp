@@ -64,7 +64,9 @@
 									</div>
 									<div class="form-group">
 										<label for="exampleInputFile">지출 수량</label> 
-										<input type="text" class="form-control" id="expense_amount" name="expense_amount" placeholder="담당자를 입력해주세요">
+										<input type="button" id="minus" value=" - "> 
+										<input type="text" id="expense_amount" value="1" size="3"> 
+										<input type="button" id="plus" value=" + "> 
 									</div>
 									<div class="form-group">
 										<label for="exampleInputFile">지출 담당자</label> 
@@ -76,7 +78,7 @@
 									</div>
 									<div class="form-group">
 										<label for="exampleInputFile">지출 합계</label> 
-										<input type="text" class="form-control" id="expense_total" name="expense_total">
+										<input type="text" class="form-control" id="expense_total" name="expense_total" readonly>
 									</div>									
 								</div>
 								<div class="box-footer">
@@ -84,6 +86,44 @@
 									<button type="reset" class="btn btn-primary">초기화</button>
 								</div>
 							</form>
+							<script type="text/javascript">
+								$(function() {
+									$('#minus').click(function(e) {
+										var stat = $('#expense_amount').val();
+										console.log('stat : ' + stat);
+										var num = stat*1;
+										num--;
+										if (num <= 0) {
+											alert('더이상 줄일수 없습니다.');
+											num = 1;
+										}
+										var expense_price = $('#expense_price').val();
+										expense_price *=1;
+										expense_price *= num;
+										console.log('expense_price' + expense_price);
+										$('#expense_amount').val(num);
+										$('#expense_total').val(expense_price);
+									});
+									$('#plus').click(function() {
+										var stat = $('#expense_amount').val();
+										console.log('plus stat ' + stat);
+										var num = stat*1;
+										console.log(num);
+										num +=1;
+									
+										if (num > 99) {
+											alert('더이상 늘릴수 없습니다.');
+											num = 99;
+										}
+										var expense_price = $('#expense_price').val();
+										expense_price *=1;
+										expense_price *= num;
+										console.log('expense_price' + expense_price);
+										$('#expense_amount').val(num);
+										$('#expense_total').val(expense_price);
+									});
+								});
+							</script>
 						</div>
 					</div>
 				</div>

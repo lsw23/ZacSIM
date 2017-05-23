@@ -3,11 +3,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script>
 	$(document).ready(function(){
 		//console.log("하이");
 		$('#joinForm').click(function(){
+			var member_sex = $('#member_sex').val();
 			var member_regi_path = $('#member_regi_path').val();
 			var member_use_pur = $('#member_use_pur').val();
 			if($('#staff_id').val().length < 5) {
@@ -16,9 +18,9 @@
 			} else if($('#member_nm').val()=='') {
 	            alert('이름을 입력해주세요');
 	            $('#member_nm').focus();
-			} else if($('#member_sex').val()=='') {
-	            alert('성별을 입력해주세요');
-	            $('#member_sex').focus();    
+			}  else if(member_sex == '선택'){
+	            alert('성별을 선택해 주세요');
+	            $('#member_sex').focus();
 			} else if($('#member_tel').val()=='') {
 	            alert('연락처를 입력해주세요');
 	            $('#member_tel').focus();
@@ -61,8 +63,8 @@
       <div class="content-wrapper">
 		  <section class="content-header">
 		    <h1>
-		       StudyRoom
-		      <small>웹 기반 독서실 관리프로그램</small>
+		                독서실 회원
+		      <small>등록</small>
 		    </h1>
 		    <ol class="breadcrumb">
 		      <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -97,7 +99,11 @@
 							</div>
 							<div class="form-group">
 								<label class="control-label" for="inputLarge">성별</label>
-								<input type="text" class="form-control" id="member_sex" name="member_sex" placeholder="성별을 입력해주세요">
+								<select class="form-control" name="member_sex" id="member_sex" >
+								<option value="선택" selected>성별을 선택해 주세요</option> 
+									<option value="남자">남자</option> 
+									<option value="여자">여자</option> 
+								</select>	
 							</div>
 							<div class="form-group">
 								<label class="control-label" for="inputLarge">연락처</label>
@@ -148,6 +154,6 @@
 			</div> 
 		   </section>
 	      </div>	
-		</div>	
+		</div>
 	</body>
 </html>
