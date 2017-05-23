@@ -1,18 +1,17 @@
 package com.monorella.srf.branch.dto;
 
 public class Payment {
-	private int pay_cd;
-	private String branch_owner_cd;
-	private String room_cd;
-	private String seat_cd;
-	private String member_cd;
-	private int pay_amount;
-	private int discount_amount;
-	private int total_amount;
-	private String pay_date;
-	private String pay_due;
-	private String pay_option;
-	private String member_nm;
+	private int pay_cd; //결제 코드
+	private String branch_owner_cd; //지점대표코드
+	private String room_cd; //열람실 코드
+	private String seat_cd; //열람석 코드
+	private String member_cd; //회원 코드
+	private int total_amount; //결제금액
+	private String pay_date; //결제일
+	private String member_regi_date; //회원 기간 시작일
+	private String member_end_date; //회원 기간 만료일
+	private String pay_option; //결제 종류
+	private String member_nm; //회원 이름
 	public int getPay_cd() {
 		return pay_cd;
 	}
@@ -43,18 +42,6 @@ public class Payment {
 	public void setMember_cd(String member_cd) {
 		this.member_cd = member_cd;
 	}
-	public int getPay_amount() {
-		return pay_amount;
-	}
-	public void setPay_amount(int pay_amount) {
-		this.pay_amount = pay_amount;
-	}
-	public int getDiscount_amount() {
-		return discount_amount;
-	}
-	public void setDiscount_amount(int discount_amount) {
-		this.discount_amount = discount_amount;
-	}
 	public int getTotal_amount() {
 		return total_amount;
 	}
@@ -67,11 +54,17 @@ public class Payment {
 	public void setPay_date(String pay_date) {
 		this.pay_date = pay_date;
 	}
-	public String getPay_due() {
-		return pay_due;
+	public String getMember_regi_date() {
+		return member_regi_date;
 	}
-	public void setPay_due(String pay_due) {
-		this.pay_due = pay_due;
+	public void setMember_regi_date(String member_regi_date) {
+		this.member_regi_date = member_regi_date;
+	}
+	public String getMember_end_date() {
+		return member_end_date;
+	}
+	public void setMember_end_date(String member_end_date) {
+		this.member_end_date = member_end_date;
 	}
 	public String getPay_option() {
 		return pay_option;
@@ -85,13 +78,12 @@ public class Payment {
 	public void setMember_nm(String member_nm) {
 		this.member_nm = member_nm;
 	}
+	
 	@Override
 	public String toString() {
 		return "Payment [pay_cd=" + pay_cd + ", branch_owner_cd=" + branch_owner_cd + ", room_cd=" + room_cd
-				+ ", seat_cd=" + seat_cd + ", member_cd=" + member_cd + ", pay_amount=" + pay_amount
-				+ ", discount_amount=" + discount_amount + ", total_amount=" + total_amount + ", pay_date=" + pay_date
-				+ ", pay_due=" + pay_due + ", pay_option=" + pay_option + ", member_nm=" + member_nm + "]";
+				+ ", seat_cd=" + seat_cd + ", member_cd=" + member_cd + ", total_amount=" + total_amount + ", pay_date="
+				+ pay_date + ", member_regi_date=" + member_regi_date + ", member_end_date=" + member_end_date
+				+ ", pay_option=" + pay_option + ", member_nm=" + member_nm + "]";
 	}
-	
-
 }

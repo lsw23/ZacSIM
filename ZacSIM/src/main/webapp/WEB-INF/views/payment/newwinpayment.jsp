@@ -10,9 +10,9 @@
 	<div class="row">
 		<div class="col-md-12">
              <!-- Info box -->
-             <div class="box box-solid bg-aqua">
+             <div class="box box-solid bg-olive">
                <div class="box-header">
-                 <h2 class="box-title"><i class="fa fa-bell-o"></i>결제</h2>
+                 <h2 class="box-title"><i class="fa fa-pagelines"></i>결제</h2>
                </div>
               </div><!-- box box-solid bg-aqua -->
 		             
@@ -37,31 +37,30 @@
 					    
 					    <div class="form-group">
 					    <label for="fname">회원코드&nbsp;</label>
-					    <input type="text" id="member_cd" name="member_cd" class="form-control" value="${member_cd}">
+					    <input type="text" id="member_cd" name="member_cd" class="form-control">
 					    </div>
 					    
 					    <div class="form-group">
-					    <label for="fname">회원요금&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					    <label for="fname">등록일</label>
+					    <input type="date" name="member_regi_date" class="form-control">
+					    </div>
+					    
+					    <div class="form-group">
+					    <label for="fname">만료일</label>
+					    <input type="date" name="member_end_date" class="form-control">
+					    </div>
+
+						<div class="form-group">
+					    <label for="lname">결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					    <label>
 					    		학생 	<input type="radio" name="r3" class="flat-red" checked/>
 	                    </label>
 	                    <label>
 	                      		일반 <input type="radio" name="r3" class="flat-red"/>
 	                    </label>
-					    	<input type="text" id="pay_amount" name="pay_amount" class="form-control">
-					    </div>
-						
-						<div class="form-group">
-					    <label for="lname">할인금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					    
-					    <input type="text" id="discount_amount" name="discount_amount" class="form-control">
-						</div>
-						
-						<div class="form-group">
-					    <label for="lname">결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					    <input type="text" id="total_amount" name="total_amount" class="form-control">
 					    </div>
-
+						
 					    <div class="form-group">
 					    <label for="결제 방법">결제방법&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					    <select id="결제 방법" name="pay_option" class="form-control">
@@ -92,6 +91,7 @@
 	      radioClass: 'iradio_flat-green'
 	    });
 		
+		//결제 요금 계산
 		$('#discount_amount').blur(function(){
 			console.log('요금 테스트');
 			var pay = $('#pay_amount').val() *1;

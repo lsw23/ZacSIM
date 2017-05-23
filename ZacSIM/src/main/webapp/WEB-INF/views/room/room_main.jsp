@@ -44,7 +44,7 @@
 				//결제창
 				window.open(contextPath+'/payment/newwinpayment?branch_owner_cd='+branch_owner_cd+'&room_cd='+room_cd+'&seat_cd='+seat_cd+'&member_cd='+member_cd, '_blank', specs);
 			    } else {
-				    var width=500, height=800;
+				    var width=500, height=500;
 				    var left = (screen.availWidth - width)/2;
 				    var top = (screen.availHeight - height)/2;
 				    var specs = "width=" + width;
@@ -52,9 +52,8 @@
 				    specs += ",left=" + left;
 				    specs += ",top=" + top;
 				//상세정보
-					window.open(contextPath+'/payment/newwindetail?member_nm='+windetailon, '_blank', specs);
-				   	
-			    	
+					var seat_cd = $(this).val();
+					window.open(contextPath+'/payment/newwindetail?member_nm='+windetailon+'&seat_cd='+seat_cd, '_blank', specs);
 			    }
 			});
 		});

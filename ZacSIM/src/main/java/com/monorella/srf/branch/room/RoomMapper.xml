@@ -25,7 +25,7 @@
 	</update>
   	
   	<!-- 열람실 현황 조회 -->
-  	<select id="selctRoomDashBoardNow" resultType="com.monorella.srf.branch.dto.RoomDashBoard">
+  	<select id="selctRoomDashBoardNow" resultType="com.monorella.srf.branch.dto.RoomDashBoard" parameterType="com.monorella.srf.branch.dto.BranchOwner">
 		SELECT 
 			brd.room_dash_cd
 			, brd.room_cd
@@ -38,6 +38,7 @@
 			, br.room_nm
 		FROM branch_room_dashboard_tb brd
 		INNER JOIN branch_room_tb br ON brd.room_cd = br.room_cd
+		WHERE br.branch_owner_cd = #{branch_owner_cd}
 		ORDER BY brd.room_cd ASC
   	</select>
   	
@@ -109,7 +110,7 @@
   	</delete>
   	
   	<!-- 열람석 정보가져오기 -->
-    <select id="selectSeat" resultType="com.monorella.srf.branch.dto.Seat">
+    <select id="selectSeat" resultType="com.monorella.srf.branch.dto.Seat" parameterType="com.monorella.srf.branch.dto.BranchOwner">
     	SELECT 
     		bs.seat_cd
     		,  bs.room_cd
@@ -120,11 +121,12 @@
     		,  bm.member_nm
     		,  bm.member_cd
 		FROM branch_saet_tb bs
-		LEFT JOIN branch_member_tb bm ON bs.seat_cd = bm.seat_cd;
+		LEFT JOIN branch_member_tb bm ON bs.seat_cd = bm.seat_cd
+		WHERE bs.branch_owner_cd = #{branch_owner_cd}
     </select>
   
 	<!-- 열람실 정보가져오기 -->
-	<select id="selectRoom" resultType="com.monorella.srf.branch.dto.Room">
+	<select id="selectRoom" resultType="com.monorella.srf.branch.dto.Room" parameterType="com.monorella.srf.branch.dto.BranchOwner">
 		SELECT 
 			room_cd
 			, branch_owner_cd
@@ -132,6 +134,7 @@
 			, seat_num
 			, room_division
 		FROM branch_room_tb
+		WHERE branch_owner_cd = #{branch_owner_cd}
 		ORDER BY room_nm ASC
 	</select>
 	

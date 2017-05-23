@@ -2,11 +2,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.monorella.srf.branch.payment.PaymentMapper">
 	
-	
-	<!-- 열람실 결제 현황 select  -->
-	
-	
-	
 	<!-- 결제 입력 -->
 	<insert id="insertPayment" parameterType="com.monorella.srf.branch.dto.Payment">
 		INSERT INTO branch_pay_tb(
@@ -14,30 +9,19 @@
 			, room_cd
 			, seat_cd
 			, member_cd
-			, pay_amount
-			, discount_amount
 			, total_amount
 			, pay_date
-			, pay_option
-			)
-			
-			<!-- , pay_option) -->
+			, pay_option)
 		VALUES(
  			#{branch_owner_cd}
 			, #{room_cd}
 			, #{seat_cd}
 			, #{member_cd}
-			, #{pay_amount}
-			, #{discount_amount}
 			, #{total_amount}
 			, now() 
-			, #{pay_option}
-			<!-- , #{pay_option} -->
-			
-
-		)
+			, #{pay_option})
 	</insert>
-
+	<!-- 결제 성공시 seat_appoint 수정 -->
 	<update id="modifyPaymentSeat" parameterType="com.monorella.srf.branch.dto.Payment">
 		UPDATE branch_saet_tb 
             SET 
@@ -45,13 +29,14 @@
         WHERE seat_cd = #{seat_cd}
     </update>
     
+    <!-- 결제 성공시 member tb 수정 -->
     <update id="modifyPaymentMember" parameterType="com.monorella.srf.branch.dto.Payment">
 		UPDATE branch_member_tb 
             SET 
             seat_cd = #{seat_cd}
             , member_date = CURRENT_DATE()
-            , member_regi_date = now()
-            , member_end_date = #{pay_date}
+            , member_regi_date = #{member_regi_date}
+            , member_end_date = #{member_end_date}
             , member_seat_state = 'Y'
         WHERE member_cd = #{member_cd}
     </update>
@@ -63,6 +48,7 @@
 			WHERE seat_cd = #{seat_cd}
 	</select>
 	
+	<!-- 출결번호 입력 -->
     <insert id="insertPaymentinout" parameterType="com.monorella.srf.branch.dto.Payment">
 		INSERT INTO branch_inout_tb(
  			member_cd
@@ -76,6 +62,7 @@
 		)
     </insert>
     
+    <!-- 출결번호 조회 -->
     <select id="inoutingdetail" parameterType="com.monorella.srf.branch.dto.Payment" resultType="int">
 		SELECT 
 			inout_num 
@@ -83,6 +70,7 @@
 			WHERE seat_cd = #{seat_cd}
 	</select>
 	
+	<!-- 출결번호 member tb에 수정 -->
     <update id="Paymentinoutup" parameterType="com.monorella.srf.branch.dto.Member">
 		UPDATE branch_member_tb 
             SET 
@@ -90,19 +78,21 @@
         WHERE member_cd = #{member_cd}
     </update>
     
-	<select id="detailMember" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">
+	<select id="detailMember" parameterType="com.monorella.srf.branch.dto.Member" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT 
-			member_cd 
-			, branch_owner_cd 
-			, staff_id 
-			, member_nm 
-			, member_sex 
-			, member_tel 
-			, member_addr
-			, member_age 
-			, member_seat_state
-			FROM branch_member_tb 
-			WHERE member_nm = #{member_nm}
+			bm.member_cd 
+			, bm.branch_owner_cd
+			, bm.seat_cd 
+			, bm.member_nm
+			, bm.member_tel
+			, bm.member_addr
+			, bm.member_age 
+			, bm.member_regi_date
+			, bm.member_end_date
+			, bs.room_cd
+			FROM branch_member_tb  bm
+			INNER JOIN branch_saet_tb bs ON bm.seat_cd = bs.seat_cd
+			WHERE bm.member_nm = #{member_nm} AND bm.seat_cd = #{seat_cd}
 	</select>
     
 </mapper>

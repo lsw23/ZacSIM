@@ -50,20 +50,20 @@
                		<div class="box-header">
 	                 <h3 class="box-title">열람실 등록하기</h3>
 	               </div>
-	               <form action="${pageContext.request.contextPath}/room/room_pro" method="post">
+	               <form id="room_form" action="${pageContext.request.contextPath}/room/room_pro" method="post">
 	               <div class="box-body">
 	                 <div class="row">
 	                   <div class="col-xs-2">
 	                     <label>지점대표코드</label>
-	                     <input type="text" class="form-control" name="branch_owner_cd" value="${sessionScope.branchOwner.branch_owner_cd}" readonly>
+	                     <input type="text" class="form-control" id="branch_owner_cd" name="branch_owner_cd" value="${sessionScope.branchOwner.branch_owner_cd}" readonly>
 	                   </div>
 	                   <div class="col-xs-3">
 	                     <label>열람실 이름</label>
-	                     <input type="text" class="form-control" name="room_nm" placeholder="열람실 이름을 입력해주세요.예)205호">
+	                     <input type="text" class="form-control" id="room_nm" name="room_nm" placeholder="열람실 이름을 입력해주세요.예)205호">
 	                   </div>
 	                   <div class="col-xs-3">
 	                     <label>총 열람석 수</label>
-	                     <input type="text" class="form-control" name="seat_num" placeholder="숫자만 입력해주세요">
+	                     <input type="text" class="form-control" id="seat_num" name="seat_num" placeholder="숫자만 입력해주세요">
 	                   </div>
 	                   <div class="col-xs-3">
 	                     <label>구분</label>
@@ -75,7 +75,7 @@
 	                   </div>
 	                   <div class="col-xs-1">
 	                     <label>등록</label>
-	                     <button type="submit" class="btn btn-block btn-info">확인</button>
+	                     <button id="btn" type="button" class="btn btn-block btn-info">확인</button>
 	                   </div>
 	                  
 	                </div><!-- /.box-body row -->
@@ -141,7 +141,7 @@
     <!-- AdminLTE for demo purposes -->
     <script src="${pageContext.request.contextPath}/resources/dist/js/demo.js" type="text/javascript"></script>
     <!-- page script -->
-    <script type="text/javascript">
+    <script>
       $(function () {
         $("#example1").dataTable();
         $('#example2').dataTable({
@@ -153,6 +153,27 @@
           "bAutoWidth": false
         });
       });
+    </script>
+    <script>
+    	//정규식
+    	var re_str = /^[가-힣a-z0-9_-]+$/;
+    	var re_num = /^[0-9]+$/;
+    
+    	$('#btn').click(function(){
+    		console.log('room_form btn 클릭');
+    			if(re_str.test($('#room_nm').val()) != true){
+ 					alert('열람실 이름을 입력해주세요.');
+ 					$('#room_nm').focus();
+ 					return false;
+    			}else if(re_num.test($('#seat_num').val()) != true){
+    				alert('숫자를 입력해주세요.');
+    				$('#seat_num').focus();
+    				return false;
+    			}else{
+    				$('#room_form').submit();
+    			}
+    		
+    	});
     </script>
 </body>
 </html>
