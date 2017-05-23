@@ -1,1 +1,43 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.monorella.srf.branch.expense.ExpenseMapper">
+
+<select id="selectExpenseList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Expense">
+	SELECT 
+		expense_cd
+		, branch_owner_cd
+		, expense_breakdown
+		, expense_total
+		, branch_name
+		, expense_date
+		FROM branch_expense_tb 
+		ORDER BY expense_cd DESC 
+		LIMIT #{beginRow}, #{pagePerRow}
+	</select>
+
+<select id="getExpenseCount" resultType="int">
+		SELECT COUNT(*) FROM branch_expense_tb
+	</select>
+	
+<insert id="insertExpense" parameterType="com.monorella.srf.branch.dto.Expense">
+	INSERT INTO branch_expense_tb(
+		branch_owner_cd
+		, expense_price
+		, expense_breakdown
+		, expense_amount
+		, branch_name
+		, expense_total
+		, expense_date)	
+	VALUES(
+		#{branch_owner_cd}
+		, #{expense_price}
+		, #{expense_breakdown}
+		, #{expense_amount}
+		, #{branch_name}
+		, #{expense_total}
+		, #{expense_date}
+	)
+	</insert>
+</mapper>

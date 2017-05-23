@@ -107,11 +107,6 @@
 									<div class="form-group">
 										<label for="exampleInputFile">직원 연락처</label> 
 										<input type="text" class="form-control" id="staff_tel" name="staff_tel" placeholder="연락처를 입력해주세요">
-										<div>
-											<input type=button value="-" onClick="javascript:this.form.amount.value--;">
-											<input type=text name=amount value=0> 
-											<input type=button value="+" onClick="javascript:this.form.amount.value++;">	 
-										</div>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputFile">직원 주소</label> 

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.monorella.srf.branch.income.IncomeMapper">
+	<select id="selectIncomeSum" parameterType="java.util.Map" resultType="int">
+		SELECT SUM(bp.total_amount) AS total
+		FROM branch_pay_tb bp
+		INNER JOIN branch_member_tb bm
+		ON bp.member_cd = bm.member_cd
+		WHERE bp.pay_date >= #{startDate}
+		AND bp.pay_date <![CDATA[ <= ]]> #{endDate}
+		AND bp.branch_owner_cd = #{branch_owner_cd};
+	</select>
+
+	<select id="selectIncomeList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Payment">
+		SELECT bm.member_nm AS member_nm
+			, bp.total_amount AS total_amount
+			, bp.pay_date AS pay_date
+			, bp.pay_option AS pay_option
+		FROM branch_pay_tb bp
+		INNER JOIN branch_member_tb bm
+		ON bp.member_cd = bm.member_cd
+		WHERE bp.pay_date >= #{startDate}
+		AND bp.pay_date <![CDATA[ <= ]]> #{endDate}
+		AND bp.branch_owner_cd = #{branch_owner_cd}
+		ORDER BY bp.pay_date ASC;
+	</select>
+</mapper>

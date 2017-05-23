@@ -20,15 +20,19 @@ public class HeadBranchOwnerController {
 	//지점 정보 삭제
 	@RequestMapping(value="/head/branch_owner_delete_pro" , method = RequestMethod.GET)
 	public String deleteBranchOwner(@RequestParam(value="branch_owner_cd") String branch_owner_cd){
-		System.out.println("BranchOwnerController-> deleteBranchOwner()-> branch_owner_cd: "+branch_owner_cd);
-		headBranchOwnerDao.deleteBranchOwner(branch_owner_cd);
+		System.out.println("HeadBranchOwnerController-> deleteBranchOwner()-> branch_owner_cd: "+branch_owner_cd);
+		int result = headBranchOwnerDao.deleteBranchOwner(branch_owner_cd);
+		System.out.println("HeadBranchOwnerController->deleteBranchOwner()-> result: "+result);
+		if(result==1){
+			headBranchOwnerDao.deleteBranchOwnerCode(branch_owner_cd);
+		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
 	
 	//지점 정보 수정 처리
 	@RequestMapping(value="/head/branch_owner_modify_pro" , method = RequestMethod.POST)
 	public String modifyBranchOwner(HeadBranchOwner branchOwner, Model model){
-		System.out.println("BranchOwnerController-> ModifyBranchOwner()-> branchOwner: "+branchOwner);
+		System.out.println("HeadBranchOwnerController-> ModifyBranchOwner()-> branchOwner: "+branchOwner);
 		headBranchOwnerDao.modifyBranchOwner(branchOwner);
 		return "redirect:/head/barach_owner/branch_owner_modify?branch_owner_cd="+branchOwner.getBranch_owner_cd();
 	}
@@ -36,9 +40,9 @@ public class HeadBranchOwnerController {
 	//지점 정보 수정 폼, 단일 사업자 정보 조회
 	@RequestMapping(value="/head/barach_owner/branch_owner_modify" , method = RequestMethod.GET)
 	public String selectOneBranchOwner(@RequestParam(value="branch_owner_cd") String branch_owner_cd, Model model){
-		//System.out.println("BranchOwnerController-> SelectOneBranchOwner()-> owner_num: "+owner_num);
+		//System.out.println("HeadBranchOwnerController-> SelectOneBranchOwner()-> owner_num: "+owner_num);
 		HeadBranchOwner info = headBranchOwnerDao.selectOneBranchOwner(branch_owner_cd);
-		//System.out.println("BranchOwnerController-> SelectOneBranchOwner()-> info: "+info);
+		//System.out.println("HeadBranchOwnerController-> SelectOneBranchOwner()-> info: "+info);
 		model.addAttribute("info", info);
 		return "/head/barach_owner/branch_owner_modify";
 	}
@@ -46,7 +50,7 @@ public class HeadBranchOwnerController {
 	//지점 목록
 	@RequestMapping(value="/head/barach_owner/branch_owner_list" , method = RequestMethod.GET)
 	public String selectBranchOwnerList(Model model){
-		//System.out.println("BranchOwnerController-> selectBranchOwnerList()");
+		//System.out.println("HeadBranchOwnerController-> selectBranchOwnerList()");
 		List<HeadBranchOwner> ownerList = headBranchOwnerDao.selectBranchOwnerList(); //이용중 회원 목록
 		model.addAttribute("ownerList", ownerList);
 		return "/head/barach_owner/branch_owner_list";
@@ -55,15 +59,19 @@ public class HeadBranchOwnerController {
 	//지점 등록 요청
 	@RequestMapping(value="/head/branch_owner_insert_pro", method=RequestMethod.POST)
 	public String insertBranchOwner(HeadBranchOwner branchOwner){
-		//System.out.println("BranchController-> insertBranchOwner()-> BranchOwner: "+branchOwner.toString());
-		headBranchOwnerDao.insertBranchOwner(branchOwner);
+		//System.out.println("HeadBranchOwnerController-> insertBranchOwner()-> BranchOwner: "+branchOwner.toString());
+		int result = headBranchOwnerDao.insertBranchOwner(branchOwner);
+		
+		if(result==1){
+			headBranchOwnerDao.insertBranchOwnerCode(branchOwner.getBranch_owner_cd());
+		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
 	
 	//지점 등록 폼 요청
 	@RequestMapping(value="/head/barach_owner/branch_owner_insert", method=RequestMethod.GET)
 	public String branchOwnerForm(){
-		//System.out.println("BranchOwnerController-> branchOwnerForm()");
+		//System.out.println("HeadBranchOwnerController-> branchOwnerForm()");
 		return "/head/barach_owner/branch_owner_insert";
 	}
 }

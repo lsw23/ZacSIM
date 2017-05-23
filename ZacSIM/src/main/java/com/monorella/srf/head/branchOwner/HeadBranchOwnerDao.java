@@ -14,6 +14,18 @@ public class HeadBranchOwnerDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate; 
 	
+	// 사업자 삭제시 insert_num_list 테이블에 branch_owner_cd 및 레코드 한 줄 삭제
+	public int deleteBranchOwnerCode(String branch_owner_cd){
+		System.out.println("HeadBranchOwnerDao-> deleteBranchOwnerCode-> branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.insert("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.deleteBranchOwnerCode", branch_owner_cd);
+	}
+	
+	// 사업자 등록시 insert_num_list 테이블에 branch_owner_cd 및 레코드 한 줄 생성
+	public int insertBranchOwnerCode(String branch_owner_cd){
+		System.out.println("HeadBranchOwnerDao-> insertBranchOwnerCode-> branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.insert("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.insertBranchOwnerCode", branch_owner_cd);
+	}
+
 	//사업자 정보 삭제 처리
 	public int deleteBranchOwner(String branch_owner_cd){
 		System.out.println("BranchOwnerDao-> deleteBranchOwner()-> branchOwner: "+branch_owner_cd);

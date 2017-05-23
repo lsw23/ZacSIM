@@ -49,7 +49,13 @@
                 <beans:value>classpath:com/monorella/srf/branch/payment/PaymentMapper.xml</beans:value>
                 <beans:value>classpath:com/monorella/srf/branch/staffboard/StaffBoardMapper.xml</beans:value>
                 <beans:value>classpath:com/monorella/srf/branch/charges/ChargesMapper.xml</beans:value>
+
+                <beans:value>classpath:com/monorella/srf/branch/expense/ExpenseMapper.xml</beans:value>
+
                 <beans:value>classpath:com/monorella/srf/branch/attendance/AttendanceMapper.xml</beans:value>
+
+                <beans:value>classpath:com/monorella/srf/branch/income/IncomeMapper.xml</beans:value>
+
                 <!-- 본사 -->
                 <beans:value>classpath:com/monorella/srf/head/login/HeadLoginMapper.xml</beans:value>
                 <beans:value>classpath:com/monorella/srf/head/branchOwner/HeadBranchOwnerMapper.xml</beans:value>

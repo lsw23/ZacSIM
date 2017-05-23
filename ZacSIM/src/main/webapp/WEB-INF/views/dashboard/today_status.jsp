@@ -259,14 +259,14 @@
      <script type="text/javascript">
       $(function () {
         $("#example1").dataTable();
-        $('#example2').dataTable({
-          "bPaginate": true,
+        /* $('#example2').dataTable({
+          "bPaginate": false,
           "bLengthChange": false, // jquery.dataTables.js 파일 내에 aLengthMenu로 find
           "bFilter": false,
-          "bSort": true,
-          "bInfo": true,
+          "bSort": false,
+          "bInfo": false,
           "bAutoWidth": false
-        });
+        }); */
       });
     </script>
   </body>
