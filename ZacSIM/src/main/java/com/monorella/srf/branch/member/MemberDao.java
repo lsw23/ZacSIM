@@ -36,11 +36,11 @@ public class MemberDao {
 		System.out.println("9st modifyMember");
 		return sqlSessionTemplate.update("com.monorella.srf.branch.member.MemberMapper.modifyMember", member);
 	}
-	
+
 	//하나의 게시글 보기
-	public Member getMember(String member_cd) {
+	public Member getMember(String member_nm) {
 		System.out.println("8st getMember");
-        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMember", member_cd);
+        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMember", member_nm);
     }
 	
 	// 회원검색 메서드
@@ -54,6 +54,15 @@ public class MemberDao {
 		return memberList;
 	}	
 
+	// 입퇴실 리스트 메서드
+	public List<Member> selectMemberExit(int currentPage, int pagePerRow) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("beginRow", (currentPage-1)*pagePerRow);
+		map.put("pagePerRow", pagePerRow);
+		System.out.println("6st selectMemberExit");
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.selectMemberExit", map);
+	}
+	
 	// 회원리스트 메서드
 	public List<Member> selectMemberList(int currentPage, int pagePerRow) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -62,6 +71,12 @@ public class MemberDao {
 		System.out.println("6st selectMemberList");
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.selectMemberList", map);
 	}
+
+	// 회원 select
+	public List<Member> exitMember() {
+		System.out.println("5st exitMember");
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.exitMember");
+	}
 	
 	// 회원 select
 	public List<Member> selectMember() {
@@ -69,14 +84,26 @@ public class MemberDao {
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.selectMember");
 	}
 	
+	public int exitMemberCount() {
+		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.exitMemberCount");
+		System.out.println("4st exitMemberCount");
+		return row;
+	}
+	
 	public int selectMemberCount() {
 		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.selectMemberCount");
 		System.out.println("4st selectMemberCount");
 		return row;
 	}
+
+	// 회원 code select
+	public int exitMemberCode() {
+		System.out.println("3st exitMemberCode");
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.exitMemberCode");
+	}
 	
 	// 회원 code select
-	public int selectMemberCode(){
+	public int selectMemberCode() {
 		System.out.println("3st selectMemberCode");
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.selectMemberCode");
 	}

@@ -88,44 +88,12 @@
             		  </tr>
             		</thead>  
                     <tbody>
-
-				<c:forEach var="b" items="${list}">
 			                <tr>
-			                    <td>${b.member_cd}</td>
-			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${b.member_nm}">${b.member_nm}</a></td>
+			                    <td>${member.member_cd}</td>
+			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${member.member_nm}">${member.member_nm}</a></td>
 	               		    </tr>
-			 	</c:forEach>
 			        </tbody>
                   </table>
-                  <nav aria-label="Page navigation example">
-				    <ul class="pagination justify-content-center">
-				        <c:if test="${currentPage > 1}">
-				            <li class="page-item">
-				            	<a class="page-link" href="${pageContext.request.contextPath}/member/member_exit?currentPage=${currentPage-1}" aria-label="Previous">
-				            		<span aria-hidden="true">&laquo;</span>
-				            		<span class="sr-only">Previous</span>
-				            	</a>
-				            </li>	
-				        </c:if>
-				        <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-							<c:if test="${i == currentPage}">
-								<li class="page-item"><a class="page-link" href="#">${i}</a></li>
-							</c:if>
-							<c:if test="${i != currentPage}">
-								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/member/member_exit?currentPage=${i}">${i}</a></li>
-							</c:if>
-						</c:forEach>
-						
-				        <c:if test="${currentPage < lastPage}">
-				            <li class="page-item">
-				            	<a class="page-link" href="${pageContext.request.contextPath}/member/member_exit?currentPage=${currentPage+1}" aria-label="Next">
-				            		<span aria-hidden="true">&raquo;</span>
-				        			<span class="sr-only">Next</span>
-				            	</a>	
-				            </li>	
-				        </c:if>
-					 </ul>
-					</nav>
                   </div>
                   </div>
                   </div>
@@ -166,4 +134,4 @@
 				</div>
 				</div>
 	</body>
-</html>            
+</html>     

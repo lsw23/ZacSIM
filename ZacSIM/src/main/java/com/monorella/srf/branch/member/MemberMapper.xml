@@ -52,7 +52,7 @@
 			, member_regi_path AS member_regi_path
 			, member_use_pur AS member_use_pur
 			FROM branch_member_tb 
-			WHERE member_cd = #{member_cd}
+			WHERE member_nm = #{member_nm}
 	</select>
 
 	<!-- 회원 검색 -->
@@ -86,6 +86,16 @@
 			</if>
 			</if> 
 	</select>
+
+	<!-- 입퇴실 리스트 -->	
+	<select id="selectMemberExit" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
+		SELECT
+			member_cd
+			, member_nm
+		FROM branch_member_tb
+		ORDER BY inout_num DESC
+		LIMIT #{beginRow}, #{pagePerRow}
+	</select>
 	
 	<!-- 회원 리스트 -->	
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
@@ -103,6 +113,26 @@
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
 
+	<!-- 입퇴실 조회 -->
+	<select id="exitMember" resultType="com.monorella.srf.branch.dto.Member">
+	  	SELECT
+		  	 member_cd
+		  	 , branch_owner_cd
+		  	 , staff_id
+		  	 , member_nm
+		  	 , member_sex
+		  	 , member_tel
+		  	 , member_addr
+		  	 , member_date
+			 , member_regi_date
+			 , member_end_date
+		  	 , member_regi_path
+		  	 , member_age
+		  	 , member_seat_state
+	  	FROM branch_member_tb
+	  	ORDER BY member_cd DESC 
+  </select>
+  
 	<!-- 회원 조회 -->
 	<select id="selectMember" resultType="com.monorella.srf.branch.dto.Member">
 	  	SELECT
@@ -122,6 +152,10 @@
 	  	FROM branch_member_tb
 	  	ORDER BY member_cd DESC 
   </select>
+
+	<select id="exitMemberCount" resultType="int">
+        SELECT COUNT(*) FROM branch_member_tb
+    </select>
 
 	<select id="selectMemberCount" resultType="int">
         SELECT COUNT(*) FROM branch_member_tb
