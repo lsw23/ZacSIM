@@ -93,7 +93,7 @@ public class StaffController {
 		System.out.println("StaffController-> StaffList()");
 		List<Staff> list = staffDao.getStaffList();
 		Staff staff = list.get(0);
-		System.out.println(staff.getStaff_in_date()+"<<<<<get getStaff_in_date() 요놈");
+		System.out.println(staff.getStaff_in_date()+"<<<<<get getStaff_in_date()");
 		model.addAttribute("list", list);
 		return "staff/staff_list";
 		

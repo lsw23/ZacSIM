@@ -80,6 +80,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                   <table class="table">
+                   <thead>
                     <tr>
 	              		<th>직원 아이디</th>
 					   	<th>지점 대표코드</th>
@@ -88,6 +89,7 @@
 					   	<th>직원 주소</th>
 					   	<th>직원 가입일</th>
                     </tr>
+                    </thead>
                     <tbody>
 
 				<c:forEach var="s" items="${list}">
@@ -112,6 +114,9 @@
           </div>
         
       </div><!-- /.content-wrapper -->
-
+	<script>
+	$('#staff_menu').addClass('active');
+	$('#staff02').addClass('active');
+</script>
 </body>
 </html>

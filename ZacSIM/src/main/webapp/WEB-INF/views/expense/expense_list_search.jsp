@@ -7,6 +7,7 @@
 <!-- 헤드 -->
 <c:import url="../module2/head.jsp" />
 
+
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 
@@ -192,13 +193,13 @@ header, footer, aside, nav, section, article {
 	border: 1px solid #dbdbdb
 }
 
-/* .btncalendar {
+.btncalendar {
 	display: inline-block;
 	width: 22px;
 	height: 22px;
 	background: url(images/btn_calendar.gif) center center no-repeat;
 	text-indent: -999em
-} */
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -407,13 +408,13 @@ header, footer, aside, nav, section, article {
 															<!-- 시작일 -->
 															<span class="dset"> 
 																<input type="text" class="datepicker inpType" name="so" id="searchStartDate"> 
-																<a href="#none" class="btncalendar dateclick">기간</a>
+																<a href="#none" class="btncalendar dateclick">달력</a>
 															</span> 
 															<span class="demi">~</span>
 															<!-- 종료일 -->
 															<span class="dset"> 
 																<input type="text" class="datepicker inpType" name="sv" id="searchEndDate"> 
-																<a href="#none" class="btncalendar dateclick">기간</a>
+																<a href="#none" class="btncalendar dateclick">달력</a>
 															</span>
 														</div>
 													</td>
@@ -421,9 +422,9 @@ header, footer, aside, nav, section, article {
 											<tbody>
 										</table>
 									</div>
-								</div>							
+								</div>
 								<div class="box-footer">
-									<button id="staffbutton" type="submit" class="btn btn-default">기간 검색</button>
+									<button id="staffbutton" type="submit" class="btn btn-default">기간검색</button>
 									<button type="reset" class="btn btn-default">초기화</button>
 								</div>
 							</form>
@@ -445,7 +446,7 @@ header, footer, aside, nav, section, article {
 									</thead>
 									<tbody>
 
-										<c:forEach var="s" items="${list}">
+										<c:forEach var="s" items="${searchlist}">
 											<tr>
 												<td>${s.expense_cd}</td>
 												<td>${s.branch_owner_cd}</td>
