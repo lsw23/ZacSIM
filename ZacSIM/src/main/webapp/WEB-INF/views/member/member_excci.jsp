@@ -88,7 +88,7 @@
             		  </tr>
             		</thead>  
                     <tbody>
-                    <c:forEach var="b" items="${list}">
+                    <c:forEach var="b" items="${exelist}">
 			                <tr>  
 			                	<td>${b.member_cd}</td>  
 			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${b.member_nm}">${b.member_nm}</a></td>
