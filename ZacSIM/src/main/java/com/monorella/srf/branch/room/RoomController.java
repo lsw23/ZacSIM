@@ -3,6 +3,10 @@ package com.monorella.srf.branch.room;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.Room;
 import com.monorella.srf.branch.dto.RoomDashBoard;
 import com.monorella.srf.branch.dto.Seat;
 import com.monorella.srf.branch.dto.SeatRowCol;
-import org.json.*;
 
 @Controller
 public class RoomController {
@@ -23,13 +27,10 @@ public class RoomController {
 	
 	//열람실 현황 보기
 	@RequestMapping(value="/room/room_dashboard" , method = RequestMethod.GET)
-	public String room_dashboard(Model model){
+	public String room_dashboard(Model model, HttpSession session){
 		System.out.println("room_dashboard()");
-		//열람실 모든 코드 조회
-		//List<Room> roomCdlist = roomDao.selectRoomAllCd();
-		//RoomDashBoard roomdash = roomDao.selectRoomDashBoard(roomCdlist.get(0).getRoom_cd());
-
-		List<RoomDashBoard> roomdashlist = roomDao.selectRoomDashBoardNow();
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		List<RoomDashBoard> roomdashlist = roomDao.selectRoomDashBoardNow(branchOwner);
 		for(RoomDashBoard rl : roomdashlist){
 			System.out.println(rl);
 		}
@@ -173,9 +174,10 @@ public class RoomController {
 	
 	//열람실 등록폼
    @RequestMapping(value="/room/room_form", method = RequestMethod.GET)
-	public String room_form(Model model){
-		System.out.println("room_form 요청");
-		model.addAttribute("roomlist", roomDao.selectRoom());
+	public String room_form(Model model, HttpSession session){
+	   	System.out.println("room_form 요청");	
+	   	BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		model.addAttribute("roomlist", roomDao.selectRoom(branchOwner));
 		return "room/room_form";
 	}
 	//좌석등록
@@ -186,9 +188,13 @@ public class RoomController {
 	}
 	//열람실 관리
 	@RequestMapping(value="/room/room_main", method = RequestMethod.GET)
-	public String room_main(Model model){
-		List<Seat> seatlist = roomDao.selectSeat();
-		model.addAttribute("roomlist", roomDao.selectRoom());
+	public String room_main(Model model, HttpSession session){
+		//세션 값 get 
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		System.out.println("branchOwner :" + branchOwner.getBranch_owner_cd());
+		
+		List<Seat> seatlist = roomDao.selectSeat(branchOwner);
+		model.addAttribute("roomlist", roomDao.selectRoom(branchOwner));
 		model.addAttribute("seatlist", seatlist);
 		return "room/room_main";
 	}

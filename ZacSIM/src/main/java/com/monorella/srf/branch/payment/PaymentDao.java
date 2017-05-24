@@ -50,9 +50,8 @@ public class PaymentDao {
 		System.out.println("Paymentinoutup modify");
 		return sqlSessionTemplate.update("com.monorella.srf.branch.payment.PaymentMapper.Paymentinoutup", member);
 	}
-	// newwindetail.jsp 요청
-	public Member detailMember(String member_nm) {
-		System.out.println("windetailMember"+member_nm);
-        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.payment.PaymentMapper.detailMember", member_nm);
+	//상세정보 요청
+	public Member detailMember(Member member) {
+        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.payment.PaymentMapper.detailMember", member);
     }
 }
