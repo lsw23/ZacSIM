@@ -113,13 +113,14 @@
     <select id="selectSeat" resultType="com.monorella.srf.branch.dto.Seat" parameterType="com.monorella.srf.branch.dto.BranchOwner">
     	SELECT 
     		bs.seat_cd
-    		,  bs.room_cd
-    		,  bs.branch_owner_cd
-    		,  bs.seat_cnumber
-    		,  bs.seat_appoint
-    		,  bs.colseat_state
-    		,  bm.member_nm
-    		,  bm.member_cd
+    		, bs.room_cd
+    		, bs.branch_owner_cd
+    		, bs.seat_cnumber
+    		, bs.seat_appoint
+    		, bs.colseat_state
+    		, bm.member_nm
+    		, bm.member_cd
+    		, bm.member_end_date
 		FROM branch_saet_tb bs
 		LEFT JOIN branch_member_tb bm ON bs.seat_cd = bm.seat_cd
 		WHERE bs.branch_owner_cd = #{branch_owner_cd}

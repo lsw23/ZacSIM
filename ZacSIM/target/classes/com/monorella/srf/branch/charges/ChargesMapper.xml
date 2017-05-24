@@ -5,6 +5,15 @@
   
   <mapper namespace="com.monorella.srf.branch.charges.ChargesMapper">
   
+  <!-- 요금제 modify -->
+  <update id="modifyCharges" parameterType="com.monorella.srf.branch.dto.Charges">
+  	UPDATE seat_charges
+		SET
+		seat_member_type= #{seat_member_type}
+		, seat_charges_date=#{seat_charges_date}
+		, seat_charges_price=#{seat_charges_price}
+		WHERE seat_charges_code = #{seat_charges_code}
+  </update>
   
   <!-- 요금제 코드 COUNT -->
   <select id="selectChargesCode" resultType="int">
@@ -17,7 +26,7 @@
   </delete>
   
   <!-- 요금제 조회 -->
-  <select id="selectCharges" resultType="com.monorella.srf.branch.dto.Charges">
+  <select id="selectCharges" resultType="com.monorella.srf.branch.dto.Charges" parameterType="com.monorella.srf.branch.dto.BranchOwner">
 	  	SELECT
 		  	 seat_charges_code
 		  	 ,  branch_owner_cd
@@ -25,6 +34,7 @@
 		  	 ,  seat_charges_date
 		  	 ,  seat_charges_price
 	  	FROM  seat_charges
+	  	WHERE branch_owner_cd = #{branch_owner_cd}
 	  	ORDER BY seat_charges_code DESC 
   </select>
   

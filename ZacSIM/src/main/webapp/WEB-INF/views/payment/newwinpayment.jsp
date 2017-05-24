@@ -64,9 +64,8 @@
 					    <div class="form-group">
 					    <label for="결제 방법">결제방법&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 					    <select id="결제 방법" name="pay_option" class="form-control">
-					      <option value="카드">카드</option>
-					      <option value="현금">현금</option>
-					      <option value="자동이체">자동이체</option>
+					      <option value="card">카드</option>
+					      <option value="cash">현금</option>
 					    </select>
 					    </div>
 

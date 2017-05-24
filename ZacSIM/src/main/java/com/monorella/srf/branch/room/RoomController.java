@@ -25,6 +25,12 @@ public class RoomController {
 	@Autowired
 	private RoomDao roomDao;
 	
+	//회원 자리 이동
+	@RequestMapping(value="/room/move_form", method = RequestMethod.GET)
+	public String seat_move(){
+		return "room/move_form";
+	}
+	
 	//열람실 현황 보기
 	@RequestMapping(value="/room/room_dashboard" , method = RequestMethod.GET)
 	public String room_dashboard(Model model, HttpSession session){

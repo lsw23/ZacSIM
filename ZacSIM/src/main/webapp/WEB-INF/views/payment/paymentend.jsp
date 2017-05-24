@@ -12,7 +12,7 @@
 			<div class="box box-primary">
 				<div class="container">
 				</div>
-				<h2>결제가 완료되었습니다.</h2>
+				<h2>결제가 완료되었습니다.열람실 관리화면에서 새로고침(F5)을 눌러주세요.</h2>
 				<h3>회원의 출결번호는 ${inouting}입니다.</h3>
 			</div>
 		</div>

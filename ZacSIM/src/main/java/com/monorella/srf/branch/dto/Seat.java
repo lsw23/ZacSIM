@@ -15,7 +15,14 @@ public class Seat {
 	private String seat_appoint; //열람석 지정(결제여부)
 	private int seat_row; //열람석 행
 	private int seat_col; //열람석 열
+	private String member_end_date; //회원 기간 만료일;
 	
+	public String getMember_end_date() {
+		return member_end_date;
+	}
+	public void setMember_end_date(String member_end_date) {
+		this.member_end_date = member_end_date;
+	}
 	public int getSeat_row() {
 		return seat_row;
 	}
@@ -100,10 +107,7 @@ public class Seat {
 		return "Seat [seat_cd=" + seat_cd + ", room_cd=" + room_cd + ", branch_owner_cd=" + branch_owner_cd
 				+ ", member_cd=" + member_cd + ", member_nm=" + member_nm + ", seat_cnumber=" + seat_cnumber
 				+ ", colseat_state=" + colseat_state + ", seat_in_time=" + seat_in_time + ", seat_out_time="
-				+ seat_out_time + ", seat_date=" + seat_date + ", seat_appoint=" + seat_appoint 
-				+ ", seat_row=" + seat_row + ", seat_col=" + seat_col + "]";
+				+ seat_out_time + ", seat_date=" + seat_date + ", seat_appoint=" + seat_appoint + ", seat_row="
+				+ seat_row + ", seat_col=" + seat_col + ", member_end_date=" + member_end_date + "]";
 	}
-	
-	
-
 }

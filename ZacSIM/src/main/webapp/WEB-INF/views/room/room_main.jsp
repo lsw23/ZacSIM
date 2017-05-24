@@ -115,6 +115,7 @@
 							 </c:when>
 							 <c:otherwise>
 							 	<p class="windetailon">${s.member_nm}</p>
+							 	<%-- <p>${s.member_end_date}</p> --%>
 							 </c:otherwise>
 							</c:choose>
 						</button>
@@ -129,7 +130,6 @@
 		</section><!-- content -->
 	</div><!-- content-wrapper -->
    </div><!-- wrapper -->
-
 
 <c:import url="../module2/jsscript.jsp" />
 <script>

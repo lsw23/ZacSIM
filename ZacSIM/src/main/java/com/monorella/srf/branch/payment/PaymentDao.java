@@ -13,6 +13,13 @@ public class PaymentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	
+	
+	//기간만료일 수정
+	public int modifyEndDate(Payment payment){
+		return sqlSessionTemplate.update("com.monorella.srf.branch.payment.PaymentMapper.modifyEndDate", payment);
+	}
+	
 	// 열람실 좌석 추가 메서드
 	public int insertPayment(Payment payment) {
 		System.out.println("insertpayment");

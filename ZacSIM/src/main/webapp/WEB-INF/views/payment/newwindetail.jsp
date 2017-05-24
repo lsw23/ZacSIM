@@ -19,7 +19,6 @@
                 <!-- form start -->
                   <div class="box-body">
 					<form name="myForm" name="postForm" action="${pageContext.request.contextPath}/member/member_pro" method="post">
-							
 						<div class="form-group">
 							<input type="hidden" class="form-control" name="branch_owner_cd" value="${detailmember.branch_owner_cd}" readonly>
 						</div>
@@ -44,7 +43,7 @@
 							<input type="text" class="form-control" id="member_end_date" name="member_end_date" value="${detailmember.member_end_date}" readonly>
 						</div>
 						<a href="${pageContext.request.contextPath}/payment/extension_form?member_nm=${detailmember.member_nm}&seat_cd=${detailmember.seat_cd}"><button type="button" class="btn btn-primary">기간 연장</button></a>
-						<button type="button" class="btn btn-primary">좌석 이동</button>
+						<a href="${pageContext.request.contextPath}/room/move_form"><button type="button" class="btn btn-primary">좌석 이동</button></a>
 						<button type="button" class="btn btn-primary">좌석 해제</button>
                 </form>         
               </div>
