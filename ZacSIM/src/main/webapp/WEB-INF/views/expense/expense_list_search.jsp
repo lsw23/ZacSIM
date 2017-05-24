@@ -36,7 +36,7 @@
 						<div class="box box-danger">
 							<div class="box-header">
 								<h3 class="box-title">
-									<b>지출 목록</b>
+									<b>수입 목록</b>
 								</h3>
 							</div>
 							<form action="${pageContext.request.contextPath}/expense/expense_list_search_pro" method="post">
@@ -44,12 +44,10 @@
 									<div class="form-group">
 										<b>기간 선택:</b> 
 										&nbsp;&nbsp; 
-										<input name="startDate" type="date" style="width: 150px; height: 25px;"> 
-										&nbsp;~&nbsp; 
-										<input name="endDate" type="date" style="width: 150px; height: 25px;"> 
+										<input name="startDate" type="date" style="width: 150px; height: 25px;"> &nbsp;~&nbsp; <input name="endDate" type="date" style="width: 150px; height: 25px;"> 
 										<input class="btnPadding" type="submit" value="검색" />
 										<p>
-											<small>(기간은 최소 하루 이상으로 선택해 주세요. ex.2017-01-01의 지출내역->
+											<small>(기간은 최소 하루 이상으로 선택해 주세요. ex.2017-01-01의 수입내역->
 												2017-01-01 ~ 2017-01-02)</small>
 										</p>
 									</div>
@@ -96,7 +94,7 @@
 												<span class="sr-only">Previous</span>
 												</a></li>
 											</c:if>
-											<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+											<c:forEach var="i" begin="${startPage}" end="${endPage}"step="1">
 												<c:if test="${i == currentPage}">
 													<li class="page-item"><a class="page-link" href="#">${i}</a></li>
 												</c:if>
