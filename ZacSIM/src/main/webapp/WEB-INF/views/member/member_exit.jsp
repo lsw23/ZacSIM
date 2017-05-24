@@ -154,6 +154,17 @@
                       <th>퇴실시간</th>
                     </tr>
                   </thead>
+                  <tbody>
+
+				<c:forEach var="n" items="${listExit}">
+			                <tr>
+			                    <td>${n.member_nm}</td>
+			                    <td>${n.seat_date}</td>
+			                    <td>${n.seat_in_time}</td>
+			                    <td>${n.seat_out_time}</td>
+	               		    </tr>
+			 	</c:forEach>
+			        </tbody>
                   </table>
 				   </div>
 				   </div>

@@ -10,22 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.Member;
+import com.monorella.srf.branch.dto.SeatTime;
 import com.monorella.srf.branch.member.MemberDao;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
-
-	// 신규 회원 알림 요청
-	@RequestMapping(value="/module2/left", method = RequestMethod.GET)
-	public String MemberNew(Model model
-			, @RequestParam(value="member_date", required=true) String member_date) {
-		System.out.println("/module2/left 요청");
-		Member member = memberDao.newMember(member_date);
-		model.addAttribute("member", member);
-		return "module2/left";
-	}
 
 	// 회원 삭제 폼 요청
 	@RequestMapping(value="/member/member_remove", method = RequestMethod.GET)
@@ -115,7 +106,11 @@ public class MemberController {
 	            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 			System.out.println("member_exit 요청");
 			List<Member> memberexit = memberDao.exitMember();
+			List<SeatTime> listExit = memberDao.Exit();
+			System.out.println("member_exit 입퇴실 요청");
 			model.addAttribute("memberexit", memberexit);
+			model.addAttribute("listExit", listExit);
+			System.out.println("member_exit 입퇴실 요청2");
 
 			if(currentPage < 1){
 				currentPage = 1;

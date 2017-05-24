@@ -125,6 +125,17 @@
                       <th>퇴실시간</th>
                     </tr>
                   </thead>
+                  <tbody>
+
+				<c:forEach var="b" items="${exelist}">
+			                <tr>
+			                    <td>${b.member_nm}</td>
+			                    <td>${b.seat_date}</td>
+			                    <td>${b.seat_in_time}</td>
+			                    <td>${b.seat_out_time}</td>
+	               		    </tr>
+			 	</c:forEach>
+			        </tbody>
                   </table>
 				   </div>
 				   </div>
