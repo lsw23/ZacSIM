@@ -10,10 +10,23 @@ import org.springframework.stereotype.Repository;
 
 import com.monorella.srf.branch.dto.Expense;
 
+
 @Repository
 public class ExpenseDao {
 	@Autowired
     private SqlSessionTemplate sqlSessionTemplate;
+	
+	//공지사항 검색 메서드
+		 public List<Expense> searchExpense(String so, String sv){
+			 System.out.println("ExpenseDao->searchExpense ->so:" +so
+					 +"sv:" + sv);
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("so", so);
+				map.put("sv", sv);
+				List<Expense> expenseList = null;
+				expenseList = sqlSessionTemplate.selectList("com.monorella.srf.branch.expense.ExpenseMapper.searchExpense", map);
+				return expenseList;
+			}
 	
 	//전체 공지사항의 수를 구하는 메서드
 			public int getExpenseCount(){

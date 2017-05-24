@@ -126,6 +126,8 @@
     <script src="${pageContext.request.contextPath}/resources/dist/js/demo.js" type="text/javascript"></script>
     <!-- page script -->
     <script>
+      $('#charges_menu').addClass('active');	
+		    
       $(function () {
         $("#example1").dataTable();
         $('#example2').dataTable({

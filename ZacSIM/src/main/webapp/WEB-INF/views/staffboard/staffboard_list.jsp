@@ -152,7 +152,9 @@
 </div>
 
 </div><!-- /.content-wrapper -->
-
+	<script>
+	$('#staffboard_menu').addClass('active');
+</script>
 </body>
 </html>
 
