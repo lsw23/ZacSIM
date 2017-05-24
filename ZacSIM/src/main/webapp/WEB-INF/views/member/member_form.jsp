@@ -30,9 +30,6 @@
 			} else if($('#member_age').val()=='') {
 	            alert('나이를 입력해주세요');
 	            $('#member_age').focus();
-			} else if($('#member_seat_state').val()=='') {
-	            alert('회원상태를 입력해주세요');
-	            $('#member_seat_state').focus();
 			}  else if(member_regi_path == '설명'){
 	            alert('등록경로를 선택해 주세요');
 	            $('#member_regi_path').focus();
@@ -47,8 +44,7 @@
 </script>
     <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
-	<!-- JS -->
-	<c:import url="../module2/jsscript.jsp" />
+
 </head>
 	<body class="skin-blue">
    	 <div class="wrapper">
@@ -118,10 +114,6 @@
 								<input type="text" class="form-control" id="member_age" name="member_age" placeholder="나이를 입력해주세요">
 							</div>
 							<div class="form-group">
-								<label class="control-label" for="inputLarge">회원상태</label>
-								<input type="text" class="form-control" id="member_seat_state" name="member_seat_state" placeholder="회원상태를 입력해주세요">
-							</div>
-							<div class="form-group">
 								<label class="control-label" for="inputLarge">등록경로</label>
 								<select class="form-control" name="member_regi_path" id="member_regi_path" > 
 									<option value="설명" selected>등록경로를 선택해 주세요</option> 
@@ -155,5 +147,12 @@
 		   </section>
 	      </div>	
 		</div>
+		
+	<!-- JS -->
+	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		$('#member_menu').addClass('active');
+		$('#member01').addClass('active');
+	</script>		
 	</body>
 </html>

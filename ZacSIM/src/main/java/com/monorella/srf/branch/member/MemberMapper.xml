@@ -32,14 +32,14 @@
             , member_seat_state = #{member_seat_state}
             , member_regi_path = #{member_regi_path}
             , member_use_pur = #{member_use_pur}
-        WHERE member_cd = #{member_cd}
-        AND member_nm = #{member_nm}
+        WHERE member_nm = #{member_nm}
+        AND member_cd = #{member_cd}
     </update>
 	
 	<!-- 하나의 게시글 보기 -->
 	<select id="getMember" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT 
-			member_cd As member_cd
+			member_cd AS member_cd
 			, branch_owner_cd AS branch_owner_cd
 			, staff_id As staff_id
 			, member_nm AS member_nm
@@ -53,6 +53,22 @@
 			, member_use_pur AS member_use_pur
 			FROM branch_member_tb 
 			WHERE member_nm = #{member_nm}
+	</select>
+
+	<!-- 입퇴실 검색 -->
+	<select id="exeMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
+		SELECT
+			 member_cd
+			 , member_nm AS member_nm
+			 FROM branch_member_tb
+			  <if test="sv !=null and sv != ''">
+			<if test="so.equals('member_cd')">
+			WHERE member_cd like concat('%',#{sv},'%')
+			</if>
+			<if test="so.equals('member_nm')">
+				WHERE member_nm like concat('%',#{sv},'%')
+			</if>
+			</if> 
 	</select>
 
 	<!-- 회원 검색 -->
@@ -87,7 +103,15 @@
 			</if> 
 	</select>
 
-	<!-- 입퇴실 리스트 -->	
+	<!-- 입퇴실 내역 -->
+	<resultMap id="memberSeatTime" type="com.monorella.srf.branch.dto.SeatTime">
+		<result property="member_nm" column="member_nm" />
+		<result property="seat_date" column="seat_date" />
+		<result property="seat_in_time" column="seat_in_time" />
+		<result property="seat_out_time" column="seat_out_time" />
+	</resultMap>
+
+	<!-- 입퇴실 회원 리스트 -->	
 	<select id="selectMemberExit" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			member_cd
@@ -136,10 +160,10 @@
 	<!-- 회원 조회 -->
 	<select id="selectMember" resultType="com.monorella.srf.branch.dto.Member">
 	  	SELECT
-		  	 member_cd
+		  	 member_nm
 		  	 , branch_owner_cd
 		  	 , staff_id
-		  	 , member_nm
+		  	 , member_cd
 		  	 , member_sex
 		  	 , member_tel
 		  	 , member_addr
@@ -161,7 +185,7 @@
         SELECT COUNT(*) FROM branch_member_tb
     </select>
 
- 	<!-- 요금제 자동등록 -->
+ 	<!--  자동등록 -->
   	<insert id="autoMemberCode" parameterType="com.monorella.srf.branch.dto.Member">
   		<selectKey resultType="String" keyProperty="member_cd" order="BEFORE">
   			SELECT CONCAT('member_cd', MAX(CONVERT(SUBSTRING(member_cd, 10), UNSIGNED))+1) AS member_cd
@@ -179,9 +203,9 @@
 			, member_addr
 			, member_age
 			, member_date
+			, member_month
 			, member_regi_date
 			, member_end_date
-			, member_seat_state
 			, member_regi_path
 			, member_use_pur)
 		VALUES(
@@ -196,13 +220,18 @@
 			, #{member_addr}
 			, #{member_age}
 			, now()
+			, month(now())
 			, now()
 			, now()
-			, #{member_seat_state}
 			, #{member_regi_path}
 			, #{member_use_pur}
 		)	
   	</insert>
+ 	
+ 	<!-- 입퇴실 코드 COUNT -->
+ 	<select id="exitMemberCode" resultType="int">
+  		SELECT COUNT(member_cd) FROM branch_member_tb
+  	</select> 	
  	
  	<!-- 회원 코드 COUNT -->
  	<select id="selectMemberCode" resultType="int">
@@ -223,9 +252,9 @@
 			, member_addr
 			, member_age
 			, member_date
+			, member_month
 			, member_regi_date
 			, member_end_date
-			, member_seat_state
 			, member_regi_path
 			, member_use_pur)
 		VALUES(
@@ -240,9 +269,9 @@
 			, #{member_addr}
 			, #{member_age}
 			, now()
+			, month(now())
 			, now()
 			, now()
-			, #{member_seat_state}
 			, #{member_regi_path}
 			, #{member_use_pur}
 		)

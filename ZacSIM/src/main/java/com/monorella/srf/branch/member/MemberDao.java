@@ -43,6 +43,17 @@ public class MemberDao {
         return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMember", member_nm);
     }
 	
+	// 입퇴실 검색 메서드
+	public List<Member> exeMember(String so, String sv){
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("so", so);
+		map.put("sv", sv);
+		List<Member> memberexit = null;
+		System.out.println("7st exeMember");
+		memberexit = sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.exeMember", map);
+		return memberexit;
+	}
+	
 	// 회원검색 메서드
 	public List<Member> searchMember(String so, String sv){
 		Map<String, String> map = new HashMap<String, String>();
@@ -72,7 +83,7 @@ public class MemberDao {
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.selectMemberList", map);
 	}
 
-	// 회원 select
+	// 입퇴실 select
 	public List<Member> exitMember() {
 		System.out.println("5st exitMember");
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.exitMember");

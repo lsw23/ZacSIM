@@ -6,8 +6,7 @@
 <!-- head -->
 	 <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
-	<!-- JS -->
-	<c:import url="../module2/jsscript.jsp" />
+
 </head>
 <body class="skin-blue">
     <div class="wrapper">
@@ -55,8 +54,8 @@
 
 		<c:forEach var="s" items="${searchlist}">
 	        <tr>
-	           <td><a href="${pageContext.request.contextPath}/member/member_view?member_cd=${s.member_cd}">${s.member_cd}</a></td>
-	           <td>${s.member_nm}</td>
+	           <td>${s.member_cd}</td>
+	           <td><a href="${pageContext.request.contextPath}/member/member_view?member_nm=${s.member_nm}">${s.member_nm}</a></td>
 	           <td>${s.member_sex}</td>
 	           <td>${s.member_addr}</td>
 	           <td>${s.member_age}</td>
@@ -72,5 +71,11 @@
    </section>
    </div> 
   </div>
+        <!-- JS -->
+	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		$('#member_menu').addClass('active');
+		$('#member02').addClass('active');
+	</script>
 </body>
 </html>

@@ -46,9 +46,9 @@ public class MemberController {
 	// 회원 수정 폼 요청
 	@RequestMapping(value="/member/member_modify", method = RequestMethod.GET)
 	public String MemberModify(Model model
-			, @RequestParam(value="member_cd", required=true) String member_cd) {
+			, @RequestParam(value="member_nm", required=true) String member_nm) {
 		System.out.println("/member/member_modify2 요청");
-		Member member = memberDao.getMember(member_cd);
+		Member member = memberDao.getMember(member_nm);
 		model.addAttribute("member", member);
 		return "member/member_modify";	
 	}
@@ -58,7 +58,7 @@ public class MemberController {
 	public String MemberModify(Member member){
 		System.out.println("/member/member_modify1 요청");
 		memberDao.modifyMember(member);
-		return "redirect:/member/member_view?member_cd="+member.getMember_cd();		
+		return "redirect:/member/member_view?member_nm="+member.getMember_nm();		
 	}
 
 	// 회원 입퇴실 요청
@@ -74,13 +74,27 @@ public class MemberController {
 	// 회원 상세 요청
 	@RequestMapping(value="/member/member_view", method = RequestMethod.GET)
 	public String MemberView(Model model 
-			, @RequestParam(value="member_cd")String member_cd){
+			, @RequestParam(value="member_nm")String member_nm){
 		System.out.println("/member/member_view 요청");
-		Member member = memberDao.getMember(member_cd);
+		Member member = memberDao.getMember(member_nm);
 		model.addAttribute("member", member);
 		return "member/member_view";
 	}
 
+	// 입퇴실 검색 요청
+	@RequestMapping(value="/member/member_exe", method = {RequestMethod.GET, RequestMethod.POST})
+	public String MemberExe(Model model
+			, @RequestParam("so") String so
+			, @RequestParam("sv") String sv){
+		System.out.println("MemberController->MemberExe()" + so + sv);
+		List<Member> exelist = memberDao.exeMember(so, sv);
+		System.out.println(exelist);
+		model.addAttribute("exelist", exelist);
+		model.addAttribute("so", so);
+		model.addAttribute("sv", sv);
+		return "member/member_exe";
+	}
+	
 	// 회원 검색 요청
 	@RequestMapping(value="/member/member_search", method = {RequestMethod.GET, RequestMethod.POST})
 	public String MemberSearch(Model model

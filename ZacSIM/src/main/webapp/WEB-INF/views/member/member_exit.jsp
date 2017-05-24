@@ -7,10 +7,10 @@
 <script>
 	$(document).ready(function(){
 		//console.log("하이");
-		$('#searchBtn').click(function(){
-			if($('#searchForm').val()=='') {
+		$('#exitBtn').click(function(){
+			if($('#exitForm').val()=='') {
 				alert("검색어를 입력해주세요.");
-				$('#searchForm').focus();
+				$('#exitForm').focus();
 			} else {
                 $('#exitMember').submit();
             }
@@ -19,8 +19,7 @@
 </script>
     <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
-	<!-- JS -->
-	<c:import url="../module2/jsscript.jsp" />
+
 </head>
   <body class="skin-blue">
     <div class="wrapper">
@@ -36,7 +35,7 @@
 		  <section class="content-header">
 		    <h1>
 		       	독서실 회원
-		      <small>입퇴실 목록</small>
+		      <small>입퇴실</small>
 		    </h1>
       		<ol class="breadcrumb">
 		      <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -59,7 +58,7 @@
                 </div><!-- /.box-header -->
 
                 <!-- form start -->
-                <form id="exitMember" action="${pageContext.request.contextPath}/member/member_search" method="post">
+                <form id="exitMember" action="${pageContext.request.contextPath}/member/member_exe" method="post">
                   <div class="form-group">
 			 	  <div class="row">
 			  		<div class="col-sm-4">
@@ -69,10 +68,10 @@
 					  </select>
 			 	 	 </div>
 			   <div class="col-sm-6">
-			   		<input name="sv" id="searchForm" type="text" class="form-control" placeholder="검색을 입력하시오."/>
+			   		<input name="sv" id="exitForm" type="text" class="form-control" placeholder="검색을 입력하시오."/>
 			   </div>
 			   <div class="col-sm-2">
-			   		<button type="button" id="searchBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+			   		<button type="button" id="exitBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
 			   </div>
 			   </div>
 			   </div>
@@ -149,6 +148,7 @@
                   <table class="table">
                   <thead>
                     <tr>
+                      <th>이름</th>
                       <th>현재 날짜</th>
                       <th>입실시간</th>
                       <th>퇴실시간</th>
@@ -165,5 +165,11 @@
 				</section>
 				</div>
 				</div>
+	<!-- JS -->
+	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		$('#member_menu').addClass('active');
+		$('#member03').addClass('active');
+	</script>			
 	</body>
 </html>            
