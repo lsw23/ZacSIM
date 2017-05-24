@@ -72,9 +72,9 @@
                 <i class="fa fa-credit-card"></i> <span>회계</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
+              <ul class="treeview-menu" >
                 <li id="account01"><a href="${pageContext.request.contextPath}/account/income"><i class="fa fa-circle-o"></i>수입</a></li>
-                <li id="account02"><a href="${pageContext.request.contextPath}/expense/expense_list"><i class="fa fa-circle-o"></i>지출</a></li>
+                <li id="expense"><a href="${pageContext.request.contextPath}/expense/expense_list"><i class="fa fa-circle-o"></i>지출</a></li>
               </ul>
             </li>
 

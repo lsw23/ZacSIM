@@ -180,5 +180,9 @@
 	</div>
 	<!-- JS -->
 <c:import url="../module2/jsscript.jsp" />
+<script>
+	$('#staff_menu').addClass('active');
+	$('#staff01').addClass('active');
+</script>
 </body>
 </html>

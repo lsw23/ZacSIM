@@ -43,30 +43,38 @@
 		      <li class="active">직원</li>
 		    </ol>
 		  </section>
-<div class="table-responsive">
+ <section class="content">
+			<div class="col-md-9 col-lg-12 main" id="wrap">
+			
+			<div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">독서실 직원 리스트</h3>
+                  <div class="box-tools">
  <!-- 검색 -->
     <form id="searchFrom" action="${pageContext.request.contextPath}/staff/staff_search" method="post">
 	 <div class="form-group">
 	 <div class="row">
-	  <div class="col-sm-3">
-	  </div>
-	  <div class="col-sm-2">
+	  <div class="col-sm-4">
 	   <select name="so" class="form-control" id="sel1">
 	    <option value="staff_id">아이디</option>
 	    <option value="branch_owner_cd">대표코드</option>
 	    <option value="staff_name">직원이름</option>
 	  </select>
 	  </div>
-	   <div class="col-sm-3">
+	   <div class="col-sm-6">
 	   		<input name="sv" id="selectValue" type="text" class="form-control" placeholder="검색어를 입력해주세요."/>
 	   </div>
-	   <div class="col-sm-4">
+	   <div class="col-sm-2">
 	   		<button type="button" id="searchBtn" class="btn btn-default">검색</button>
 	   </div>
 	   </div>
 	</div>
 	</form>
-        <a href="${pageContext.request.contextPath}/staff/staff_form">직원 추가</a>
+        </div>
+        </div>
+        <div class="box-body table-responsive no-padding">
   <table class="table">
    <thead>
    	<tr>
@@ -82,7 +90,7 @@
 
 	<c:forEach var="s" items="${searchlist}">
                 <tr>
-                    <td><a href="${pageContext.request.contextPath}/staffView?staff_id=${s.staff_id}">${s.staff_id}</a></td>
+                    <td><a href="${pageContext.request.contextPath}/staff/staff_view?staff_id=${s.staff_id}">${s.staff_id}</a></td>
                     <td>${s.branch_owner_cd}</td>
                     <td>${s.staff_name}</td>
                     <td>${s.staff_tel}</td>
@@ -93,10 +101,19 @@
         </tbody>
    
   </table>
-   
+   </div>
+   </div>
+   </div>
+   </div>
  </div>
-</div>
+ </section>
 </div>
 
+</div>
+
+<script>
+	$('#staff_menu').addClass('active');
+	$('#staff02').addClass('active');
+</script>
 </body>
 </html>

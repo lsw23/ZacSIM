@@ -81,7 +81,9 @@
 </div>
 </div>
 </div>
-
+	<script>
+	$('#staffboard_menu').addClass('active');
+</script>
 </body>
 </html>
 

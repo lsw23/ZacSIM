@@ -130,7 +130,10 @@
 			</section>
 		</div>
 	</div>
-
+<script>
+	$('#account_menu').addClass('active');
+	$('#expense').addClass('active');
+</script>
 
 </body>
 </html>

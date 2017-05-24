@@ -11,11 +11,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.Expense;
 
-
 @Controller
 public class ExpenseController {
 	@Autowired
 	private ExpenseDao expenseDao;
+	
+	//공지사항 검색
+	@RequestMapping(value="/expense/expense_list_search" , method = RequestMethod.POST)
+	public String ExpenseSearch(Model model
+			, @RequestParam("so") String so
+			, @RequestParam("sv") String sv){
+		System.out.println("StaffController->StaffSearch()" + so + sv);
+			List<Expense> searchlist = expenseDao.searchExpense(so, sv);
+			System.out.println(searchlist);
+		model.addAttribute("searchlist", searchlist);
+		model.addAttribute("so", so);
+	    model.addAttribute("sv", sv);
+		return "expense/expense_list_search";
+	}
+	
 	// 리스트 및 페이징 요청
 			@RequestMapping(value="/expense/expense_list", method = RequestMethod.GET)
 			public String ExpenseList(Model model

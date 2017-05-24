@@ -4,6 +4,20 @@
  
 <mapper namespace="com.monorella.srf.branch.expense.ExpenseMapper">
 
+<select id="searchExpense" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Expense">
+	SELECT 
+	expense_cd
+		 , branch_owner_cd
+		 , expense_breakdown 
+		 , expense_total
+		 , branch_name
+		 , expense_date
+	FROM branch_expense_tb
+	WHERE #{so}<![CDATA[ <=]]> expense_date AND expense_date <![CDATA[ <=]]> #{sv}
+	</select>
+
+
+
 <select id="selectExpenseList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Expense">
 	SELECT 
 		expense_cd
