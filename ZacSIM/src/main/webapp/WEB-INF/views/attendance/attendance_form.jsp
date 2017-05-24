@@ -49,10 +49,14 @@
 	<!-- JS -->
 	<c:import url="../module2/jsscript.jsp" />
 	<script>
+		$('#attendance_menu').addClass('active');
+	
 		$('#input_btn').click(function(){
 			console.log('#input_btn 클릭');
 			window.open('${pageContext.request.contextPath}/attendance/attendance_input', '_blank', 'toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=600,width=500,height=400');
 		});
+		
+		
 	</script>
 	
 </body>

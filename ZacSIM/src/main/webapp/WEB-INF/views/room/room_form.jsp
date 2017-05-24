@@ -172,7 +172,13 @@
     			}else{
     				$('#room_form').submit();
     			}
-    		
+    	});
+    	
+    	//메뉴 고정
+    	$(function(){
+    		console.log('하이');
+    		$('#room_menu').addClass('active');
+    		$('#room01').addClass('active');
     	});
     </script>
 </body>

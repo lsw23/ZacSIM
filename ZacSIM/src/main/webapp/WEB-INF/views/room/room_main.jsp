@@ -133,6 +133,10 @@
 
 <c:import url="../module2/jsscript.jsp" />
 <script>
+	console.log('하이');
+	$('#room_menu').addClass('active');
+	$('#room02').addClass('active');
+	
 	if($('.windetailon').length > 0){
 		console.log('헬로우');
 		$('.windetailon').parent().removeClass('bg-olive');
