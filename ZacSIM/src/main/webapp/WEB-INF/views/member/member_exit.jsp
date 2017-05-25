@@ -91,7 +91,7 @@
 				<c:forEach var="b" items="${list}">
 			                <tr>
 			                    <td>${b.member_cd}</td>
-			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${b.member_nm}">${b.member_nm}</a></td>
+			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_cd=${b.member_cd}&member_nm=${b.member_nm}">${b.member_nm}</a></td>
 	               		    </tr>
 			 	</c:forEach>
 			        </tbody>

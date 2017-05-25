@@ -87,13 +87,12 @@
             		  </tr>
             		</thead>  
                     <tbody>
-
-				<c:forEach var="b" items="${exelist}">
-			                <tr>
-			                    <td>${b.member_cd}</td>
-			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${b.member_nm}">${b.member_nm}</a></td>
+						<c:forEach var="memberexit" items="${memberexit}">
+			                <tr>  
+			                	<td>${memberexit.member_cd}</td>  
+			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_cd=${memberexit.member_cd}&member_nm=${memberexit.member_nm}">${memberexit.member_nm}</a></td>
 	               		    </tr>
-			 	</c:forEach>
+					</c:forEach>
 			        </tbody>
                   </table>
                   </div>
@@ -103,7 +102,7 @@
             <div class="col-md-6">
             </div>
                   
-         	   	<!-- Main content -->
+        		 <!-- Main content -->
        		    <section class="content">
                   
             	<!-- right column -->
@@ -127,15 +126,14 @@
                   </thead>
                   <tbody>
 
-				<c:forEach var="b" items="${exelist}">
-			                <tr>
-			                    <td>${b.member_nm}</td>
-			                    <td>${b.seat_date}</td>
-			                    <td>${b.seat_in_time}</td>
-			                    <td>${b.seat_out_time}</td>
-	               		    </tr>
-			 	</c:forEach>
-			        </tbody>
+                 <tr>
+			                    <td>${member.member_nm}</td>
+			                    <td>${seattime.seat_date}</td>
+			                    <td>${seattime.seat_in_time}</td>
+			                    <td>${seattime.seat_out_time}</td>
+	             </tr>
+
+			 	  </tbody>
                   </table>
 				   </div>
 				   </div>
@@ -143,10 +141,12 @@
 				 </div>
 				 </div>
 				 </section>
+			</div> 
+			</section>
 				</div>
-				</section>
+			
 				</div>
-				</div>
+				
 	<!-- JS -->
 	<c:import url="../module2/jsscript.jsp" />
 	<script>

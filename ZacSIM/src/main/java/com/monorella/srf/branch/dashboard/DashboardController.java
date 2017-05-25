@@ -4,12 +4,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.Member;
 
 @Controller
@@ -26,8 +30,17 @@ public class DashboardController {
 	
 	// 메뉴 - 통계 폼
 	@RequestMapping(value="/dashboard/all_status" , method = RequestMethod.GET)
-	public String selectAllStatus(Model model){
+	public String selectAllStatus(Model model, HttpSession session){
 		System.out.println("DashboardController-> selectAllStatus()");
+		
+		// 세션에서 오너코드 받기
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		String branch_owner_cd = branchOwner.getBranch_owner_cd();
+		System.out.println("DashboardController-> selectAllStatus() branch_owner_cd: "+ branch_owner_cd);
+		
+		// 오너 코드를 통한 월별 남녀 가입자수 받기------------------------------------------------
+		InsertNumList monthMen = dashboardDao.selectInsertNumMen(branch_owner_cd);
+		InsertNumList monthWoman = dashboardDao.selectInsertNumWoman(branch_owner_cd);
 		
 		// 오늘 날짜 및 해당 월 구하기 -----------------------------------------------------------
 		Date today = new Date();
@@ -35,51 +48,27 @@ public class DashboardController {
 	    SimpleDateFormat month = new SimpleDateFormat("M");
 	    
 	    // 주 이용 목적
-	    int languageNo = dashboardDao.selectPurposeLanguage(); //외국어
-	    int CSATNo = dashboardDao.selectPurposeCSAT(); //수능
- 		int publicOfficialNo = dashboardDao.selectPurposePublicOfficial(); //공무원
- 		int licenseNo = dashboardDao.selectPurposeLicense(); //자격증
- 		int purposeEtcNo = dashboardDao.selectPurposeEtc(); //기타
+	    int languageNo = dashboardDao.selectPurposeLanguage(branch_owner_cd); //외국어
+	    int CSATNo = dashboardDao.selectPurposeCSAT(branch_owner_cd); //수능
+ 		int publicOfficialNo = dashboardDao.selectPurposePublicOfficial(branch_owner_cd); //공무원
+ 		int licenseNo = dashboardDao.selectPurposeLicense(branch_owner_cd); //자격증
+ 		int purposeEtcNo = dashboardDao.selectPurposeEtc(branch_owner_cd); //기타
 	    
 	    // 회원----------------------------------------------------------------------------
-	    int monthMemberNo = dashboardDao.selectMonthInsertMemberCount(); // 당월 가입 회원 수
-	    int MemberNo = dashboardDao.selectMemberCount(); //전체 회원 수
- 		int MenNo = dashboardDao.selectMenCount(); //남성
- 		int womanNo = dashboardDao.selectWomanCount(); //여성
+	    int monthMemberNo = dashboardDao.selectMonthInsertMemberCount(branch_owner_cd); // 당월 가입 회원 수
+	    int MemberNo = dashboardDao.selectMemberCount(branch_owner_cd); //전체 회원 수
+ 		int MenNo = dashboardDao.selectMenCount(branch_owner_cd); //남성
+ 		int womanNo = dashboardDao.selectWomanCount(branch_owner_cd); //여성
  		
  		// 등록경로------------------------------------------------------------
-		int pamphletNo = dashboardDao.selectPamphletCount(); //전단지
-		int placardNo = dashboardDao.selectPlacardCount(); //플래카드
-		int introductionNo = dashboardDao.selectIntroductionCount(); //지인소개
-		int internetNo = dashboardDao.selectInternetCount(); //인터넷
-		int pathEtcNo = dashboardDao.selectEtcCount(); //기타
+		int pamphletNo = dashboardDao.selectPamphletCount(branch_owner_cd); //전단지
+		int placardNo = dashboardDao.selectPlacardCount(branch_owner_cd); //플래카드
+		int introductionNo = dashboardDao.selectIntroductionCount(branch_owner_cd); //지인소개
+		int internetNo = dashboardDao.selectInternetCount(branch_owner_cd); //인터넷
+		int pathEtcNo = dashboardDao.selectEtcCount(branch_owner_cd); //기타
 		
-		// 월별 등록자 수----------------------------------------------------------
-		int januaryInsertNo = dashboardDao.selectJanuaryInsertMember();
-		int februaryInsertNo = dashboardDao.selectFebruaryInsertMember();
-		int marchInsertNo = dashboardDao.selectMarchInsertMember();
-		int aprilInsertNo = dashboardDao.selectAprilInsertMember();
-		int mayInsertNo = dashboardDao.selectMayInsertMember();
-		int juneInsertNo = dashboardDao.selectJuneInsertMember();
-		int julyInsertNo = dashboardDao.selectJulyInsertMember();
-		int augustInsertNo = dashboardDao.selectAugustInsertMember();
-		int septemberInsertNo = dashboardDao.selectSeptemberInsertMember();
-		int octoberInsertNo = dashboardDao.selectOctoberInsertMember();
-		int novemberInsertNo = dashboardDao.selectNovemberInsertMember();
-		int decemberInsertNo = dashboardDao.selectDecemberInsertMember();
-		
-		int januaryInsertMenNo = dashboardDao.selectJanuaryInsertMenMember();
-		int februaryInsertMenNo = dashboardDao.selectFebruaryInsertMenMember();
-		int marchInsertMenNo = dashboardDao.selectMarchInsertMenMember();
-		int aprilInsertMenNo = dashboardDao.selectAprilInsertMenMember();
-		int mayInsertMenNo = dashboardDao.selectMayInsertMenMember();
-		int juneInsertMenNo = dashboardDao.selectJuneInsertMenMember();
-		int julyInsertMenNo = dashboardDao.selectJulyInsertMenMember();
-		int augustInsertMenNo = dashboardDao.selectAugustInsertMenMember();
-		int septemberInsertMenNo = dashboardDao.selectSeptemberInsertMenMember();
-		int octoberInsertMenNo = dashboardDao.selectOctoberInsertMenMember();
-		int novemberInsertMenNo = dashboardDao.selectNovemberInsertMenMember();
-		int decemberInsertMenNo = dashboardDao.selectDecemberInsertMenMember();
+		System.out.println("DashboardController-> selectTodayStatus()-> monthMen: "+ monthMen);
+ 		System.out.println("DashboardController-> selectTodayStatus()-> monthWoman: "+ monthWoman);
 		
  		//System.out.println("DashboardController-> selectTodayStatus()-> simpleToday: "+ simpleToday.format(today));
  		//System.out.println("DashboardController-> selectTodayStatus()-> month: "+ month.format(today));
@@ -101,32 +90,9 @@ public class DashboardController {
 		//System.out.println("DashboardController-> selectTodayStatus()-> internetNo: "+internetNo);
 		//System.out.println("DashboardController-> selectTodayStatus()-> pathEtcNo: "+pathEtcNo);
 		
-		//System.out.println("DashboardController-> selectTodayStatus()-> januaryInsertNo: "+januaryInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> februaryInsertNo: "+februaryInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> marchInsertNo: "+marchInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> aprilInsertNo: "+aprilInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> mayInsertNo: "+mayInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> juneInsertNo: "+juneInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> julyInsertNo: "+julyInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> augustInsertNo: "+augustInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> septemberInsertNo: "+septemberInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> octoberInsertNo: "+octoberInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> novemberInsertNo: "+novemberInsertNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> decemberInsertNo: "+decemberInsertNo);
-		
-		//System.out.println("DashboardController-> selectTodayStatus()-> januaryInsertMenNo: "+januaryInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> februaryInsertMenNo: "+februaryInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> marchInsertMenNo: "+marchInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> aprilInsertMenNo: "+aprilInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> mayInsertMenNo: "+mayInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> juneInsertMenNo: "+juneInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> julyInsertMenNo: "+julyInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> augustInsertMenNo: "+augustInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> septemberInsertMenNo: "+septemberInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> octoberInsertMenNo: "+octoberInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> novemberInsertMenNo: "+novemberInsertMenNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> decemberInsertMenNo: "+decemberInsertMenNo);
-		
+ 		model.addAttribute("monthMen", monthMen);
+		model.addAttribute("monthWoman", monthWoman);
+ 		
 	    model.addAttribute("today", simpleToday.format(today));
 	    model.addAttribute("month", month.format(today));
 	    
@@ -147,40 +113,18 @@ public class DashboardController {
 		model.addAttribute("internetNo", internetNo);
 		model.addAttribute("pathEtcNo", pathEtcNo);
 		
-		model.addAttribute("januaryInsertNo", januaryInsertNo);
-		model.addAttribute("februaryInsertNo", februaryInsertNo);
-		model.addAttribute("marchInsertNo", marchInsertNo);
-		model.addAttribute("aprilInsertNo", aprilInsertNo);
-		model.addAttribute("mayInsertNo", mayInsertNo);
-		model.addAttribute("juneInsertNo", juneInsertNo);
-		model.addAttribute("julyInsertNo", julyInsertNo);
-		model.addAttribute("augustInsertNo", augustInsertNo);
-		model.addAttribute("septemberInsertNo", septemberInsertNo);
-		model.addAttribute("octoberInsertNo", octoberInsertNo);
-		model.addAttribute("novemberInsertNo", novemberInsertNo);
-		model.addAttribute("decemberInsertNo", decemberInsertNo);
-		
-		model.addAttribute("januaryInsertMenNo", januaryInsertMenNo);
-		model.addAttribute("februaryInsertMenNo", februaryInsertMenNo);
-		model.addAttribute("marchInsertMenNo", marchInsertMenNo);
-		model.addAttribute("aprilInsertMenNo", aprilInsertMenNo);
-		model.addAttribute("mayInsertMenNo", mayInsertMenNo);
-		model.addAttribute("juneInsertMenNo", juneInsertMenNo);
-		model.addAttribute("julyInsertMenNo", julyInsertMenNo);
-		model.addAttribute("augustInsertMenNo", augustInsertMenNo);
-		model.addAttribute("septemberInsertMenNo", septemberInsertMenNo);
-		model.addAttribute("octoberInsertMenNo", octoberInsertMenNo);
-		model.addAttribute("novemberInsertMenNo", novemberInsertMenNo);
-		model.addAttribute("decemberInsertMenNo", decemberInsertMenNo);
-		
-		
 		return "dashboard/all_status";
 	}
 	
 	// 메뉴 - 오늘의 현황 폼
 	@RequestMapping(value="/dashboard/today_status" , method = RequestMethod.GET)
-	public String selectTodayStatus(Model model){
+	public String selectTodayStatus(Model model, HttpSession session){
 		System.out.println("DashboardController-> selectTodayStatus()");
+		
+		// 세션에서 오너코드 받기
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		String branch_owner_cd = branchOwner.getBranch_owner_cd();
+		System.out.println("DashboardController-> selectAllStatus() branch_owner_cd: "+ branch_owner_cd);
 		
 		// 오늘 날짜
 		Date today = new Date();
@@ -188,25 +132,25 @@ public class DashboardController {
 	    //System.out.println("현재날짜 : "+ simpleToday.format(today));
 		
 		// 열람석 상태-------------------------------------------
-		int useMemberNo = dashboardDao.selectUseSeatCount(); //사용중 열람석
-		int absenceMemberNo = dashboardDao.selectAbsenceSeatCount(); //부재중 열람석 
-		int unpaidMemberNo = dashboardDao.selectUnpaidSeatCount(); // 미결제 열람석
+		int useMemberNo = dashboardDao.selectUseSeatCount(branch_owner_cd); //사용중 열람석
+		int absenceMemberNo = dashboardDao.selectAbsenceSeatCount(branch_owner_cd); //부재중 열람석 
+		int unpaidMemberNo = dashboardDao.selectUnpaidSeatCount(branch_owner_cd); // 미결제 열람석
 		
 		// 이용중 회원----------------------------------------------------------------------------
-		int useTeensWomanMemberNo = dashboardDao.selectUseTeensWomanMemberCount(); // 이용중 10대 여자
-		int useTeensMenMemberNo = dashboardDao.selectUseTeensMenMemberCount();     // 이용중 10대 남자
-		int useTwentyWomanMemberNo = dashboardDao.selectUseTwentyWomanMemberCount(); // 이용중 20대 여자
-		int useTwentyMenMemberNo = dashboardDao.selectUseTwentyMenMemberCount();     // 이용중 20대 남자
-		int useThirtyWomanMemberNo = dashboardDao.selectUseThirtyWomanMemberCount(); // 이용중 30대 여자
-		int useThirtyMenMemberNo = dashboardDao.selectUseThirtyMenMemberCount();     // 이용중 30대 남자
-		int useFortyWomanMemberNo = dashboardDao.selectUseFortyWomanMemberCount(); // 이용중 40대 여자
-		int useFortyMenMemberNo = dashboardDao.selectUseFortyMenMemberCount();     // 이용중 40대 남자
-		int useEtcWomanMemberNo = dashboardDao.selectUseEtcWomanMemberCount(); // 이용중 기타연령 여자
-		int useEtcMenMemberNo = dashboardDao.selectUseEtcMenMemberCount();     // 이용중 기타연령 남자
-		List<Member> useMemberList = dashboardDao.selectUseMemberList(); //이용중 회원 목록
+		int useTeensWomanMemberNo = dashboardDao.selectUseTeensWomanMemberCount(branch_owner_cd); // 이용중 10대 여자
+		int useTeensMenMemberNo = dashboardDao.selectUseTeensMenMemberCount(branch_owner_cd);     // 이용중 10대 남자
+		int useTwentyWomanMemberNo = dashboardDao.selectUseTwentyWomanMemberCount(branch_owner_cd); // 이용중 20대 여자
+		int useTwentyMenMemberNo = dashboardDao.selectUseTwentyMenMemberCount(branch_owner_cd);     // 이용중 20대 남자
+		int useThirtyWomanMemberNo = dashboardDao.selectUseThirtyWomanMemberCount(branch_owner_cd); // 이용중 30대 여자
+		int useThirtyMenMemberNo = dashboardDao.selectUseThirtyMenMemberCount(branch_owner_cd);     // 이용중 30대 남자
+		int useFortyWomanMemberNo = dashboardDao.selectUseFortyWomanMemberCount(branch_owner_cd); // 이용중 40대 여자
+		int useFortyMenMemberNo = dashboardDao.selectUseFortyMenMemberCount(branch_owner_cd);     // 이용중 40대 남자
+		int useEtcWomanMemberNo = dashboardDao.selectUseEtcWomanMemberCount(branch_owner_cd); // 이용중 기타연령 여자
+		int useEtcMenMemberNo = dashboardDao.selectUseEtcMenMemberCount(branch_owner_cd);     // 이용중 기타연령 남자
+		List<Member> useMemberList = dashboardDao.selectUseMemberList(branch_owner_cd); //이용중 회원 목록
 		
 		// 회원-------------------------------------------------------------------------------
-		int todayMemberNo = dashboardDao.selectTodayInsertMemberCount(); //금일 등록 회원
+		int todayMemberNo = dashboardDao.selectTodayInsertMemberCount(branch_owner_cd); //금일 등록 회원
 
 		
 		//System.out.println("DashboardController-> selectTodayStatus()-> useMemberNo: "+useMemberNo);

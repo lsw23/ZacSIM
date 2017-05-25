@@ -8,6 +8,7 @@ public class Payment {
 	private String member_cd; //회원 코드
 	private int total_amount; //결제금액
 	private String pay_date; //결제일
+	private int pay_month; //결제월
 	private String member_regi_date; //회원 기간 시작일
 	private String member_end_date; //회원 기간 만료일
 	private String pay_option; //결제 종류
@@ -54,6 +55,12 @@ public class Payment {
 	public void setPay_date(String pay_date) {
 		this.pay_date = pay_date;
 	}
+	public int getPay_month() {
+		return pay_month;
+	}
+	public void setPay_month(int pay_month) {
+		this.pay_month = pay_month;
+	}
 	public String getMember_regi_date() {
 		return member_regi_date;
 	}
@@ -83,7 +90,8 @@ public class Payment {
 	public String toString() {
 		return "Payment [pay_cd=" + pay_cd + ", branch_owner_cd=" + branch_owner_cd + ", room_cd=" + room_cd
 				+ ", seat_cd=" + seat_cd + ", member_cd=" + member_cd + ", total_amount=" + total_amount + ", pay_date="
-				+ pay_date + ", member_regi_date=" + member_regi_date + ", member_end_date=" + member_end_date
-				+ ", pay_option=" + pay_option + ", member_nm=" + member_nm + "]";
+				+ pay_date + ", pay_month=" + pay_month + ", member_regi_date=" + member_regi_date
+				+ ", member_end_date=" + member_end_date + ", pay_option=" + pay_option + ", member_nm=" + member_nm
+				+ "]";
 	}
 }

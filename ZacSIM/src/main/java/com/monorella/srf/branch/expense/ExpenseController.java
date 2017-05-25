@@ -19,14 +19,14 @@ public class ExpenseController {
 	//공지사항 검색
 	@RequestMapping(value="/expense/expense_list_search" , method = RequestMethod.POST)
 	public String ExpenseSearch(Model model
-			, @RequestParam("so") String so
-			, @RequestParam("sv") String sv){
-		System.out.println("StaffController->StaffSearch()" + so + sv);
-			List<Expense> searchlist = expenseDao.searchExpense(so, sv);
+			, @RequestParam("searchStartDate") String searchStartDate
+			, @RequestParam("searchEndDate") String searchEndDate){
+		System.out.println("StaffController->StaffSearch()" + searchStartDate + searchEndDate);
+			List<Expense> searchlist = expenseDao.searchExpense(searchStartDate, searchEndDate);
 			System.out.println(searchlist);
 		model.addAttribute("searchlist", searchlist);
-		model.addAttribute("so", so);
-	    model.addAttribute("sv", sv);
+		model.addAttribute("searchStartDate", searchStartDate);
+	    model.addAttribute("searchEndDate", searchEndDate);
 		return "expense/expense_list_search";
 	}
 	

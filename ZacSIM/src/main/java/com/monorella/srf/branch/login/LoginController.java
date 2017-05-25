@@ -34,8 +34,14 @@ public class LoginController {
 		return "login/login_logout";
 	}
 	
+	//메인 화면
+	@RequestMapping(value = "/",  method = RequestMethod.GET)
+	public String main(){
+		return "index/index";
+		
+	}
 	//로그인 폼
-	@RequestMapping(value = {"/", "/login/loginFrom"},  method = RequestMethod.GET)
+	@RequestMapping(value = "/login/loginFrom",  method = RequestMethod.GET)
 	public String loginFrom(){ 
 		return "login/login_form";
 	}

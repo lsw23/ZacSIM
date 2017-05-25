@@ -9,13 +9,7 @@ public class SeatTime {
 	private String seat_in_time; //입실시간
 	private String seat_out_time; //퇴실시간
 	private String seat_date; //현재날짜
-	
-	public String getMember_nm() {
-		return member_nm;
-	}
-	public void setMember_nm(String member_nm) {
-		this.member_nm = member_nm;
-	}
+
 	public int getSeat_time_cd() {
 		return seat_time_cd;
 	}
@@ -33,6 +27,12 @@ public class SeatTime {
 	}
 	public void setMember_cd(String member_cd) {
 		this.member_cd = member_cd;
+	}
+	public String getMember_nm() {
+		return member_nm;
+	}
+	public void setMember_nm(String member_nm) {
+		this.member_nm = member_nm;
 	}
 	public String getSeat_in_time() {
 		return seat_in_time;
@@ -58,5 +58,5 @@ public class SeatTime {
 				+ ", member_nm=" + member_nm + ", seat_in_time=" + seat_in_time + ", seat_out_time=" + seat_out_time
 				+ ", seat_date=" + seat_date + "]";
 	}
-	
+
 }

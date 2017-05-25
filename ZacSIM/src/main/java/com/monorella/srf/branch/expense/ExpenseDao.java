@@ -17,12 +17,12 @@ public class ExpenseDao {
     private SqlSessionTemplate sqlSessionTemplate;
 	
 	//공지사항 검색 메서드
-		 public List<Expense> searchExpense(String so, String sv){
-			 System.out.println("ExpenseDao->searchExpense ->so:" +so
-					 +"sv:" + sv);
+		 public List<Expense> searchExpense(String searchStartDate, String searchEndDate){
+			 System.out.println("ExpenseDao->searchExpense ->searchStartDate:" +searchStartDate
+					 +"searchEndDate:" + searchEndDate);
 				Map<String, String> map = new HashMap<String, String>();
-				map.put("so", so);
-				map.put("sv", sv);
+				map.put("searchStartDate", searchStartDate);
+				map.put("searchEndDate", searchEndDate);
 				List<Expense> expenseList = null;
 				expenseList = sqlSessionTemplate.selectList("com.monorella.srf.branch.expense.ExpenseMapper.searchExpense", map);
 				return expenseList;
