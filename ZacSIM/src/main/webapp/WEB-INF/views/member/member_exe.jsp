@@ -127,12 +127,12 @@
                   </thead>
                   <tbody>
 
-				<c:forEach var="b" items="${exelist}">
+				<c:forEach var="n" items="${listExit}">
 			                <tr>
-			                    <td>${b.member_nm}</td>
-			                    <td>${b.seat_date}</td>
-			                    <td>${b.seat_in_time}</td>
-			                    <td>${b.seat_out_time}</td>
+			                    <td>${n.member_nm}</td>
+			                    <td>${n.seat_date}</td>
+			                    <td>${n.seat_in_time}</td>
+			                    <td>${n.seat_out_time}</td>
 	               		    </tr>
 			 	</c:forEach>
 			        </tbody>

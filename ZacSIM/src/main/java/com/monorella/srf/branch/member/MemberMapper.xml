@@ -4,6 +4,84 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.monorella.srf.branch.member.MemberMapper">
+	
+	<!-- 회원 가입시 월별 여자 가입자수 업데이트 -->
+	<update id="modifyMonthInsertInfoWoman" parameterType="com.monorella.srf.branch.dto.InsertNumList">
+		UPDATE insert_num_list 
+		SET january = #{january}
+		, february = #{february}
+		, march = #{march}
+		, april = #{april}
+		, may = #{may}
+		, june = #{june}
+		, july = #{july}
+		, august = #{august}
+		, september = #{september}
+		, october = #{october}
+		, november = #{november}
+		, december = #{december}
+		 WHERE branch_owner_cd = #{branch_owner_cd} AND member_sex='여자';
+	</update>
+	
+	<!-- 회원 가입시 월별 남자 가입자수 업데이트 -->
+	<update id="modifyMonthInsertInfoMen" parameterType="com.monorella.srf.branch.dto.InsertNumList">
+		UPDATE insert_num_list 
+		SET january = #{january}
+		, february = #{february}
+		, march = #{march}
+		, april = #{april}
+		, may = #{may}
+		, june = #{june}
+		, july = #{july}
+		, august = #{august}
+		, september = #{september}
+		, october = #{october}
+		, november = #{november}
+		, december = #{december}
+		 WHERE branch_owner_cd = #{branch_owner_cd} AND member_sex='남자';
+	</update>
+	
+	<!-- 월별 여자 가입자수 조회 -->
+	<select id="selectMonthInsertNumWoman" parameterType="String" resultType="com.monorella.srf.branch.dto.InsertNumList">
+		SELECT 
+		branch_owner_cd
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 1 AND member_sex="여자") AS january
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 2 AND member_sex="여자") AS february
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 3 AND member_sex="여자") AS march
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 4 AND member_sex="여자") AS april
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 5 AND member_sex="여자") AS may
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 6 AND member_sex="여자") AS june
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 7 AND member_sex="여자") AS july
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 8 AND member_sex="여자") AS august
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 9 AND member_sex="여자") AS september
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 10 AND member_sex="여자") AS october
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 11 AND member_sex="여자") AS november
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 12 AND member_sex="여자") AS december
+		FROM branch_member_tb
+		WHERE branch_owner_cd = #{branch_owner_cd}
+		GROUP BY branch_owner_cd;
+	</select>
+	
+	<!-- 월별 남자 가입자수 조회 -->
+	<select id="selectMonthInsertNumMen" parameterType="String" resultType="com.monorella.srf.branch.dto.InsertNumList">
+		SELECT 
+		branch_owner_cd
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 1 AND member_sex="남자") AS january
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 2 AND member_sex="남자") AS february
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 3 AND member_sex="남자") AS march
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 4 AND member_sex="남자") AS april
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 5 AND member_sex="남자") AS may
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 6 AND member_sex="남자") AS june
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 7 AND member_sex="남자") AS july
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 8 AND member_sex="남자") AS august
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 9 AND member_sex="남자") AS september
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 10 AND member_sex="남자") AS october
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 11 AND member_sex="남자") AS november
+		,(SELECT COUNT(member_month) FROM branch_member_tb WHERE branch_owner_cd = #{branch_owner_cd} AND member_month = 12 AND member_sex="남자") AS december
+		FROM branch_member_tb
+		WHERE branch_owner_cd = #{branch_owner_cd}
+		GROUP BY branch_owner_cd;
+	</select>
 
 	<!-- 회원 삭제 -->
 	<delete id="MemberRemove" parameterType="com.monorella.srf.branch.dto.Member">
@@ -29,6 +107,19 @@
         WHERE member_nm = #{member_nm}
         AND member_cd = #{member_cd}
     </update>
+	
+	<!-- 하나의 입퇴실 보기 -->
+	<select id="getExit" parameterType="String" resultType="com.monorella.srf.branch.dto.SeatTime">
+		SELECT
+			m.member_nm AS member_nm
+			, s.seat_date AS seat_date
+			, s.seat_in_time AS seat_in_time
+			, s.seat_out_time AS seat_out_time
+			FROM branch_member_tb AS m
+			INNER join branch_seat_time_tb AS s
+			ON m.seat_cd = s.seat_cd 
+			WHERE m.member_nm = #{member_nm}
+	</select>	
 	
 	<!-- 하나의 게시글 보기 -->
 	<select id="getMember" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">

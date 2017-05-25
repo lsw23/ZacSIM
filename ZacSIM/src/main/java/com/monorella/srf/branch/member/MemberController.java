@@ -2,6 +2,8 @@ package com.monorella.srf.branch.member;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.SeatTime;
 import com.monorella.srf.branch.member.MemberDao;
@@ -41,7 +45,7 @@ public class MemberController {
 		System.out.println("/member/member_modify2 요청");
 		Member member = memberDao.getMember(member_nm);
 		model.addAttribute("member", member);
-		return "member/member_modify";	
+		return "member/member_modify";
 	}
 
 	// 회원 수정 요청
@@ -57,14 +61,14 @@ public class MemberController {
 	public String MemberExcci(Model model 
 			, @RequestParam(value="member_nm")String member_nm){
 		System.out.println("/member/member_excci 요청");
-		Member member = memberDao.getMember(member_nm);
-		model.addAttribute("member", member);
+		SeatTime seattime = memberDao.getExit(member_nm);
+		model.addAttribute("seattime", seattime);
 		return "member/member_excci";
 	}
 	
 	// 회원 상세 요청
 	@RequestMapping(value="/member/member_view", method = RequestMethod.GET)
-	public String MemberView(Model model 
+	public String MemberView(Model model
 			, @RequestParam(value="member_nm")String member_nm){
 		System.out.println("/member/member_view 요청");
 		Member member = memberDao.getMember(member_nm);
@@ -104,11 +108,13 @@ public class MemberController {
 		@RequestMapping(value="/member/member_exit", method = RequestMethod.GET)
 		public String selectMemberExit(Model model
 	            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-			System.out.println("member_exit 요청");
+			System.out.println("member_exit 요청1");
 			List<Member> memberexit = memberDao.exitMember();
+			System.out.println("member_exit 요청1");
 			List<SeatTime> listExit = memberDao.Exit();
-			System.out.println("member_exit 입퇴실 요청");
+			System.out.println("member_exit 입퇴실 요청2");
 			model.addAttribute("memberexit", memberexit);
+			System.out.println("member_exit 요청1");
 			model.addAttribute("listExit", listExit);
 			System.out.println("member_exit 입퇴실 요청2");
 
@@ -125,7 +131,7 @@ public class MemberController {
 			int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
 			if(joinCount%pagePerRow != 0) {
 				lastPage++;
-			}	
+			}
 
 			int countPage = 5;
 			int startPage = ((currentPage - 1)/10)*10+1;
@@ -140,6 +146,7 @@ public class MemberController {
 			if(endPage > lastPage) {
 				previousPage = 1;
 			}
+
 			if(nextPage > lastPage) {
 				nextPage = lastPage;
 			}
@@ -153,7 +160,7 @@ public class MemberController {
 			model.addAttribute("previousPage", previousPage);
 			model.addAttribute("lastPage", lastPage);
 			
-			System.out.println("member_exit 요청완료");
+			System.out.println("member_exit1,2 요청완료");
 			
 			return "member/member_exit";
 		}
@@ -208,13 +215,17 @@ public class MemberController {
 
 	// 독서실 회원 코드 자동 증가 및 POST 요청
 	@RequestMapping(value="/member/member_pro", method= RequestMethod.POST)
-	public String MemberPro(Member member) {
+	public String MemberPro(Member member, HttpSession session) {
 		System.out.println("회원코드 자동증가 폼");
 		System.out.println(member);
 
 		//코드 MAX select
 		int code = memberDao.selectMemberCode();
-
+		
+		// 세선에서 사업자 코드 받기
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		String branch_owner_cd = branchOwner.getBranch_owner_cd();
+		
 		if(code == 0){ 
 			member.setMember_cd("member_cd1");
 			memberDao.insertMember(member);
@@ -223,6 +234,19 @@ public class MemberController {
 			int result = memberDao.autoMemberCode(member);
 			if(result == 1) {
 				System.out.println("회원 등록 성공");
+				
+				// 가입시 해당 월 남자 가입자수 조회 
+				InsertNumList insertNumList = memberDao.selectMonthInsertNumMen(branch_owner_cd);
+				System.out.println("MemberController-> MemberPro-> insertNumList: "+ insertNumList);
+				// 사업자 코드로 해당 월 가입자 수 업데이트
+				memberDao.modifyMonthInsertInfoMen(insertNumList);
+				
+				// 가입시 해당 월 여자 가입자수 조회 
+				InsertNumList insertNumListW = memberDao.selectMonthInsertNumWoman(branch_owner_cd);
+				System.out.println("MemberController-> MemberPro-> insertNumListW: "+ insertNumListW);
+				// 사업자 코드로 해당 월 가입자 수 업데이트
+				memberDao.modifyMonthInsertInfoWoman(insertNumListW);
+				
 				return "redirect:/member/member_form";
 			} else {
 				System.out.println("회원 등록 실패");
