@@ -59,10 +59,16 @@ public class MemberController {
 	// 회원 입퇴실 요청
 	@RequestMapping(value="/member/member_excci", method = RequestMethod.GET)
 	public String MemberExcci(Model model 
-			, @RequestParam(value="member_nm")String member_nm){
+			, @RequestParam(value="member_nm")String member_nm
+			, @RequestParam(value="member_cd")String member_cd){
 		System.out.println("/member/member_excci 요청");
-		SeatTime seattime = memberDao.getExit(member_nm);
-		model.addAttribute("seattime", seattime);
+		Member member= memberDao.getMeberView(member_cd);
+		System.out.println("두번재 :" + member);
+		System.out.println("이름 : " + member.getMember_nm());
+		 List<SeatTime> seattime= memberDao.getExit(member.getMember_nm());
+		 System.out.println("여기 :" + seattime);
+		 model.addAttribute("seattime", seattime);
+		model.addAttribute("member", member);
 		return "member/member_excci";
 	}
 	
@@ -82,9 +88,9 @@ public class MemberController {
 			, @RequestParam("so") String so
 			, @RequestParam("sv") String sv){
 		System.out.println("MemberController->MemberExe()" + so + sv);
-		List<Member> exelist = memberDao.exeMember(so, sv);
-		System.out.println(exelist);
-		model.addAttribute("exelist", exelist);
+		List<Member> memberexit = memberDao.exeMember(so, sv);
+		System.out.println(memberexit);
+		model.addAttribute("memberexit", memberexit);
 		model.addAttribute("so", so);
 		model.addAttribute("sv", sv);
 		return "member/member_exe";
@@ -247,12 +253,12 @@ public class MemberController {
 				// 사업자 코드로 해당 월 가입자 수 업데이트
 				memberDao.modifyMonthInsertInfoWoman(insertNumListW);
 				
-				return "redirect:/member/member_form";
+				return "redirect:/member/member_list";
 			} else {
 				System.out.println("회원 등록 실패");
 			}
 		}
-		return "redirect:/member/member_form";		
+		return "redirect:/member/member_list";
 	}
 
 	// 독서실 회원 코드 자동 증가 및 POST 요청 

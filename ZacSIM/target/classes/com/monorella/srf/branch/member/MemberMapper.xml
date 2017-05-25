@@ -111,10 +111,10 @@
 	<!-- 하나의 입퇴실 보기 -->
 	<select id="getExit" parameterType="String" resultType="com.monorella.srf.branch.dto.SeatTime">
 		SELECT
-			m.member_nm AS member_nm
-			, s.seat_date AS seat_date
-			, s.seat_in_time AS seat_in_time
-			, s.seat_out_time AS seat_out_time
+			m.member_nm 
+			, s.seat_date 
+			, s.seat_in_time
+			, s.seat_out_time 
 			FROM branch_member_tb AS m
 			INNER join branch_seat_time_tb AS s
 			ON m.seat_cd = s.seat_cd 
@@ -141,7 +141,33 @@
 	</select>
 
 	<!-- 입퇴실 검색 -->
-	<select id="exeMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
+	<!-- <select id="exelist" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.SeatTime">
+		SELECT
+		 m.member_nm
+			, s.seat_date
+			, s.seat_in_time
+			, s.seat_out_time
+			FROM branch_member_tb AS m
+			INNER join branch_seat_time_tb AS s
+			ON m.seat_cd = s.seat_cd;
+			<if test="sv !=null and sv != ''">
+			<if test="so.equals('m.member_nm')">
+				WHERE m.member_nm like concat('%',#{sv},'%')
+			</if>
+			<if test="so.equals('s.seat_date')">
+				WHERE s.seat_date like concat('%',#{sv},'%')
+			</if>
+			<if test="so.equals('s.seat_in_time')">
+				WHERE s.seat_in_time like concat('%',#{sv},'%')
+			</if>
+			<if test="so.equals('s.seat_out_time')">
+				WHERE s.seat_out_time like concat('%',#{sv},'%')
+			</if>
+			</if> 
+	</select> -->
+
+	 <!-- 입퇴실 검색 -->
+	 <select id="exeMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			 member_cd
 			 , member_nm AS member_nm
@@ -155,7 +181,7 @@
 			</if>
 			</if> 
 	</select>
-
+  
 	<!-- 회원 검색 -->
 	<select id="searchMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
@@ -187,6 +213,14 @@
 			</if>
 			</if> 
 	</select>
+	<!-- 독서실 회원 목록? -->
+	<select id="getMeberView"  resultType="com.monorella.srf.branch.dto.Member">
+	SELECT 
+	member_cd 
+	, member_nm 
+	FROM branch_member_tb 
+	WHERE member_cd=#{member_cd}
+	</select>
 
 	<!-- 입퇴실 내역 -->
 	<select id="exitList" resultType="com.monorella.srf.branch.dto.SeatTime">
@@ -197,7 +231,8 @@
 			, s.seat_out_time AS seat_out_time
 		FROM branch_member_tb AS m
 		INNER join branch_seat_time_tb AS s
-		ON m.seat_cd = s.seat_cd;
+		ON m.seat_cd = s.seat_cd
+		ORDER BY seat_time_cd  DESC
 	</select>
 
 	<!-- 입퇴실 회원 리스트 -->	
