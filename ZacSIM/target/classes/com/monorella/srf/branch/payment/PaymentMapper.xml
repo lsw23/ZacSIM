@@ -19,6 +19,7 @@
 			, member_cd
 			, total_amount
 			, pay_date
+			, pay_month
 			, pay_option)
 		VALUES(
  			#{branch_owner_cd}
@@ -26,7 +27,8 @@
 			, #{seat_cd}
 			, #{member_cd}
 			, #{total_amount}
-			, now() 
+			, now()
+			, month(now()) 
 			, #{pay_option})
 	</insert>
 	<!-- 결제 성공시 seat_appoint 수정 -->
