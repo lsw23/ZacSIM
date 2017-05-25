@@ -191,7 +191,7 @@ header, footer, aside, nav, section, article {
 	border: 1px solid #dbdbdb
 }
 
-.btncalendar{
+   .btncalendar{
   display:inline-block;
   width:22px;
   height:22px;
@@ -210,7 +210,7 @@ header, footer, aside, nav, section, article {
 <script>                
 
         $(document).ready(function() {
-   
+        	
 
             //datepicker 한국어로 사용하기 위한 언어설정
             $.datepicker.setDefaults($.datepicker.regional['ko']);     
@@ -271,6 +271,7 @@ header, footer, aside, nav, section, article {
                     $('input:checked').parent(".chkbox2").addClass("on");                    
                 });
             };
+            
             $(".dateclick").dateclick();    // DateClick
             $(".searchDate").schDate();        // searchDate
             
