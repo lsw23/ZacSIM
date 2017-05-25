@@ -17,7 +17,26 @@ public class PaymentController {
 		
 	@Autowired PaymentDao paymentDao;
 	@Autowired RoomDao roomDao;
-
+	//기간 만료일 연장 성공
+	@RequestMapping(value="payment/extension_success", method=RequestMethod.GET)
+	public String extensionSuccess(){
+		return "payment/extension_success";
+	}
+	
+	//기간 만료일 연장 pro
+	@RequestMapping(value="/payment/extension_pro", method = RequestMethod.POST)
+	public String extensionEndDatePro(Payment payment){
+		System.out.println("PaymentController /n" + payment);
+		int result = paymentDao.insertPayment(payment);
+		if(result == 1){
+			System.out.println("기간연장 결제처리 성공 ");
+			paymentDao.modifyEndDate(payment);
+			System.out.println("회원 기간연장 성공");
+			return "redirect:/payment/extension_success";
+		}
+		return "redirect:/payment/newwindetail";
+	}
+	
 	//연장 form
 	@RequestMapping(value="/payment/extension_form" , method = RequestMethod.GET)
 	public String extensionPaymentFrom(Member member, Model model){
