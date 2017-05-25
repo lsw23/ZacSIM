@@ -13,7 +13,7 @@
 	 	staffboardreply_no
 	 	, staffboard_no
 	 	, staffboard_name
-	 	, DATE_FORMAT(staffboardreply_date, '%Y-%m-%d') staffboardreply_date
+	 	, DATE_FORMAT(staffboardreply_date, '%Y-%m-%d,%T') staffboardreply_date
 	 	, staffboardreply_content
 	FROM branch_staffboardreply_tb WHERE staffboard_no = #{staffboard_no}
 </select>

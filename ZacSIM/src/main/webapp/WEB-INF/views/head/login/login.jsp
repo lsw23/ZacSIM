@@ -18,7 +18,7 @@
 
 </head>
 <body class="light-gray-bg">
-	<h2 style="color:white;"><a href="${pageContext.request.contextPath}/">전주점 사이트</a></h2>
+	<h2 style="color:white;"><a href="${pageContext.request.contextPath}/login/loginFrom">전주점 사이트</a></h2>
 	<div class="templatemo-content-widget templatemo-login-widget white-bg"
 	style="margin-top: 150px;">
 		<header class="text-center">
