@@ -44,7 +44,7 @@
 				//결제창
 				window.open(contextPath+'/payment/newwinpayment?branch_owner_cd='+branch_owner_cd+'&room_cd='+room_cd+'&seat_cd='+seat_cd+'&member_cd='+member_cd, '_blank', specs);
 			    } else {
-				    var width=500, height=800;
+				    var width=500, height=500;
 				    var left = (screen.availWidth - width)/2;
 				    var top = (screen.availHeight - height)/2;
 				    var specs = "width=" + width;
@@ -52,9 +52,8 @@
 				    specs += ",left=" + left;
 				    specs += ",top=" + top;
 				//상세정보
-					window.open(contextPath+'/payment/newwindetail?member_nm='+windetailon, '_blank', specs);
-				   	
-			    	
+					var seat_cd = $(this).val();
+					window.open(contextPath+'/payment/newwindetail?member_nm='+windetailon+'&seat_cd='+seat_cd, '_blank', specs);
 			    }
 			});
 		});
@@ -116,6 +115,7 @@
 							 </c:when>
 							 <c:otherwise>
 							 	<p class="windetailon">${s.member_nm}</p>
+							 	<%-- <p>${s.member_end_date}</p> --%>
 							 </c:otherwise>
 							</c:choose>
 						</button>
@@ -131,9 +131,12 @@
 	</div><!-- content-wrapper -->
    </div><!-- wrapper -->
 
-
 <c:import url="../module2/jsscript.jsp" />
 <script>
+	console.log('하이');
+	$('#room_menu').addClass('active');
+	$('#room02').addClass('active');
+	
 	if($('.windetailon').length > 0){
 		console.log('헬로우');
 		$('.windetailon').parent().removeClass('bg-olive');

@@ -42,13 +42,14 @@
 	  	  <!-- Main content -->
 	      <section class="content">
 	      	<div class="row">
-	      	  <div class="col-md-6">
+	      	  <div class="col-md-7">
 	      	  <!-- 테이블 -->
 	            <div class="box box-primary">
 	                <div class="box-header">
 	                  <h3 class="box-title">요금제</h3>
 	                </div><!-- /.box-header -->
 	                <div class="box-body">
+	               	 
 	                  <table id="example1" class="table table-bordered table-striped">
 	                    <thead>
 	                      <tr>
@@ -62,44 +63,50 @@
 	                    <tbody>
 	                      <c:forEach var="c" items="${chargeslist}" >
 		                      <tr>
-		                        <td><input type="text" name="seat_member_type" class="form-control text01" value="${c.seat_member_type}" readonly/></td>
-		                        <td><input type="text" name="seat_charges_date" class="form-control text02" value="${c.seat_charges_date}" readonly/></td>
-		                        <td><input type="text" name="seat_charges_price" class="form-control text03" value="${c.seat_charges_price}" readonly/></td>
-		                        <td><a href="${pageContext.request.contextPath}/charges/charges_update?charges_code=${c.seat_charges_code}"><button id="update_btn"><i class="fa  fa-eraser"></i></button></a></td>
+		                        <td>
+		                        	<form class="modify_form">
+		                        		<input type="hidden" name="seat_charges_code" value="${c.seat_charges_code}" />
+		                        		<input type="text" name="seat_member_type" class="form-control text01" value="${c.seat_member_type}" readonly/>
+		                        	</form>
+		                        </td>
+		                        <td><form class="modify_form"><input type="text" name="seat_charges_date" class="form-control text02" value="${c.seat_charges_date}" readonly/></form></td>
+		                        <td><form class="modify_form"><input type="text" name="seat_charges_price" class="form-control text03" value="${c.seat_charges_price}" readonly/></form></td>
+		                        <td><button type="button" class="update_btn"><i class="fa  fa-eraser"></i></button></td>
 		                        <td><a href="${pageContext.request.contextPath}/charges/charges_delete?charges_code=${c.seat_charges_code}"><button><i class="fa  fa-times"></i></button></a></td>
 		                      </tr>
 	                      </c:forEach>
 	                    </tbody>
 	                  </table>
+	                 
                 	</div><!-- /.box-body -->
               	</div><!-- /.box -->
               </div><!-- /.1 row col-md-6-->
               
-              <div class="col-md-6">
+              <div class="col-md-5">
 	              <!-- 폼  테그 01 -->
 	              <div class="box box-warning">
 	                <div class="box-header">
 	                  <h3 class="box-title">요금설정</h3>
 	                </div><!-- /.box-header -->
 	                <!-- form start -->
-	                <form action="${pageContext.request.contextPath}/charges/charges_pro" method="post">
+	                <form id="charges_form" action="${pageContext.request.contextPath}/charges/charges_pro" method="post">
 	                  <div class="box-body">
 	                  	<input type="hidden" name="branch_owner_cd" value="${sessionScope.branchOwner.branch_owner_cd}" >
 	                    <div class="form-group">
 	                      <label>회원구분</label>
-	                      <input type="text" name="seat_member_type" class="form-control" />
+	                      <input type="text" id="seat_member_type" name="seat_member_type" class="form-control" />
 	                    </div>
 	                    <div class="form-group">
 	                      <label>기간(일)</label>
-	                      <input type="text" name="seat_charges_date" class="form-control" />
+	                      <input type="text" id="seat_charges_date" name="seat_charges_date" class="form-control" />
 	                    </div>
 	                    <div class="form-group">
 	                      <label>금액(원)</label>
-	                      <input type="text" name="seat_charges_price" class="form-control" />
+	                      <input type="text" id="seat_charges_price" name="seat_charges_price" class="form-control" />
 	                    </div>
                   	  </div><!-- /.box-body -->
                   	  <div class="box-footer">
-	                    <button type="submit" class="btn btn-primary">등록</button>
+	                    <button id="btn" type="button" class="btn btn-primary">등록</button>
 	                  </div>
                 	</form>
               	 </div><!-- box box-primary -->
@@ -138,14 +145,58 @@
         });
       });
       
-      $('.text01, text02, text03').dblclick(function(){
+      //더블클릭 이벤트
+      $('.text01, .text02, .text03').dblclick(function(){
     	  console.log('클릭');
     	  $(this).removeAttr('readonly');
       });
-      $('.text01, text02, text03').blur(function(){
+      $('.text01, .text02, .text03').blur(function(){
     	  console.log('blur');
     	  $(this).attr('readonly','readonly');
       });
+      
+      //수정 하기
+      $('.update_btn').click(function(){
+    	  console.log('수정 클릭');
+    	  var result = confirm('정말로 수정하시겠습니까?'); //confirm 창
+    	  if(result){ //확인 버튼 눌렀을 때
+    		  var parms = $(this).parent().parent().find('.modify_form').serialize(); //해당 버튼의 부모 부모 테그안의 modify_form클래스를 선택하고 serialize
+        	  console.log(parms);
+        	  $.ajax({
+        		  type: "POST",
+        		  url: "${pageContext.request.contextPath}/charges/charges_update", 
+        		  data: parms, //보낼 데이터
+        		  contentType: "application/x-www-form-urlencoded; charset=UTF-8", //UTF-8로 인코딩해 한글깨짐 방지
+        		  success:function(data){
+        			  console.log('통신 성공');
+        		  },
+        		  error:function(data){
+        			  console.log('통신 실패');
+        		  }
+    	  });
+    	 }	  
+      });
+      
+      var re_str = /^[가-힣a-z0-9_-]+$/;
+  	  var re_num = /^[0-9]+$/;
+      
+      $('#btn').click(function(){
+    	  if(re_str.test($('#seat_member_type').val()) != true){
+    		  alert('회원구분을 입력해주세요.');
+    		  $('#seat_member_type').focus();
+    		  return false;
+    	  }else if(re_num.test($('#seat_charges_date').val()) != true){
+    		  alert('기간을 적어주세요.(숫자만 적어주세요.)');
+    		  $('#seat_charges_date').focus();
+    		  return false;
+    	  }else if(re_num.test($('#seat_charges_price').val()) !=true){
+    		  alert('금액을 적어주세요.(숫자만 적어주세요.)');
+    		  return false;
+    	  }else{
+    		  $('#charges_form').submit();
+    	  }
+      });
+      
     
       
      </script>

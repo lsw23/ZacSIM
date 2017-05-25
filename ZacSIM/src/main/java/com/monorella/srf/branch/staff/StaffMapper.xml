@@ -38,6 +38,7 @@
 		 , staff_name 
 		 , staff_tel 
 		 , staff_addr
+		 , staff_in_date
 		 FROM branch_staff_tb
 		  <if test="sv !=null and sv != ''">
 		 	<if test="so.equals('staff_id')">
@@ -54,6 +55,9 @@
 		</if>
 		<if test="so.equals('staff_addr')">
 			WHERE staff_addr like concat('%',#{sv},'%')
+		</if>
+		<if test="so.equals('staff_in_date')">
+			WHERE staff_in_date like concat('%',#{sv},'%')
 		</if>
 		</if> 
 </select>

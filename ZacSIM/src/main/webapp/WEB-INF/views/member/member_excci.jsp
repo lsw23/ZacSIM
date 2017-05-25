@@ -7,10 +7,10 @@
 <script>
 	$(document).ready(function(){
 		//console.log("하이");
-		$('#exitBtn').click(function(){
-			if($('#exitForm').val()=='') {
+		$('#searchBtn').click(function(){
+			if($('#searchForm').val()=='') {
 				alert("검색어를 입력해주세요.");
-				$('#exitForm').focus();
+				$('#searchForm').focus();
 			} else {
                 $('#exitMember').submit();
             }
@@ -19,7 +19,8 @@
 </script>
     <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
-
+	<!-- JS -->
+	<c:import url="../module2/jsscript.jsp" />
 </head>
   <body class="skin-blue">
     <div class="wrapper">
@@ -68,10 +69,10 @@
 					  </select>
 			 	 	 </div>
 			   <div class="col-sm-6">
-			   		<input name="sv" id="exitForm" type="text" class="form-control" placeholder="검색을 입력하시오."/>
+			   		<input name="sv" id="searchForm" type="text" class="form-control" placeholder="검색을 입력하시오."/>
 			   </div>
 			   <div class="col-sm-2">
-			   		<button type="button" id="exitBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+			   		<button type="button" id="searchBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
 			   </div>
 			   </div>
 			   </div>
@@ -87,44 +88,14 @@
             		  </tr>
             		</thead>  
                     <tbody>
-
-				<c:forEach var="b" items="${list}">
-			                <tr>
-			                    <td>${b.member_cd}</td>
+                    <c:forEach var="b" items="${exelist}">
+			                <tr>  
+			                	<td>${b.member_cd}</td>  
 			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${b.member_nm}">${b.member_nm}</a></td>
 	               		    </tr>
-			 	</c:forEach>
+	               	</c:forEach>
 			        </tbody>
                   </table>
-                  <nav aria-label="Page navigation example">
-				    <ul class="pagination justify-content-center">
-				        <c:if test="${currentPage > 1}">
-				            <li class="page-item">
-				            	<a class="page-link" href="${pageContext.request.contextPath}/member/member_exit?currentPage=${currentPage-1}" aria-label="Previous">
-				            		<span aria-hidden="true">&laquo;</span>
-				            		<span class="sr-only">Previous</span>
-				            	</a>
-				            </li>	
-				        </c:if>
-				        <c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
-							<c:if test="${i == currentPage}">
-								<li class="page-item"><a class="page-link" href="#">${i}</a></li>
-							</c:if>
-							<c:if test="${i != currentPage}">
-								<li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/member/member_exit?currentPage=${i}">${i}</a></li>
-							</c:if>
-						</c:forEach>
-						
-				        <c:if test="${currentPage < lastPage}">
-				            <li class="page-item">
-				            	<a class="page-link" href="${pageContext.request.contextPath}/member/member_exit?currentPage=${currentPage+1}" aria-label="Next">
-				            		<span aria-hidden="true">&raquo;</span>
-				        			<span class="sr-only">Next</span>
-				            	</a>	
-				            </li>	
-				        </c:if>
-					 </ul>
-					</nav>
                   </div>
                   </div>
                   </div>
@@ -154,17 +125,6 @@
                       <th>퇴실시간</th>
                     </tr>
                   </thead>
-                  <tbody>
-
-				<c:forEach var="n" items="${listExit}">
-			                <tr>
-			                    <td>${n.member_nm}</td>
-			                    <td>${n.seat_date}</td>
-			                    <td>${n.seat_in_time}</td>
-			                    <td>${n.seat_out_time}</td>
-	               		    </tr>
-			 	</c:forEach>
-			        </tbody>
                   </table>
 				   </div>
 				   </div>
@@ -176,11 +136,5 @@
 				</section>
 				</div>
 				</div>
-	<!-- JS -->
-	<c:import url="../module2/jsscript.jsp" />
-	<script>
-		$('#member_menu').addClass('active');
-		$('#member03').addClass('active');
-	</script>			
 	</body>
-</html>            
+</html>     

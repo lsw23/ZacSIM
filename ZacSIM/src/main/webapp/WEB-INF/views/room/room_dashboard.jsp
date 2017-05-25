@@ -186,5 +186,11 @@
 	
 	<!-- JS -->
 	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		//메뉴 고정
+			console.log('하이');
+			$('#room_menu').addClass('active');
+			$('#room03').addClass('active');
+	</script>
 </body>
 </html>

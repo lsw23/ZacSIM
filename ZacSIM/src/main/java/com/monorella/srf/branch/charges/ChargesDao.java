@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.Charges;
 
 @Repository
@@ -19,9 +20,9 @@ public class ChargesDao {
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.charges.ChargesMapper.selectChargesCode");
 	}
 
-	//요금제 update
-	public int updateCharges(String charges_code){
-		return sqlSessionTemplate.update("");
+	//요금제 modify
+	public int modifyCharges(Charges charges){
+		return sqlSessionTemplate.update("com.monorella.srf.branch.charges.ChargesMapper.modifyCharges", charges);
 	}
 	
 	//요금제 delete
@@ -30,8 +31,8 @@ public class ChargesDao {
 	}
 	
 	//요금제 select
-	public List<Charges> selectCharges(){
-		return sqlSessionTemplate.selectList("com.monorella.srf.branch.charges.ChargesMapper.selectCharges");
+	public List<Charges> selectCharges(BranchOwner branchOwner){
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.charges.ChargesMapper.selectCharges", branchOwner);
 	}
 	
 	//요금제 자동등록

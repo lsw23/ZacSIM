@@ -17,6 +17,37 @@ public class PaymentController {
 		
 	@Autowired PaymentDao paymentDao;
 	@Autowired RoomDao roomDao;
+	//기간 만료일 연장 성공
+	@RequestMapping(value="payment/extension_success", method=RequestMethod.GET)
+	public String extensionSuccess(){
+		return "payment/extension_success";
+	}
+	
+	//기간 만료일 연장 pro
+	@RequestMapping(value="/payment/extension_pro", method = RequestMethod.POST)
+	public String extensionEndDatePro(Payment payment){
+		System.out.println("PaymentController /n" + payment);
+		int result = paymentDao.insertPayment(payment);
+		if(result == 1){
+			System.out.println("기간연장 결제처리 성공 ");
+			paymentDao.modifyEndDate(payment);
+			System.out.println("회원 기간연장 성공");
+			return "redirect:/payment/extension_success";
+		}
+		return "redirect:/payment/newwindetail";
+	}
+	
+	//연장 form
+	@RequestMapping(value="/payment/extension_form" , method = RequestMethod.GET)
+	public String extensionPaymentFrom(Member member, Model model){
+		System.out.println("extensionPaymentFrom() 실행");
+		System.out.println("PaymentController member :" + member);
+		Member detailmember = paymentDao.detailMember(member);
+		System.out.println("PaymentController detailmember :" + detailmember);
+		model.addAttribute("detailmember", detailmember);
+		return "payment/extension_form";
+	}
+	
 	//결제 form
 	@RequestMapping(value="/payment/newwinpayment", method = RequestMethod.GET)
 	public String paymentFrom(Model model,
@@ -24,9 +55,6 @@ public class PaymentController {
 			@RequestParam(value="room_cd", required=true) String room_cd,
 			@RequestParam(value="seat_cd", required=true) String seat_cd,
 			@RequestParam(value="member_cd", required=true) String member_cd){
-		
-		//지점명 , 열람실 이름, 열람석 번호
-		
 
 		model.addAttribute("branch_owner_cd", branch_owner_cd);
 		model.addAttribute("room_cd", room_cd);
@@ -42,12 +70,10 @@ public class PaymentController {
 	
 	// 상세정보 요청
 	@RequestMapping(value="/payment/newwindetail", method = RequestMethod.GET)
-	public String newwindetail(Model model 
-			, @RequestParam(value="member_nm")String member_nm){
-		System.out.println(member_nm);
-		Member member = paymentDao.detailMember(member_nm);
-		System.out.println("member: "+ member);
-		model.addAttribute("member", member);
+	public String newwindetail(Member member, Model model){
+		Member detailmember = paymentDao.detailMember(member);
+		System.out.println("member: "+ detailmember);
+		model.addAttribute("detailmember", detailmember);
 		return "payment/newwindetail";
 	}
 	
@@ -84,8 +110,7 @@ public class PaymentController {
 			System.out.println(roomdash);
 			//열람실현황 수정
 			roomDao.modifyRoomDashBoard(roomdash);
-			
-			
+
 			//출결번호
 			model.addAttribute("inouting", inouting);
 			

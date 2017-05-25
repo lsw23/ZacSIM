@@ -7,8 +7,7 @@
 <head>
 <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
-	<!-- JS -->
-	<c:import url="../module2/jsscript.jsp" />
+
 </head>
 	<body class="skin-blue">
     <div class="wrapper">
@@ -41,7 +40,7 @@
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
-                  <tr>
+		          <tr>
                 	<td>독서실 회원코드 :</td>
                 	<td>${member.member_cd}</td>
 		          </tr>
@@ -74,7 +73,7 @@
 		              <td>${member.member_use_pur}</td>
 		           </tr>
 		           </table>
-		           <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_modify?member_cd=${member.member_cd}">회원 수정</a>
+		           <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_modify?member_nm=${member.member_nm}">회원 수정</a>
    				   <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_remove?member_cd=${member.member_cd}">회원 삭제</a>
   				   <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_list">회원리스트</a>
                 </div><!-- /.box-body -->
@@ -85,5 +84,11 @@
           </section>  
           </div>    
       </div><!-- /.content-wrapper -->
+            <!-- JS -->
+	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		$('#member_menu').addClass('active');
+		$('#member02').addClass('active');
+	</script>
     </body>
 </html>  

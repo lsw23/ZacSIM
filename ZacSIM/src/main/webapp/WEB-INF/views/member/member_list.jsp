@@ -20,8 +20,7 @@
 </script>
 <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
-	<!-- JS -->
-	<c:import url="../module2/jsscript.jsp" />
+
 </head>
 <body class="skin-blue">
     <div class="wrapper">
@@ -36,7 +35,7 @@
 		  <section class="content-header">
 		    <h1>
 		      	독서실 회원
-		      <small>리스트</small>
+		      <small>목록</small>
 		    </h1>
 		    <ol class="breadcrumb">
 		      <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -96,8 +95,8 @@
 
 				<c:forEach var="b" items="${list}">
 			                <tr>
-			                    <td><a href="${pageContext.request.contextPath}/member/member_view?member_cd=${b.member_cd}">${b.member_cd}</a></td>
-			                    <td>${b.member_nm}</td>
+			                    <td>${b.member_cd}</td>
+			                    <td><a href="${pageContext.request.contextPath}/member/member_view?member_nm=${b.member_nm}">${b.member_nm}</a></td>
 			                    <td>${b.member_sex}</td>
 			                    <td>${b.member_addr}</td>
 			                    <td>${b.member_age}</td>
@@ -143,5 +142,11 @@
           </section><!-- /.content -->
           </div>
       </div><!-- /.content-wrapper -->
+      <!-- JS -->
+	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		$('#member_menu').addClass('active');
+		$('#member02').addClass('active');
+	</script>
 </body>
 </html>

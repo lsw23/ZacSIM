@@ -78,6 +78,10 @@
     </section>
     </div>
 </div>
+<script>
+	$('#staff_menu').addClass('active');
+	$('#staff02').addClass('active');
+</script>
 </body>
 </html>
 

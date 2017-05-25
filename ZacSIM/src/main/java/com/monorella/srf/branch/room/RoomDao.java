@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.Room;
 import com.monorella.srf.branch.dto.RoomDashBoard;
 import com.monorella.srf.branch.dto.Seat;
@@ -37,8 +38,8 @@ public class RoomDao {
 	}
 	
 	//열람실 현황 조회
-	public List<RoomDashBoard> selectRoomDashBoardNow(){
-		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selctRoomDashBoardNow");
+	public List<RoomDashBoard> selectRoomDashBoardNow(BranchOwner branchOwner){
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selctRoomDashBoardNow", branchOwner);
 	}
 	
 	//열람실 현황 입력데이터 조회
@@ -80,15 +81,15 @@ public class RoomDao {
 	}
 	
 	//열람석 select
-	public List<Seat> selectSeat(){
+	public List<Seat> selectSeat(BranchOwner branchOwner){
 		System.out.println("selectSeat()");
-		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selectSeat");
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selectSeat", branchOwner);
 	}
 	
 	//열람실 select
-	public List<Room> selectRoom(){
+	public List<Room> selectRoom(BranchOwner branchOwner){
 		System.out.println("selectRoom()");
-		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selectRoom");
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selectRoom", branchOwner);
 	}
 	
 	//열람실 현황 insert

@@ -29,7 +29,7 @@
     <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <beans:property name="url" value="jdbc:mysql://monorella.cafe24.com:3306/monorella?useUnicode=true&amp;characterEncoding=utf-8"/> 
-        <!-- <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/monorella?useUnicode=true&amp;characterEncoding=utf-8"/>  -->
+        <!-- <beans:property name="url" value="jdbc:mysql://127.0.0.1:3306/monorella?useUnicode=true&amp;characterEncoding=utf-8"/> -->
         <beans:property name="username" value="monorella"/>
         <beans:property name="password" value="gkahsl!23"/>
     </beans:bean>
@@ -49,8 +49,10 @@
                 <beans:value>classpath:com/monorella/srf/branch/payment/PaymentMapper.xml</beans:value>
                 <beans:value>classpath:com/monorella/srf/branch/staffboard/StaffBoardMapper.xml</beans:value>
                 <beans:value>classpath:com/monorella/srf/branch/charges/ChargesMapper.xml</beans:value>
+                <beans:value>classpath:com/monorella/srf/branch/expense/ExpenseMapper.xml</beans:value>
                 <beans:value>classpath:com/monorella/srf/branch/attendance/AttendanceMapper.xml</beans:value>
                 <beans:value>classpath:com/monorella/srf/branch/income/IncomeMapper.xml</beans:value>
+
                 <!-- 본사 -->
                 <beans:value>classpath:com/monorella/srf/head/login/HeadLoginMapper.xml</beans:value>
                 <beans:value>classpath:com/monorella/srf/head/branchOwner/HeadBranchOwnerMapper.xml</beans:value>
