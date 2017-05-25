@@ -36,7 +36,7 @@
 		  <section class="content-header">
 		    <h1>
 		       	독서실 회원
-		      <small>입퇴실 목록</small>
+		      <small>입퇴실</small>
 		    </h1>
       		<ol class="breadcrumb">
 		      <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -59,7 +59,7 @@
                 </div><!-- /.box-header -->
 
                 <!-- form start -->
-                <form id="exitMember" action="${pageContext.request.contextPath}/member/member_search" method="post">
+                <form id="exitMember" action="${pageContext.request.contextPath}/member/member_exe" method="post">
                   <div class="form-group">
 			 	  <div class="row">
 			  		<div class="col-sm-4">
@@ -88,10 +88,12 @@
             		  </tr>
             		</thead>  
                     <tbody>
-			                <tr>
-			                    <td>${member.member_cd}</td>
-			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${member.member_nm}">${member.member_nm}</a></td>
+                    <c:forEach var="b" items="${exelist}">
+			                <tr>  
+			                	<td>${b.member_cd}</td>  
+			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${b.member_nm}">${b.member_nm}</a></td>
 	               		    </tr>
+	               	</c:forEach>
 			        </tbody>
                   </table>
                   </div>
@@ -117,11 +119,22 @@
                   <table class="table">
                   <thead>
                     <tr>
+                      <th>이름</th>
                       <th>현재 날짜</th>
                       <th>입실시간</th>
                       <th>퇴실시간</th>
                     </tr>
                   </thead>
+                  <tbody>
+                    <c:forEach var="n" items="${listExit}">
+			                <tr>
+			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${n.member_nm}">${n.member_nm}</a></td>
+			                    <td>${n.seat_date}</td>
+			                    <td>${n.seat_in_time}</td>
+			                    <td>${n.seat_out_time}</td>
+	               		    </tr>
+			 	</c:forEach>
+			 	  </tbody>
                   </table>
 				   </div>
 				   </div>

@@ -46,8 +46,7 @@
 </script>
 <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
-	<!-- JS -->
-	<c:import url="../module2/jsscript.jsp" />
+
 </head>
 <body class="skin-blue">
     <div class="wrapper">
@@ -150,6 +149,12 @@
 		  </div>
 		 </section> 
 		 </div>
-		</div>	
+		</div>
+		      <!-- JS -->
+	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		$('#member_menu').addClass('active');
+		$('#member02').addClass('active');
+	</script>
 </body>
 </html>

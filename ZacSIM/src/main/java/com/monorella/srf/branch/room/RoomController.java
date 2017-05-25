@@ -25,6 +25,22 @@ public class RoomController {
 	@Autowired
 	private RoomDao roomDao;
 	
+	//열람실 별 미결제 열람석 조회
+	@RequestMapping(value="/room/move_seat", method = RequestMethod.POST)
+	public String notpay_seat(Seat seat){
+		System.out.println(seat);
+		return "";
+	}
+	
+	//회원 자리 이동
+	@RequestMapping(value="/room/move_form", method = RequestMethod.GET)
+	public String seat_move(Model model, HttpSession session){
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		List<Room> roomlist = roomDao.selectRoom(branchOwner);
+		model.addAttribute("roomlist", roomlist);
+		return "room/move_form";
+	}
+	
 	//열람실 현황 보기
 	@RequestMapping(value="/room/room_dashboard" , method = RequestMethod.GET)
 	public String room_dashboard(Model model, HttpSession session){

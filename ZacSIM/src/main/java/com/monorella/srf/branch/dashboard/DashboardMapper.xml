@@ -350,7 +350,7 @@
 	</select>
 	<!-- 당월 등록 회원 -->
 	<select id="selectMonthInsertMemberCount" resultType="int">
-		SELECT insert_no FROM month_member_insert WHERE month = MONTH(CURDATE());
+		SELECT insert_num FROM month_insert_num WHERE month = MONTH(CURDATE());
 	</select>
 	<!-- 금일 등록 회원 -->
 	<select id="selectTodayInsertMemberCount" resultType="int">
