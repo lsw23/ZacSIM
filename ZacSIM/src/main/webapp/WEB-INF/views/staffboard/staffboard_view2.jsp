@@ -71,30 +71,15 @@
 						<div class="box box-primary">
 							<h3>공지사항 댓글</h3>
 							<div>댓글 수 : ${totalReply}</div>
-							<c:forEach var="reply" items="${replylist}">
-							<div class="table-responsive">
-							<table class="table table-hover" style="width: 430px; height: 25px;">
-							<thead>
-							<tr>
-							<th>&nbsp;</th>
-							<th> 댓글 목록</th>
-							<th>&nbsp;</th>
-							</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th class="success"><div>&nbsp;</div>${reply.staffboard_name} <div>&nbsp;</div></th>
-									<th class="success"></th>
-									<th class="success"><div>${reply.staffboardreply_date}</div>${reply.staffboardreply_content}</th>
-								</tr>						
-								<%-- <tr>	
-									
-									<th class="success">${reply.staffboardreply_date}${reply.staffboardreply_content}</th>
-								</tr> --%>
-								</tbody>
+							<table>
+							<div class="groove">
+								<c:forEach var="reply" items="${replylist}">
+									<div>${reply.staffboard_name} ${reply.staffboardreply_date}</div>
+									<div>${reply.staffboardreply_content}</div>
+
+								</c:forEach>
 								</table>
-								</div>
-							</c:forEach>
+							</div>
 
 							<form action="${pageContext.request.contextPath}/staffboard/staffboard_reply_pro"method="post">
 								<%-- <input type="hidden" name="staffboardreply_no" value="${staffboardreply_no}"> --%>

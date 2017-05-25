@@ -193,13 +193,13 @@ header, footer, aside, nav, section, article {
 	border: 1px solid #dbdbdb
 }
 
-.btncalendar {
+ .btncalendar {
 	display: inline-block;
 	width: 22px;
 	height: 22px;
 	background: url(images/btn_calendar.gif) center center no-repeat;
 	text-indent: -999em
-}
+} 
 </style>
 
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -255,29 +255,31 @@ header, footer, aside, nav, section, article {
             });
             */
 
+            // Search Date
+            jQuery.fn.schDate = function(){
+                var $obj = $(this);
+                var $chk = $obj.find("input[type=radio]");
+                $chk.click(function(){                
+                    $('input:not(:checked)').parent(".chkbox2").removeClass("on");
+                    $('input:checked').parent(".chkbox2").addClass("on");                    
+                });
+            };
+
+            // DateClick
+            jQuery.fn.dateclick = function(){
+                var $obj = $(this);
+                $obj.click(function(){
+                    $(this).parent().find("input").focus();
+                });
+            }    
+
+            
             $(".dateclick").dateclick();    // DateClick
             $(".searchDate").schDate();        // searchDate
             
         });
 
-        // Search Date
-        jQuery.fn.schDate = function(){
-            var $obj = $(this);
-            var $chk = $obj.find("input[type=radio]");
-            $chk.click(function(){                
-                $('input:not(:checked)').parent(".chkbox2").removeClass("on");
-                $('input:checked').parent(".chkbox2").addClass("on");                    
-            });
-        };
-
-        // DateClick
-        jQuery.fn.dateclick = function(){
-            var $obj = $(this);
-            $obj.click(function(){
-                $(this).parent().find("input").focus();
-            });
-        }    
-
+      
         
         function setSearchDate(start){
 
@@ -407,13 +409,13 @@ header, footer, aside, nav, section, article {
 														<div class="clearfix">
 															<!-- 시작일 -->
 															<span class="dset"> 
-																<input type="text" class="datepicker inpType" name="so" id="searchStartDate"> 
+																<input type="text" class="datepicker inpType" name="searchStartDate" id="searchStartDate"> 
 																<a href="#none" class="btncalendar dateclick">달력</a>
 															</span> 
 															<span class="demi">~</span>
 															<!-- 종료일 -->
 															<span class="dset"> 
-																<input type="text" class="datepicker inpType" name="sv" id="searchEndDate"> 
+																<input type="text" class="datepicker inpType" name="searchEndDate" id="searchEndDate"> 
 																<a href="#none" class="btncalendar dateclick">달력</a>
 															</span>
 														</div>
@@ -424,6 +426,7 @@ header, footer, aside, nav, section, article {
 									</div>
 								</div>
 								<div class="box-footer">
+									<a href="${pageContext.request.contextPath}/expense/expense_form" class="btn btn-default">지출내역추가</a>
 									<button id="staffbutton" type="submit" class="btn btn-default">기간검색</button>
 									<button type="reset" class="btn btn-default">초기화</button>
 								</div>
@@ -458,8 +461,7 @@ header, footer, aside, nav, section, article {
 										</c:forEach>
 									</tbody>
 								</table>
-								<div>
-									<a href="${pageContext.request.contextPath}/expense/expense_form">지출내역추가</a>
+								<div>									
 									<nav aria-label="Page navigation example">
 										<ul class="pagination justify-content-center">
 											<c:if test="${currentPage > 1}">

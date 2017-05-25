@@ -13,7 +13,7 @@
 		 , branch_name
 		 , expense_date
 	FROM branch_expense_tb
-	WHERE #{so}<![CDATA[ <=]]> expense_date AND expense_date <![CDATA[ <=]]> #{sv}
+	WHERE #{searchStartDate}<![CDATA[ <=]]> expense_date AND expense_date <![CDATA[ <=]]> #{searchEndDate}
 	</select>
 
 
