@@ -24,7 +24,8 @@ public class HeadBranchOwnerController {
 		int result = headBranchOwnerDao.deleteBranchOwner(branch_owner_cd);
 		System.out.println("HeadBranchOwnerController->deleteBranchOwner()-> result: "+result);
 		if(result==1){
-			headBranchOwnerDao.deleteBranchOwnerCode(branch_owner_cd);
+			// 사업자 삭제시 insert_num_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제
+			headBranchOwnerDao.deleteNumList(branch_owner_cd);
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
@@ -61,9 +62,10 @@ public class HeadBranchOwnerController {
 	public String insertBranchOwner(HeadBranchOwner branchOwner){
 		//System.out.println("HeadBranchOwnerController-> insertBranchOwner()-> BranchOwner: "+branchOwner.toString());
 		int result = headBranchOwnerDao.insertBranchOwner(branchOwner);
-		
 		if(result==1){
-			headBranchOwnerDao.insertBranchOwnerCode(branchOwner.getBranch_owner_cd());
+			//사업자 등록시 insert_num_list 테이블에 branch_owner_cd 및 member_sex 값을 가진 레코드 두 줄 생성
+			headBranchOwnerDao.insertNumListMen(branchOwner.getBranch_owner_cd());
+			headBranchOwnerDao.insertNumListWoman(branchOwner.getBranch_owner_cd());
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}

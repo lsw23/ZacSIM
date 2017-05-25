@@ -310,56 +310,56 @@
           hideHover: 'auto'
         }); */
 		
-        // 월별 등록자 추이
-        var januaryInsertNo = '<c:out value='${januaryInsertNo}'/>';
-        januaryInsertNo *= 1; // int변환
-		var februaryInsertNo = '<c:out value='${februaryInsertNo}'/>';
-		februaryInsertNo *= 1;
-		var marchInsertNo = '<c:out value='${marchInsertNo}'/>';
-		marchInsertNo *= 1;
-		var aprilInsertNo = '<c:out value='${aprilInsertNo}'/>';
-		aprilInsertNo *= 1;
-		var mayInsertNo = '<c:out value='${mayInsertNo}'/>';
-		mayInsertNo *= 1;
-		var juneInsertNo = '<c:out value='${juneInsertNo}'/>';
-		juneInsertNo *= 1; 
-		var julyInsertNo = '<c:out value='${julyInsertNo}'/>';
-		julyInsertNo *= 1;
-		var augustInsertNo = '<c:out value='${augustInsertNo}'/>';
-		augustInsertNo *= 1;
-		var septemberInsertNo = '<c:out value='${septemberInsertNo}'/>';
-		septemberInsertNo *= 1;
-		var octoberInsertNo = '<c:out value='${octoberInsertNo}'/>';
-		octoberInsertNo *= 1;
-		var novemberInsertNo = '<c:out value='${novemberInsertNo}'/>';
-		novemberInsertNo *= 1; 
-		var decemberInsertNo = '<c:out value='${decemberInsertNo}'/>';
-		decemberInsertNo *= 1;
+     // 월별 등록자 추이
+        var januaryMen = '<c:out value='${monthMen.january}'/>';
+        januaryMen *= 1; // int변환
+		var februaryMen = '<c:out value='${monthMen.february}'/>';
+		februaryMen *= 1;
+		var marchMen = '<c:out value='${monthMen.march}'/>';
+		marchMen *= 1;
+		var aprilMen = '<c:out value='${monthMen.april}'/>';
+		aprilMen *= 1;
+		var mayMen = '<c:out value='${monthMen.may}'/>';
+		mayMen *= 1;
+		var juneMen = '<c:out value='${monthMen.june}'/>';
+		juneMen *= 1; 
+		var julyMen = '<c:out value='${monthMen.july}'/>';
+		julyMen *= 1;
+		var augustMen = '<c:out value='${monthMen.august}'/>';
+		augustMen *= 1;
+		var septemberMen = '<c:out value='${monthMen.september}'/>';
+		septemberMen *= 1;
+		var octoberMen = '<c:out value='${monthMen.october}'/>';
+		octoberMen *= 1;
+		var novemberMen = '<c:out value='${monthMen.november}'/>';
+		novemberMen *= 1; 
+		var decemberMen = '<c:out value='${monthMen.december}'/>';
+		decemberMen *= 1;
         
-		var januaryInsertMenNo = '<c:out value='${januaryInsertMenNo}'/>';
-        januaryInsertMenNo *= 1; // int변환
-		var februaryInsertMenNo = '<c:out value='${februaryInsertMenNo}'/>';
-		februaryInsertMenNo *= 1;
-		var marchInsertMenNo = '<c:out value='${marchInsertMenNo}'/>';
-		marchInsertMenNo *= 1;
-		var aprilInsertMenNo = '<c:out value='${aprilInsertMenNo}'/>';
-		aprilInsertMenNo *= 1;
-		var mayInsertMenNo = '<c:out value='${mayInsertMenNo}'/>';
-		mayInsertMenNo *= 1;
-		var juneInsertMenNo = '<c:out value='${juneInsertMenNo}'/>';
-		juneInsertMenNo *= 1; 
-		var julyInsertMenNo = '<c:out value='${julyInsertMenNo}'/>';
-		julyInsertMenNo *= 1;
-		var augustInsertMenNo = '<c:out value='${augustInsertMenNo}'/>';
-		augustInsertMenNo *= 1;
-		var septemberInsertMenNo = '<c:out value='${septemberInsertMenNo}'/>';
-		septemberInsertMenNo *= 1;
-		var octoberInsertMenNo = '<c:out value='${octoberInsertMenNo}'/>';
-		octoberInsertMenNo *= 1;
-		var novemberInsertMenNo = '<c:out value='${novemberInsertMenNo}'/>';
-		novemberInsertMenNo *= 1; 
-		var decemberInsertMenNo = '<c:out value='${decemberInsertMenNo}'/>';
-		decemberInsertMenNo *= 1;
+		var januaryWoman = '<c:out value='${monthWoman.january}'/>';
+        januaryWoman *= 1; // int변환
+		var februaryWoman = '<c:out value='${monthWoman.february}'/>';
+		februaryWoman *= 1;
+		var marchWoman = '<c:out value='${monthWoman.march}'/>';
+		marchWoman *= 1;
+		var aprilWoman = '<c:out value='${monthWoman.april}'/>';
+		aprilWoman *= 1;
+		var mayWoman = '<c:out value='${monthWoman.may}'/>';
+		mayWoman *= 1;
+		var juneWoman = '<c:out value='${monthWoman.june}'/>';
+		juneWoman *= 1; 
+		var julyWoman = '<c:out value='${monthWoman.july}'/>';
+		julyWoman *= 1;
+		var augustWoman = '<c:out value='${monthWoman.august}'/>';
+		augustWoman *= 1;
+		var septemberWoman = '<c:out value='${monthWoman.september}'/>';
+		septemberWoman *= 1;
+		var octoberWoman = '<c:out value='${monthWoman.october}'/>';
+		octoberWoman *= 1;
+		var novemberWoman = '<c:out value='${monthWoman.november}'/>';
+		novemberWoman *= 1; 
+		var decemberWoman = '<c:out value='${monthWoman.december}'/>';
+		decemberWoman *= 1;
         
         var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
         // This will get the first returned node in the jQuery collection.
@@ -368,7 +368,7 @@
         var areaChartData = {
           labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
           datasets: [
-    	  	{
+    		{
               label: "합계",
               fillColor: "#BFFFB8", // 그래프 바탕
               strokeColor: "#BFFFB8", //위 쪽 그래프 구분선
@@ -376,18 +376,18 @@
               pointStrokeColor: "#FFF", //점 테두리
               pointHighlightFill: "#BFFFB8", // 마우스 오버시 점
               pointHighlightStroke: "#1DDB16", // 마우스 오버시 점 테두리
-              data: [januaryInsertNo
-            	  , februaryInsertNo
-            	  , marchInsertNo
-            	  , aprilInsertNo
-            	  , mayInsertNo
-            	  , juneInsertNo
-            	  , julyInsertNo
-            	  , augustInsertNo
-            	  , septemberInsertNo
-            	  , octoberInsertNo
-            	  , novemberInsertNo
-            	  , decemberInsertNo]
+              data: [januaryMen+januaryWoman
+            	  , februaryMen+februaryWoman
+            	  , marchMen+marchWoman
+            	  , aprilMen+aprilWoman
+            	  , mayMen+mayWoman
+            	  , juneMen+juneWoman
+            	  , julyMen+julyWoman
+            	  , augustMen+augustWoman
+            	  , septemberMen+septemberWoman
+            	  , octoberMen+octoberWoman
+            	  , novemberMen+novemberWoman
+            	  , decemberMen+decemberWoman]
             },
             {
            	  label: "남성",
@@ -397,18 +397,18 @@
               pointStrokeColor: "#FFF", //점 테두리
               pointHighlightFill: "#C7C6FF", // 마우스 오버시 점
               pointHighlightStroke: "#3736FF", // 마우스 오버시 점 테두리
-              data: [januaryInsertMenNo
-            	  , februaryInsertMenNo
-            	  , marchInsertMenNo
-            	  , aprilInsertMenNo
-            	  , mayInsertMenNo
-            	  , juneInsertMenNo
-            	  , julyInsertMenNo
-            	  , augustInsertMenNo
-            	  , septemberInsertMenNo
-            	  , octoberInsertMenNo
-            	  , novemberInsertMenNo
-            	  , decemberInsertMenNo]
+              data: [januaryMen
+            	  , februaryMen
+            	  , marchMen
+            	  , aprilMen
+            	  , mayMen
+            	  , juneMen
+            	  , julyMen
+            	  , augustMen
+            	  , septemberMen
+            	  , octoberMen
+            	  , novemberMen
+            	  , decemberMen]
             },
             {
               label: "여성",
@@ -418,18 +418,18 @@
               pointStrokeColor: "#FFF", //점 테두리
               pointHighlightFill: "#FFC6C6", // 마우스 오버시 점
               pointHighlightStroke: "#FF4848", // 마우스 오버시 점 테두리
-              data: [januaryInsertNo-januaryInsertMenNo
-            	  , februaryInsertNo-februaryInsertMenNo
-            	  , marchInsertNo-marchInsertMenNo
-            	  , aprilInsertNo-aprilInsertMenNo
-            	  , mayInsertNo-mayInsertMenNo
-            	  , juneInsertNo-juneInsertMenNo
-            	  , julyInsertNo-julyInsertMenNo
-            	  , augustInsertNo-augustInsertMenNo
-            	  , septemberInsertNo-septemberInsertMenNo
-            	  , octoberInsertNo-octoberInsertMenNo
-            	  , novemberInsertNo-novemberInsertMenNo
-            	  , decemberInsertNo-decemberInsertMenNo]
+              data: [januaryWoman
+            	  , februaryWoman
+            	  , marchWoman
+            	  , aprilWoman
+            	  , mayWoman
+            	  , juneWoman
+            	  , julyWoman
+            	  , augustWoman
+            	  , septemberWoman
+            	  , octoberWoman
+            	  , novemberWoman
+            	  , decemberWoman]
             }
           ]
         };

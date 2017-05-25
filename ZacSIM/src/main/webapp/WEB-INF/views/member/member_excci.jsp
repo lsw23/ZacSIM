@@ -125,6 +125,16 @@
                       <th>퇴실시간</th>
                     </tr>
                   </thead>
+                  <tbody>
+                    <c:forEach var="n" items="${listExit}">
+			                <tr>
+			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${n.member_nm}">${n.member_nm}</a></td>
+			                    <td>${n.seat_date}</td>
+			                    <td>${n.seat_in_time}</td>
+			                    <td>${n.seat_out_time}</td>
+	               		    </tr>
+			 	</c:forEach>
+			 	  </tbody>
                   </table>
 				   </div>
 				   </div>

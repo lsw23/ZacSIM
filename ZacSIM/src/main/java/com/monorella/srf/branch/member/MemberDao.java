@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.SeatTime;
 
@@ -16,6 +17,31 @@ public class MemberDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	//-------------------------------------------
+	// 회원 가입시 월별 여자 가입자수 업데이트
+	public int modifyMonthInsertInfoWoman(InsertNumList insertNumListW){
+		System.out.println("MemberDao-> modifyMonthInsertInfoWoman()-> insertNumListW: "+insertNumListW);
+		return sqlSessionTemplate.update("com.monorella.srf.branch.member.MemberMapper.modifyMonthInsertInfoWoman", insertNumListW);
+	}
+	
+	// 회원 가입시 월별 남자 가입자수 업데이트
+	public int modifyMonthInsertInfoMen(InsertNumList insertNumList){
+		System.out.println("MemberDao-> modifyMonthInsertInfoMen()-> insertNum: "+insertNumList);
+		return sqlSessionTemplate.update("com.monorella.srf.branch.member.MemberMapper.modifyMonthInsertInfoMen", insertNumList);
+	}
+	
+	// 회원 등록시 월별 여자 가입자수 조회
+	public InsertNumList selectMonthInsertNumWoman(String branch_owner_cd){
+		System.out.println("MemberDao-> monthInsertNum()-> branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.selectMonthInsertNumWoman", branch_owner_cd);
+	}
+	
+	// 회원 등록시 월별 남자 가입자수 조회
+	public InsertNumList selectMonthInsertNumMen(String branch_owner_cd){
+		System.out.println("MemberDao-> monthInsertNum()-> branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.selectMonthInsertNumMen", branch_owner_cd);
+	}
+	//--------------------------------------------------------------
 	
 	// 회원삭제 메서드
     public int removeMember(String member_cd, String branch_owner_cd) {
@@ -32,6 +58,12 @@ public class MemberDao {
 		return sqlSessionTemplate.update("com.monorella.srf.branch.member.MemberMapper.MemberModify", member);
 	}
 
+	//하나의 게시글 보기
+	public SeatTime getExit(String member_nm) {
+		System.out.println("8st getExit");
+        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getExit", member_nm);
+    }
+	
 	//하나의 게시글 보기
 	public Member getMember(String member_nm) {
 		System.out.println("8st getMember");
@@ -58,7 +90,7 @@ public class MemberDao {
 		System.out.println("7st searchMember");
 		memberList = sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.searchMember", map);
 		return memberList;
-	}	
+	}
 
 	// 입퇴실 리스트 메서드
 	public List<SeatTime> listExit(int currentPage, int pagePerRow) {
@@ -68,7 +100,7 @@ public class MemberDao {
 		System.out.println("6st listExit");
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.exitList", map);
 	}
-	
+
 	// 입퇴실 회원 리스트 메서드
 	public List<Member> selectMemberExit(int currentPage, int pagePerRow) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -77,7 +109,7 @@ public class MemberDao {
 		System.out.println("6st selectMemberExit");
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.selectMemberExit", map);
 	}
-	
+
 	// 회원리스트 메서드
 	public List<Member> selectMemberList(int currentPage, int pagePerRow) {
 		Map<String, Integer> map = new HashMap<String, Integer>();

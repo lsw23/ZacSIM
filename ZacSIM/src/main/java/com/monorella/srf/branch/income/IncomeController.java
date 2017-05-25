@@ -33,34 +33,44 @@ public class IncomeController {
 		Date today = new Date();
 	    SimpleDateFormat simpleToday = new SimpleDateFormat("yyyy-MM-dd");
 	    SimpleDateFormat month = new SimpleDateFormat("M");	     
-		
+	    
 		// 세선에서 사업자 코드 받기
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 		String branch_owner_cd = branchOwner.getBranch_owner_cd();
+		System.out.println("IncomeController-> SelectIncomeList()-> branch_owner_cd: "+ branch_owner_cd);
 		
 		// 기간별 수입 목록 검색
 		List<Payment> pay = incomeDao.selectIncomeList(startDate, endDate, branch_owner_cd);
-		
-		// 기간 수입 합계
-		int total = incomeDao.selectIncomeSum(startDate, endDate, branch_owner_cd);
-		
-		//System.out.println("IncomeController-> IncomeForm()-> simpleToday: "+ simpleToday.format(today));
- 		//System.out.println("IncomeController-> IncomeForm()-> month: "+ month.format(today));
-		
-		//System.out.println("IncomeController-> IncomeForm()-> pay: "+ pay);
-		
-		model.addAttribute("startDate", startDate);
-		model.addAttribute("endDate", endDate);
-		
-		model.addAttribute("today", simpleToday.format(today));
-	    model.addAttribute("month", month.format(today));
-		
-		model.addAttribute("pay", pay);
-		
-		model.addAttribute("total", total);
-		
-		
-		return "/account/income";
+		System.out.println("IncomeController-> selectIncomeList()-> pay: "+ pay);
+			
+		if(pay.isEmpty()){
+			String getNull = "선택하신 기간에는 수입 항목이 없습니다.";
+			model.addAttribute("getNull", getNull);
+		    		
+		    //기간 수입 합계
+ 			int total = 0;
+ 			
+ 			model.addAttribute("total", total);
+ 			model.addAttribute("today", simpleToday.format(today));
+		    model.addAttribute("month", month.format(today));	    
+		    model.addAttribute("startDate", startDate);
+			model.addAttribute("endDate", endDate);
+ 			
+			return "/account/income";
+		}else{
+			// 기간 수입 합계
+			int total = incomeDao.selectIncomeSum(startDate, endDate, branch_owner_cd);
+			System.out.println("IncomeController-> selectIncomeList()-> total: "+ total);
+			
+			model.addAttribute("today", simpleToday.format(today));
+		    model.addAttribute("month", month.format(today));
+			model.addAttribute("total", total);		
+			model.addAttribute("startDate", startDate);
+			model.addAttribute("endDate", endDate);
+			model.addAttribute("pay", pay);
+			
+			return "/account/income";
+		}
 	}
 	
 	// 수입 목록 폼
