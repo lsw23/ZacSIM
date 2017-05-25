@@ -84,6 +84,7 @@
 									</tr>
 			                    </thead>
 			                    <tbody>
+			                    	<p style="color: #2D0087;">${getNull}</p>
 				                    <c:forEach var="p" items="${pay}">
 										<tr>
 											<td>${p.member_nm}</td>
