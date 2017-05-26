@@ -238,6 +238,7 @@
 		    resize: true,
 		    colors: ["#3c8dbc", "#f56954", "#00a65a"],
 		    data: [
+		    	//ajax 
 		      {label: "201호", value: 12},
 		      {label: "202호", value: 30},
 		      {label: "203호", value: 20}
