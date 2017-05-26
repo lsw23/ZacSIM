@@ -15,21 +15,27 @@ public class HeadBranchOwnerDao {
 	SqlSessionTemplate sqlSessionTemplate; 
 	
 	// 사업자 삭제시 insert_num_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제
+	public int deleteAgeGroupList(String branch_owner_cd){
+		System.out.println("HeadBranchOwnerDao-> deleteAgeGroupList-> branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.delete("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.deleteAgeGroupList", branch_owner_cd);
+	}
+	
+	// 사업자 등록시 branch_dashboard_age_group 테이블에 branch_owner_cd 및 member_sex 값을 가진 레코드 생성
+	public int insertAgeGroupList(String branch_owner_cd){
+		System.out.println("HeadBranchOwnerDao-> insertAgeGroupList-> branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.insert("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.insertAgeGroupList", branch_owner_cd);
+	}
+	
+	// 사업자 삭제시 insert_num_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제
 	public int deleteNumList(String branch_owner_cd){
-		System.out.println("HeadBranchOwnerDao-> deleteBranchOwnerCode-> branch_owner_cd: "+ branch_owner_cd);
+		System.out.println("HeadBranchOwnerDao-> deleteNumList-> branch_owner_cd: "+ branch_owner_cd);
 		return sqlSessionTemplate.delete("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.deleteNumList", branch_owner_cd);
 	}
 	
-	// 사업자 등록시 insert_num_list 테이블에 branch_owner_cd 및 member_sex=여자 값을 가진 레코드 생성
-	public int insertNumListWoman(String branch_owner_cd){
-		System.out.println("HeadBranchOwnerDao-> insertNumListWoman-> branch_owner_cd: "+ branch_owner_cd);
-		return sqlSessionTemplate.insert("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.insertNumListWoman", branch_owner_cd);
-	}
-	
-	// 사업자 등록시 insert_num_list 테이블에 branch_owner_cd 및 member_sex=남자 값을 가진 레코드 생성
-	public int insertNumListMen(String branch_owner_cd){
-		System.out.println("HeadBranchOwnerDao-> insertNumListMen-> branch_owner_cd: "+ branch_owner_cd);
-		return sqlSessionTemplate.insert("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.insertNumListMen", branch_owner_cd);
+	// 사업자 등록시 insert_num_list 테이블에 branch_owner_cd 및 member_sex 값을 가진 레코드 생성
+	public int insertNumList(String branch_owner_cd){
+		System.out.println("HeadBranchOwnerDao-> insertNumList-> branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.insert("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.insertNumList", branch_owner_cd);
 	}
 
 	//사업자 정보 삭제 처리

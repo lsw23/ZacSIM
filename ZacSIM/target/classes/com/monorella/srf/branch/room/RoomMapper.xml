@@ -4,7 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.monorella.srf.branch.room.RoomMapper">
-
+  	
+  	<!-- 이동 후 좌석 지정 'Y'로 -->
+  	<update id="modifySeatCdAfter" parameterType="com.monorella.srf.branch.dto.Seat">
+  		UPDATE branch_saet_tb
+			SET
+				seat_appoint='Y'
+				, colseat_state ='빈좌석'
+			WHERE seat_cd = #{seat_cd}
+  	</update>
+  	
+  	<!-- 이동 전 좌석 지정 'N'으로 해당 회원 좌석코드를 이동할 좌석코드로 modify -->
+  	<update id="modifyMoveSeat" parameterType="java.util.Map">
+  		UPDATE branch_saet_tb bs INNER JOIN branch_member_tb bm
+		ON bs.seat_cd = bm.seat_cd
+			SET
+			  bs.seat_appoint = 'N' <!-- (이동전 좌석 지정 N) -->
+			  , bm.seat_cd = #{seatcd_after}   <!-- (이동 후 좌석코드) -->
+		WHERE bs.seat_cd = #{seatcd_before} <!-- (이동전 좌석코드) -->
+  	</update>
+  
+	<!-- 열람실별 미결제 좌석 조회 -->
+	<select id="selectNotPaySeat" parameterType="com.monorella.srf.branch.dto.Seat" resultType="com.monorella.srf.branch.dto.Seat">
+		SELECT 
+			seat_cd
+			, seat_cnumber
+		FROM branch_saet_tb 
+		WHERE room_cd = #{room_cd} AND seat_appoint = 'N'
+	</select>
+	
   	<!-- 열람실 현황 입실&퇴실 modify -->
   	<update id="modifySeatRoomDashBoard" parameterType="com.monorella.srf.branch.dto.RoomDashBoard">
   		UPDATE branch_room_dashboard_tb
@@ -53,6 +81,16 @@
   			,(SELECT COUNT(colseat_state) FROM branch_saet_tb WHERE colseat_state = '입실' AND room_cd = #{room_cd} OR colseat_state = '퇴실' AND room_cd = #{room_cd}) AS room_personnel
 		FROM branch_saet_tb
 		WHERE room_cd = #{room_cd} LIMIT 1
+  	</select>
+  	
+  	<!-- 열람석 코드 가져오기 -->
+  	<select id="selectSeatCd" parameterType="com.monorella.srf.branch.dto.Seat" resultType="com.monorella.srf.branch.dto.Seat">
+  		SELECT
+			seat_cd
+			, room_cd
+			, seat_appoint
+		FROM branch_saet_tb
+		WHERE room_cd = #{room_cd} AND seat_cnumber = #{seat_cnumber}
   	</select>
   	
   	<!-- 열람실 코드 전체 가져오기  -->
