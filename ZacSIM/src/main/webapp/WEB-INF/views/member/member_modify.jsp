@@ -11,10 +11,7 @@
 		$('#modifyForm').click(function(){
 		var member_regi_path = $('#member_regi_path').val();
 		var member_use_pur = $('#member_use_pur').val();
-		if($('#staff_id').val().length < 5) {
-            alert('직원아이디를 5자 이상 입력하세요.');
-            $('#staff_id').focus();
-		} else if($('#member_nm').val()=='') {
+		if($('#member_nm').val()=='') {
             alert('이름을 입력해주세요');
             $('#member_nm').focus();
 		} else if($('#member_sex').val()=='') {
@@ -29,9 +26,6 @@
 		} else if($('#member_age').val()=='') {
             alert('나이를 입력해주세요');
             $('#member_age').focus();
-		} else if($('#member_seat_state').val()=='') {
-            alert('회원상태를 입력해주세요');
-            $('#member_seat_state').focus();
 		}  else if(member_regi_path == '설명'){
             alert('등록경로를 선택해 주세요');
             $('#member_regi_path').focus();
@@ -88,10 +82,6 @@
 							<input type="text" class="form-control" value="${sessionScope.branchOwner.branch_owner_cd}" id="branch_owner_cd" name="branch_owner_cd" readonly>
 						</div>
 						<div class="form-group">
-							<label class="control-label" for="inputLarge">직원아이디</label>
-							<input type="text" class="form-control" value="${member.staff_id}" id="staff_id" name="staff_id" placeholder="직원아이디를 입력해주세요">
-						</div>
-						<div class="form-group">
 							<label class="control-label" for="inputLarge">이름</label>
 							<input type="text" class="form-control" value="${member.member_nm}" id="member_nm" name="member_nm" placeholder="이름을 입력해주세요">
 						</div>
@@ -110,10 +100,6 @@
 						<div class="form-group">
 							<label class="control-label" for="inputLarge">나이</label>
 							<input type="text" class="form-control" value="${member.member_age}" id="member_age" name="member_age" placeholder="나이를 입력해주세요">
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="inputLarge">회원상태</label>
-							<input type="text" class="form-control" value="${member.member_seat_state}" id="member_seat_state" name="member_seat_state" placeholder="회원상태를 입력해주세요">
 						</div>
 						<div class="form-group">
 							<label class="control-label" for="inputLarge">등록경로</label>
