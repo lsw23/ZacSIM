@@ -32,13 +32,26 @@ public class RoomController {
 	@RequestMapping(value="/room/move_pro", method = RequestMethod.POST)
 	public String moveSeat(Seat seat){
 		System.out.println("RoomController moveSeat() seat :" + seat);
-		//이동할 좌석코드 구하기
+		//이전 열람실 코드 구하기
+		String beforeRoomCd = roomDao.selectRoomCdeqSeatCd(seat.getSeat_cd());
+		System.out.println("beforeRoomCd :" + beforeRoomCd );
+		//이동할 좌석코드 구하기(이전 seat 이후 seatcd)
 		Seat seatcd = roomDao.selectSeatCd(seat);
 		System.out.println("seatcd :" + seatcd);
+		//자리이동 1단계
 		int result = roomDao.modifyMoveSeat(seat, seatcd);
 		System.out.println("자리이동 수정 1단계 성공" + result);
+		//자리이동 2단계
 		roomDao.modifySeatCdAfter(seatcd);
-		return "redirect:/room/move_success";
+		
+		//열람실 현황 modify
+		RoomDashBoard beforeDash = roomDao.selectRoomDashBoard(beforeRoomCd);
+		RoomDashBoard afterDash = roomDao.selectRoomDashBoard(seatcd.getRoom_cd());
+		System.out.println("beforeDash" + beforeDash);
+		System.out.println("afterDash" + afterDash);
+		roomDao.modifyAllRoomDashBoard(beforeDash);
+		roomDao.modifyAllRoomDashBoard(afterDash);
+		return "room/move_success";
 	}
 	
 	//열람실 별 미결제 열람석 조회
@@ -163,12 +176,12 @@ public class RoomController {
 	//열람실 삭제
 	@RequestMapping(value="/room/room_delete" , method = RequestMethod.GET)
 	public String room_Delete(@RequestParam(value="room_cd", required=true) String room_cd){
-		
 		System.out.println("room_cd :" + room_cd);
 		try{
 			System.out.println("열람실 & 열람석 삭제");
 			roomDao.deleteSeat(room_cd);
 			roomDao.deleteRoom(room_cd);
+			roomDao.deleteRoomDashBoard(room_cd);
 		
 			return "redirect:/room/room_form";
 		}catch(Exception e){
@@ -181,9 +194,19 @@ public class RoomController {
 	@RequestMapping(value="/room/room_pro", method = RequestMethod.POST)
 	public String room_pro(Room room, Model model){
 		System.out.println("room_pro 열람실 등록");
-		int result = roomDao.insertRoom(room);
-		//열람실 등록 성공시
-		if(result == 1){
+		//열랑실 코드 총 수 조회
+		int roomcdCount = roomDao.selectCountRoomCd();
+		System.out.println("roomcdCount" + roomcdCount);
+		if(roomcdCount == 0){
+			//열람실 최초 등록
+			System.out.println("최초");
+			room.setRoom_cd("room_cd1");
+			roomDao.insertFristRoom(room);
+		}else{
+			//열람실 자동 등록
+			System.out.println("자동");
+			roomDao.insertRoom(room);
+		}	
 			System.out.println("열람실 등록 성공");
 			//열람석 등록
 			ArrayList<Seat> seatli = new ArrayList<Seat>();
@@ -210,11 +233,6 @@ public class RoomController {
 			model.addAttribute("room", room);
 			model.addAttribute("seat", seatli);
 			return "room/chair_form";
-		//열람실 등록실패시	
-		}else{
-			System.out.println("열람실 등록 실패");
-		}
-		return "room/room_form"; 
 	}
 	
 	//열람실 등록폼

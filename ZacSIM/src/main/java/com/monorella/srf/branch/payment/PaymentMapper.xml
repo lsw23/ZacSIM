@@ -36,6 +36,7 @@
 		UPDATE branch_saet_tb 
             SET 
             seat_appoint = 'Y'
+            , colseat_state = '퇴실'
         WHERE seat_cd = #{seat_cd}
     </update>
     
