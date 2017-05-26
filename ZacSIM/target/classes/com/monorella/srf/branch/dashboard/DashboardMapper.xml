@@ -3,6 +3,26 @@
 
 <mapper namespace="com.monorella.srf.branch.dashboard.DashboardMapper">
 	
+	<!-- 이용중 회원 목록 -->
+	<select id="selectUseMemberList" parameterType="String" resultType="com.monorella.srf.branch.dto.UsingMemberList">
+		SELECT st.seat_cd AS seat_cd
+			, mt.member_nm AS member_nm
+			, mt.member_sex AS member_sex
+			, rt.room_nm AS room_nm 
+			, (SElECT stt.seat_in_time FROM branch_seat_time_tb ORDER BY stt.seat_in_time DESC LIMIT 1) AS in_time
+		FROM branch_saet_tb st 
+		INNER JOIN branch_member_tb mt 
+		ON st.seat_cd = mt.seat_cd
+		INNER JOIN branch_room_tb rt 
+		ON st.room_cd = rt.room_cd 
+		INNER JOIN branch_seat_time_tb stt
+		ON st.seat_cd = stt.seat_cd
+		WHERE st.branch_owner_cd = #{branch_owner_cd}
+		AND st.colseat_state = '입실'
+		GROUP BY mt.member_nm
+		ORDER BY stt.seat_in_time DESC
+	</select>
+	
 	<!-- 월별 가입자수 -->
 	<!-- 월별 남자 가입자수 추이 목록 -->
 	<select id="selectInsertNumWoman" parameterType="String" resultType="com.monorella.srf.branch.dto.InsertNumList">
@@ -18,9 +38,7 @@
 		FROM insert_num_list 
 		WHERE branch_owner_cd = #{branch_owner_cd}
 		AND member_sex = '남자'
-		AND branch_owner_cd = #{branch_owner_cd}
 	</select>
-	
 	
 	<!-- 주 이용 목적 -->
 	<!-- 토익 -->
@@ -126,22 +144,26 @@
 	<!-- 이용중 10대 여자회원 -->
 	<select id="selectUseTeensWomanMemberCount" parameterType="String" resultType="int">
 		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND member_age >= 10 
-		AND member_age <![CDATA[ < ]]> 20
-		AND member_sex="여자"
-		AND branch_owner_cd = #{branch_owner_cd}
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 10 
+		AND mt.member_age <![CDATA[ < ]]> 20
+		AND mt.member_sex="여자"
+		AND st.branch_owner_cd = #{branch_owner_cd}
 	</select>
 	<!-- 이용중 10대 남자 회원 -->
 	<select id="selectUseTeensMenMemberCount" parameterType="String" resultType="int">
 		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND member_age >= 10 
-		AND member_age <![CDATA[ < ]]> 20
-		AND member_sex="남자"
-		AND branch_owner_cd = #{branch_owner_cd}
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.mt.member_age >= 10 
+		AND mt.mt.member_age <![CDATA[ < ]]> 20
+		AND mt.member_sex="남자"
+		AND st.branch_owner_cd = #{branch_owner_cd}
 	</select>
 	<!-- 이용중 20대 여자회원 -->
 	<select id="selectUseTwentyWomanMemberCount" parameterType="String" resultType="int">
@@ -223,14 +245,6 @@
 	
 	
 	<!-- 회원 -->
-	<!-- 이용중 회원 목록 -->
-	<select id="selectUseMemberList" parameterType="java.util.List" resultType="com.monorella.srf.branch.dto.Member">
-		SELECT seat_cd, member_nm, member_sex
-		FROM branch_member_tb
-		WHERE member_seat_state = "Y"
-		AND branch_owner_cd = #{branch_owner_cd}
-		ORDER BY seat_cd ASC
-	</select>
 	<!-- 당월 등록 회원 -->
 	<select id="selectMonthInsertMemberCount" parameterType="String" resultType="int">
 		SELECT COUNT(member_month) FROM branch_member_tb WHERE member_month = MONTH(CURDATE()) AND branch_owner_cd = #{branch_owner_cd}

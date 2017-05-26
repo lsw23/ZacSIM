@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.monorella.srf.branch.dto.InsertNumList;
-import com.monorella.srf.branch.dto.Member;
+import com.monorella.srf.branch.dto.UsingMemberList;
 
 @Repository
 public class DashboardDao {
@@ -151,10 +151,11 @@ public class DashboardDao {
 		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseTeensMenMemberCount", branch_owner_cd);
 		return row;
 	}
+	
 	//이용중 회원 목록
-	public List<Member> selectUseMemberList(String branch_owner_cd){
-		List<Member> useMember = sqlSessionTemplate.selectList("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberList", branch_owner_cd);
-		return useMember;
+	public List<UsingMemberList> selectUseMemberList(String branch_owner_cd){
+		System.out.println("DashboardDao-> selectUseMemberList() branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberList", branch_owner_cd);
 	}
 	
 	

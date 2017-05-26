@@ -126,6 +126,15 @@
     <script src="${pageContext.request.contextPath}/resources/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
     
+    <script>
+    //메뉴 고정
+    	$(function(){
+    		console.log('하이');
+    		$('#account_menu').addClass('active');
+    		$('#account01').addClass('active');
+    	});
+    </script>
+    
     <script type="text/javascript">
       $(function () {
         $('#example2').dataTable({

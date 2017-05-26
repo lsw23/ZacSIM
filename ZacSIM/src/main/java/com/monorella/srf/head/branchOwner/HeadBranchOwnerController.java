@@ -26,6 +26,8 @@ public class HeadBranchOwnerController {
 		if(result==1){
 			// 사업자 삭제시 insert_num_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제
 			headBranchOwnerDao.deleteNumList(branch_owner_cd);
+			// 연령대 테이블 레코드 삭제
+			headBranchOwnerDao.deleteAgeGroupList(branch_owner_cd);
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
@@ -64,8 +66,9 @@ public class HeadBranchOwnerController {
 		int result = headBranchOwnerDao.insertBranchOwner(branchOwner);
 		if(result==1){
 			//사업자 등록시 insert_num_list 테이블에 branch_owner_cd 및 member_sex 값을 가진 레코드 두 줄 생성
-			headBranchOwnerDao.insertNumListMen(branchOwner.getBranch_owner_cd());
-			headBranchOwnerDao.insertNumListWoman(branchOwner.getBranch_owner_cd());
+			headBranchOwnerDao.insertNumList(branchOwner.getBranch_owner_cd());	
+			// 연령대 테이블에 레코드 추가
+			headBranchOwnerDao.insertAgeGroupList(branchOwner.getBranch_owner_cd());
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
