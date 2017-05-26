@@ -2,6 +2,7 @@ package com.monorella.srf.branch.dto;
 
 public class StaffBoard {
 	private int staffboard_no;				//게시판 번호
+	private String branch_owner_cd;			//지점 대표코드 
 	private String staffboard_pw;			//게시판 비번
 	private String staffboard_title;		//게시판 제목
 	private String staffboard_content;		//게시판 내용
@@ -12,6 +13,12 @@ public class StaffBoard {
 	}
 	public void setStaffboard_no(int staffboard_no) {
 		this.staffboard_no = staffboard_no;
+	}
+	public String getBranch_owner_cd() {
+		return branch_owner_cd;
+	}
+	public void setBranch_owner_cd(String branch_owner_cd) {
+		this.branch_owner_cd = branch_owner_cd;
 	}
 	public String getStaffboard_pw() {
 		return staffboard_pw;
@@ -45,10 +52,12 @@ public class StaffBoard {
 	}
 	@Override
 	public String toString() {
-		return "StaffBoard [staffboard_no=" + staffboard_no + ", staffboard_pw=" + staffboard_pw + ", staffboard_title="
-				+ staffboard_title + ", staffboard_content=" + staffboard_content + ", staff_name=" + staff_name
-				+ ", staffboard_date=" + staffboard_date + "]";
+		return "StaffBoard [staffboard_no=" + staffboard_no + ", branch_owner_cd=" + branch_owner_cd
+				+ ", staffboard_pw=" + staffboard_pw + ", staffboard_title=" + staffboard_title
+				+ ", staffboard_content=" + staffboard_content + ", staff_name=" + staff_name + ", staffboard_date="
+				+ staffboard_date + "]";
 	}
+	
 	
 	
 	

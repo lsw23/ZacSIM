@@ -63,7 +63,6 @@
 			 	  <div class="row">
 			  		<div class="col-sm-4">
                       <select name="so" class="form-control" id="sel1">
-				    	<option value="member_cd">CODE</option>
 						<option value="member_nm">이름</option>
 					  </select>
 			 	 	 </div>
@@ -82,15 +81,15 @@
                   <table class="table">
                   <thead>
                     <tr>
-                      	<th>회원코드</th>
+                      	<th>연락처</th>
 		            	<th>이름</th>
             		  </tr>
             		</thead>  
                     <tbody>
 						<c:forEach var="memberexit" items="${memberexit}">
-			                <tr>  
-			                	<td>${memberexit.member_cd}</td>  
-			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_cd=${memberexit.member_cd}&member_nm=${memberexit.member_nm}">${memberexit.member_nm}</a></td>
+			                <tr>
+				                <td>${memberexit.member_tel}</td> 
+				                <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${memberexit.member_nm}&member_tel=${memberexit.member_tel}">${memberexit.member_nm}</a></td>
 	               		    </tr>
 					</c:forEach>
 			        </tbody>
@@ -98,9 +97,6 @@
                   </div>
                   </div>
                   </div>
-            <!-- right column -->
-            <div class="col-md-6">
-            </div>
                   
         		 <!-- Main content -->
        		    <section class="content">

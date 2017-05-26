@@ -45,8 +45,8 @@ public class StaffDao {
 		}
 
 	 // 직원 조회 메서드 
-	 public List<Staff> getStaffList(){
-		return  sqlSessionTemplate.selectList("com.monorella.srf.branch.staff.StaffMapper.getStaffList");
+	 public List<Staff> getStaffList(String branch_owner_cd){
+		return  sqlSessionTemplate.selectList("com.monorella.srf.branch.staff.StaffMapper.getStaffList",branch_owner_cd);
 		 
 	 }
 	// 직원추가 메서드 

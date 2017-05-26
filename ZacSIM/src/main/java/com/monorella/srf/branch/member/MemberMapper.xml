@@ -95,13 +95,11 @@
 		UPDATE branch_member_tb 
             SET branch_owner_cd = #{branch_owner_cd}
             , branch_owner_cd = #{branch_owner_cd}
-            , staff_id = #{staff_id}
             , member_nm = #{member_nm}
             , member_sex = #{member_sex}
             , member_tel = #{member_tel}
             , member_addr = #{member_addr}
             , member_age = #{member_age}
-            , member_seat_state = #{member_seat_state}
             , member_regi_path = #{member_regi_path}
             , member_use_pur = #{member_use_pur}
         WHERE member_nm = #{member_nm}
@@ -121,21 +119,18 @@
 			WHERE m.member_nm = #{member_nm}
 	</select>	
 	
-	<!-- 하나의 게시글 보기 -->
+	<!-- 하나의 회원 보기 -->
 	<select id="getMember" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT 
-			member_cd AS member_cd
-			, branch_owner_cd AS branch_owner_cd
-			, staff_id As staff_id
-			, member_nm AS member_nm
-			, member_sex AS member_sex
-			, member_tel AS member_tel
-			, member_addr AS member_addr
-			, member_age AS member_age
-			, member_date AS member_date
-			, member_seat_state AS member_seat_state
-			, member_regi_path AS member_regi_path
-			, member_use_pur AS member_use_pur
+			member_cd
+			, member_nm
+			, member_sex
+			, member_age
+			, member_regi_date
+			, member_end_date
+			, member_seat_state
+			, member_regi_path
+			, member_use_pur
 			FROM branch_member_tb 
 			WHERE member_nm = #{member_nm}
 	</select>
@@ -169,12 +164,12 @@
 	 <!-- 입퇴실 검색 -->
 	 <select id="exeMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
-			 member_cd
-			 , member_nm AS member_nm
+			 member_tel
+			 , member_nm
 			 FROM branch_member_tb
 			  <if test="sv !=null and sv != ''">
-			<if test="so.equals('member_cd')">
-			WHERE member_cd like concat('%',#{sv},'%')
+			<if test="so.equals('member_tel')">
+			WHERE member_tel like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_nm')">
 				WHERE member_nm like concat('%',#{sv},'%')
@@ -186,11 +181,11 @@
 	<select id="searchMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			 member_cd
-			 , member_nm AS member_nm
-			 , member_sex AS member_sex
-			 , member_addr AS member_addr
-			 , member_age AS member_age
-			 , member_seat_state AS member_seat_state
+			 , member_nm
+			 , member_sex
+			 , member_addr
+			 , member_age
+			 , member_seat_state
 			 FROM branch_member_tb
 			  <if test="sv !=null and sv != ''">
 			<if test="so.equals('member_cd')">
@@ -216,19 +211,19 @@
 	<!-- 독서실 회원 목록? -->
 	<select id="getMeberView"  resultType="com.monorella.srf.branch.dto.Member">
 	SELECT 
-	member_cd 
+	member_tel
 	, member_nm 
 	FROM branch_member_tb 
-	WHERE member_cd=#{member_cd}
+	WHERE member_tel=#{member_tel}
 	</select>
 
 	<!-- 입퇴실 내역 -->
 	<select id="exitList" resultType="com.monorella.srf.branch.dto.SeatTime">
 		SELECT
-			m.member_nm AS member_nm
-			, s.seat_date AS seat_date
-			, s.seat_in_time AS seat_in_time
-			, s.seat_out_time AS seat_out_time
+			m.member_nm
+			, s.seat_date
+			, s.seat_in_time
+			, s.seat_out_time
 		FROM branch_member_tb AS m
 		INNER join branch_seat_time_tb AS s
 		ON m.seat_cd = s.seat_cd
@@ -238,7 +233,7 @@
 	<!-- 입퇴실 회원 리스트 -->	
 	<select id="selectMemberExit" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
-			member_cd
+			member_tel
 			, member_nm
 		FROM branch_member_tb
 		ORDER BY inout_num DESC
@@ -249,13 +244,10 @@
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			member_cd
-			, branch_owner_cd
 			, member_nm
-			, member_sex
 			, member_tel
 			, member_addr
-			, member_age
-			, member_seat_state
+			, member_date
 		FROM branch_member_tb
 		ORDER BY inout_num DESC
 		LIMIT #{beginRow}, #{pagePerRow}
@@ -355,7 +347,7 @@
  	<!-- 입퇴실 코드 COUNT -->
  	<select id="exitMemberCode" resultType="int">
   		SELECT COUNT(member_cd) FROM branch_member_tb
-  	</select> 	
+  	</select>  	
  	
  	<!-- 회원 코드 COUNT -->
  	<select id="selectMemberCode" resultType="int">
@@ -365,7 +357,7 @@
   	<!-- 회원 등록 -->
 	<insert id="insertMember" parameterType="com.monorella.srf.branch.dto.Member">
 		INSERT INTO branch_member_tb(
-			member_cd
+  			member_cd
 			, branch_owner_cd
 			, staff_id
 			, seat_cd
@@ -379,6 +371,7 @@
 			, member_month
 			, member_regi_date
 			, member_end_date
+			, member_seat_state
 			, member_regi_path
 			, member_use_pur)
 		VALUES(
@@ -396,6 +389,7 @@
 			, month(now())
 			, now()
 			, now()
+			, #{member_seat_state}
 			, #{member_regi_path}
 			, #{member_use_pur}
 		)

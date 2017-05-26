@@ -88,6 +88,7 @@
 		, staff_name
 		, staffboard_date
 		FROM branch_staffboard_tb 
+		WHERE branch_owner_cd = #{branch_owner_cd}
 		ORDER BY staffboard_no DESC 
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
@@ -99,12 +100,14 @@
  <insert id="insertStaffBoard" parameterType="com.monorella.srf.branch.dto.StaffBoard">
 	INSERT INTO branch_staffboard_tb(
 		staffboard_pw
+		, branch_owner_cd
 		, staffboard_title
 		, staffboard_content
 		, staff_name
 		, staffboard_date)
 	VALUES(
 		#{staffboard_pw}
+		, #{branch_owner_cd}
 		, #{staffboard_title}
 		, #{staffboard_content}
 		, #{staff_name}

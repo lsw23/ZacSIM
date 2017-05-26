@@ -149,11 +149,11 @@
                     <tbody>
                     <c:forEach var="m" items="${useMemberList}">
 	                    <tr>
-	                      <td>201호</td>
+	                      <td>${m.room_nm}</td>
 	                      <td>${m.seat_cd}</td>
 	                      <td>${m.member_nm}</td>
 	                      <td>${m.member_sex}</td>
-	                      <td>11-7-2014</td>
+	                      <td>${m.in_time}</td>
 	                      <td><a href="#"><span class="label label-warning">Calling</span></a></td>
 	                    </tr>
                     </c:forEach>
@@ -196,6 +196,15 @@
     <!-- 페이지 내 href 경로 이동-->
     <script src="${pageContext.request.contextPath}/resources/js/templatemo-script.js"></script>
     
+    <script>
+    //메뉴 고정
+    	$(function(){
+    		console.log('하이');
+    		$('#dashboard_menu').addClass('active');
+    		$('#dashboard01').addClass('active');
+    	});
+    </script>
+    
     <!-- Page script -->
      <script type="text/javascript">
       $(function () {
@@ -229,6 +238,7 @@
 		    resize: true,
 		    colors: ["#3c8dbc", "#f56954", "#00a65a"],
 		    data: [
+		    	//ajax 
 		      {label: "201호", value: 12},
 		      {label: "202호", value: 30},
 		      {label: "203호", value: 20}
@@ -269,5 +279,6 @@
         }); */
       });
     </script>
+    
   </body>
 </html>

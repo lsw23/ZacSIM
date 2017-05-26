@@ -63,13 +63,13 @@ public class MemberDao {
 		System.out.println("MemberDao->getMeberView->"+member_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMeberView",member_cd);
 	}
-	//하나의 게시글 보기
-	public List<SeatTime> getExit(String member_nm) {
-		System.out.println("8st getExit");
-        return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.getExit", member_nm);
-    }
+	//하나의 입퇴실 보기
+		public List<SeatTime> getExit(String member_nm) {
+			System.out.println("8st getExit");
+	        return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.getExit", member_nm);
+	}
 	
-	//하나의 게시글 보기
+	//하나의 회원 보기
 	public Member getMember(String member_nm) {
 		System.out.println("8st getMember");
         return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMember", member_nm);

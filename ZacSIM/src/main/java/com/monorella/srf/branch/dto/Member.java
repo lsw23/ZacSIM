@@ -1,12 +1,12 @@
 package com.monorella.srf.branch.dto;
 
 public class Member {
-	private String member_nm; //회원이름
+	private String member_cd; //회원코드
 	private String branch_owner_cd; //지점대표코드
 	private String staff_id; //직원 아이디
 	private int seat_cd; //열람석 코드
 	private int inout_num; // 출결번호
-	private String member_cd; //회원코드
+	private String member_nm; //회원이름
 	private String member_sex; //회원성별
 	private String member_tel; //회원 연락처
 	private String member_addr; //회원 주소
@@ -130,8 +130,8 @@ public class Member {
 	}
 	@Override
 	public String toString() {
-		return "Member [member_nm=" + member_nm + ", branch_owner_cd=" + branch_owner_cd + ", staff_id=" + staff_id
-				+ ", seat_cd=" + seat_cd + ", inout_num=" + inout_num + ", member_cd=" + member_cd + ", member_sex="
+		return "Member [member_cd=" + member_cd + ", branch_owner_cd=" + branch_owner_cd + ", staff_id=" + staff_id
+				+ ", seat_cd=" + seat_cd + ", inout_num=" + inout_num + ", member_nm=" + member_nm + ", member_sex="
 				+ member_sex + ", member_tel=" + member_tel + ", member_addr=" + member_addr + ", member_age="
 				+ member_age + ", member_date=" + member_date + ", member_month=" + member_month + ", member_regi_date="
 				+ member_regi_date + ", member_end_date=" + member_end_date + ", member_seat_state=" + member_seat_state
