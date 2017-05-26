@@ -1,6 +1,8 @@
 package com.monorella.srf.branch.room;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,29 @@ public class RoomDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	//자리이동(이동후 좌석 지정 Y)
+	public int modifySeatCdAfter(Seat seatcd){
+		return sqlSessionTemplate.update("com.monorella.srf.branch.room.RoomMapper.modifySeatCdAfter", seatcd);
+	}
+	
+	//자리이동(이동전 좌석 지정 N, 회원 seat_cd 변경)
+	public int modifyMoveSeat(Seat seat, Seat seatcd){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("seatcd_before", seat.getSeat_cd());
+		map.put("seatcd_after", seatcd.getSeat_cd());
+		return sqlSessionTemplate.update("com.monorella.srf.branch.room.RoomMapper.modifyMoveSeat", map);
+	}
+	
+	//열람석 코드 조회
+	public Seat selectSeatCd(Seat seat){
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.room.RoomMapper.selectSeatCd", seat);
+	}
+	
+	//열람실 별 미결제 좌석 조회
+	public List<Seat> selectNotPaySeat(Seat seat){
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selectNotPaySeat", seat);
+	}
 	
 	//열람석 code 전체 조회 
 	public List<Room> selectRoomAllCd(){

@@ -87,13 +87,13 @@
 		            	<th>이름</th>
             		  </tr>
             		</thead>  
-                    <tbody>
-                    <c:forEach var="b" items="${exelist}">
-			                <tr>  
-			                	<td>${b.member_cd}</td>  
-			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${b.member_nm}">${b.member_nm}</a></td>
+                    <tbody>           
+                   
+			               <tr>  
+			                	<td>${member.member_cd}</td>  
+			                    <td>${member.member_nm}</td>
 	               		    </tr>
-	               	</c:forEach>
+	              
 			        </tbody>
                   </table>
                   </div>
@@ -126,14 +126,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <c:forEach var="n" items="${listExit}">
+                  <c:forEach var="seattime" items="${seattime}">
 			                <tr>
-			                    <td><a href="${pageContext.request.contextPath}/member/member_excci?member_nm=${n.member_nm}">${n.member_nm}</a></td>
-			                    <td>${n.seat_date}</td>
-			                    <td>${n.seat_in_time}</td>
-			                    <td>${n.seat_out_time}</td>
+			                    <td>${seattime.member_nm}</td>
+			                    <td>${seattime.seat_date}</td>
+			                    <td>${seattime.seat_in_time}</td>
+			                    <td>${seattime.seat_out_time}</td>
 	               		    </tr>
-			 	</c:forEach>
+			 	 </c:forEach>
 			 	  </tbody>
                   </table>
 				   </div>

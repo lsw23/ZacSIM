@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,19 +28,45 @@ public class RoomController {
 	@Autowired
 	private RoomDao roomDao;
 	
+	//자리이동
+	@RequestMapping(value="/room/move_pro", method = RequestMethod.POST)
+	public String moveSeat(Seat seat){
+		System.out.println("RoomController moveSeat() seat :" + seat);
+		//이동할 좌석코드 구하기
+		Seat seatcd = roomDao.selectSeatCd(seat);
+		System.out.println("seatcd :" + seatcd);
+		int result = roomDao.modifyMoveSeat(seat, seatcd);
+		System.out.println("자리이동 수정 1단계 성공" + result);
+		roomDao.modifySeatCdAfter(seatcd);
+		return "redirect:/room/move_success";
+	}
+	
 	//열람실 별 미결제 열람석 조회
 	@RequestMapping(value="/room/move_seat", method = RequestMethod.POST)
-	public String notpay_seat(Seat seat){
+	public ResponseEntity<String> notpay_seat(Seat seat){
 		System.out.println(seat);
-		return "";
+		List<Seat> seatlist = roomDao.selectNotPaySeat(seat);
+		System.out.println("seatlist : " + seatlist);
+		//JSON
+		JSONObject jsonMain = new JSONObject();
+		for(int i=0; i<seatlist.size(); i++){
+			jsonMain.put("cnumber"+i,seatlist.get(i).getSeat_cnumber());
+		}
+		System.out.println(jsonMain.toString());
+		//HttpHeaders 
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
+		return new ResponseEntity<String>(jsonMain.toString(), responseHeaders, HttpStatus.OK);
 	}
 	
 	//회원 자리 이동
 	@RequestMapping(value="/room/move_form", method = RequestMethod.GET)
-	public String seat_move(Model model, HttpSession session){
+	public String seat_move(Seat seat, Model model, HttpSession session){
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 		List<Room> roomlist = roomDao.selectRoom(branchOwner);
+		System.out.println("seat_move() seat_cd :" + seat.getSeat_cd()); 
 		model.addAttribute("roomlist", roomlist);
+		model.addAttribute("seat_cd", seat.getSeat_cd());
 		return "room/move_form";
 	}
 	
