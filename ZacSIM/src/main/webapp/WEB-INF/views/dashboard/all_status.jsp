@@ -218,7 +218,14 @@
     <script src="${pageContext.request.contextPath}/resources/plugins/morris/morris.min.js" type="text/javascript"></script>
     <!-- ChartJS 1.0.1 -->
     <script src="${pageContext.request.contextPath}/resources/plugins/chartjs/Chart.min.js" type="text/javascript"></script>
-    
+     
+      <script>
+    //메뉴 고정
+    	$(function(){
+    		$('#dashboard_menu').addClass('active');
+    		$('#dashboard02').addClass('active');
+    	});
+    </script>
     <!-- Page script -->
     <script type="text/javascript">
       $(function () {

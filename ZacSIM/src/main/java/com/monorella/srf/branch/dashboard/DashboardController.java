@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.Member;
+import com.monorella.srf.branch.dto.UsingMemberList;
 
 @Controller
 public class DashboardController {
@@ -147,7 +148,7 @@ public class DashboardController {
 		int useFortyMenMemberNo = dashboardDao.selectUseFortyMenMemberCount(branch_owner_cd);     // 이용중 40대 남자
 		int useEtcWomanMemberNo = dashboardDao.selectUseEtcWomanMemberCount(branch_owner_cd); // 이용중 기타연령 여자
 		int useEtcMenMemberNo = dashboardDao.selectUseEtcMenMemberCount(branch_owner_cd);     // 이용중 기타연령 남자
-		List<Member> useMemberList = dashboardDao.selectUseMemberList(branch_owner_cd); //이용중 회원 목록
+		List<UsingMemberList> useMemberList = dashboardDao.selectUseMemberList(branch_owner_cd); //이용중 회원 목록
 		
 		// 회원-------------------------------------------------------------------------------
 		int todayMemberNo = dashboardDao.selectTodayInsertMemberCount(branch_owner_cd); //금일 등록 회원
@@ -167,7 +168,7 @@ public class DashboardController {
 		//System.out.println("DashboardController-> selectTodayStatus()-> useFortyMenMemberNo: "+useFortyMenMemberNo);
 		//System.out.println("DashboardController-> selectTodayStatus()-> useEtcWomanMemberNo: "+useEtcWomanMemberNo);
 		//System.out.println("DashboardController-> selectTodayStatus()-> useEtcMenMemberNo: "+useEtcMenMemberNo);
-		//System.out.println("DashboardController-> selectTodayStatus()-> useMemberList: "+useMemberList);
+		System.out.println("DashboardController-> selectTodayStatus()-> useMemberList: "+useMemberList);
 		
 		//System.out.println("DashboardController-> selectTodayStatus()-> todayMemberNo: "+todayMemberNo);
 		

@@ -149,11 +149,11 @@
                     <tbody>
                     <c:forEach var="m" items="${useMemberList}">
 	                    <tr>
-	                      <td>201호</td>
+	                      <td>${m.room_nm}</td>
 	                      <td>${m.seat_cd}</td>
 	                      <td>${m.member_nm}</td>
 	                      <td>${m.member_sex}</td>
-	                      <td>11-7-2014</td>
+	                      <td>${m.in_time}</td>
 	                      <td><a href="#"><span class="label label-warning">Calling</span></a></td>
 	                    </tr>
                     </c:forEach>
@@ -195,6 +195,15 @@
     <script src="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
     <!-- 페이지 내 href 경로 이동-->
     <script src="${pageContext.request.contextPath}/resources/js/templatemo-script.js"></script>
+    
+    <script>
+    //메뉴 고정
+    	$(function(){
+    		console.log('하이');
+    		$('#dashboard_menu').addClass('active');
+    		$('#dashboard01').addClass('active');
+    	});
+    </script>
     
     <!-- Page script -->
      <script type="text/javascript">
@@ -269,5 +278,6 @@
         }); */
       });
     </script>
+    
   </body>
 </html>
