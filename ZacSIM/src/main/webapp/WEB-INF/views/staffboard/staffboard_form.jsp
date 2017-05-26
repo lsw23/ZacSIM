@@ -70,6 +70,10 @@
 							<!-- form start -->
 							<form id="addForm" role="form" action="${pageContext.request.contextPath}/staffboard/staffboard_pro"method="post">
 								<div class="box-body">
+								<div class="form-group">
+									 	<label for="staffboard_title">지점 대표코드</label>
+				                      	<input type="text" class="form-control" name="branch_owner_cd" value="${sessionScope.branchOwner.branch_owner_cd}" readonly/>
+				                    </div>		
                   				  <div class="form-group">
 									 	<label for="exampleInputstaffid">비밀번호</label>
 				                      	<input type="password" class="form-control" id="staffboard_pw" name="staffboard_pw" placeholder="비밀번호를 입력해주세요">

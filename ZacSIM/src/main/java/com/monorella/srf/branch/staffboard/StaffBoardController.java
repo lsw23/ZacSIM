@@ -2,6 +2,8 @@ package com.monorella.srf.branch.staffboard;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.StaffBoard;
 import com.monorella.srf.branch.dto.StaffBoardReply;
 
@@ -89,14 +91,16 @@ public class StaffBoardController {
 		
 		// 리스트 및 페이징 요청
 		@RequestMapping(value="/staffboard/staffboard_list", method = RequestMethod.GET)
-		public String StaffBoardList(Model model
+		public String StaffBoardList(Model model, HttpSession session
 	            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 			System.out.println("StaffBoardController -> StaffBoardList()");
-			
+			BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+			String branch_owner_cd = branchOwner.getBranch_owner_cd();
+			System.out.println("StaffController-> StaffList() branch_owner_cd: "+ branch_owner_cd);
 			int joinCount = 0;
 			joinCount = staffboardDao.getStaffBoardCount();
 			int pagePerRow = 5;
-			List<StaffBoard> list = staffboardDao.selectStaffBoardList(currentPage, pagePerRow);
+			List<StaffBoard> list = staffboardDao.selectStaffBoardList(currentPage, pagePerRow, branch_owner_cd);
 			int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
 			if(joinCount%pagePerRow != 0) {
 				lastPage++;

@@ -69,12 +69,13 @@ public class StaffBoardDao {
  
 	
 	// 회원리스트 메서드
-	public List<StaffBoard> selectStaffBoardList(int currentPage, int pagePerRow) {
+	public List<StaffBoard> selectStaffBoardList(int currentPage, int pagePerRow, String branch_owner_cd) {
 		System.out.println("StaffBoardDao-> selectStaffBoardList-> currentPage: " + currentPage 
 				+"pagePerRow: "+pagePerRow);
-		Map<String, Integer> map = new HashMap<String, Integer>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("beginRow", (currentPage-1)*pagePerRow);
 		map.put("pagePerRow", pagePerRow);
+		map.put("branch_owner_cd", branch_owner_cd);
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.staffboard.StaffBoardMapper.selectStaffBoardList", map);
 	}
 	/*// 공지사항 목록 메서드

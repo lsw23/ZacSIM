@@ -2,6 +2,8 @@ package com.monorella.srf.branch.expense;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.Expense;
 
 @Controller
@@ -32,14 +35,16 @@ public class ExpenseController {
 	
 	// 리스트 및 페이징 요청
 			@RequestMapping(value="/expense/expense_list", method = RequestMethod.GET)
-			public String ExpenseList(Model model
+			public String ExpenseList(Model model, HttpSession session
 		            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 				System.out.println("ExpenseController -> ExpenseList()");
-				
+				BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+				String branch_owner_cd = branchOwner.getBranch_owner_cd();
+				System.out.println("StaffController-> StaffList() branch_owner_cd: "+ branch_owner_cd);
 				int joinCount = 0;
 				joinCount = expenseDao.getExpenseCount();
 				int pagePerRow = 5;
-				List<Expense> list = expenseDao.selectExpenseList(currentPage, pagePerRow);
+				List<Expense> list = expenseDao.selectExpenseList(currentPage, pagePerRow, branch_owner_cd);
 				int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
 				if(joinCount%pagePerRow != 0) {
 					lastPage++;

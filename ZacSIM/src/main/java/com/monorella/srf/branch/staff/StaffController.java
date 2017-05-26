@@ -7,8 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.Staff;
 @Controller
 public class StaffController {
@@ -89,9 +89,12 @@ public class StaffController {
 		}
 	// 직원 리스트 요청 
 	@RequestMapping(value = "/staff/staff_list", method = RequestMethod.GET)
-	public String StaffList(Model model){
+	public String StaffList(Model model, HttpSession session){
 		System.out.println("StaffController-> StaffList()");
-		List<Staff> list = staffDao.getStaffList();
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		String branch_owner_cd = branchOwner.getBranch_owner_cd();
+		System.out.println("StaffController-> StaffList() branch_owner_cd: "+ branch_owner_cd);
+		List<Staff> list = staffDao.getStaffList(branch_owner_cd);
 		Staff staff = list.get(0);
 		System.out.println(staff.getStaff_in_date()+"<<<<<get getStaff_in_date()");
 		model.addAttribute("list", list);
