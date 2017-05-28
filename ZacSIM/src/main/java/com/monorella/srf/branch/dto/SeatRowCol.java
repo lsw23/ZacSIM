@@ -5,9 +5,8 @@ import java.util.List;
 public class SeatRowCol {
 	private List<String> room_cd;
 	private List<Integer> seat_cnumber; // 열람석 번호
-	private String seat_row; // 열람석 행
-	private String seat_col; // 열람석 열
-	
+	private List<Integer> seat_left; // 열람석 left 좌표
+	private List<Integer> seat_top; // 열람석 top 좌표
 	public List<String> getRoom_cd() {
 		return room_cd;
 	}
@@ -20,24 +19,23 @@ public class SeatRowCol {
 	public void setSeat_cnumber(List<Integer> seat_cnumber) {
 		this.seat_cnumber = seat_cnumber;
 	}
-	public String getSeat_row() {
-		return seat_row;
+	public List<Integer> getSeat_left() {
+		return seat_left;
 	}
-	public void setSeat_row(String seat_row) {
-		this.seat_row = seat_row;
+	public void setSeat_left(List<Integer> seat_left) {
+		this.seat_left = seat_left;
 	}
-	public String getSeat_col() {
-		return seat_col;
+	public List<Integer> getSeat_top() {
+		return seat_top;
 	}
-	public void setSeat_col(String seat_col) {
-		this.seat_col = seat_col;
+	public void setSeat_top(List<Integer> seat_top) {
+		this.seat_top = seat_top;
 	}
 	
 	@Override
 	public String toString() {
-		return "SeatRowCol [room_cd=" + room_cd + ", seat_cnumber=" + seat_cnumber + ", seat_row=" + seat_row
-				+ ", seat_col=" + seat_col + "]";
+		return "SeatRowCol [room_cd=" + room_cd + ", seat_cnumber=" + seat_cnumber + ", seat_left=" + seat_left
+				+ ", seat_top=" + seat_top + "]";
 	}
-	
 	
 }

@@ -150,16 +150,28 @@ public class RoomController {
 	@RequestMapping(value="/room/room_placement" , method = RequestMethod.POST)
 	public String room_placement(SeatRowCol seatrowcol){
 		System.out.println(seatrowcol);
-		String[] seat_col = seatrowcol.getSeat_col().split(",");
+		
+		for(int i=0; i<seatrowcol.getRoom_cd().size(); i++){
+			Seat seat = new Seat();
+			seat.setRoom_cd(seatrowcol.getRoom_cd().get(i));
+			seat.setSeat_cnumber(seatrowcol.getSeat_cnumber().get(i));
+			seat.setSeat_col(seatrowcol.getSeat_left().get(i));
+			seat.setSeat_row(seatrowcol.getSeat_top().get(i));
+			System.out.println("번호 :" + seat.getSeat_cnumber() + ", col: " + seat.getSeat_col() + ", row : "+ seat.getSeat_row());
+			roomDao.modifyRoomSeat(seat);
+		}
+		return "redirect:/room/room_main";
+		
+	/*	String[] seat_col = seatrowcol.getSeat_col().split(",");
 		String[] seat_row = seatrowcol.getSeat_row().split(",");
-	/*	
+		
 	    for(String col : seat_col){
 			System.out.println(col);
 		}
 		for(String row : seat_row){
 			System.out.println(row);
 		}
-	*/
+	
 		for(int i=0; i<seatrowcol.getSeat_cnumber().size(); i++){
 			Seat seat = new Seat();
 			seat.setRoom_cd(seatrowcol.getRoom_cd().get(i));
@@ -168,8 +180,8 @@ public class RoomController {
 			seat.setSeat_row(Integer.parseInt(seat_row[i+1]));
 			System.out.println("번호 :" + seat.getSeat_cnumber() +", row : "+ seat.getSeat_row() + ", col: " + seat.getSeat_col());
 			roomDao.modifyRoomSeat(seat);
-		}
-		return "redirect:/room/room_main";
+		}*/
+		
 	}
 	
 	
