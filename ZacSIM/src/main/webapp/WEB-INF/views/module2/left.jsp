@@ -29,8 +29,7 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li id="dashboard01"><a href="${pageContext.request.contextPath}/dashboard/today_status"><i class="fa fa-circle-o"></i> 오늘의 현황</a></li>
-                <li id="dashboard02"><a href="${pageContext.request.contextPath}/dashboard/all_status"><i class="fa fa-circle-o"></i> 통계</a></li>
+                <li id="dashboard02"><a href="${pageContext.request.contextPath}/dashboard/all_status"><i class="fa fa-circle-o"></i>지점 현황</a></li>
               </ul>
             </li>
             <li class="treeview" id="staff_menu">

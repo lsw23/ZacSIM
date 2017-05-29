@@ -3,6 +3,22 @@
 
 <mapper namespace="com.monorella.srf.branch.dashboard.DashboardMapper">
 	
+	<!-- 이용중인 회원 중 남자 회원의 연령대별 수 -->
+	<select id="selectUseMemberAgeGroupWomanNum" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAgeGroup">
+		SELECT teens, twenty, thirty, forty, etc 
+		FROM branch_dashboard_age_group 
+		WHERE branch_owner_cd = #{branch_owner_cd}
+		AND member_sex = '여자'
+	</select>
+	<!-- 이용중인 회원 중 남자 회원의 연령대별 수 -->
+	<select id="selectUseMemberAgeGroupMenNum" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAgeGroup">
+		SELECT teens, twenty, thirty, forty, etc 
+		FROM branch_dashboard_age_group 
+		WHERE branch_owner_cd = #{branch_owner_cd}
+		AND member_sex = '남자'
+	</select>
+	
+	
 	<!-- 이용중 회원 목록 -->
 	<select id="selectUseMemberList" parameterType="String" resultType="com.monorella.srf.branch.dto.UsingMemberList">
 		SELECT st.seat_cd AS seat_cd
@@ -23,6 +39,7 @@
 		ORDER BY stt.seat_in_time DESC
 	</select>
 	
+	
 	<!-- 월별 가입자수 -->
 	<!-- 월별 남자 가입자수 추이 목록 -->
 	<select id="selectInsertNumWoman" parameterType="String" resultType="com.monorella.srf.branch.dto.InsertNumList">
@@ -31,7 +48,6 @@
 		WHERE branch_owner_cd = #{branch_owner_cd}
 		AND member_sex = '여자'
 	</select>
-	
 	<!-- 월별 남자 가입자수 추이 목록 -->
 	<select id="selectInsertNumMen" parameterType="String" resultType="com.monorella.srf.branch.dto.InsertNumList">
 		SELECT january, february, march, april, may, june, july, august, september, october, november, december 
@@ -39,6 +55,7 @@
 		WHERE branch_owner_cd = #{branch_owner_cd}
 		AND member_sex = '남자'
 	</select>
+	
 	
 	<!-- 주 이용 목적 -->
 	<!-- 토익 -->
@@ -136,110 +153,6 @@
 		SELECT COUNT(*) 
 		FROM branch_saet_tb 
 		WHERE colseat_state = "입실"
-		AND branch_owner_cd = #{branch_owner_cd}
-	</select>
-	
-	
-	<!-- 연령대 -->
-	<!-- 이용중 10대 여자회원 -->
-	<select id="selectUseTeensWomanMemberCount" parameterType="String" resultType="int">
-		<![CDATA[SELECT COUNT(*)
-		FROM branch_saet_tb st
-		INNER JOIN branch_member_tb mt
-		ON st.seat_cd = mt.seat_cd
-		WHERE st.colseat_state = '입실'
-		AND mt.member_age >= 10 
-		AND mt.member_age < 20
-		AND mt.member_sex="여자"
-		AND st.branch_owner_cd = #{branch_owner_cd}]]>
-	</select>
-	<!-- 이용중 10대 남자 회원 -->
-	<select id="selectUseTeensMenMemberCount" parameterType="String" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_saet_tb st
-		INNER JOIN branch_member_tb mt
-		ON st.seat_cd = mt.seat_cd
-		WHERE st.colseat_state = '입실'
-		AND mt.member_age >= 10 
-		AND mt.member_age <![CDATA[ < ]]> 20
-		AND mt.member_sex="남자"
-		AND st.branch_owner_cd = #{branch_owner_cd}
-	</select>
-	<!-- 이용중 20대 여자회원 -->
-	<select id="selectUseTwentyWomanMemberCount" parameterType="String" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND member_age >= 20 
-		AND member_age <![CDATA[ < ]]> 30
-		AND member_sex="여자"
-		AND branch_owner_cd = #{branch_owner_cd}
-	</select>
-	<!-- 이용중 20대 남자 회원 -->
-	<select id="selectUseTwentyMenMemberCount" parameterType="String" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND member_age >= 20 
-		AND member_age <![CDATA[ < ]]> 30
-		AND member_sex="남자";
-	</select>
-	<!-- 이용중 30대 여자회원 -->
-	<select id="selectUseThirtyWomanMemberCount" parameterType="String" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND member_age >= 30 
-		AND member_age <![CDATA[ < ]]> 40
-		AND member_sex="여자"
-		AND branch_owner_cd = #{branch_owner_cd}
-	</select>
-	<!-- 이용중 30대 남자 회원 -->
-	<select id="selectUseThirtyMenMemberCount" parameterType="String" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND member_age >= 30
-		AND member_age <![CDATA[ < ]]> 40
-		AND member_sex="남자"
-		AND branch_owner_cd = #{branch_owner_cd}
-	</select>
-	<!-- 이용중 40대 여자회원 -->
-	<select id="selectUseFortyWomanMemberCount" parameterType="String" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND member_age >= 40 
-		AND member_age <![CDATA[ < ]]> 50
-		AND member_sex="여자"
-		AND branch_owner_cd = #{branch_owner_cd}
-	</select>
-	<!-- 이용중 40대 남자 회원 -->
-	<select id="selectUseFortyMenMemberCount" parameterType="String" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND member_age >= 40 
-		AND member_age <![CDATA[ < ]]> 50
-		AND member_sex="남자"
-		AND branch_owner_cd = #{branch_owner_cd}
-	</select>
-	<!-- 이용중 기타연령 여자회원 -->
-	<select id="selectUseEtcWomanMemberCount" parameterType="String" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND (member_age >= 50 OR member_age <![CDATA[ < ]]> 10)
-		AND member_sex="여자"
-		AND branch_owner_cd = #{branch_owner_cd}
-	</select>
-	<!-- 이용중 기타연령 남자 회원 -->
-	<select id="selectUseEtcMenMemberCount" resultType="int">
-		SELECT COUNT(*)
-		FROM branch_member_tb 
-		WHERE member_seat_state = "Y"
-		AND (member_age >= 50 OR member_age <![CDATA[ < ]]> 10)
-		AND member_sex="남자"
 		AND branch_owner_cd = #{branch_owner_cd}
 	</select>
 	

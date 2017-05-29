@@ -10,14 +10,16 @@
    <!-- Font Awesome Icons -->
    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
    <!-- Ionicons -->
-   <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+   <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
    <!-- Morris chart -->
    <link href="${pageContext.request.contextPath}/resources/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
    <!-- Theme style -->
    <link href="${pageContext.request.contextPath}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
    <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
    <link href="${pageContext.request.contextPath}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-   
+   <!-- DATA TABLES -->
+   <link href="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+  
 </head>
 <body class="skin-blue">
     <div class="wrapper">
@@ -42,104 +44,177 @@
 
 		<!-- ------------------------내용!!!------------------------------ -->
         <section class="content">
-  
-          <!-- 작은 박스 4개 -->
+          
           <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-lg-4 col-xs-4">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>${MemberNo}</h3>
+                  <p>총 회원</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-4">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3>${useMemberNo}</h3>
+                  <p>이용중 열람석</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-compose"></i>
+                </div>
+                <a href="#example1" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-4">
+              <!-- small box -->
+              <div class="small-box bg-yellow">
+                <div class="inner">
+                  <h3>${MemberNo}</h3>
+                  <p><b>${month}월</b> 순 수익</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-cash"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+          </div><!-- /.row -->
+          
+          <!-- 박스 6개 -->
+          <div class="row">
+            <div class="col-md-2 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-people-outline"></i></span>
+                <span class="info-box-icon bg-aqua"><i class="ion ion-person"></i></span>
                 <div class="info-box-content">
-                  <h3 class="info-box-text">총 회원</h3>
-                  <span class="info-box-number">${MemberNo} <small>명</small></span>
+                  <h3 class="info-box-text">금일 등록</h3>
+                  <span class="info-box-number">${todayMemberNo} <small>명</small></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
-            </div><!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-xs-12">
+             </div><!-- /.col -->
+             <div class="col-md-2 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="ion ion-ios-people-outline"></i></span>
+                <span class="info-box-icon bg-aqua"><i class="ion ion-person-stalker"></i></span>
                 <div class="info-box-content">
-                  <h3 class="info-box-text"><b>${month}월</b> 등록 회원</h3>
+                  <h3 class="info-box-text"><b>${month}월</b> 등록</h3>
                   <span class="info-box-number">${monthMemberNo} <small>명</small></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
-            </div><!-- /.col -->
-
-            <!-- fix for small devices only -->
-            <div class="clearfix visible-sm-block"></div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
-                <div class="info-box-content">
-                  <h3 class="info-box-text"><b>${month}월</b> 매출</h3>
-                  <span class="info-box-number"># <small>원</small></span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="ion ion ion-ios-cart-outline"></i></span>
-                <div class="info-box-content">
-                  <h3 class="info-box-text"><b>${month}월</b> 지출</h3>
-                  <span class="info-box-number"># <small>원</small></span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-          
-		  <!-- 원형 차트 3개 -->
-          <div class="row">
-          
-            <div class="col-md-4">
-             <div class="box box-default">
-               <div class="box-header with-border">
-               	 <i class="fa fa-bar-chart-o"></i>
-                 <h3 class="box-title"><b>회원 성비</b></h3>
-                 <div class="box-tools pull-right">
-                   <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                   <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                 </div>
-               </div><!-- /.box-header -->
-               <div class="box-body">  
-	            <div id="sex" style="height: 250px;"></div>
-               </div><!-- /.box-body -->
-              </div><!-- /.box -->
              </div><!-- /.col -->
-            
-            <div class="col-md-4">
-             <div class="box box-default">
-               <div class="box-header with-border">
-               	 <i class="fa fa-bar-chart-o"></i>
-                 <h3 class="box-title"><b>회원 등록 경로</b></h3>
-                 <div class="box-tools pull-right">
-                   <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                   <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                 </div>
-               </div><!-- /.box-header -->
-               <div class="box-body">  
-	            <div id="path" style="height: 250px;"></div>
-               </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div><!-- /.col -->
-            
-            <div class="col-md-4">
-             <div class="box box-default">
-               <div class="box-header with-border">
-               	 <i class="fa fa-bar-chart-o"></i>
-                 <h3 class="box-title"><b>주 이용 목적</b></h3>
-                 <div class="box-tools pull-right">
-                   <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                   <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                 </div>
-               </div><!-- /.box-header -->
-               <div class="box-body">  
-	            <div id="purpose" style="height: 250px;"></div>
-               </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div><!-- /.col -->
-          
-          </div><!-- /.row -->
-          <!-- 원형 차트 3개 end-->
+		     <div class="col-md-2 col-sm-6 col-xs-12">
+	             <div class="info-box">
+	               <span class="info-box-icon bg-green"><i class="ion ion-log-out"></i></span>
+	               <div class="info-box-content">
+	                 <h3 class="info-box-text">부재중</h3>
+	                 <span class="info-box-number">${absenceMemberNo} <small>명</small></span>
+	               </div><!-- /.info-box-content -->
+	             </div><!-- /.info-box -->
+	         </div><!-- /.col -->
+	         <div class="col-md-2 col-sm-6 col-xs-12">
+	             <div class="info-box">
+	               <span class="info-box-icon bg-green"><i class="ion ion-android-close"></i></span>
+	               <div class="info-box-content">
+	                 <h3 class="info-box-text">미결제</h3>
+	                 <span class="info-box-number">${unpaidMemberNo} <small>명</small></span>
+	               </div><!-- /.info-box-content -->
+	             </div><!-- /.info-box -->
+	         </div><!-- /.col -->
+	         <div class="col-md-2 col-sm-6 col-xs-12">
+	             <div class="info-box">
+	               <span class="info-box-icon bg-yellow"><i class="ion ion-happy-outline"></i></span>
+	               <div class="info-box-content">
+	                 <h3 class="info-box-text"><b>${month}월</b> 수입</h3>
+	                 <span class="info-box-number"># <small>원</small></span>
+	               </div><!-- /.info-box-content -->
+	             </div><!-- /.info-box -->
+	         </div><!-- /.col -->
+	         <div class="col-md-2 col-sm-6 col-xs-12">
+	             <div class="info-box">
+	               <span class="info-box-icon bg-yellow"><i class="ion ion-sad-outline"></i></span>
+	               <div class="info-box-content">
+	                 <h3 class="info-box-text"><b>${month}월</b> 지출</h3>
+	                 <span class="info-box-number"># <small>원</small></span>
+	               </div><!-- /.info-box-content -->
+	             </div><!-- /.info-box -->
+	         </div><!-- /.col -->
+		  </div><!-- /.row -->
+          <!-- 박스 6개 end -->
+          	<div class="row">
+				<div class="col-md-12">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<i class="fa fa-area-chart"></i>
+							<h3 class="box-title">
+								<b>월별 등록자 추이</b>
+							</h3>
+							<div class="box-tools pull-right">
+								<button class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+							</div>
+						</div>
+						
+						<div class="box-body">
+		                	<canvas id="areaChart" height="250"></canvas>
+		                </div><!-- /.box-body -->
+					</div>
+				</div>
+			</div>
+			<!-- 원형 차트 3개 -->
+			<div class="row">
+				<div class="col-md-4">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<i class="ion ion-pie-graph"></i>
+							<h3 class="box-title"><b>회원 성비</b></h3>
+							<div class="box-tools pull-right">
+								<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+								<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+						<div class="box-body">  
+							<div id="sex" style="height: 250px;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<i class="ion ion-pie-graph"></i>
+							<h3 class="box-title"><b>회원 등록 경로</b></h3>
+							<div class="box-tools pull-right">
+								<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+								<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+					<div class="box-body">  
+					<div id="path" style="height: 250px;"></div>
+					</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<i class="ion ion-pie-graph"></i>
+							<h3 class="box-title"><b>주 이용 목적</b></h3>
+							<div class="box-tools pull-right">
+								<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+								<button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+					<div class="box-body">  
+					<div id="purpose" style="height: 250px;"></div>
+					</div>
+					</div>
+				</div>
+			</div>
+			<!-- 원형 차트 3개 end-->
           
           	<!-- 범위 그래프 차트 -->
 				<!-- <div class="row"> //누적합산그래프
@@ -169,29 +244,60 @@
 					</div>
 				</div> -->
 				
-				<div class="row">
-					<div class="col-md-12">
-						<div class="box box-default">
-							<div class="box-header with-border">
-								<i class="fa fa-bar-chart-o"></i>
-								<h3 class="box-title">
-									<b>월별 등록자 추이</b>
-								</h3>
-								<div class="box-tools pull-right">
-									<button class="btn btn-box-tool" data-widget="collapse">
-										<i class="fa fa-minus"></i>
-									</button>
-								</div>
-							</div>
-							
-							<div class="box-body">
-			                	<canvas id="areaChart" height="250"></canvas>
-			                </div><!-- /.box-body -->
-						</div>
-					</div>
-				</div>
+			
+			<!-- 범위 그래프 차트 end -->
+  		  <div class="row">
 				
-				<!-- 범위 그래프 차트 end -->
+            <div class="col-md-12">
+			 <!-- BAR CHART -->
+              <div class="box box-success">
+                <div class="box-header">
+                  <i class="fa fa-bar-chart"></i>
+                  <h3 class="box-title"><b>회원 연령대별(성별) 그래프</b></h3>
+                </div>
+                <div class="box-body chart-responsive">
+                  <div class="chart" id="bar-chart" style="height: 300px;"></div>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col (RIGHT) -->
+            
+          </div><!-- /.row -->
+          
+          <div class="row">
+            <div class="col-xs-12">
+           	  <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title"><b>현재 이용자</b></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+	                      <th>열람실</th>
+	                      <th>열람석</th>
+	                      <th>이름</th>
+	                      <th>성별</th>
+	                      <th>입실 시간</th>
+	                      <th>호출 메세지</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="m" items="${useMemberList}">
+	                    <tr>
+	                      <td>${m.room_nm}</td>
+	                      <td>${m.seat_cd}</td>
+	                      <td>${m.member_nm}</td>
+	                      <td>${m.member_sex}</td>
+	                      <td>${m.in_time}</td>
+	                      <td><a href="#"><span class="label label-warning">Calling</span></a></td>
+	                    </tr>
+                    </c:forEach>
+                    </tbody>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
           
         </section><!-- /.content -->
 
@@ -216,8 +322,15 @@
     <!-- Morris.js charts -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/morris/morris.min.js" type="text/javascript"></script>
+    <!-- SlimScroll -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- ChartJS 1.0.1 -->
     <script src="${pageContext.request.contextPath}/resources/plugins/chartjs/Chart.min.js" type="text/javascript"></script>
+    <!-- DATA TABES SCRIPT -->
+    <script src="${pageContext.request.contextPath}/resources/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+    <!-- 페이지 내 href 경로 이동-->
+    <script src="${pageContext.request.contextPath}/resources/js/templatemo-script.js"></script>
      
       <script>
     //메뉴 고정
@@ -482,6 +595,79 @@
         //Create the line chart
         areaChart.Line(areaChartData, areaChartOptions);
 
+      });
+    </script>
+    <script type="text/javascript">
+      $(function () {
+        "use strict";
+      
+      	//DONUT CHART
+		  /* var donut = new Morris.Donut({
+		    element: 'now-room-num',
+		    resize: true,
+		    colors: ["#3c8dbc", "#f56954", "#00a65a"],
+		    data: [
+		    	//ajax 
+		      {label: "201호", value: 12},
+		      {label: "202호", value: 30},
+		      {label: "203호", value: 20}
+		    ],
+		    hideHover: 'auto'
+		  }); */
+		 
+	  	  //BAR CHART
+         // 연령대 변수
+	     var useTeensWomanMemberNo = '<c:out value='${useAgeGroupW.teens}'/>';
+	     useTeensWomanMemberNo *= 1; // int변환
+         var useTeensMenMemberNo = '<c:out value='${useAgeGroupM.teens}'/>';
+         useTeensMenMemberNo *= 1;
+         var useTwentyWomanMemberNo = '<c:out value='${useAgeGroupW.twenty}'/>';
+         useTwentyWomanMemberNo *= 1;
+         var useTwentyMenMemberNo = '<c:out value='${useAgeGroupM.twenty}'/>';
+         useTwentyMenMemberNo *= 1;
+         var useThirtyWomanMemberNo = '<c:out value='${useAgeGroupW.thirty}'/>';
+         useThirtyWomanMemberNo *= 1;
+         var useThirtyMenMemberNo = '<c:out value='${useAgeGroupM.thirty}'/>';
+         useThirtyMenMemberNo *= 1;
+         var useFortyWomanMemberNo = '<c:out value='${useAgeGroupW.forty}'/>';
+         useFortyWomanMemberNo *= 1;
+         var useFortyMenMemberNo = '<c:out value='${useAgeGroupM.forty}'/>';
+         useFortyMenMemberNo *= 1;
+         var useEtcWomanMemberNo = '<c:out value='${useAgeGroupW.etc}'/>';
+         useEtcWomanMemberNo *= 1;
+         var useEtcMenMemberNo = '<c:out value='${useAgeGroupM.etc}'/>';
+         useEtcMenMemberNo *= 1;	   
+	   
+	     var bar = new Morris.Bar({
+	        element: 'bar-chart',
+	        resize: true,
+	        data: [
+	          {y: '10대', a: useTeensMenMemberNo, b: useTeensMenMemberNo+useTeensWomanMemberNo , c: useTeensWomanMemberNo},
+	          {y: '20대', a: useTwentyMenMemberNo, b: useTwentyMenMemberNo+useTwentyWomanMemberNo, c: useTwentyWomanMemberNo},
+	          {y: '30대', a: useThirtyMenMemberNo, b: useThirtyMenMemberNo+useThirtyWomanMemberNo, c: useThirtyWomanMemberNo},
+	          {y: '40대', a: useFortyMenMemberNo, b: useFortyMenMemberNo+useFortyWomanMemberNo, c: useFortyWomanMemberNo},
+	          {y: '기타', a: useEtcMenMemberNo, b: useEtcMenMemberNo+useEtcWomanMemberNo, c: useEtcWomanMemberNo},
+	        ],
+	        barColors: ['#1266FF', '#E5D85C', '#FF3636'],
+	        xkey: 'y',
+	        ykeys: ['a', 'b', 'c'],
+	        labels: ['남자', '합계', '여자'],
+	        hideHover: 'auto'
+	     });  
+	  });
+     </script>
+     
+     <script type="text/javascript">
+      $(function () {
+        $("#example1").dataTable();
+        /* $('#example2').dataTable({
+          "bPaginate": false,
+          "bLengthChange": false, // jquery.dataTables.js 파일 내에 aLengthMenu로 find
+          "bFilter": false,
+          "bSort": false,
+          "bInfo": false,
+          "bAutoWidth": false
+        }); */
       });
     </script>
   </body>

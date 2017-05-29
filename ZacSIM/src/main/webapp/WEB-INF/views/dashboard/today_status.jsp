@@ -209,29 +209,7 @@
      <script type="text/javascript">
       $(function () {
         "use strict";
-          // 변수 설정
-          // 연령대 변수
-	      var useTeensWomanMemberNo = '<c:out value='${useTeensWomanMemberNo}'/>';
-	      useTeensWomanMemberNo *= 1; // int변환
-          var useTeensMenMemberNo = '<c:out value='${useTeensMenMemberNo}'/>';
-          useTeensMenMemberNo *= 1;
-          var useTwentyWomanMemberNo = '<c:out value='${useTwentyWomanMemberNo}'/>';
-          useTwentyWomanMemberNo *= 1;
-          var useTwentyMenMemberNo = '<c:out value='${useTwentyMenMemberNo}'/>';
-          useTwentyMenMemberNo *= 1;
-          var useThirtyWomanMemberNo = '<c:out value='${useThirtyWomanMemberNo}'/>';
-          useThirtyWomanMemberNo *= 1;
-          var useThirtyMenMemberNo = '<c:out value='${useThirtyMenMemberNo}'/>';
-          useThirtyMenMemberNo *= 1;
-          var useFortyWomanMemberNo = '<c:out value='${useFortyWomanMemberNo}'/>';
-          useFortyWomanMemberNo *= 1;
-          var useFortyMenMemberNo = '<c:out value='${useFortyMenMemberNo}'/>';
-          useFortyMenMemberNo *= 1;
-          var useEtcWomanMemberNo = '<c:out value='${useEtcWomanMemberNo}'/>';
-          useEtcWomanMemberNo *= 1;
-          var useEtcMenMemberNo = '<c:out value='${useEtcMenMemberNo}'/>';
-          useEtcMenMemberNo *= 1;
-           
+      
       	//DONUT CHART
 		  var donut = new Morris.Donut({
 		    element: 'now-room-num',
@@ -246,7 +224,29 @@
 		    hideHover: 'auto'
 		  });
 		 
-	   //BAR CHART
+	  	  //BAR CHART
+         // 연령대 변수
+	     var useTeensWomanMemberNo = '<c:out value='${useAgeGroupW.teens}'/>';
+	     useTeensWomanMemberNo *= 1; // int변환
+         var useTeensMenMemberNo = '<c:out value='${useAgeGroupM.teens}'/>';
+         useTeensMenMemberNo *= 1;
+         var useTwentyWomanMemberNo = '<c:out value='${useAgeGroupW.twenty}'/>';
+         useTwentyWomanMemberNo *= 1;
+         var useTwentyMenMemberNo = '<c:out value='${useAgeGroupM.twenty}'/>';
+         useTwentyMenMemberNo *= 1;
+         var useThirtyWomanMemberNo = '<c:out value='${useAgeGroupW.thirty}'/>';
+         useThirtyWomanMemberNo *= 1;
+         var useThirtyMenMemberNo = '<c:out value='${useAgeGroupM.thirty}'/>';
+         useThirtyMenMemberNo *= 1;
+         var useFortyWomanMemberNo = '<c:out value='${useAgeGroupW.forty}'/>';
+         useFortyWomanMemberNo *= 1;
+         var useFortyMenMemberNo = '<c:out value='${useAgeGroupM.forty}'/>';
+         useFortyMenMemberNo *= 1;
+         var useEtcWomanMemberNo = '<c:out value='${useAgeGroupW.etc}'/>';
+         useEtcWomanMemberNo *= 1;
+         var useEtcMenMemberNo = '<c:out value='${useAgeGroupM.etc}'/>';
+         useEtcMenMemberNo *= 1;	   
+	   
 	     var bar = new Morris.Bar({
 	        element: 'bar-chart',
 	        resize: true,

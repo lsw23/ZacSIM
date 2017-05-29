@@ -17,7 +17,7 @@ public class HeadBranchOwnerController {
 	@Autowired
 	HeadBranchOwnerDao headBranchOwnerDao;
 	
-	//지점 정보 삭제
+	//사업자 정보 삭제
 	@RequestMapping(value="/head/branch_owner_delete_pro" , method = RequestMethod.GET)
 	public String deleteBranchOwner(@RequestParam(value="branch_owner_cd") String branch_owner_cd){
 		System.out.println("HeadBranchOwnerController-> deleteBranchOwner()-> branch_owner_cd: "+branch_owner_cd);
@@ -32,7 +32,7 @@ public class HeadBranchOwnerController {
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
 	
-	//지점 정보 수정 처리
+	//사업자 정보 수정 처리
 	@RequestMapping(value="/head/branch_owner_modify_pro" , method = RequestMethod.POST)
 	public String modifyBranchOwner(HeadBranchOwner branchOwner, Model model){
 		System.out.println("HeadBranchOwnerController-> ModifyBranchOwner()-> branchOwner: "+branchOwner);
@@ -40,7 +40,7 @@ public class HeadBranchOwnerController {
 		return "redirect:/head/barach_owner/branch_owner_modify?branch_owner_cd="+branchOwner.getBranch_owner_cd();
 	}
 	
-	//지점 정보 수정 폼, 단일 사업자 정보 조회
+	//사업자 정보 수정 폼, 단일 사업자 정보 조회
 	@RequestMapping(value="/head/barach_owner/branch_owner_modify" , method = RequestMethod.GET)
 	public String selectOneBranchOwner(@RequestParam(value="branch_owner_cd") String branch_owner_cd, Model model){
 		//System.out.println("HeadBranchOwnerController-> SelectOneBranchOwner()-> owner_num: "+owner_num);
@@ -50,7 +50,7 @@ public class HeadBranchOwnerController {
 		return "/head/barach_owner/branch_owner_modify";
 	}
 	
-	//지점 목록
+	//사업자 목록
 	@RequestMapping(value="/head/barach_owner/branch_owner_list" , method = RequestMethod.GET)
 	public String selectBranchOwnerList(Model model){
 		//System.out.println("HeadBranchOwnerController-> selectBranchOwnerList()");
@@ -59,7 +59,7 @@ public class HeadBranchOwnerController {
 		return "/head/barach_owner/branch_owner_list";
 	}
 	
-	//지점 등록 요청
+	//사업자 등록 요청
 	@RequestMapping(value="/head/branch_owner_insert_pro", method=RequestMethod.POST)
 	public String insertBranchOwner(HeadBranchOwner branchOwner){
 		//System.out.println("HeadBranchOwnerController-> insertBranchOwner()-> BranchOwner: "+branchOwner.toString());
@@ -73,7 +73,7 @@ public class HeadBranchOwnerController {
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
 	
-	//지점 등록 폼 요청
+	//사업자 등록 폼 요청
 	@RequestMapping(value="/head/barach_owner/branch_owner_insert", method=RequestMethod.GET)
 	public String branchOwnerForm(){
 		//System.out.println("HeadBranchOwnerController-> branchOwnerForm()");

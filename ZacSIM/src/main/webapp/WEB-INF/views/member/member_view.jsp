@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <%--   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> --%>
 <!DOCTYPE html>
 <html>
@@ -45,6 +44,10 @@
                 	<td>${member.member_cd}</td>
 		          </tr>
 		          <tr>
+		            <td>출결번호 :</td>
+                	<td>${member.inout_num}</td>
+		          </tr>
+		          <tr>
 		            <td>이름 :</td>
 		            <td>${member.member_nm}</td>
 		          </tr>
@@ -66,7 +69,12 @@
 		           </tr>
 		           <tr>
 		              <td>회원상태 :</td>
-		              <td>${member.member_seat_state}</td>
+		              <c:if test="${member.member_seat_state eq 'Y'}">
+		              <td>정회원</td>
+		              </c:if>
+		              <c:if test="${member.member_seat_state eq 'N'}">
+		              <td>일반회원</td>
+		              </c:if>
 		           </tr>
 		           <tr>
 		              <td>등록경로 :</td>
