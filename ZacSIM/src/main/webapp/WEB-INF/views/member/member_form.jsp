@@ -39,7 +39,7 @@
 			} else {
 				$('#insertMember').submit();    
 			}
-		});          
+		});
 	});
 </script>
     <!-- 헤드 -->

@@ -5,6 +5,148 @@
   
 <mapper namespace="com.monorella.srf.branch.member.MemberMapper">
 	
+	<!-- ================================================================ -->
+	<!-- 회원 가입시 연령대별 남자 이용자 업데이트 -->
+	<update id="modifyWomanAgeGroupInfo" parameterType="com.monorella.srf.branch.dto.DashboardAgeGroup">
+		UPDATE branch_dashboard_age_group 
+		SET teens = #{teens}
+		, twenty = #{twenty}
+		, thirty = #{thirty}
+		, forty = #{forty}
+		, etc = #{etc}
+		WHERE branch_owner_cd = #{branch_owner_cd} AND member_sex='여자';
+	</update>
+	<!-- 회원 가입시 연령대별 남자 이용자 업데이트 -->
+	<update id="modifyMenAgeGroupInfo" parameterType="com.monorella.srf.branch.dto.DashboardAgeGroup">
+		UPDATE branch_dashboard_age_group 
+		SET teens = #{teens}
+		, twenty = #{twenty}
+		, thirty = #{thirty}
+		, forty = #{forty}
+		, etc = #{etc}
+		WHERE branch_owner_cd = #{branch_owner_cd} AND member_sex='남자';
+	</update>
+	<!-- 회원 가입시 연령대별 여자 이용자 조회 -->
+	<select id="selectAgeGroupWoman" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAgeGroup">
+		<![CDATA[
+		SELECT branch_owner_cd
+		,
+		(SELECT COUNT(*) FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 10 
+		AND mt.member_age < 20
+		AND mt.member_sex = '여자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS teens
+		,
+		(SELECT COUNT(*)
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 20 
+		AND mt.member_age < 30
+		AND mt.member_sex='여자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS twenty
+		,
+		(SELECT COUNT(*)
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 30 
+		AND mt.member_age < 40
+		AND mt.member_sex='여자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS thirty
+		,
+		(SELECT COUNT(*)
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 40 
+		AND mt.member_age < 50
+		AND mt.member_sex='여자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS forty
+		,
+		(SELECT COUNT(*)
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND ((mt.member_age >= 50) OR (mt.member_age < 10))
+		AND mt.member_sex='여자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS etc
+		,
+		member_sex
+		FROM branch_member_tb
+		WHERE member_sex = '여자'
+		GROUP BY branch_owner_cd
+		]]>
+	</select>
+	<!-- 회원 가입시 연령대별 남자 이용자 조회 -->
+	<select id="selectAgeGroupMen" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAgeGroup">
+		<![CDATA[
+		SELECT branch_owner_cd
+		,
+		(SELECT COUNT(*) FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 10 
+		AND mt.member_age < 20
+		AND mt.member_sex = '남자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS teens
+		,
+		(SELECT COUNT(*)
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 20 
+		AND mt.member_age < 30
+		AND mt.member_sex='남자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS twenty
+		,
+		(SELECT COUNT(*)
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 30 
+		AND mt.member_age < 40
+		AND mt.member_sex='남자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS thirty
+		,
+		(SELECT COUNT(*)
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND mt.member_age >= 40 
+		AND mt.member_age < 50
+		AND mt.member_sex='남자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS forty
+		,
+		(SELECT COUNT(*)
+		FROM branch_saet_tb st
+		INNER JOIN branch_member_tb mt
+		ON st.seat_cd = mt.seat_cd
+		WHERE st.colseat_state = '입실'
+		AND ((mt.member_age >= 50) OR (mt.member_age < 10))
+		AND mt.member_sex='남자'
+		AND st.branch_owner_cd = #{branch_owner_cd}) AS etc
+		,
+		member_sex
+		FROM branch_member_tb
+		WHERE member_sex = '남자'
+		GROUP BY branch_owner_cd
+		]]>
+	</select>
+	<!-- ================================================================ -->
+	
+	<!-- ================================================================ -->
 	<!-- 회원 가입시 월별 여자 가입자수 업데이트 -->
 	<update id="modifyMonthInsertInfoWoman" parameterType="com.monorella.srf.branch.dto.InsertNumList">
 		UPDATE insert_num_list 
@@ -22,7 +164,6 @@
 		, december = #{december}
 		 WHERE branch_owner_cd = #{branch_owner_cd} AND member_sex='여자';
 	</update>
-	
 	<!-- 회원 가입시 월별 남자 가입자수 업데이트 -->
 	<update id="modifyMonthInsertInfoMen" parameterType="com.monorella.srf.branch.dto.InsertNumList">
 		UPDATE insert_num_list 
@@ -40,7 +181,6 @@
 		, december = #{december}
 		 WHERE branch_owner_cd = #{branch_owner_cd} AND member_sex='남자';
 	</update>
-	
 	<!-- 월별 여자 가입자수 조회 -->
 	<select id="selectMonthInsertNumWoman" parameterType="String" resultType="com.monorella.srf.branch.dto.InsertNumList">
 		SELECT 
@@ -61,7 +201,6 @@
 		WHERE branch_owner_cd = #{branch_owner_cd}
 		GROUP BY branch_owner_cd;
 	</select>
-	
 	<!-- 월별 남자 가입자수 조회 -->
 	<select id="selectMonthInsertNumMen" parameterType="String" resultType="com.monorella.srf.branch.dto.InsertNumList">
 		SELECT 
@@ -82,7 +221,9 @@
 		WHERE branch_owner_cd = #{branch_owner_cd}
 		GROUP BY branch_owner_cd;
 	</select>
-
+	<!-- ================================================================ -->
+	
+	
 	<!-- 회원 삭제 -->
 	<delete id="MemberRemove" parameterType="com.monorella.srf.branch.dto.Member">
 		DELETE FROM branch_member_tb 
@@ -120,9 +261,10 @@
 	</select>	
 	
 	<!-- 하나의 회원 보기 -->
-	<select id="getMember" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">
+	<select id="getMeber" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT 
 			member_cd
+			, inout_num
 			, member_nm
 			, member_sex
 			, member_age

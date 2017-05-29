@@ -45,6 +45,10 @@
                 	<td>${member.member_cd}</td>
 		          </tr>
 		          <tr>
+		            <td>출결번호 :</td>
+                	<td>${member.inout_num}</td>
+		          </tr>
+		          <tr>
 		            <td>이름 :</td>
 		            <td>${member.member_nm}</td>
 		          </tr>

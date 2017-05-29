@@ -19,7 +19,7 @@ public class Member {
 	private String member_regi_path; //회원가입 경로
 	private String member_use_pur; //독서실 이용 이유
 	private String room_cd; //열람실 코드
-
+	
 	public String getRoom_cd() {
 		return room_cd;
 	}
