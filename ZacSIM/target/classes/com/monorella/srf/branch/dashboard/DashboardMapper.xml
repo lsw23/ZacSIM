@@ -3,6 +3,16 @@
 
 <mapper namespace="com.monorella.srf.branch.dashboard.DashboardMapper">
 	
+	<!-- 당월 지출 총액 -->
+	<select id="selectTotalExpanse" parameterType="String" resultType="int">
+		SELECT SUM(expense_total) FROM branch_expense_tb WHERE expense_month = MONTH(NOW()) AND branch_owner_cd = #{branch_owner_cd}
+	</select>
+	<!-- 당월 결제 총액 -->
+	<select id="selectTotalIncome" parameterType="String" resultType="int">
+		SELECT SUM(total_amount) FROM branch_pay_tb WHERE pay_month = MONTH(NOW()) AND branch_owner_cd = #{branch_owner_cd}
+	</select>
+	
+	
 	<!-- 이용중인 회원 중 남자 회원의 연령대별 수 -->
 	<select id="selectUseMemberAgeGroupWomanNum" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAgeGroup">
 		SELECT teens, twenty, thirty, forty, etc 

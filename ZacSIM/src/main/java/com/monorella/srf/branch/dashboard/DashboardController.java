@@ -132,6 +132,14 @@ public class DashboardController {
 		model.addAttribute("internetNo", internetNo);
 		model.addAttribute("pathEtcNo", pathEtcNo);
 		
+		// 당월 수입 지출 총계-----------------------------------------------------------------
+		int totalIncomeNum = dashboardDao.selectTotalIncome(branch_owner_cd); //수입
+		int totalExpanseNum = dashboardDao.selectTotalExpanse(branch_owner_cd); //지출
+		//System.out.println("DashboardController-> selectTodayStatus()-> totalIncomeNum: "+totalIncomeNum);
+		//System.out.println("DashboardController-> selectTodayStatus()-> totalExpanseNum: "+totalExpanseNum);
+		model.addAttribute("totalIncomeNum", totalIncomeNum);
+		model.addAttribute("totalExpanseNum", totalExpanseNum);
+		
 		return "dashboard/all_status";			
 	
 	}

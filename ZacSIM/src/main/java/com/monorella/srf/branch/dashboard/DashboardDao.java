@@ -16,6 +16,17 @@ public class DashboardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	// 당월 지출 총액
+	public int selectTotalExpanse(String branch_owner_cd){
+		System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectTotalExpanse", branch_owner_cd);
+	}
+	// 당월 결제 총액
+	public int selectTotalIncome(String branch_owner_cd){
+		System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectTotalIncome", branch_owner_cd);
+	}
+	
 	// 이용중 회원-----------------------------------------------------------------------------------------------------
 	// 이용중인 회원 중 여자 회원의 연령대별 수
 	public DashboardAgeGroup selectUseMemberAgeGroupWomanNum(String branch_owner_cd){
