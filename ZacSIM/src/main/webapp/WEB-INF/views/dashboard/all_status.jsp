@@ -10,7 +10,7 @@
    <!-- Font Awesome Icons -->
    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
    <!-- Ionicons -->
-   <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+   <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
    <!-- Morris chart -->
    <link href="${pageContext.request.contextPath}/resources/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
    <!-- Theme style -->
@@ -67,7 +67,7 @@
                   <p>이용중 열람석</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-android-checkbox-outline"></i>
+                  <i class="ion ion-compose"></i>
                 </div>
                 <a href="#example1" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -80,18 +80,18 @@
                   <p><b>${month}월</b> 순 수익</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-person-add"></i>
+                  <i class="ion ion-cash"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
           </div><!-- /.row -->
           
-          <!-- 박스 4개 -->
+          <!-- 박스 6개 -->
           <div class="row">
             <div class="col-md-2 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-people-outline"></i></span>
+                <span class="info-box-icon bg-aqua"><i class="ion ion-person"></i></span>
                 <div class="info-box-content">
                   <h3 class="info-box-text">금일 등록</h3>
                   <span class="info-box-number">${todayMemberNo} <small>명</small></span>
@@ -100,7 +100,7 @@
              </div><!-- /.col -->
              <div class="col-md-2 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-people-outline"></i></span>
+                <span class="info-box-icon bg-aqua"><i class="ion ion-person-stalker"></i></span>
                 <div class="info-box-content">
                   <h3 class="info-box-text"><b>${month}월</b> 등록</h3>
                   <span class="info-box-number">${monthMemberNo} <small>명</small></span>
@@ -109,7 +109,7 @@
              </div><!-- /.col -->
 		     <div class="col-md-2 col-sm-6 col-xs-12">
 	             <div class="info-box">
-	               <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+	               <span class="info-box-icon bg-green"><i class="ion ion-log-out"></i></span>
 	               <div class="info-box-content">
 	                 <h3 class="info-box-text">부재중</h3>
 	                 <span class="info-box-number">${absenceMemberNo} <small>명</small></span>
@@ -118,7 +118,7 @@
 	         </div><!-- /.col -->
 	         <div class="col-md-2 col-sm-6 col-xs-12">
 	             <div class="info-box">
-	               <span class="info-box-icon bg-green"><i class="ion ion ion-ios-cart-outline"></i></span>
+	               <span class="info-box-icon bg-green"><i class="ion ion-android-close"></i></span>
 	               <div class="info-box-content">
 	                 <h3 class="info-box-text">미결제</h3>
 	                 <span class="info-box-number">${unpaidMemberNo} <small>명</small></span>
@@ -127,7 +127,7 @@
 	         </div><!-- /.col -->
 	         <div class="col-md-2 col-sm-6 col-xs-12">
 	             <div class="info-box">
-	               <span class="info-box-icon bg-yellow"><i class="ion ion ion-ios-cart-outline"></i></span>
+	               <span class="info-box-icon bg-yellow"><i class="ion ion-happy-outline"></i></span>
 	               <div class="info-box-content">
 	                 <h3 class="info-box-text"><b>${month}월</b> 수입</h3>
 	                 <span class="info-box-number"># <small>원</small></span>
@@ -136,7 +136,7 @@
 	         </div><!-- /.col -->
 	         <div class="col-md-2 col-sm-6 col-xs-12">
 	             <div class="info-box">
-	               <span class="info-box-icon bg-yellow"><i class="ion ion ion-ios-cart-outline"></i></span>
+	               <span class="info-box-icon bg-yellow"><i class="ion ion-sad-outline"></i></span>
 	               <div class="info-box-content">
 	                 <h3 class="info-box-text"><b>${month}월</b> 지출</h3>
 	                 <span class="info-box-number"># <small>원</small></span>
@@ -144,14 +144,34 @@
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
 		  </div><!-- /.row -->
-          <!-- 박스 4개 end -->
-          
+          <!-- 박스 6개 end -->
+          	<div class="row">
+				<div class="col-md-12">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<i class="fa fa-area-chart"></i>
+							<h3 class="box-title">
+								<b>월별 등록자 추이</b>
+							</h3>
+							<div class="box-tools pull-right">
+								<button class="btn btn-box-tool" data-widget="collapse">
+									<i class="fa fa-minus"></i>
+								</button>
+							</div>
+						</div>
+						
+						<div class="box-body">
+		                	<canvas id="areaChart" height="250"></canvas>
+		                </div><!-- /.box-body -->
+					</div>
+				</div>
+			</div>
 			<!-- 원형 차트 3개 -->
 			<div class="row">
 				<div class="col-md-4">
 					<div class="box box-default">
 						<div class="box-header with-border">
-							<i class="fa fa-bar-chart-o"></i>
+							<i class="ion ion-pie-graph"></i>
 							<h3 class="box-title"><b>회원 성비</b></h3>
 							<div class="box-tools pull-right">
 								<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -166,7 +186,7 @@
 				<div class="col-md-4">
 					<div class="box box-default">
 						<div class="box-header with-border">
-							<i class="fa fa-bar-chart-o"></i>
+							<i class="ion ion-pie-graph"></i>
 							<h3 class="box-title"><b>회원 등록 경로</b></h3>
 							<div class="box-tools pull-right">
 								<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -181,7 +201,7 @@
 				<div class="col-md-4">
 					<div class="box box-default">
 						<div class="box-header with-border">
-							<i class="fa fa-bar-chart-o"></i>
+							<i class="ion ion-pie-graph"></i>
 							<h3 class="box-title"><b>주 이용 목적</b></h3>
 							<div class="box-tools pull-right">
 								<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -224,27 +244,7 @@
 					</div>
 				</div> -->
 				
-			<div class="row">
-				<div class="col-md-12">
-					<div class="box box-default">
-						<div class="box-header with-border">
-							<i class="fa fa-bar-chart-o"></i>
-							<h3 class="box-title">
-								<b>월별 등록자 추이</b>
-							</h3>
-							<div class="box-tools pull-right">
-								<button class="btn btn-box-tool" data-widget="collapse">
-									<i class="fa fa-minus"></i>
-								</button>
-							</div>
-						</div>
-						
-						<div class="box-body">
-		                	<canvas id="areaChart" height="250"></canvas>
-		                </div><!-- /.box-body -->
-					</div>
-				</div>
-			</div>
+			
 			<!-- 범위 그래프 차트 end -->
   		  <div class="row">
 				
@@ -252,6 +252,7 @@
 			 <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header">
+                  <i class="fa fa-bar-chart"></i>
                   <h3 class="box-title"><b>회원 연령대별(성별) 그래프</b></h3>
                 </div>
                 <div class="box-body chart-responsive">
@@ -616,8 +617,8 @@
 		 
 	  	  //BAR CHART
          // 연령대 변수
-		     var useTeensWomanMemberNo = '<c:out value='${useAgeGroupW.teens}'/>';
-		     useTeensWomanMemberNo *= 1; // int변환
+	     var useTeensWomanMemberNo = '<c:out value='${useAgeGroupW.teens}'/>';
+	     useTeensWomanMemberNo *= 1; // int변환
          var useTeensMenMemberNo = '<c:out value='${useAgeGroupM.teens}'/>';
          useTeensMenMemberNo *= 1;
          var useTwentyWomanMemberNo = '<c:out value='${useAgeGroupW.twenty}'/>';
