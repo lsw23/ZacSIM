@@ -94,9 +94,9 @@ public class MemberDao {
 	}
 	
 	//하나의 회원 보기
-	public Member getMeber(String member_nm) {
-		System.out.println("8st getMeber");
-        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMeber", member_nm);
+	public Member getMember(String member_nm) {
+		System.out.println("8st getMember");
+        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMember", member_nm);
     }
 	
 	// 입퇴실 내역검색 메서드
