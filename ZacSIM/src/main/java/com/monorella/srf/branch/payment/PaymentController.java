@@ -81,12 +81,14 @@ public class PaymentController {
 	@RequestMapping(value="/payment/paymentend", method = RequestMethod.POST)
 	public String paymentpro(Payment payment, Member member, Model model){
 		System.out.println("paymentpro 요청");
+		//결제 입력
 		int result = paymentDao.insertPayment(payment);
 		System.out.println("insertPayment 요청");
 		if(result == 1){
-			//성공시
+			//성공시(열람석 지정 'Y'로)
 			paymentDao.modifyPaymentSeat(payment);
 			//결제코드 조회
+			
 			int resulting = paymentDao.paycddetail(payment);
 			System.out.println("resulting :" + resulting);			
 			payment.setPay_cd(resulting);			

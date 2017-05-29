@@ -51,6 +51,10 @@ public class RoomDao {
 	public String selectRoomCdeqSeatCd(int seat_cd){
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.room.RoomMapper.selectRoomCdeqSeatCd", seat_cd);
 	}
+	//열람실 현황 allmodify
+	public int modifyAllRoomDashBoard(RoomDashBoard roomDashBoard){
+		return sqlSessionTemplate.update("com.monorella.srf.branch.room.RoomMapper.modifyAllRoomDashBoard", roomDashBoard);
+	}
 	
 	//열람실 입실 현황 modify
 	public int modifySeatRoomDashBoard(RoomDashBoard roomDashBoard){
@@ -92,6 +96,10 @@ public class RoomDao {
 		System.out.println("modifyRoomSeat()");
 		return sqlSessionTemplate.update("com.monorella.srf.branch.room.RoomMapper.modifyRoomSeat", seat);
 	}
+	//열람실 현황 삭제
+	public int deleteRoomDashBoard(String room_cd){
+		return sqlSessionTemplate.delete("com.monorella.srf.branch.room.RoomMapper.deleteRoomDashBoard", room_cd);
+	}
 	
 	//열람석 삭제
 	public int deleteSeat(String room_cd){
@@ -131,5 +139,15 @@ public class RoomDao {
 	public int insertRoom(Room room){
 		System.out.println(room);
 		return sqlSessionTemplate.insert("com.monorella.srf.branch.room.RoomMapper.insertRoom", room);
+	}
+	
+	//열람실 최초 insert
+	public int insertFristRoom(Room room){
+		return sqlSessionTemplate.insert("com.monorella.srf.branch.room.RoomMapper.insertFristRoom", room);
+	}
+	
+	//열람실 총코드수 select
+	public int selectCountRoomCd(){
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.room.RoomMapper.selectCountRoomCd");
 	}
 }
