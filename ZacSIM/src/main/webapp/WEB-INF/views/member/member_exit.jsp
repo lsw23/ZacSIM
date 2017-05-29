@@ -99,14 +99,8 @@
                   </div>
                   </div>
             <!-- right column -->
-            <div class="col-md-6">
-            </div>
                   
-         	   	<!-- Main content -->
-       		    <section class="content">
-                  
-            	<!-- right column -->
-            	<div class="row">	
+            	<!-- right column -->	
 	            <div class="col-md-6">
 	            
 	            <div class="box box-primary">
@@ -142,8 +136,6 @@
 				 </div>
 				 </div>
 				 </section>
-				</div>
-				</section>
 				</div>
 				</div>
 	<!-- JS -->

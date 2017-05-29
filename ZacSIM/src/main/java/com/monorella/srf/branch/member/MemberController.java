@@ -22,6 +22,8 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 
+	
+	
 	// 회원 삭제 폼 요청
 	@RequestMapping(value="/member/member_remove", method = RequestMethod.GET)
 	public String MemberRemove(@RequestParam(value="member_cd", required=true) String member_cd){
@@ -43,7 +45,7 @@ public class MemberController {
 	public String MemberModify(Model model
 			, @RequestParam(value="member_nm", required=true) String member_nm) {
 		System.out.println("/member/member_modify2 요청");
-		Member member = memberDao.getMeber(member_nm);
+		Member member = memberDao.getMember(member_nm);
 		model.addAttribute("member", member);
 		return "member/member_modify";
 	}
@@ -54,7 +56,7 @@ public class MemberController {
 		System.out.println("/member/member_modify1 요청");
 		memberDao.modifyMember(member);
 		System.out.println("수정이름 : " + member.getMember_nm()+"/member/member_modify1 요청");
-		return "member/member_view";		
+		return "redirect:/member/member_view?member_nm="+member.getMember_nm();
 	}
 
 	// 회원 입퇴실 요청
@@ -78,7 +80,7 @@ public class MemberController {
 	public String MemberView(Model model
 			, @RequestParam(value="member_nm")String member_nm){
 		System.out.println(member_nm + "/member/member_view 요청");
-		Member member = memberDao.getMeber(member_nm);
+		Member member = memberDao.getMember(member_nm);
 		model.addAttribute("member", member);
 		return "member/member_view";
 	}
