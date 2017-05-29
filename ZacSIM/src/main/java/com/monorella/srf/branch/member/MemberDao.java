@@ -58,7 +58,7 @@ public class MemberDao {
 		return sqlSessionTemplate.update("com.monorella.srf.branch.member.MemberMapper.MemberModify", member);
 	}
 
-	//
+	// 하나의 입퇴실회원 보기
 	public Member getMeberView(String member_cd){
 		System.out.println("MemberDao->getMeberView->"+member_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMeberView",member_cd);
@@ -70,9 +70,9 @@ public class MemberDao {
 	}
 	
 	//하나의 회원 보기
-	public Member getMember(String member_nm) {
-		System.out.println("8st getMember");
-        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMember", member_nm);
+	public Member getMeber(String member_nm) {
+		System.out.println("8st getMeber");
+        return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMeber", member_nm);
     }
 	
 	// 입퇴실 내역검색 메서드

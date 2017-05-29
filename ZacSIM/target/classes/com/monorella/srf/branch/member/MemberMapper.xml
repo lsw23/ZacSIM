@@ -120,9 +120,10 @@
 	</select>	
 	
 	<!-- 하나의 회원 보기 -->
-	<select id="getMember" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">
+	<select id="getMeber" parameterType="String" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT 
 			member_cd
+			, inout_num
 			, member_nm
 			, member_sex
 			, member_age
