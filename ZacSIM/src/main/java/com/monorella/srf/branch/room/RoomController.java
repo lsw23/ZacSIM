@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.PayList;
 import com.monorella.srf.branch.dto.Room;
 import com.monorella.srf.branch.dto.RoomDashBoard;
 import com.monorella.srf.branch.dto.Seat;
@@ -89,10 +90,23 @@ public class RoomController {
 		System.out.println("room_dashboard()");
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 		List<RoomDashBoard> roomdashlist = roomDao.selectRoomDashBoardNow(branchOwner);
+		ArrayList<PayList> paylist = new ArrayList<PayList>();
+		int paynumber = 0;
+		
 		for(RoomDashBoard rl : roomdashlist){
-			System.out.println(rl);
+			PayList pay = new PayList();
+			//결제률 구하기
+			double percentage = ((double)rl.getPay_seat()/rl.getNotpay_seat())*100;
+			int percent = (int)percentage;
+			//자동증가
+			paynumber += 1; 
+			pay.setRoom_nm(rl.getRoom_nm());
+			pay.setPayment_percentage(percent);
+			pay.setPaynumber(paynumber);
+			paylist.add(pay);
 		}
 		model.addAttribute("roomdashlist", roomdashlist);
+		model.addAttribute("paylist", paylist);
 		return "room/room_dashboard";
 	}
 	

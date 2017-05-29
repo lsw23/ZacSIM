@@ -61,7 +61,6 @@
 		                <th>결제 열람석 수</th>
 		                <th>미결제 열람석 수</th>
             		  </tr>
-                      </tr>
                     </thead>
                     <tbody>
                       <c:forEach var="rd" items="${roomdashlist}">
@@ -81,119 +80,48 @@
               </div><!-- /.box -->
 			</div>
 			
-			<div class="col-xs-12">
-			              <div class="box">
-			                <div class="box-header">
-			                    <ul class="nav nav-tabs">
-								    <li class="active"><a data-toggle="tab" href="#home">입실</a></li>
-								    <li><a data-toggle="tab" href="#menu1">퇴실 </a></li>
-								    <li><a data-toggle="tab" href="#menu2">만료 </a></li>
-								  </ul>
-			                </div><!-- /.box-header -->
-			                <div class="box-body">
-			                   <div class="tab-content">
-								    <div id="home" class="tab-pane fade in active">
-								      	<table id="example2" class="table table-bordered table-hover">
-						                    <thead>
-						                      <tr>
-								            	<th>열람실</th>
-								           	    <th>열람석 번호</th>
-								                <th>회원코드</th>
-								                <th>이름</th>
-								                <th>시작일</th>
-								                <th>만료일</th>
-						            		  </tr>
-						                    </thead>
-						                    <tbody>
-						                      <tr>
-						                        <td>201호</td>
-						                        <td>7</td>
-						                        <td>member_cd10</td>
-						                        <td>박석민</td>
-						                        <td>2017-05-17</td>
-						                        <td>2017-06-17</td>
-						                      </tr> 
-						                    </tbody>
-						                  </table>
-									</div>
-									
-								    <div id="menu1" class="tab-pane fade">
-								      <table id="example2" class="table table-bordered table-hover">
-						                    <thead>
-						                      <tr>
-								            	<th>Rendering engine</th>
-								           	    <th>Browser</th>
-								                <th>Platform(s)</th>
-								                <th>Engine version</th>
-								                <th>CSS grade</th>
-						            		  </tr>
-						                    </thead>
-						                    <tbody>
-						                      <!-- <tr>
-						                        <td>Other browsers</td>
-						                        <td>All others</td>
-						                        <td>-</td>
-						                        <td>-</td>
-						                        <td>U</td>
-						                      </tr> -->
-						                    </tbody>
-						                    <tfoot>
-						                      <tr>
-						                        <th>Rendering engine</th>
-						                        <th>Browser</th>
-						                        <th>Platform(s)</th>
-						                        <th>Engine version</th>
-						                        <th>CSS grade</th>
-						                      </tr>
-						                    </tfoot>
-						                  </table>
-								    </div>
-										    
-								    <div id="menu2" class="tab-pane fade">
-								      <table id="example2" class="table table-bordered table-hover">
-						                    <thead>
-						                      <tr>
-								            	<th>Rendering engine</th>
-								           	    <th>Browser</th>
-								                <th>Platform(s)</th>
-								                <th>Engine version</th>
-								                <th>CSS grade</th>
-						            		  </tr>
-						                    </thead>
-						                    <tbody>
-						                      <!-- <tr>
-						                        <td>Other browsers</td>
-						                        <td>All others</td>
-						                        <td>-</td>
-						                        <td>-</td>
-						                        <td>U</td>
-						                      </tr> -->
-						                    </tbody>
-						                    <tfoot>
-						                      <tr>
-						                        <th>Rendering engine</th>
-						                        <th>Browser</th>
-						                        <th>Platform(s)</th>
-						                        <th>Engine version</th>
-						                        <th>CSS grade</th>
-						                      </tr>
-						                    </tfoot>
-						                  </table>
-								    </div>
-										 
-								  </div><!-- tab-content -->
-			                </div><!-- /.box-body -->
-			              </div><!-- /.box -->
-			             </div><!-- col-xs-12 -->
+			<div class="col-md-12">
+              <div class="box">
+                <div class="box-header">
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table class="table table-bordered">
+                    <tr>
+                      <th style="width: 10px">#</th>
+                      <th>열람실</th>
+                      <th>결제률</th>
+                      <th style="width: 40px">Label</th>
+                    </tr>
+                    <c:forEach var="p" items="${paylist}">
+	                    <tr>
+	                      <td>${p.paynumber}</td>
+	                      <td>${p.room_nm}</td>
+	                      <td>
+	                        <div class="progress progress-xs">
+	                          <div class="progress-bar progress-bar-yellow" style="width: ${p.payment_percentage}%"></div>
+	                        </div>
+	                      </td>
+	                      <td><span class="badge bg-yellow">${p.payment_percentage}%</span></td>
+	                    </tr>
+                    </c:forEach>
+                  </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix">
+                  <ul class="pagination pagination-sm no-margin pull-right">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                  </ul>
+                </div>
+              </div><!-- /.box -->
+            </div><!-- /.col -->
 					</div><!-- row -->
 			</section>
 	 	</div><!-- content-wrapper -->
 	</div><!-- wrapper -->
-				       
-	
-	        
-	
-	
+
 	<!-- JS -->
 	<c:import url="../module2/jsscript.jsp" />
 	<script>
