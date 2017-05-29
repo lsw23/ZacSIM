@@ -45,14 +45,7 @@
 								<div class="box-body">
 									<div class="form-group">
 										<label for="exampleInputbranch_owner_cd">지점 대표 코드</label> 
-										<SELECT class="form-control" name="branch_owner_cd" id="branch_owner_cd">
-											<option value="M0" selected>&nbsp;</option>
-											<option value="M1">M1</option>
-											<option value="M2">M2</option>
-											<option value="M3">M3</option>
-											<option value="M4">M4</option>
-											<option value="M5">M5</option>
-										</SELECT>
+										<input type="text" class="form-control" name="branch_owner_cd" value="${sessionScope.branchOwner.branch_owner_cd}" readonly/>
 									</div>
 									<div class="form-group">
 										<label for="exampleInputFile">지출 내역</label> 

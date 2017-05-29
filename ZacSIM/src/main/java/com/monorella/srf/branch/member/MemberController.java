@@ -53,23 +53,24 @@ public class MemberController {
 	public String MemberModify(Member member){
 		System.out.println("/member/member_modify1 요청");
 		memberDao.modifyMember(member);
+		System.out.println("수정이름 : " + member.getMember_nm());
 		return "redirect:/member/member_view?member_nm="+member.getMember_nm();		
 	}
 
 	// 회원 입퇴실 요청
-	@RequestMapping(value="/member/member_excci", method = RequestMethod.GET)
-	public String MemberExcci(Model model 
-			, @RequestParam(value="member_nm")String member_nm
-			, @RequestParam(value="member_cd")String member_cd){
-		System.out.println("/member/member_excci 요청");
-		Member member= memberDao.getMeberView(member_cd);
-		System.out.println("두번재 :" + member);
-		System.out.println("이름 : " + member.getMember_nm());
-		 List<SeatTime> seattime= memberDao.getExit(member.getMember_nm());
-		 System.out.println("여기 :" + seattime);
-		 model.addAttribute("seattime", seattime);
-		model.addAttribute("member", member);
-		return "member/member_excci";
+		@RequestMapping(value="/member/member_excci", method = RequestMethod.GET)
+		public String MemberExcci(Model model 
+				, @RequestParam(value="member_nm")String member_nm
+				, @RequestParam(value="member_tel")String member_tel){
+			System.out.println("/member/member_excci 요청");
+			Member member= memberDao.getMeberView(member_tel);
+			System.out.println("두번재 :" + member);
+			System.out.println("이름 : " + member.getMember_nm());
+			 List<SeatTime> seattime= memberDao.getExit(member.getMember_nm());
+			 System.out.println("여기 :" + seattime);
+			 model.addAttribute("seattime", seattime);
+			model.addAttribute("member", member);
+			return "member/member_excci";
 	}
 	
 	// 회원 상세 요청
@@ -83,17 +84,17 @@ public class MemberController {
 	}
 
 	// 입퇴실 검색 요청
-	@RequestMapping(value="/member/member_exe", method = {RequestMethod.GET, RequestMethod.POST})
-	public String MemberExe(Model model
-			, @RequestParam("so") String so
-			, @RequestParam("sv") String sv){
-		System.out.println("MemberController->MemberExe()" + so + sv);
-		List<Member> memberexit = memberDao.exeMember(so, sv);
-		System.out.println(memberexit);
-		model.addAttribute("memberexit", memberexit);
-		model.addAttribute("so", so);
-		model.addAttribute("sv", sv);
-		return "member/member_exe";
+		@RequestMapping(value="/member/member_exe", method = {RequestMethod.GET, RequestMethod.POST})
+		public String MemberExe(Model model
+				, @RequestParam("so") String so
+				, @RequestParam("sv") String sv){
+			System.out.println("MemberController->MemberExe()" + so + sv);
+			List<Member> memberexit = memberDao.exeMember(so, sv);
+			System.out.println(memberexit);
+			model.addAttribute("memberexit", memberexit);
+			model.addAttribute("so", so);
+			model.addAttribute("sv", sv);
+			return "member/member_exe";
 	}
 	
 	// 회원 검색 요청
@@ -111,64 +112,64 @@ public class MemberController {
 	}
 
 	// 입퇴실 및 페이징 요청
-		@RequestMapping(value="/member/member_exit", method = RequestMethod.GET)
-		public String selectMemberExit(Model model
-	            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-			System.out.println("member_exit 요청1");
-			List<Member> memberexit = memberDao.exitMember();
-			System.out.println("member_exit 요청1");
-			List<SeatTime> listExit = memberDao.Exit();
-			System.out.println("member_exit 입퇴실 요청2");
-			model.addAttribute("memberexit", memberexit);
-			System.out.println("member_exit 요청1");
-			model.addAttribute("listExit", listExit);
-			System.out.println("member_exit 입퇴실 요청2");
+			@RequestMapping(value="/member/member_exit", method = RequestMethod.GET)
+			public String selectMemberExit(Model model
+		            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+				System.out.println("member_exit 요청1");
+				List<Member> memberexit = memberDao.exitMember();
+				System.out.println("member_exit 요청1");
+				List<SeatTime> listExit = memberDao.Exit();
+				System.out.println("member_exit 입퇴실 요청2");
+				model.addAttribute("memberexit", memberexit);
+				System.out.println("member_exit 요청1");
+				model.addAttribute("listExit", listExit);
+				System.out.println("member_exit 입퇴실 요청2");
 
-			if(currentPage < 1){
-				currentPage = 1;
-	            }
+				if(currentPage < 1){
+					currentPage = 1;
+		            }
 
-			int joinCount = 0;
-			joinCount = memberDao.exitMemberCount();
+				int joinCount = 0;
+				joinCount = memberDao.exitMemberCount();
 
-			int pagePerRow = 10;
-			List<Member> list = memberDao.selectMemberExit(currentPage, pagePerRow);
+				int pagePerRow = 10;
+				List<Member> list = memberDao.selectMemberExit(currentPage, pagePerRow);
 
-			int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
-			if(joinCount%pagePerRow != 0) {
-				lastPage++;
-			}
+				int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
+				if(joinCount%pagePerRow != 0) {
+					lastPage++;
+				}
 
-			int countPage = 5;
-			int startPage = ((currentPage - 1)/10)*10+1;
-			int endPage = startPage + countPage-1;
-			int nextPage = ((currentPage - 1)/10)*10+2;
-			int previousPage = ((currentPage - 1)/10)*10-10+1;
+				int countPage = 5;
+				int startPage = ((currentPage - 1)/10)*10+1;
+				int endPage = startPage + countPage-1;
+				int nextPage = ((currentPage - 1)/10)*10+2;
+				int previousPage = ((currentPage - 1)/10)*10-10+1;
 
-			if(previousPage <= 0) {
-				previousPage = 1;
-			}
+				if(previousPage <= 0) {
+					previousPage = 1;
+				}
 
-			if(endPage > lastPage) {
-				previousPage = 1;
-			}
+				if(endPage > lastPage) {
+					previousPage = 1;
+				}
 
-			if(nextPage > lastPage) {
-				nextPage = lastPage;
-			}
+				if(nextPage > lastPage) {
+					nextPage = lastPage;
+				}
 
-			model.addAttribute("joinCount", joinCount);
-			model.addAttribute("list", list);
-			model.addAttribute("currentPage", currentPage);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("endPage", endPage);
-			model.addAttribute("nextPage", nextPage);
-			model.addAttribute("previousPage", previousPage);
-			model.addAttribute("lastPage", lastPage);
-			
-			System.out.println("member_exit1,2 요청완료");
-			
-			return "member/member_exit";
+				model.addAttribute("joinCount", joinCount);
+				model.addAttribute("list", list);
+				model.addAttribute("currentPage", currentPage);
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("endPage", endPage);
+				model.addAttribute("nextPage", nextPage);
+				model.addAttribute("previousPage", previousPage);
+				model.addAttribute("lastPage", lastPage);
+				
+				System.out.println("member_exit1,2 요청완료");
+				
+				return "member/member_exit";
 		}
 	
 	// 리스트 및 페이징 요청
@@ -238,6 +239,7 @@ public class MemberController {
 
 		} else {	
 			int result = memberDao.autoMemberCode(member);
+			System.out.println("값 :" + result);
 			if(result == 1) {
 				System.out.println("회원 등록 성공");
 				

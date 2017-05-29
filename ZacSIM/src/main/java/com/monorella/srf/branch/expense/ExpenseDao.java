@@ -16,7 +16,7 @@ public class ExpenseDao {
 	@Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 	
-	//공지사항 검색 메서드
+	//지출내역 기간별로  검색 메서드
 		 public List<Expense> searchExpense(String searchStartDate, String searchEndDate){
 			 System.out.println("ExpenseDao->searchExpense ->searchStartDate:" +searchStartDate
 					 +"searchEndDate:" + searchEndDate);
@@ -34,12 +34,13 @@ public class ExpenseDao {
 			}
 			
 	// 지출리스트 메서드
-		public List<Expense> selectExpenseList(int currentPage, int pagePerRow) {
+		public List<Expense> selectExpenseList(int currentPage, int pagePerRow, String branch_owner_cd) {
 			System.out.println("ExpenseDao-> selectExpenseList-> currentPage: " + currentPage 
 					+"pagePerRow: "+pagePerRow);
-			Map<String, Integer> map = new HashMap<String, Integer>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("beginRow", (currentPage-1)*pagePerRow);
 			map.put("pagePerRow", pagePerRow);
+			map.put("branch_owner_cd", branch_owner_cd);
 			return sqlSessionTemplate.selectList("com.monorella.srf.branch.expense.ExpenseMapper.selectExpenseList", map);
 		}
 	

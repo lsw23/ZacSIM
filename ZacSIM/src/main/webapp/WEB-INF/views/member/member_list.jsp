@@ -62,8 +62,6 @@
 			    <option value="member_cd">CODE</option>
 					<option value="member_nm">이름</option>
 					<option value="member_sex">성별</option>
-					<option value="member_sex">주소</option>
-				    <option value="member_age">나이</option>
 				    <option value="member_seat_state">회원상태</option>
 			  </select>
 			  </div>
@@ -85,10 +83,9 @@
                     <tr>
                       	<th>회원코드</th>
 		            	<th>이름</th>
-		           	    <th>성별</th>
+		           	    <th>연락처</th>
 		                <th>주소</th>
-		                <th>나이</th>
-		                <th>회원상태</th>
+		                <th>가입일</th>
             		  </tr>
             		</thead>  
                     <tbody>
@@ -97,10 +94,9 @@
 			                <tr>
 			                    <td>${b.member_cd}</td>
 			                    <td><a href="${pageContext.request.contextPath}/member/member_view?member_nm=${b.member_nm}">${b.member_nm}</a></td>
-			                    <td>${b.member_sex}</td>
+			                    <td>${b.member_tel}</td>
 			                    <td>${b.member_addr}</td>
-			                    <td>${b.member_age}</td>
-			                    <td>${b.member_seat_state}</td>
+			                    <td>${b.member_date}</td>
 	               		    </tr>
 			 	</c:forEach>
 			        </tbody>

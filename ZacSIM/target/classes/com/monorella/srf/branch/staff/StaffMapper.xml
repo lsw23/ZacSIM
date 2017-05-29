@@ -62,7 +62,7 @@
 		</if> 
 </select>
 
-  <select id="getStaffList" resultType="com.monorella.srf.branch.dto.Staff">
+  <select id="getStaffList" parameterType="String" resultType="com.monorella.srf.branch.dto.Staff">
   	SELECT
   	staff_id
   	, branch_owner_cd 
@@ -73,6 +73,7 @@
 	, staff_in_date
 
  	FROM branch_staff_tb
+ 	WHERE branch_owner_cd = #{branch_owner_cd}
 	ORDER BY staff_name DESC 
   </select>
   

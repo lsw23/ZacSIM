@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.InsertNumList;
-import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.UsingMemberList;
 
 @Controller

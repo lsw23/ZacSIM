@@ -53,16 +53,20 @@
 		            <td>${member.member_sex}</td>
 		          </tr>
 		          <tr>
-		            <td>연락처 :</td>
-		            <td>${member.member_tel}</td>
-		          </tr>
-		          <tr>
 		            <td>나이 :</td>
 		            <td>${member.member_age}</td>
 		          </tr>
-		          <tr>
-		             <td>가입일 :</td>
-		             <td>${member.member_date}</td>
+		           <tr>
+		              <td>등록일 :</td>
+		              <td>${member.member_regi_date}</td>
+		           </tr>
+		           <tr>
+		              <td>기간만료일 :</td>
+		              <td>${member.member_end_date}</td>
+		           </tr>
+		           <tr>
+		              <td>회원상태 :</td>
+		              <td>${member.member_seat_state}</td>
 		           </tr>
 		           <tr>
 		              <td>등록경로 :</td>
