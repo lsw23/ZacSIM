@@ -64,7 +64,6 @@
 			 	  <div class="row">
 			  		<div class="col-sm-4">
                       <select name="so" class="form-control" id="sel1">
-				    	<option value="member_cd">CODE</option>
 						<option value="member_nm">이름</option>
 					  </select>
 			 	 	 </div>
@@ -83,14 +82,14 @@
                   <table class="table">
                   <thead>
                     <tr>
-                      	<th>회원코드</th>
+                      	<th>연락처</th>
 		            	<th>이름</th>
             		  </tr>
             		</thead>  
                     <tbody>           
                    
 			               <tr>  
-			                	<td>${member.member_cd}</td>  
+			                    <td>${member.member_tel}</td>
 			                    <td>${member.member_nm}</td>
 	               		    </tr>
 	              

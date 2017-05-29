@@ -5,6 +5,11 @@
   
   <mapper namespace="com.monorella.srf.branch.room.RoomMapper">
   	
+  	<!-- 열람실 총코드 수 조회 -->
+  	<select id="selectCountRoomCd" resultType="int">
+  		SELECT COUNT(room_cd) FROM branch_room_tb
+  	</select>
+  	
   	<!-- 이동 후 좌석 지정 'Y'로 -->
   	<update id="modifySeatCdAfter" parameterType="com.monorella.srf.branch.dto.Seat">
   		UPDATE branch_saet_tb
@@ -20,6 +25,7 @@
 		ON bs.seat_cd = bm.seat_cd
 			SET
 			  bs.seat_appoint = 'N' <!-- (이동전 좌석 지정 N) -->
+			  , bs.colseat_state = '빈좌석'
 			  , bm.seat_cd = #{seatcd_after}   <!-- (이동 후 좌석코드) -->
 		WHERE bs.seat_cd = #{seatcd_before} <!-- (이동전 좌석코드) -->
   	</update>
@@ -32,6 +38,24 @@
 		FROM branch_saet_tb 
 		WHERE room_cd = #{room_cd} AND seat_appoint = 'N'
 	</select>
+	
+	<!-- 열람실 현황 삭제 -->
+	<delete id="deleteRoomDashBoard" parameterType="com.monorella.srf.branch.dto.Room">
+		DELETE FROM branch_room_dashboard_tb WHERE room_cd = #{room_cd}
+	</delete>
+	
+	<!-- 열람실 현황 전체 modify -->
+	<update id="modifyAllRoomDashBoard" parameterType="com.monorella.srf.branch.dto.RoomDashBoard">
+		UPDATE branch_room_dashboard_tb
+			SET
+				seat_in= #{seat_in}
+				, seat_out=#{seat_out}
+				, pay_seat=#{pay_seat}
+				, notpay_seat=#{notpay_seat}
+				, room_out=#{room_out}
+				, room_personnel=#{room_personnel}
+			WHERE room_cd =#{room_cd}
+	</update>
 	
   	<!-- 열람실 현황 입실&퇴실 modify -->
   	<update id="modifySeatRoomDashBoard" parameterType="com.monorella.srf.branch.dto.RoomDashBoard">
@@ -233,4 +257,21 @@
 			, #{seat_num}
 			, #{room_division})	
 	</insert>
+	
+	<!-- 열람실 최초등록 -->
+	<insert id="insertFristRoom" parameterType="com.monorella.srf.branch.dto.Room">
+		INSERT INTO branch_room_tb(
+			room_cd
+			, branch_owner_cd
+			, room_nm
+			, seat_num
+			, room_division)
+		VALUES (
+			#{room_cd} 
+			, #{branch_owner_cd}
+			, #{room_nm}
+			, #{seat_num}
+			, #{room_division})	
+	</insert>
+	
   </mapper>
