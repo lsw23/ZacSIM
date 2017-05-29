@@ -98,14 +98,10 @@
                   </div>
                   </div>
                   
-        		 <!-- Main content -->
-       		    <section class="content">
-                  
             	<!-- right column -->
-            	<div class="row">	
 	            <div class="col-md-6">
 	            
-	            <div class="box box-warning">
+	            <div class="box box-primary">
                 <div class="box-header">
                   <h3 class="box-title">독서실 회원 입퇴실 리스트</h3>
                   <div class="box-tools">
@@ -137,12 +133,8 @@
 				 </div>
 				 </div>
 				 </section>
-			</div> 
-			</section>
 				</div>
-			
-				</div>
-				
+				</div>			
 	<!-- JS -->
 	<c:import url="../module2/jsscript.jsp" />
 	<script>

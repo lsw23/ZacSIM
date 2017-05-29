@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.DashboardAgeGroup;
 import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.UsingMemberList;
 
@@ -15,14 +16,33 @@ public class DashboardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	// 이용중 회원-----------------------------------------------------------------------------------------------------
+	// 이용중인 회원 중 여자 회원의 연령대별 수
+	public DashboardAgeGroup selectUseMemberAgeGroupWomanNum(String branch_owner_cd){
+		System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberAgeGroupWomanNum", branch_owner_cd);
+	}
+	// 이용중인 회원 중 남자 회원의 연령대별 수
+	public DashboardAgeGroup selectUseMemberAgeGroupMenNum(String branch_owner_cd){
+		System.out.println("DashboardDao-> selectUseMemberAgeGroupMenNum() branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberAgeGroupMenNum", branch_owner_cd);
+	}
+	//이용중 회원 목록
+	public List<UsingMemberList> selectUseMemberList(String branch_owner_cd){
+		System.out.println("DashboardDao-> selectUseMemberList() branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberList", branch_owner_cd);
+	}
+	
+	
+	// --------------------------------월별 가입자수----------------------------------------------------------
 	// 월별 여자 가입자수 
 	public InsertNumList selectInsertNumWoman(String branch_owner_cd){
-		System.out.println("DashboardDao-> selectInsertNumWoman() branch_owner_cd: "+branch_owner_cd);
+		//System.out.println("DashboardDao-> selectInsertNumWoman() branch_owner_cd: "+branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectInsertNumWoman", branch_owner_cd);
 	}
 	// 월별 남자 가입자수 
 	public InsertNumList selectInsertNumMen(String branch_owner_cd){
-		System.out.println("DashboardDao-> selectInsertNumMen() branch_owner_cd: "+branch_owner_cd);
+		//System.out.println("DashboardDao-> selectInsertNumMen() branch_owner_cd: "+branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectInsertNumMen", branch_owner_cd);
 	}
 
@@ -98,65 +118,6 @@ public class DashboardDao {
 		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseSeatCount", branch_owner_cd);
 		return row;
 	}		
-	
-	
-	//----------------------------------------------------연령대별 회원-------------------------------------------------
-	//이용중 기타연령 회원 남
-	public int selectUseEtcMenMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseEtcMenMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 기타연령 회원 여
-	public int selectUseEtcWomanMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseEtcWomanMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 40대 회원 남
-	public int selectUseFortyMenMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseFortyMenMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 40대 회원 여
-	public int selectUseFortyWomanMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseFortyWomanMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 30대 회원 남
-	public int selectUseThirtyMenMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseThirtyMenMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 30대 회원 여
-	public int selectUseThirtyWomanMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseThirtyWomanMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 20대 회원 남
-	public int selectUseTwentyMenMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseTwentyMenMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 20대 회원 여
-	public int selectUseTwentyWomanMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseTwentyWomanMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 10대 회원 여
-	public int selectUseTeensWomanMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseTeensWomanMemberCount", branch_owner_cd);
-		return row;
-	}
-	//이용중 10대 회원 남
-	public int selectUseTeensMenMemberCount(String branch_owner_cd){
-		int row = sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseTeensMenMemberCount", branch_owner_cd);
-		return row;
-	}
-	
-	//이용중 회원 목록
-	public List<UsingMemberList> selectUseMemberList(String branch_owner_cd){
-		System.out.println("DashboardDao-> selectUseMemberList() branch_owner_cd: "+ branch_owner_cd);
-		return sqlSessionTemplate.selectList("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberList", branch_owner_cd);
-	}
 	
 	
 	//----------------------------------------------------회원-------------------------------------------------

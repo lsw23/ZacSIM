@@ -12,16 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.DashboardAgeGroup;
 import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.SeatTime;
-import com.monorella.srf.branch.member.MemberDao;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 
+	
+	
 	// 회원 삭제 폼 요청
 	@RequestMapping(value="/member/member_remove", method = RequestMethod.GET)
 	public String MemberRemove(@RequestParam(value="member_cd", required=true) String member_cd){
@@ -53,8 +55,8 @@ public class MemberController {
 	public String MemberModify(Member member){
 		System.out.println("/member/member_modify1 요청");
 		memberDao.modifyMember(member);
-		System.out.println("수정이름 : " + member.getMember_nm());
-		return "redirect:/member/member_view?member_nm="+member.getMember_nm();		
+		System.out.println("수정이름 : " + member.getMember_nm()+"/member/member_modify1 요청");
+		return "redirect:/member/member_view?member_nm="+member.getMember_nm();
 	}
 
 	// 회원 입퇴실 요청
@@ -77,7 +79,7 @@ public class MemberController {
 	@RequestMapping(value="/member/member_view", method = RequestMethod.GET)
 	public String MemberView(Model model
 			, @RequestParam(value="member_nm")String member_nm){
-		System.out.println("/member/member_view 요청");
+		System.out.println(member_nm + "/member/member_view 요청");
 		Member member = memberDao.getMember(member_nm);
 		model.addAttribute("member", member);
 		return "member/member_view";
@@ -243,17 +245,27 @@ public class MemberController {
 			if(result == 1) {
 				System.out.println("회원 등록 성공");
 				
+				//--------------------------------------------------------------------------------------
 				// 가입시 해당 월 남자 가입자수 조회 
 				InsertNumList insertNumList = memberDao.selectMonthInsertNumMen(branch_owner_cd);
-				System.out.println("MemberController-> MemberPro-> insertNumList: "+ insertNumList);
+				//System.out.println("MemberController-> MemberPro-> insertNumList: "+ insertNumList);
 				// 사업자 코드로 해당 월 가입자 수 업데이트
 				memberDao.modifyMonthInsertInfoMen(insertNumList);
-				
 				// 가입시 해당 월 여자 가입자수 조회 
 				InsertNumList insertNumListW = memberDao.selectMonthInsertNumWoman(branch_owner_cd);
-				System.out.println("MemberController-> MemberPro-> insertNumListW: "+ insertNumListW);
+				//System.out.println("MemberController-> MemberPro-> insertNumListW: "+ insertNumListW);
 				// 사업자 코드로 해당 월 가입자 수 업데이트
 				memberDao.modifyMonthInsertInfoWoman(insertNumListW);
+				
+				//--------------------------------------------------------------------------------------
+				// 가입시 연령대별 남자 이용회원 조회
+				DashboardAgeGroup insertAgeGroupListM = memberDao.selectAgeGroupMen(branch_owner_cd);
+				// 수정
+				memberDao.modifyMenAgeGroupInfo(insertAgeGroupListM);
+				// 가입시 연령대별 여자 이용회원 조회
+				DashboardAgeGroup insertAgeGroupListW = memberDao.selectAgeGroupWoman(branch_owner_cd);
+				// 수정
+				memberDao.modifyWomanAgeGroupInfo(insertAgeGroupListW);
 				
 				return "redirect:/member/member_list";
 			} else {
@@ -266,9 +278,13 @@ public class MemberController {
 	// 독서실 회원 코드 자동 증가 및 POST 요청 
 	// 열람실 window창에서 필요한 내용이니 지우지 말 것
 	@RequestMapping(value="/member/paymember_pro", method= RequestMethod.POST)
-	public String PayMemberPro(Member member) {
+	public String PayMemberPro(Member member, HttpSession session) {
 		System.out.println("회원코드 자동증가 폼pay");
 		System.out.println(member);
+		
+		// 세선에서 사업자 코드 받기
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		String branch_owner_cd = branchOwner.getBranch_owner_cd();
 
 		//코드 MAX select
 		int code = memberDao.selectMemberCode();
@@ -281,6 +297,29 @@ public class MemberController {
 			int result = memberDao.autoMemberCode(member);
 			if(result == 1) {
 				System.out.println("요금제 등록 성공pay");
+				
+				//--------------------------------------------------------------------------------------
+				// 가입시 해당 월 남자 가입자수 조회 
+				InsertNumList insertNumList = memberDao.selectMonthInsertNumMen(branch_owner_cd);
+				//System.out.println("MemberController-> MemberPro-> insertNumList: "+ insertNumList);
+				// 사업자 코드로 해당 월 가입자 수 업데이트
+				memberDao.modifyMonthInsertInfoMen(insertNumList);
+				// 가입시 해당 월 여자 가입자수 조회 
+				InsertNumList insertNumListW = memberDao.selectMonthInsertNumWoman(branch_owner_cd);
+				//System.out.println("MemberController-> MemberPro-> insertNumListW: "+ insertNumListW);
+				// 사업자 코드로 해당 월 가입자 수 업데이트
+				memberDao.modifyMonthInsertInfoWoman(insertNumListW);
+				
+				//--------------------------------------------------------------------------------------
+				// 가입시 연령대별 남자 이용회원 조회
+				DashboardAgeGroup insertAgeGroupListM = memberDao.selectAgeGroupMen(branch_owner_cd);
+				// 수정
+				memberDao.modifyMenAgeGroupInfo(insertAgeGroupListM);
+				// 가입시 연령대별 여자 이용회원 조회
+				DashboardAgeGroup insertAgeGroupListW = memberDao.selectAgeGroupWoman(branch_owner_cd);
+				// 수정
+				memberDao.modifyWomanAgeGroupInfo(insertAgeGroupListW);
+				
 				return "payment/memberend";
 			} else {
 				System.out.println("요금제 등록 실패");

@@ -5,11 +5,10 @@
 				<div class="row">
 					<nav class="templatemo-top-nav col-lg-12 col-md-12">
 						<ul class="text-uppercase">
-							<li><a href="" class="active">Kang Sung Hwan</a></li>
+							<li><a href="">Lee Ju Nyeoung</a></li>
 							<li><a href="">Yang Ji Hun</a></li>
-							<li><a href="">Lee Jun Young</a></li>
-							<li><a href="login.html">Pack Suck Min</a></li>
-							<li><a href="login.html">Lee Seung Wook</a></li>
+							<li><a href="">Park Suck Min</a></li>
+							<li><a href="">Lee Seung Wook</a></li>
 						</ul>
 					</nav>
 				</div>
