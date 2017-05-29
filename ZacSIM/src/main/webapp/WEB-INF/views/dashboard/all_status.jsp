@@ -32,13 +32,13 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1> 통계
+          <h1> 지점 전체 현황
             <small>(${today})</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
-            <li class="active">통계</li>
+            <li class="active">${sessionScope.branchOwner.branch_nm} 전체 현황</li>
           </ol>
         </section>
 
