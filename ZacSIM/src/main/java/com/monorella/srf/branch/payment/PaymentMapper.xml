@@ -1,6 +1,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.monorella.srf.branch.payment.PaymentMapper">
+	<!-- 연장 결제 입력 -->
+	
 	
 	<!-- 기간 연장 성공시 member테이블 member_end_date 수정  -->
 	<update id="modifyEndDate" parameterType="com.monorella.srf.branch.dto.Payment">
@@ -20,7 +22,8 @@
 			, total_amount
 			, pay_date
 			, pay_month
-			, pay_option)
+			, pay_option
+			, pay_extension)
 		VALUES(
  			#{branch_owner_cd}
 			, #{room_cd}
@@ -29,14 +32,15 @@
 			, #{total_amount}
 			, now()
 			, month(now()) 
-			, #{pay_option})
+			, #{pay_option}
+			, #{pay_extension})
 	</insert>
 	<!-- 결제 성공시 seat_appoint 수정 -->
 	<update id="modifyPaymentSeat" parameterType="com.monorella.srf.branch.dto.Payment">
 		UPDATE branch_saet_tb 
             SET 
             seat_appoint = 'Y'
-            , colseat_state = '퇴실'
+            , colseat_state = '배치'
         WHERE seat_cd = #{seat_cd}
     </update>
     
@@ -45,7 +49,6 @@
 		UPDATE branch_member_tb 
             SET 
             seat_cd = #{seat_cd}
-            , member_date = CURRENT_DATE()
             , member_regi_date = #{member_regi_date}
             , member_end_date = #{member_end_date}
             , member_seat_state = 'Y'
@@ -78,7 +81,7 @@
 		SELECT 
 			inout_num 
 			FROM branch_inout_tb 
-			WHERE seat_cd = #{seat_cd}
+			WHERE member_cd = #{member_cd} AND pay_cd = #{pay_cd}
 	</select>
 	
 	<!-- 출결번호 member tb에 수정 -->

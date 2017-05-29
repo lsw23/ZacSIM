@@ -3,8 +3,22 @@
 <!DOCTYPE>
 <html>
 <head>
-	<!-- 헤드 -->
-	<c:import url="../module2/head.jsp"/>
+	<meta charset="UTF-8">
+    <title>AdminLTE 2 | Data Tables</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <!-- Bootstrap 3.3.2 -->
+    <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome Icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <!-- DATA TABLES -->
+    <link href="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="${pageContext.request.contextPath}/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins 
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="${pageContext.request.contextPath}/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body class="skin-blue">
     <div class="wrapper">
@@ -29,19 +43,16 @@
 			
 	<!-- Main content -->
         <section class="content">
-		
-		<!-- 테이블1(밑에 div x2 추가 )-->       
-          <div class="row">
-            <div class="col-xs-12">
-            
-              <div class="box">
+		<div class="row">
+        <div class="col-xs-12">
+		<div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">현황</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example2" class="table table-bordered table-hover">
+                  <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+                        <tr>
 		            	<th>열람실</th>
 		           	    <th>입실</th>
 		                <th>퇴실</th>
@@ -50,9 +61,10 @@
 		                <th>결제 열람석 수</th>
 		                <th>미결제 열람석 수</th>
             		  </tr>
+                      </tr>
                     </thead>
                     <tbody>
-                       <c:forEach var="rd" items="${roomdashlist}">
+                      <c:forEach var="rd" items="${roomdashlist}">
                     	  <tr>
 	                        <td>${rd.room_nm}</td>
 	                        <td>${rd.seat_in}</td>
@@ -65,14 +77,11 @@
                        </c:forEach>
                     </tbody>
                   </table>
-                  
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
-             </div><!-- col-xs-12 -->
-             
-             
-              <!-- 입실 테이블 -->
-				       <div class="col-xs-12">
+			</div>
+			
+			<div class="col-xs-12">
 			              <div class="box">
 			                <div class="box-header">
 			                    <ul class="nav nav-tabs">
@@ -180,6 +189,7 @@
 			</section>
 	 	</div><!-- content-wrapper -->
 	</div><!-- wrapper -->
+				       
 	
 	        
 	

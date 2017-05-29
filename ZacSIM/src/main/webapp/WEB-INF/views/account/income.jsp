@@ -36,13 +36,13 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1> 수입
+          <h1> 결제
             <small>(${today})</small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">회계</li>
-            <li class="active">수입</li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Home</a></li>
+            <li class="active">결제</li>
+            <li class="active">결제내역</li>
           </ol>
         </section>
 
@@ -52,7 +52,7 @@
 				<div class="col-md-12">
 					<div class="box box-danger">
 						<div class="box-header">
-							<h3 class="box-title"><b>수입 목록</b></h3>
+							<h3 class="box-title"><b>결제 내역</b></h3>
 						</div><!-- /.box-header -->
 						<form action="${pageContext.request.contextPath}/income_list_search_pro" method="post">
 							<div class="box-body">
@@ -81,6 +81,8 @@
 										<th>결제 수단</th>
 										<th>수입 금액</th>
 										<th>결제일</th>
+										<th>연장결제여부</th>
+										<th>결제취소</th>
 									</tr>
 			                    </thead>
 			                    <tbody>
@@ -91,6 +93,12 @@
 											<td>${p.pay_option}</td>
 											<td>${p.total_amount}</td>
 											<td>${p.pay_date}</td>
+											<td>${p.pay_extension}</td>
+											<td>
+												<a href="${pageContext.request.contextPath}/account/delete?pay_cd=${p.pay_cd}&member_cd=${p.member_cd}&seat_cd=${p.seat_cd}&room_cd=${p.room_cd}">
+													<button type="button" class="btn btn-danger">결제취소</button>
+												</a>
+											</td>
 										</tr>
 									</c:forEach>
 			                    </tbody>
@@ -100,6 +108,15 @@
              	</div><!-- /.col -->
  	  		</div>
         </section><!-- /.content -->
+	    <c:if test="${result eq 1}"> 
+	     <div class="col-md-6">
+	     	<div class="callout callout-success">
+		     	 결제 취소가 정상 처리되었습니다.
+		    </div>
+	     </div>
+	    </c:if>    
+     
+        
 
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
@@ -146,6 +163,8 @@
           "bAutoWidth": true
         });
       });
+      
+      
     </script> 
 </body>
 </html>
