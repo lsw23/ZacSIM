@@ -17,6 +17,14 @@ public class HeadBranchOwnerController {
 	@Autowired
 	HeadBranchOwnerDao headBranchOwnerDao;
 	
+
+	// 지점 현황
+	@RequestMapping(value="/head/branch/branch_present", method = RequestMethod.GET)
+	public String present(){
+		return "/head/branch/branch_present";
+		
+	}
+	
 	//사업자 정보 삭제
 	@RequestMapping(value="/head/branch_owner_delete_pro" , method = RequestMethod.GET)
 	public String deleteBranchOwner(@RequestParam(value="branch_owner_cd") String branch_owner_cd){
