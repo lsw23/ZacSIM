@@ -74,13 +74,6 @@
 							<c:forEach var="reply" items="${replylist}">
 							<div class="table-responsive">
 							<table class="table table-hover" style="width: 430px; height: 25px;">
-							<thead>
-							<tr>
-							<th>&nbsp;</th>
-							<th> 댓글 목록</th>
-							<th>&nbsp;</th>
-							</tr>
-							</thead>
 							<tbody>
 								<tr>
 									<th class="success"><div>&nbsp;</div>${reply.staffboard_name} <div>&nbsp;</div></th>

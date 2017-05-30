@@ -6,7 +6,7 @@
 		<!-- head -->
 		<c:import url="../module2/head.jsp"/>
 		<style>
-		  .draggable { width: 60px; height: 60px; padding: 0.5em; float: left; margin: 0 10px 10px 0; background-color: red;}
+		  .draggable {width: 80px; height: 80px;  padding: 0.5em; float: left; margin: 0 10px 10px 0; background-color: #3d9970; color:white;}
 		  #draggable, #draggable2 { margin-bottom:20px; }
 		  #draggable { cursor: n-resize; }
 		  #containment-wrapper { width: 95%; height:900px; border:2px solid #ccc; padding: 10px; }
@@ -62,13 +62,13 @@
 				<div class="col-xs-9">
 					<div id="containment-wrapper">
 						<form action="${pageContext.request.contextPath}/room/room_placement" id="col_form" method="post">
-						<c:forEach var="s" items="${seat}" end="5">
+						<c:forEach var="s" items="${seat}">
 							<div class="draggable seatdraggable ui-widget-content">
 								<input type="hidden" class="seat_left" name="seat_left">
 								<input type="hidden" class="seat_top" name="seat_top">
 								<input type="hidden" name="room_cd" value="${s.room_cd}">
-								<div><input type="hidden" name="seat_cnumber" class="seat_cnum" value="${s.seat_cnumber}">${s.seat_cnumber}</div>
-								<p></p>
+								<p><input type="hidden" name="seat_cnumber" class="seat_cnum" value="${s.seat_cnumber}">${s.seat_cnumber}</p>
+								<p>빈좌석</p>
 							</div>
 						</c:forEach>
 						</form>
@@ -85,10 +85,6 @@
 	                  </div>
 	                </div>
 	                <div class="box-body">
-	                  <span>추가(드래그 해주세요)</span>
-						<ul id="sortable">
-							<li class="ui-state-default">장식물</li>
-						</ul>
 						<button id="add_btn" type="button" class="btn btn-block btn-info btn-xs">등록</button>
 						<button id="cancel_btn" type="button" class="btn btn-block btn-danger btn-xs">취소</button>
 						
@@ -109,8 +105,8 @@
 			  $('.seatdraggable').each(function (index, item) { 
 				  var s = $(this).offset();
 				  console.log('index :' + index  + 'item :' + item + 'left : ' + s.left + 'top :' + s.top);
-				  var offsetleft =  Math.round(s.left/20)*20;
-				  var offsettop = Math.round(s.top/20)*20;
+				  var offsetleft =  Math.round(s.left/10)*10;
+				  var offsettop = Math.round(s.top/10)*10;
 				  console.log('offsetleft :' + offsetleft);
 				  console.log('offsettop :' + offsettop);
 				  
@@ -139,9 +135,6 @@
 			   } 
 		 });	
   			
-  		
-  		
-  		
 		  $('.seatdraggable').click(function(){
 		    console.log('하이');
 		    var offset = $(this).offset();

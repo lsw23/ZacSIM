@@ -16,6 +16,21 @@ public class IncomeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	//결제취소 테이블에 insert
+	public int insertCancel(Payment payment){
+		return sqlSessionTemplate.insert("com.monorella.srf.branch.income.IncomeMapper.insertCancel", payment);
+	}
+	
+	//결제 취소 row 조회
+	public Payment selectIncomeCancel(Payment payment){
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.income.IncomeMapper.selectIncomeCancel", payment);
+	}
+	
+	//결제 취소 해당 결제 코드 row 삭제
+	public int deleteIncome(Payment payment){
+		return sqlSessionTemplate.delete("com.monorella.srf.branch.income.IncomeMapper.deleteIncome" , payment);
+	}
+	
 	// 기간 수입 합계
 	public int selectIncomeSum(String startDate, String endDate, String branch_owner_cd){
 		System.out.println("IncomeDao-> SelectIncomeSum() startDate: "+startDate+", endDate:"+endDate+", branch_owner_cd: "+branch_owner_cd);

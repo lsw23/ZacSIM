@@ -15,12 +15,41 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.Payment;
+import com.monorella.srf.branch.dto.RoomDashBoard;
+import com.monorella.srf.branch.room.RoomDao;
+import com.monorella.srf.branch.scheduler.SchedulerDao;
 
 @Controller
 public class IncomeController {
 	
 	@Autowired
 	private IncomeDao incomeDao; 
+	@Autowired
+	private SchedulerDao schedulerDao;
+	@Autowired
+	private RoomDao roomDao;
+	
+	//결제 취소 처리
+	@RequestMapping(value="/account/delete" , method=RequestMethod.GET)
+	public String deleteIncome(Payment payment){
+		System.out.println(payment);
+		//결제취소할 row 조회
+		Payment paymentcancel = incomeDao.selectIncomeCancel(payment);
+		//결제취소 테이블에 insert
+		incomeDao.insertCancel(paymentcancel);
+		//결제 row 삭제
+		incomeDao.deleteIncome(payment);
+		if(paymentcancel.getPay_extension().equals("N")){
+			//결제 취소 회원, 열람석 정보 수정
+			schedulerDao.modifyEndDateMember(payment.getMember_cd());
+			//열람실 현황 수정
+			RoomDashBoard roomDashboard = roomDao.selectRoomDashBoard(payment.getRoom_cd());
+			roomDao.modifyRoomDashBoard(roomDashboard);
+			roomDao.modifySeatRoomDashBoard(roomDashboard);
+		}
+		return "redirect:/account/income?result=1";
+	}
+	
 	
 	// 수입 목록 검색
 	@RequestMapping(value="/income_list_search_pro", method=RequestMethod.POST)
@@ -68,14 +97,14 @@ public class IncomeController {
 			model.addAttribute("startDate", startDate);
 			model.addAttribute("endDate", endDate);
 			model.addAttribute("pay", pay);
-			
+
 			return "/account/income";
 		}
 	}
 	
 	// 수입 목록 폼
 	@RequestMapping(value="/account/income", method=RequestMethod.GET)
-	public String incomeForm(Model model){
+	public String incomeForm(Model model, @RequestParam(value="result", required=false)String result){
 		System.out.println("AccountController-> selectIncomeList()");
 		
 		// 오늘 날짜 및 해당 월 구하기 -----------------------------------------------------------
@@ -88,6 +117,7 @@ public class IncomeController {
 	    
 	    model.addAttribute("today", simpleToday.format(today));
 	    model.addAttribute("month", month.format(today));
+	    model.addAttribute("result", result);
 	    
 	    return "/account/income";
 	}

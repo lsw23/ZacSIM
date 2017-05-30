@@ -418,6 +418,8 @@ header, footer, aside, nav, section, article {
 																<input type="text" class="datepicker inpType" name="searchEndDate" id="searchEndDate"> 
 																<a href="#none" class="btncalendar dateclick">달력</a>
 															</span>
+															<button id="staffbutton" type="submit" class="btn btn-default">기간검색</button>
+															<button type="reset" class="btn btn-default">초기화</button>
 														</div>
 													</td>
 												</tr>
@@ -426,9 +428,7 @@ header, footer, aside, nav, section, article {
 									</div>
 								</div>
 								<div class="box-footer">
-									<a href="${pageContext.request.contextPath}/expense/expense_form" class="btn btn-default">지출내역추가</a>
-									<button id="staffbutton" type="submit" class="btn btn-default">기간검색</button>
-									<button type="reset" class="btn btn-default">초기화</button>
+									<a href="${pageContext.request.contextPath}/expense/expense_form" class="btn btn-default">지출내역추가</a>									
 								</div>
 							</form>
 						</div>

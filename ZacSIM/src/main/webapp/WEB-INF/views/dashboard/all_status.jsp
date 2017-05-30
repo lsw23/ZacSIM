@@ -32,13 +32,13 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1> 통계
+          <h1> 지점 전체 현황
             <small>(${today})</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Dashboard</li>
-            <li class="active">통계</li>
+            <li class="active">${sessionScope.branchOwner.branch_nm} 전체 현황</li>
           </ol>
         </section>
 
@@ -50,7 +50,7 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>${MemberNo}</h3>
+                  <h3>${MemberNo} <span style="color: white; font-size: 20px;">명</span></h3>
                   <p>총 회원</p>
                 </div>
                 <div class="icon">
@@ -63,7 +63,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>${useMemberNo}</h3>
+                  <h3>${useMemberNo} <span style="color: white; font-size: 20px;">석</span></h3>
                   <p>이용중 열람석</p>
                 </div>
                 <div class="icon">
@@ -76,7 +76,7 @@
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>${MemberNo}</h3>
+                  <h3>${totalIncomeNum-totalExpanseNum} <span style="color: white; font-size: 20px;">원</span></h3>
                   <p><b>${month}월</b> 순 수익</p>
                 </div>
                 <div class="icon">
@@ -130,7 +130,7 @@
 	               <span class="info-box-icon bg-yellow"><i class="ion ion-happy-outline"></i></span>
 	               <div class="info-box-content">
 	                 <h3 class="info-box-text"><b>${month}월</b> 수입</h3>
-	                 <span class="info-box-number"># <small>원</small></span>
+	                 <span class="info-box-number">${totalIncomeNum} <small>원</small></span>
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
@@ -139,7 +139,7 @@
 	               <span class="info-box-icon bg-yellow"><i class="ion ion-sad-outline"></i></span>
 	               <div class="info-box-content">
 	                 <h3 class="info-box-text"><b>${month}월</b> 지출</h3>
-	                 <span class="info-box-number"># <small>원</small></span>
+	                 <span class="info-box-number">${totalExpanseNum} <small>원</small></span>
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->

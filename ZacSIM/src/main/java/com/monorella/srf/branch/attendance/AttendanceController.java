@@ -38,7 +38,7 @@ public class AttendanceController {
 			//입실 여부 체크
 			String seat_state = attendanceDao.selectSeatState(member);
 			System.out.println("seat_state :" + seat_state);
-			if(seat_state.equals("빈좌석") || seat_state.equals("퇴실")){
+			if(seat_state.equals("배치") || seat_state.equals("퇴실")){
 				//member seat_state 변경
 				seat_state = "입실";
 				//입실시간 입력

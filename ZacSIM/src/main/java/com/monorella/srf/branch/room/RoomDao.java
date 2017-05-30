@@ -19,6 +19,11 @@ public class RoomDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	//열람석 MAX 번호 조회
+	public int selectMaxCnumber(Room room){
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.room.RoomMapper.selectMaxCnumber", room);
+	}
+	
 	//자리이동(이동후 좌석 지정 Y)
 	public int modifySeatCdAfter(Seat seatcd){
 		return sqlSessionTemplate.update("com.monorella.srf.branch.room.RoomMapper.modifySeatCdAfter", seatcd);

@@ -44,7 +44,8 @@
 		, expense_amount
 		, branch_name
 		, expense_total
-		, expense_date)	
+		, expense_date
+		, expense_month)	
 	VALUES(
 		#{branch_owner_cd}
 		, #{expense_price}
@@ -53,6 +54,7 @@
 		, #{branch_name}
 		, #{expense_total}
 		, #{expense_date}
+		, DATE_FORMAT(expense_date,'%m')
 	)
 	</insert>
 </mapper>

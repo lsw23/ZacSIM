@@ -19,7 +19,7 @@
 </script>
 <script>
 $(document).ready(function() {
-    $('member_nm').event(function() {
+    $('#member_nm').event(function() {
         $(this).effect('speed');
     });
 });
