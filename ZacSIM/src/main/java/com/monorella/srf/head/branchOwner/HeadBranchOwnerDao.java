@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import com.monorella.srf.head.dto.HeadBranchOwner;
 
 @Repository
@@ -13,6 +14,12 @@ public class HeadBranchOwnerDao {
 
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate; 
+	
+	// 지점현황 리스트 메서드 
+	public List<HeadBranchOwner> selectPresentList(){
+		System.out.println("HeadBranchOwnerDao->selectPresentList");
+		return sqlSessionTemplate.selectList("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.selectPresentList");	
+	}
 	
 	// 사업자 삭제시 insert_num_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제
 	public int deleteAgeGroupList(String branch_owner_cd){

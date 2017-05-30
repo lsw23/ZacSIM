@@ -27,6 +27,7 @@ public class PaymentController {
 	@RequestMapping(value="/payment/extension_pro", method = RequestMethod.POST)
 	public String extensionEndDatePro(Payment payment){
 		System.out.println("PaymentController /n" + payment);
+		payment.setPay_extension("Y");
 		int result = paymentDao.insertPayment(payment);
 		if(result == 1){
 			System.out.println("기간연장 결제처리 성공 ");
@@ -82,16 +83,12 @@ public class PaymentController {
 	public String paymentpro(Payment payment, Member member, Model model){
 		System.out.println("paymentpro 요청");
 		//결제 입력
+		payment.setPay_extension("N");
 		int result = paymentDao.insertPayment(payment);
 		System.out.println("insertPayment 요청");
 		if(result == 1){
 			//성공시(열람석 지정 'Y'로)
-			paymentDao.modifyPaymentSeat(payment);
-			//결제코드 조회
-			
-			int resulting = paymentDao.paycddetail(payment);
-			System.out.println("resulting :" + resulting);			
-			payment.setPay_cd(resulting);			
+			paymentDao.modifyPaymentSeat(payment);	
 			//출결번호 테이블 insert
 			paymentDao.insertPaymentinout(payment);
 			//멤버테이블 요일 update

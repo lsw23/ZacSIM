@@ -20,9 +20,11 @@ public class HeadBranchOwnerController {
 
 	// 지점 현황
 	@RequestMapping(value="/head/branch/branch_present", method = RequestMethod.GET)
-	public String present(){
-		return "/head/branch/branch_present";
-		
+	public String selectpresentList(Model model){
+		System.out.println("HeadBranchOwnerController-> selectpresentList()");	
+		List<HeadBranchOwner> list = headBranchOwnerDao.selectPresentList();
+		model.addAttribute("list", list);
+		return "/head/branch/branch_present";		
 	}
 	
 	//사업자 정보 삭제

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.PayList;
 import com.monorella.srf.branch.dto.Room;
 import com.monorella.srf.branch.dto.RoomDashBoard;
 import com.monorella.srf.branch.dto.Seat;
@@ -89,10 +90,23 @@ public class RoomController {
 		System.out.println("room_dashboard()");
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 		List<RoomDashBoard> roomdashlist = roomDao.selectRoomDashBoardNow(branchOwner);
+		ArrayList<PayList> paylist = new ArrayList<PayList>();
+		int paynumber = 0;
+		
 		for(RoomDashBoard rl : roomdashlist){
-			System.out.println(rl);
+			PayList pay = new PayList();
+			//결제률 구하기
+			double percentage = ((double)rl.getPay_seat()/rl.getNotpay_seat())*100;
+			int percent = (int)percentage;
+			//자동증가
+			paynumber += 1; 
+			pay.setRoom_nm(rl.getRoom_nm());
+			pay.setPayment_percentage(percent);
+			pay.setPaynumber(paynumber);
+			paylist.add(pay);
 		}
 		model.addAttribute("roomdashlist", roomdashlist);
+		model.addAttribute("paylist", paylist);
 		return "room/room_dashboard";
 	}
 	
@@ -223,11 +237,13 @@ public class RoomController {
 			//열람석 등록
 			ArrayList<Seat> seatli = new ArrayList<Seat>();
 			//열람석 총 수 만큼 반복문
+			
 			for(int i=0; i<room.getSeat_num(); i++){
+				int cnumber = roomDao.selectMaxCnumber(room);
 				Seat seat = new Seat();
 				seat.setBranch_owner_cd(room.getBranch_owner_cd());
 				seat.setRoom_cd(room.getRoom_cd());
-				seat.setSeat_cnumber(i+1);
+				seat.setSeat_cnumber(cnumber+1);
 				roomDao.insertSeat(seat);
 				seatli.add(seat);
 			}

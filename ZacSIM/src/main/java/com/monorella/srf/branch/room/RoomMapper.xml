@@ -5,6 +5,11 @@
   
   <mapper namespace="com.monorella.srf.branch.room.RoomMapper">
   	
+  	<!-- 열람석 MAX번호 조회 -->
+  	<select id="selectMaxCnumber" parameterType="com.monorella.srf.branch.dto.Room" resultType="int">
+  		SELECT MAX(seat_cnumber) FROM branch_saet_tb WHERE branch_owner_cd = #{branch_owner_cd} 
+  	</select>
+  	
   	<!-- 열람실 총코드 수 조회 -->
   	<select id="selectCountRoomCd" resultType="int">
   		SELECT COUNT(room_cd) FROM branch_room_tb
@@ -102,7 +107,7 @@
   			,(SELECT COUNT(seat_appoint) FROM branch_saet_tb WHERE seat_appoint = 'N' AND room_cd = #{room_cd}) AS notpay_seat
   			,(SELECT COUNT(colseat_state) FROM branch_saet_tb WHERE colseat_state = '입실' AND room_cd = #{room_cd}) AS seat_in
   			,(SELECT COUNT(colseat_state) FROM branch_saet_tb WHERE colseat_state = '퇴실' AND room_cd = #{room_cd}) AS seat_out
-  			,(SELECT COUNT(colseat_state) FROM branch_saet_tb WHERE colseat_state = '입실' AND room_cd = #{room_cd} OR colseat_state = '퇴실' AND room_cd = #{room_cd}) AS room_personnel
+  			,(SELECT COUNT(colseat_state) FROM branch_saet_tb WHERE colseat_state = '입실' AND room_cd = #{room_cd} OR colseat_state = '배치' AND room_cd = #{room_cd}) AS room_personnel
 		FROM branch_saet_tb
 		WHERE room_cd = #{room_cd} LIMIT 1
   	</select>
