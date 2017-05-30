@@ -11,6 +11,7 @@ public class Expense {
 	private String expense_date;			//지출 날짜
 	private String expense_month;			//지출월
 	private int expense_total; 				//지출합계
+	
 	public int getExpense_cd() {
 		return expense_cd;
 	}

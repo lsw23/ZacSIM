@@ -71,6 +71,7 @@
 			   </div>
 			   <div class="col-sm-2">
 			   		<button type="button" id="exitBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+			   		<button type="reset" id="backBtn" class="btn btn-sm btn-default"><i class="fa fa-refresh fa-spin"></i></button>
 			   </div>
 			   </div>
 			   </div>
@@ -106,6 +107,7 @@
 	            <div class="box box-primary">
                 <div class="box-header">
                   <h3 class="box-title">독서실 회원 입퇴실 리스트</h3>
+                  <a class="btn btn-sm btn-default" href="${pageContext.request.contextPath}/member/member_exit"><i class="fa fa-refresh fa-spin"></i></a>
                   <div class="box-tools">
                 </div><!-- /.box-header -->
 				<div class="box-body table-responsive no-padding">
@@ -143,6 +145,27 @@
 	<script>
 		$('#member_menu').addClass('active');
 		$('#member03').addClass('active');
-	</script>			
+	</script>
+	
+	<script>
+	
+  var i = 0;
+  $("#member.member_nm").mouseover(function() {
+    i += 1;
+    $(this).find("span").text( "mouse over x " + i );
+  }).mouseout(function(){
+    $(this).find("span").text("mouse out ");
+  });
+
+  var n = 0;
+  $("#n.member_nm").mouseenter(function() {
+    n += 1;
+    $(this).find("span").text( "mouse enter x " + n );
+  }).mouseleave(function() {
+    $(this).find("span").text("mouse leave");
+  });
+
+</script>
+			
 	</body>
 </html>            

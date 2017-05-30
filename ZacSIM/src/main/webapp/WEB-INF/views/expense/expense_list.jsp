@@ -434,8 +434,7 @@ header, footer, aside, nav, section, article {
 							<div class="box-body table-responsive no-padding">
 								<table class="table ">
 									<thead>
-										<tr>
-											<th>지출 번호</th>
+										<tr>										
 											<th>지점 대표코드</th>
 											<th>지출 내역</th>
 											<th>지출 금액</th>
@@ -446,8 +445,7 @@ header, footer, aside, nav, section, article {
 									<tbody>
 
 										<c:forEach var="s" items="${list}">
-											<tr>
-												<td>${s.expense_cd}</td>
+											<tr>												
 												<td>${s.branch_owner_cd}</td>
 												<td>${s.expense_breakdown}</td>
 												<td>${s.expense_total}</td>
