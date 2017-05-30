@@ -17,6 +17,13 @@
 		});
 	});
 </script>
+<script>
+$(document).ready(function() {
+    $('member_nm').event(function() {
+        $(this).effect('speed');
+    });
+});
+</script>
     <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
 

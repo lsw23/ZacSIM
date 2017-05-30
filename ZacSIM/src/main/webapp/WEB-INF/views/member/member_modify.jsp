@@ -63,7 +63,7 @@
 		  </section>
 		  
 		  <section class="content">
-			
+		  
 			<div class="row">
             <div class="col-md-12">
               <div class="box box-primary">
@@ -76,10 +76,10 @@
 							<label for="exampleInputmembercd">독서실회원코드</label>
 							<input type="text" class="form-control" value="${member.member_cd}" id="member_cd" name="member_cd" readonly>
 						 </div>
-						<div class="form-group">
-							<label class="control-label" for="inputLarge">지점 대표코드</label>
-							<input type="text" class="form-control" value="${sessionScope.branchOwner.branch_owner_cd}" id="branch_owner_cd" name="branch_owner_cd" readonly>
-						</div>
+						 <div class="form-group">
+							<label for="exampleInputmembercd">출결번호</label>
+							<input type="text" class="form-control" value="${member.inout_num}" id="member_cd" name="member_cd" readonly>
+						 </div>
 						<div class="form-group">
 							<label class="control-label" for="inputLarge">이름</label>
 							<input type="text" class="form-control" value="${member.member_nm}" id="member_nm" name="member_nm" placeholder="이름을 입력해주세요">
