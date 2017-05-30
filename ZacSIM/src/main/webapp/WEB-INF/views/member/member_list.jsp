@@ -72,7 +72,7 @@
 			   </div>
 			   </div>
 			</div>
-			</form> 
+			</form>
                     
                   </div>
                 </div><!-- /.box-header -->

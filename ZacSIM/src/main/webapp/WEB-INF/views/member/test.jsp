@@ -1,45 +1,46 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>hover demo</title>
   <style>
-  ul {
-    margin-left: 20px;
-    color: blue;
-  }
-  li {
-    cursor: default;
-  }
-  span {
-    color: red;
-  }
-  </style>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+div.out { width:40%; height:120px; margin:0 15px;
+          background-color:#D6EDFC; float:left; }
+div.in {  width:60%; height:60%; 
+          background-color:#FFCC00; margin:10px auto; }
+p { line-height:1em; margin:0; padding:0; }
+</style>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
- 
-<ul>
-  <li>Milk</li>
-  <li>Bread</li>
-  <li class="fade">Chips</li>
-  <li class="fade">Socks</li>
-</ul>
- 
+  
+<div class="out overout">
+  <span>move your mouse</span>
+  <div class="in">
+  </div>
+</div>
+
+<div class="out enterleave">
+  <span>move your mouse</span>
+  <div class="in">
+  </div>
+</div>
+
 <script>
-$( "li" ).hover(
-  function() {
-    $( this ).append( $( "<span> ***</span>" ) );
-  }, function() {
-    $( this ).find( "span:last" ).remove();
-  }
-);
- 
-$( "li.fade" ).hover(function() {
-  $( this ).fadeOut( 100 );
-  $( this ).fadeIn( 500 );
-});
+  var i = 0;
+  $("member").mouseover(function() {
+    i += 1;
+    $(this).find("span").text( "mouse over x " + i );
+  }).mouseout(function(){
+    $(this).find("span").text("mouse out ");
+  });
+
+  var n = 0;
+  $("seattime").mouseenter(function() {
+    n += 1;
+    $(this).find("span").text( "mouse enter x " + n );
+  }).mouseleave(function() {
+    $(this).find("span").text("mouse leave");
+  });
 </script>
- 
+
 </body>
 </html>
