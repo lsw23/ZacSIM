@@ -55,28 +55,8 @@
               <div class="box box-primary">
                 <div class="box-header">
                   <h3 class="box-title">독서실 회원 검색</h3>
-                  <div class="box-tools">
-                </div><!-- /.box-header -->
-
-                <!-- form start -->
-                <form id="exitMember" action="${pageContext.request.contextPath}/member/member_exe" method="post">
-                  <div class="form-group">
-			 	  <div class="row">
-			  		<div class="col-sm-4">
-                      <select name="so" class="form-control" id="sel1">
-						<option value="member_nm">이름</option>
-					  </select>
-			 	 	 </div>
-			   <div class="col-sm-6">
-			   		<input name="sv" id="searchForm" type="text" class="form-control" placeholder="검색을 입력하시오."/>
-			   </div>
-			   <div class="col-sm-2">
-			   		<button type="button" id="searchBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-			   </div>
-			   </div>
-			   </div>
-			   </form>
-			</div>
+			   		<a class="btn btn-sm btn-default" href="${pageContext.request.contextPath}/member/member_exit"><i class="fa fa-undo fa-spin"></i></a>
+                </div>  
 			
 			<div class="box-body table-responsive no-padding">
                   <table class="table">
@@ -136,5 +116,6 @@
 				 </section>
 				</div>
 				</div>
+
 	</body>
 </html>     
