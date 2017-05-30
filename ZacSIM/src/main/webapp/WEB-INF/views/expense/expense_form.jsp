@@ -58,7 +58,7 @@
 									<div class="form-group">
 										<label for="exampleInputFile">지출 수량</label> 
 										<input type="button" id="minus" value=" - "> 
-										<input type="text" id="expense_amount" value="1" size="3"> 
+										<input type="text" id="expense_amount" value="0" size="3"> 
 										<input type="button" id="plus" value=" + "> 
 									</div>
 									<div class="form-group">
@@ -86,9 +86,9 @@
 										console.log('stat : ' + stat);
 										var num = stat*1;
 										num--;
-										if (num <= 0) {
+										if (num < 0) {
 											alert('더이상 줄일수 없습니다.');
-											num = 1;
+											num = 0;
 										}
 										var expense_price = $('#expense_price').val();
 										expense_price *=1;
