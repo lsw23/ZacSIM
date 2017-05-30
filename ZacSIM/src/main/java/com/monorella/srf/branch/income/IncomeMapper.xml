@@ -2,6 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.monorella.srf.branch.income.IncomeMapper">
+	
+	<!-- 결제취소테이블 insert -->
+	<insert id="insertCancel" parameterType="com.monorella.srf.branch.dto.Payment">
+		INSERT INTO branch_cancel_tb(
+			 branch_owner_cd
+			, room_cd
+			, seat_cd
+			, member_cd
+			, total_amount
+			, pay_date
+			, pay_month
+			, pay_option)
+		VALUES (
+			 #{branch_owner_cd}
+			, #{room_cd}
+			, #{seat_cd}
+			, #{member_cd}
+			, #{total_amount}
+			, #{pay_date}
+			, #{pay_month}
+			, #{pay_option})
+	</insert>
+	
+	<!-- 결제취소 row 조회 -->
+	<select id="selectIncomeCancel" parameterType="com.monorella.srf.branch.dto.Payment" resultType="com.monorella.srf.branch.dto.Payment">
+		SELECT  
+			pay_cd
+			,  branch_owner_cd
+			,  room_cd
+			,  seat_cd
+			,  member_cd
+			,  total_amount
+			,  pay_date
+			,  pay_month
+			,  pay_option
+			,  pay_extension 
+		FROM branch_pay_tb
+		WHERE pay_cd = #{pay_cd}
+	</select>
+	
+	<!-- 결제취소 결제 tb 삭제 -->
+	<delete id="deleteIncome" parameterType="com.monorella.srf.branch.dto.Payment">
+		DELETE FROM branch_pay_tb WHERE pay_cd=#{pay_cd}
+	</delete>
+	
 	<select id="selectIncomeSum" parameterType="java.util.Map" resultType="int">
 		<![CDATA[ SELECT SUM(bp.total_amount) AS total
 				FROM branch_pay_tb bp
@@ -11,18 +56,25 @@
 				AND bp.pay_date <= #{endDate}
 				AND bp.branch_owner_cd = #{branch_owner_cd};]]>
 	</select>
-
+	
 	<select id="selectIncomeList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Payment">
 		<![CDATA[ SELECT bm.member_nm AS member_nm
-					, bp.total_amount AS total_amount
-					, bp.pay_date AS pay_date
-					, bp.pay_option AS pay_option
+					, bp.pay_cd
+					, bp.branch_owner_cd
+					, bp.room_cd
+					, bp.seat_cd
+					, bp.member_cd
+					, bp.total_amount 
+					, bp.pay_date 
+					, bp.pay_month
+					, bp.pay_option
+					, bp.pay_extension 
 				FROM branch_pay_tb bp
 				INNER JOIN branch_member_tb bm
 				ON bp.member_cd = bm.member_cd
 				WHERE bp.pay_date >= #{startDate}
 				AND bp.pay_date <= #{endDate}
 				AND bp.branch_owner_cd = #{branch_owner_cd}
-				ORDER BY bp.pay_date ASC; ]]>
+				ORDER BY bp.pay_date DESC; ]]>
 	</select>
 </mapper>

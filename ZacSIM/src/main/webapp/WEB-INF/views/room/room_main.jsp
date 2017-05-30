@@ -108,8 +108,8 @@
 					 <input type="hidden" name="chk" class="mcd" class="mcdc" value="${s.member_cd}">
 					 <input type="hidden" name="chk" class="rcd" value="${s.room_cd}">	
 					 <button class="btn bg-olive btn-flat margin seat_btn" id="scd" value="${s.seat_cd}">	
-						<p>열람석${s.seat_cnumber}</p>
-							<c:choose>
+						<p>${s.seat_cnumber}</p>
+							<c:choose> 
 							 <c:when test="${s.member_nm eq null}">
 								<p class="windetail">빈좌석</p>
 							 </c:when>

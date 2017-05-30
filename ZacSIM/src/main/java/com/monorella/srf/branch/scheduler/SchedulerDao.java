@@ -12,6 +12,11 @@ import com.monorella.srf.branch.dto.Member;
 public class SchedulerDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	//만료일 지난 회원 수정
+	public int modifyEndDateMember(String member_cd){
+		return sqlSessionTemplate.update("com.monorella.srf.branch.scheduler.SchedulerMapper.modifyEndDateMember", member_cd);
+	}
+	
 	//만료일 지난 회원 조회
 	public List<Member> selectEndDate(){
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.scheduler.SchedulerMapper.selectEndDate");

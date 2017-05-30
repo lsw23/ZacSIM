@@ -13,6 +13,14 @@ public class Payment {
 	private String member_end_date; //회원 기간 만료일
 	private String pay_option; //결제 종류
 	private String member_nm; //회원 이름
+	private String pay_extension; //연장 결제 여부
+
+	public String getPay_extension() {
+		return pay_extension;
+	}
+	public void setPay_extension(String pay_extension) {
+		this.pay_extension = pay_extension;
+	}
 	public int getPay_cd() {
 		return pay_cd;
 	}
@@ -85,13 +93,12 @@ public class Payment {
 	public void setMember_nm(String member_nm) {
 		this.member_nm = member_nm;
 	}
-	
 	@Override
 	public String toString() {
 		return "Payment [pay_cd=" + pay_cd + ", branch_owner_cd=" + branch_owner_cd + ", room_cd=" + room_cd
 				+ ", seat_cd=" + seat_cd + ", member_cd=" + member_cd + ", total_amount=" + total_amount + ", pay_date="
 				+ pay_date + ", pay_month=" + pay_month + ", member_regi_date=" + member_regi_date
 				+ ", member_end_date=" + member_end_date + ", pay_option=" + pay_option + ", member_nm=" + member_nm
-				+ "]";
+				+ ", pay_extension=" + pay_extension + "]";
 	}
 }

@@ -5,56 +5,13 @@
 <head>
 <!-- 헤드 -->
 <c:import url="../module2/head.jsp"/>
-
-<style>
-.column {
-	width: 170px;
-	float: left;
-	padding-bottom: 100px;
-}
-
-.portlet {
-	margin: 0 1em 1em 0;
-	padding: 0.3em;
-	border: 1px solid;
-}
-
-.portlet-header {
-	background-color: orange;
-	padding: 0.2em 0.3em;
-	margin-bottom: 0.5em;
-	position: relative;
-}
-
-.portlet-toggle {
-	position: absolute;
-	top: 50%;
-	right: 0;
-	margin-top: -8px;
-}
-
-.portlet-content {
-	padding: 0.4em;
-}
-
-.portlet-placeholder {
-	border: 1px dotted black;
-	margin: 0 1em 1em 0;
-	height: 50px;
-}
-
-.ui-state-default {
-	border: 1px dotted;
-}
-
-#sortable {
-	inline: blokc;
-}
-
-.space{
-	background-color : black;
-}
-</style>
+	<style>
+	  .draggable { width: 80px; height: 80px; padding: 0.5em; float: left; margin: 0 10px 10px 0; background-color: #3d9970; color:white;}
+	  #draggable, #draggable2 { margin-bottom:20px; }
+	  #draggable { cursor: n-resize; }
+	  #containment-wrapper { width: 95%; height:900px; border:2px solid #ccc; padding: 10px; }
+	  h3 { clear: left; }
+	</style>
 </head>
 <body>
 <body class="skin-blue">
@@ -79,35 +36,69 @@
 	  </section> 
 	  	
 	<!-- Main content -->
-      <section class="content">
-		<div class="row">
-            <div class="col-xs-12">
-            	<div class="col-xs-9">
-            		<c:forEach var="s" items="${seatlist}">
-	            		 <div class="column">
-							<div class="portlet">
-							 	<input type="hidden" class="column_i" id="seat_row" name="seat_row">
-								<input type="hidden" class="column_num" id="seat_col" name="seat_col">
-								<div class="portlet-header "><input type="hidden" name="seat_cnumber" class="seat_cnum" value="${s.seat_cnumber}">${s.seat_cnumber}</div>
-								<div class="portlet-content"><input type="text" value="${s.member_nm}, ${s.seat_row}, ${s.seat_col}" readonly></div>
+       <section class="content">
+			<div class="row">
+	            <div class="col-xs-12">
+	            <div class='color-palette-set'>
+	               <div class='bg-orange disabled color-palette'>
+	               	 <h1>
+		               	<span>열람실 ${room.room_nm} 배치도</span>
+	               	</h1>
+	               </div>
+	             </div><!-- col-xs-12 -->  
+	             </div>
+					<h1></h1>
+				<div class="col-xs-9">
+					<div id="containment-wrapper">
+						<form action="${pageContext.request.contextPath}/room/room_placement" id="col_form" method="post">
+						<c:forEach var="s" items="${seatlist}">
+							<div class="draggable seatdraggable ui-widget-content">
+								<input type="hidden" class="seat_left" name="seat_left" value="${s.seat_col}">
+								<input type="hidden" class="seat_top" name="seat_top" value="${s.seat_row}">
+								<input type="hidden" name="room_cd" value="${s.room_cd}">								
+								<div><input type="hidden" name="seat_cnumber" class="seat_cnum" value="${s.seat_cnumber}">${s.seat_cnumber}</div>
+							<c:if test="${s.member_nm != null}">
+								<p class="member_nm">${s.member_nm}</p>
+							</c:if>
 							</div>
-						</div> 
-					</c:forEach>
-					<%-- 
-						<div>
-							${s.seat_cnumber}<br/>
-							${s.seat_row}<br/>
-							${s.seat_col}<br/>
-							${s.member_nm}<br/>
-						</div> 
-					--%>
+						</c:forEach>
+						</form>
+					</div>
 				</div>
-            </div><!-- col-xs-12 -->
-        </div><!-- row -->
-      </section><!-- content -->
+				
+				<div class="col-xs-3">
+				<div style="clear: both; width: 200px;">
+				
+				<div class="box box-solid box-warning">
+	                <div class="box-header">
+	                  <h3 class="box-title">설정</h3>
+	                  <div class="box-tools right">
+	                  </div>
+	                </div>
+	                <div class="box-body">
+						<button id="add_btn" type="button" class="btn btn-block btn-info btn-xs">수정</button>
+						<button id="cancel_btn" type="button" class="btn btn-block btn-danger btn-xs">취소</button>
+	                </div><!-- /.box-body -->
+	              </div><!-- /.box -->
+				
+				</div>
+				</div>
+			</div><!-- row -->
+		</section><!-- content -->
       
       </div><!--content-wrapper  -->
    </div><!-- wrapper -->
 	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		$('.seatdraggable').each(function(index, item){
+			var seatleft = $(this).find('.seat_left').val();
+			var seattop = $(this).find('.seat_top').val();
+			console.log('seatleft :' + seatleft + 'seattop :' + seattop);
+			
+			$(this).offset({top:seattop, left:seatleft});
+		});
+		
+		$('.member_nm').parent().css('background-color', '#84C8DC');
+	</script>
 </body>
 </html>

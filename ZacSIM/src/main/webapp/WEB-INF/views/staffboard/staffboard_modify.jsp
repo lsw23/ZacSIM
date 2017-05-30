@@ -4,30 +4,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- <!-- jquery를 사용하기위한 CDN주소
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-
-<!-- <script>
-    $(document).ready(function(){
-        $('#modifyButton').click(function(){
-            if($('#boardPw').val().length <4) {
-                alert('boardPw는 4자이상 이어야 합니다');
-                $('#boardPw').focus();
-            } else if($('#boardTitle').val()=='') {
-                alert('boardTitle을 입력하세요');
-                $('#boardTitle').focus();
-            } else if($('#boardContent').val()=='') {
-                alert('boardContent을 입력하세요');
-                $('#boardContent').focus();
-            } else if($('#boardUser').val()=='') {
-                alert('boardUser을 입력하세요');
-                $('#boardUser').focus();
-            } else {
-                $('#modifyForm').submit();
-            }
-        });
-    });
-</script> -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	//제이쿼리 사용
+	$(document).ready(function(){
+		//alert('jquery test');
+		/* 입력폼 유효성 관련 요구사항
+		1. 모든 폼은 공백 또는 "" 문자는 입력되면 안된다.
+		2. 비밀번호는 4자이상 입력하여야 한다. */
+		$('#staffboard_button').click(function(){
+			if($('#staffboard_pw').val.length >3){
+				alert('패스워드는 4자이상 이어야 합니다');
+				$('#staffboard_pw').focus();
+			}else if($('#staffboard_title').val()==''){
+				alert('제목을 입력하세요');
+				$('#staffboard_title').focus();
+			}else if($('#staffboard_content').val()==''){
+				alert('내용을 입력하세요');
+				$('#staffboard_content').focus();
+			}else if($('staff_name').val()==''){
+				alert('이름을 입력하세요');
+				$('#staff_name').focus();
+			}else{
+				$('#addForm').submit();
+			}	
+		});
+	});
+</script> 
 <!-- 헤드 -->
 	<c:import url="../module2/head.jsp"/>
 	<!-- JS -->
@@ -55,7 +58,7 @@
 		  </section>
 <div class="container">
     <h1>공지사항 수정</h1> 
-    <form class="form-horizontal" action="${pageContext.request.contextPath}/staffboard/staffboard_modify_pro" method="post">
+    <form id="addForm" class="form-horizontal" action="${pageContext.request.contextPath}/staffboard/staffboard_modify_pro" method="post">
 		
 		 <div class="form-group">staffboard_no :
             <input class="form-control" name="staffboard_no" value="${staffboard.staffboard_no}" type="text" readonly="readonly"/>
@@ -73,7 +76,7 @@
         </div>
        
           <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">글입력</button>
+                    <button id="staffboard_button" type="submit" class="btn btn-primary">글입력</button>
                     <button type="reset" class="btn btn-primary">초기화</button>
             <a class="btn btn-default" href="${pageContext.request.contextPath}/staffboard/staffboard_list">글목록</a>
         </div>

@@ -13,25 +13,35 @@
 
 <script>
     $(document).ready(function(){
-        $('#modifyButton').click(function(){
-            if($('#boardPw').val().length <4) {
-                alert('boardPw는 4자이상 이어야 합니다');
-                $('#boardPw').focus();
-            } else if($('#boardTitle').val()=='') {
-                alert('boardTitle을 입력하세요');
-                $('#boardTitle').focus();
-            } else if($('#boardContent').val()=='') {
-                alert('boardContent을 입력하세요');
-                $('#boardContent').focus();
-            } else if($('#boardUser').val()=='') {
-                alert('boardUser을 입력하세요');
-                $('#boardUser').focus();
-            } else {
-                $('#modifyForm').submit();
-            }
-        });
-    });
-</script>
+    	$('#staffbutton').click(function(){
+			if($('#staff_id').val()==''){
+				alert('아이디를 입력하세요');	
+				$('#staff_id').focus();
+			}else if($('#staff_pw').val()==''){
+				alert('비밀번호를 입력하세요');
+				$('#staff_pw').focus();
+			}else if($('#staff_pw').val().length <4){
+				alert('비밀번호는 4자이상 이어야 합니다');
+				$('#staff_pw').focus();
+			}else if($('#staff_name').val()==''){
+				alert('이름을 입력하세요');
+				$('#staff_name').focus();
+			}else if($('#staff_tel').val()==''){
+				alert('전화번호를 입력하세요');
+				$('#staff_tel').focus();
+			}else if($('#staff_addr').val()==''){
+				alert('주소를 입력하세요');
+				$('#staff_addr').focus();
+			}else if($('#staff_detail_addr').val()==''){
+				alert('상세주소를 입력하세요');
+				$('#staff_detail_addr').focus();
+			}else{
+				$('#addForm').submit();
+			}	
+		});
+	});
+</script> 
+
 
 </head>
  <body class="skin-blue">
@@ -65,7 +75,7 @@
                   <h3 class="box-title">직원 등록</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" action="${pageContext.request.contextPath}/staff/staff_modify" method="post">
+                <form id="addForm" role="form" action="${pageContext.request.contextPath}/staff/staff_modify" method="post">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="exampleInputstaffid">직원아이디</label>
@@ -73,14 +83,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">지점 대표코드</label>
-                       <SELECT class="form-control" name="branch_owner_cd" id="branch_owner_cd" > 
-					     <option value="B0010" selected>&nbsp;</option> 
-					     <option value="B0011">B011</option> 
-					     <option value="B0016">B016</option> 
-					     <option value="B0017">B017</option> 
-					     <option value="B0018">B018</option> 
-					     <option value="B0019">B019</option> 
-					    </SELECT>
+                      <input type="text" class="form-control" name="branch_owner_cd" value="${sessionScope.branchOwner.branch_owner_cd}" readonly/>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputFile">직원 비밀번호</label>
@@ -105,7 +108,7 @@
                   </div><!-- /.box-body -->
 
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">글수정</button>
+                    <button id="staffbutton" type="button" class="btn btn-primary">글수정</button>
                     <button type="reset" class="btn btn-primary">초기화</button>
                     <a class="btn btn-default" href="${pageContext.request.contextPath}/staff/staff_list">글목록</a>
                   </div>
