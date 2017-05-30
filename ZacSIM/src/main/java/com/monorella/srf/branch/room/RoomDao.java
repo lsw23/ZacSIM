@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.EndDateList;
 import com.monorella.srf.branch.dto.Room;
 import com.monorella.srf.branch.dto.RoomDashBoard;
 import com.monorella.srf.branch.dto.Seat;
@@ -18,6 +19,22 @@ public class RoomDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	//만료예정자 조회
+	public List<EndDateList> selectMemberEndDate(BranchOwner branchOwner, int dateNum){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("branch_owner_cd", branchOwner.getBranch_owner_cd());
+		map.put("dateNum", dateNum);
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selectMemberEndDate", map);
+	}
+	
+	//열람실별 만료예정자 수 전체조회
+	public List<EndDateList> selectCountEndDate(BranchOwner branchOwner, int dateNum){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("branch_owner_cd", branchOwner.getBranch_owner_cd());
+		map.put("dateNum", dateNum);
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.room.RoomMapper.selectCountEndDate", map);
+	}
 	
 	//열람석 MAX 번호 조회
 	public int selectMaxCnumber(Room room){

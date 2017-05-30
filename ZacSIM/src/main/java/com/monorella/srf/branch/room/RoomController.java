@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.EndDateList;
+import com.monorella.srf.branch.dto.PayList;
 import com.monorella.srf.branch.dto.Room;
 import com.monorella.srf.branch.dto.RoomDashBoard;
 import com.monorella.srf.branch.dto.Seat;
@@ -27,6 +28,20 @@ import com.monorella.srf.branch.dto.SeatRowCol;
 public class RoomController {
 	@Autowired
 	private RoomDao roomDao;
+	
+	//기간 만료예정
+	@RequestMapping(value="room/member_period", method = RequestMethod.GET)
+	public String memberPeriod(@RequestParam(value="dateNum",required=false, defaultValue="1")int dateNum
+								,  HttpSession session
+								,  Model model){
+		System.out.println("RoomController memberPeriod()");
+		System.out.println("dateNum :" + dateNum);
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		List<EndDateList> enddatelist = roomDao.selectMemberEndDate(branchOwner, dateNum);
+		model.addAttribute("enddatelist", enddatelist);
+		
+		return "room/member_period";
+	}
 	
 	//자리이동
 	@RequestMapping(value="/room/move_pro", method = RequestMethod.POST)
@@ -88,11 +103,30 @@ public class RoomController {
 	public String room_dashboard(Model model, HttpSession session){
 		System.out.println("room_dashboard()");
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		//열람실 현황테이블 조회
 		List<RoomDashBoard> roomdashlist = roomDao.selectRoomDashBoardNow(branchOwner);
+		//열람실 만료예정자 조회
+		int dateNum = 1;
+		List<EndDateList> enddatelist = roomDao.selectCountEndDate(branchOwner, dateNum);
+		System.out.println(enddatelist);
+		ArrayList<PayList> paylist = new ArrayList<PayList>();
+		int paynumber = 0;
 		for(RoomDashBoard rl : roomdashlist){
-			System.out.println(rl);
+			PayList pay = new PayList();
+			//만석률 구하기
+			double percentage = ((double)rl.getPay_seat()/rl.getNotpay_seat())*100;
+			int percent = (int)percentage;
+			//자동증가
+			paynumber += 1; 
+			pay.setRoom_nm(rl.getRoom_nm());
+			pay.setPayment_percentage(percent);
+			pay.setPaynumber(paynumber);
+			paylist.add(pay);
 		}
+		
 		model.addAttribute("roomdashlist", roomdashlist);
+		model.addAttribute("paylist", paylist);
+		model.addAttribute("enddatelist", enddatelist);
 		return "room/room_dashboard";
 	}
 	
@@ -103,43 +137,7 @@ public class RoomController {
 		System.out.println(room);
 		List<Seat> seatlist = roomDao.selectRoomSeat(room);
 		System.out.println(seatlist.get(0).getSeat_row());
-		
-		/*//제일 상위 객체
-		JSONObject obj = new JSONObject();
-		//Person의 JSON정보를 담을 Array 선언
-		JSONArray personArray = new JSONArray();
-		//Person의 한명 정보가 들어갈 JSONObject 선언
-		JSONObject personInfo = new JSONObject();
-		//정보 입력
-		personInfo.put("name", "송강호");
-		personInfo.put("age", "25");
-		//Array에 입력
-		personArray.put(personInfo);
-		
-		personInfo = new JSONObject();
-		personInfo.put("name", "전지현");
-		personInfo.put("age", "21");
-		
-		personArray.put(personInfo);
-		obj.put("persons", personArray);
-		//전체 입력한 값 확인
-		System.out.println(obj);*/
-		
-		
-		JSONObject seat = new JSONObject();
-		JSONArray seatArray = new JSONArray();
-		JSONObject seatRowCol = new JSONObject();
-		
-		
-		String row = seatlist.get(0).getSeat_row()+"";
-		String col = seatlist.get(0).getSeat_col()+"";
-		seatRowCol.put("row", row);
-		seatRowCol.put("col", col);
-		seatArray.put(seatRowCol);
-		seat.put("seat", seatArray);
-		System.out.println(seat);
-		
-				
+	
 		model.addAttribute("seatlist", seatlist);
 		model.addAttribute("room", room);
 	

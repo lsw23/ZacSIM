@@ -77,9 +77,9 @@
 							 	<p>금액 합계: ${total} 원</p>
 			                    <thead>
 									<tr>
-										<th>결제자 이름</th>
+										<th>결제 회원</th>
 										<th>결제 수단</th>
-										<th>수입 금액</th>
+										<th>결제 금액</th>
 										<th>결제일</th>
 										<th>연장결제여부</th>
 										<th>결제취소</th>
@@ -95,9 +95,9 @@
 											<td>${p.pay_date}</td>
 											<td>${p.pay_extension}</td>
 											<td>
-												<a href="${pageContext.request.contextPath}/account/delete?pay_cd=${p.pay_cd}&member_cd=${p.member_cd}&seat_cd=${p.seat_cd}&room_cd=${p.room_cd}">
-													<button type="button" class="btn btn-danger">결제취소</button>
-												</a>
+											<a href="${pageContext.request.contextPath}/account/delete?pay_cd=${p.pay_cd}&member_cd=${p.member_cd}&seat_cd=${p.seat_cd}&room_cd=${p.room_cd}">
+												<button type="button" class="btn btn-danger">결제취소</button>
+											</a>
 											</td>
 										</tr>
 									</c:forEach>
