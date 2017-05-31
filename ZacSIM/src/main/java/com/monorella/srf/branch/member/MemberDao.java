@@ -22,22 +22,22 @@ public class MemberDao {
 	//------------------------------------------------------------------------------------------
 	// 회원가입시 여자 연령대 수정
 	public int modifyWomanAgeGroupInfo(DashboardAgeGroup dashboardAgeGroup){
-		System.out.println("MemberDao-> modifyWomanAgeGroupInfo()-> dashboardAgeGroup: "+dashboardAgeGroup);
+		//System.out.println("MemberDao-> modifyWomanAgeGroupInfo()-> dashboardAgeGroup: "+dashboardAgeGroup);
 		return sqlSessionTemplate.update("com.monorella.srf.branch.member.MemberMapper.modifyWomanAgeGroupInfo", dashboardAgeGroup);
 	}
 	// 회원가입시 남자 연령대 수정
 	public int modifyMenAgeGroupInfo(DashboardAgeGroup dashboardAgeGroup){
-		System.out.println("MemberDao-> modifyMenAgeGroupInfo()-> dashboardAgeGroup: "+dashboardAgeGroup);
+		//System.out.println("MemberDao-> modifyMenAgeGroupInfo()-> dashboardAgeGroup: "+dashboardAgeGroup);
 		return sqlSessionTemplate.update("com.monorella.srf.branch.member.MemberMapper.modifyMenAgeGroupInfo", dashboardAgeGroup);
 	}
 	// 회원가입시 여자 연령대 조회
 	public DashboardAgeGroup selectAgeGroupWoman(String branch_owner_cd){
-		System.out.println("MemberDao-> selectAgeGroupWoman-> branch_owner_cd: "+ branch_owner_cd);
+		//System.out.println("MemberDao-> selectAgeGroupWoman-> branch_owner_cd: "+ branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.selectAgeGroupWoman", branch_owner_cd);
 	}
 	// 회원가입시 남자 연령대 조회
 	public DashboardAgeGroup selectAgeGroupMen(String branch_owner_cd){
-		System.out.println("MemberDao-> selectAgeGroupMen-> branch_owner_cd: "+ branch_owner_cd);
+		//System.out.println("MemberDao-> selectAgeGroupMen-> branch_owner_cd: "+ branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.selectAgeGroupMen", branch_owner_cd);
 	}
 	

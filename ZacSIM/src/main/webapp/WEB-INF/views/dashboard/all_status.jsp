@@ -46,7 +46,7 @@
         <section class="content">
           
           <div class="row">
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
@@ -59,7 +59,7 @@
                 <a href="${pageContext.request.contextPath}/member/member_list" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
@@ -72,7 +72,7 @@
                 <a href="#example1" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-            <div class="col-lg-4 col-xs-4">
+            <div class="col-lg-4 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-yellow">
                 <div class="inner">
@@ -89,7 +89,7 @@
           
           <!-- 박스 6개 -->
           <div class="row">
-            <div class="col-md-2 col-sm-6 col-xs-12">
+            <div class="col-md-2 col-sm-6 col-xs-6">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion ion-person"></i></span>
                 <div class="info-box-content">
@@ -98,7 +98,7 @@
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
              </div><!-- /.col -->
-             <div class="col-md-2 col-sm-6 col-xs-12">
+             <div class="col-md-2 col-sm-6 col-xs-6">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion ion-person-stalker"></i></span>
                 <div class="info-box-content">
@@ -107,7 +107,7 @@
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
              </div><!-- /.col -->
-		     <div class="col-md-2 col-sm-6 col-xs-12">
+		     <div class="col-md-2 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-green"><i class="ion ion-log-out"></i></span>
 	               <div class="info-box-content">
@@ -116,7 +116,7 @@
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-12">
+	         <div class="col-md-2 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-green"><i class="ion ion-android-close"></i></span>
 	               <div class="info-box-content">
@@ -125,7 +125,7 @@
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-12">
+	         <div class="col-md-2 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-yellow"><i class="ion ion-happy-outline"></i></span>
 	               <div class="info-box-content">
@@ -134,7 +134,7 @@
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-12">
+	         <div class="col-md-2 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-yellow"><i class="ion ion-sad-outline"></i></span>
 	               <div class="info-box-content">
