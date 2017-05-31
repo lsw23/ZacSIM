@@ -1,6 +1,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.monorella.srf.branch.payment.PaymentMapper">
+	
+	<!-- 결제 등록시 월별 결제 총액 업데이트 -->
+	<update id="modifyMonthIncome" parameterType="com.monorella.srf.branch.dto.DashboardAccount">
+		UPDATE brunch_dashboard_account_list 
+		SET january = #{january}
+		, february = #{february}
+		, march = #{march}
+		, april = #{april}
+		, may = #{may}
+		, june = #{june}
+		, july = #{july}
+		, august = #{august}
+		, september = #{september}
+		, october = #{october}
+		, november = #{november}
+		, december = #{december}
+		, account_type = '수입'
+		WHERE branch_owner_cd = #{branch_owner_cd}
+		AND account_type = '수입'
+	</update>
+	<!-- 결제 등록시 월별 결제 총액 셀렉트 -->
+	<select id="selectMonthIncome" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAccount">
+		SELECT branch_owner_cd 
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 1) AS january
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 2) AS february
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 3) AS march
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 4) AS april
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 5) AS may
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 6) AS june
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 7) AS july
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 8) AS august
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 9) AS september
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 10) AS october
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 11) AS november
+		,(SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE branch_owner_cd = #{branch_owner_cd} AND pay_month = 12) AS december
+		FROM branch_pay_tb
+		WHERE branch_owner_cd = #{branch_owner_cd}
+		GROUP BY branch_owner_cd
+	</select>
+	
+	
+	
 	<!-- 연장 결제 입력 -->
 	
 	

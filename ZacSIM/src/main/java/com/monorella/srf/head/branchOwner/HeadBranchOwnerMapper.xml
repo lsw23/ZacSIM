@@ -2,6 +2,16 @@
 
 <mapper namespace="com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper">
 
+	<!-- 사업자 삭제시 brunch_dashboard_account_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제 -->
+	<delete id="deleteAccountList" parameterType="String">
+		DELETE FROM brunch_dashboard_account_list WHERE branch_owner_cd = #{branch_owner_cd};
+	</delete>
+	<!-- 사업자 등록시  brunch_dashboard_account_list insert-->
+	<select id="insertAccountList" parameterType="String">
+		INSERT INTO brunch_dashboard_account_list (branch_owner_cd, account_type)
+		VALUES (#{branch_owner_cd}, '수입'), (#{branch_owner_cd}, '지출');
+	</select>
+
 	<select id="selectPresentList" resultType="com.monorella.srf.head.dto.HeadBranchOwner">
 	SELECT 
 		branch_owner_cd	

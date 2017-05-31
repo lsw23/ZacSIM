@@ -5,6 +5,41 @@
   
   <mapper namespace="com.monorella.srf.branch.room.RoomMapper">
   	
+  	<!--기간 만료예정자 목록 조회 -->
+  	<select id="selectMemberEndDate" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.EndDateList">
+  		SELECT 
+			 member_cd
+			, bm.branch_owner_cd
+			, bm.seat_cd, bm.member_nm
+			, CURRENT_DATE() AS member_date
+			, bm.member_end_date
+			, bs.seat_cnumber
+			, br.room_cd
+			, br.room_nm
+		FROM branch_member_tb bm 
+		INNER JOIN branch_saet_tb bs ON bm.seat_cd = bs.seat_cd
+		INNER JOIN branch_room_tb br ON bs.room_cd = br.room_cd
+		WHERE bm.member_end_date &lt;= date_add(now(), interval +#{dateNum} day)  
+		AND bm.member_seat_state = 'Y'
+		AND bm.branch_owner_cd = #{branch_owner_cd}
+  	</select>
+  	
+  	<!--열람실변 기간만료 예정자수 조회 -->
+  	<select id="selectCountEndDate" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.EndDateList">
+		SELECT 
+			 COUNT(member_cd) AS member_count
+			, br.room_nm
+			, (COUNT(member_cd)/brd.room_personnel*100) AS member_percentage
+		FROM branch_member_tb bm 
+		INNER JOIN branch_saet_tb bs ON bm.seat_cd = bs.seat_cd
+		INNER JOIN branch_room_tb br ON bs.room_cd = br.room_cd
+		INNER JOIN branch_room_dashboard_tb brd ON br.room_cd = brd.room_cd
+		WHERE bm.member_end_date &lt;= date_add(now(), interval +#{dateNum} day)  
+		AND bm.member_seat_state = 'Y'
+		AND bm.branch_owner_cd = #{branch_owner_cd}
+		GROUP BY room_nm
+  	</select>
+  	
   	<!-- 열람석 MAX번호 조회 -->
   	<select id="selectMaxCnumber" parameterType="com.monorella.srf.branch.dto.Room" resultType="int">
   		SELECT MAX(seat_cnumber) FROM branch_saet_tb WHERE branch_owner_cd = #{branch_owner_cd} 

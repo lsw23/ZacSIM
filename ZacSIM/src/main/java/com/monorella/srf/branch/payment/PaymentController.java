@@ -1,5 +1,7 @@
 package com.monorella.srf.branch.payment;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.Payment;
 import com.monorella.srf.branch.dto.RoomDashBoard;
@@ -80,13 +84,25 @@ public class PaymentController {
 	
 	// 결제완료
 	@RequestMapping(value="/payment/paymentend", method = RequestMethod.POST)
-	public String paymentpro(Payment payment, Member member, Model model){
+	public String paymentpro(Payment payment, Member member, Model model, HttpSession session){
 		System.out.println("paymentpro 요청");
+		//세션에서 오너코드 받기
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		String branch_owner_cd = branchOwner.getBranch_owner_cd();
+		
+		
 		//결제 입력
 		payment.setPay_extension("N");
 		int result = paymentDao.insertPayment(payment);
 		System.out.println("insertPayment 요청");
 		if(result == 1){
+			//월별 결제 총액 조회
+			DashboardAccount account = paymentDao.selectMonthIncome(branch_owner_cd);
+			System.out.println("DashboardAccount-> account: "+account);
+			//월별 결제 총액 brunch_dashboard_account_list에 업데이트
+			paymentDao.modifyMonthIncome(account);
+			
+			
 			//성공시(열람석 지정 'Y'로)
 			paymentDao.modifyPaymentSeat(payment);	
 			//출결번호 테이블 insert

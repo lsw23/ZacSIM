@@ -38,6 +38,8 @@ public class HeadBranchOwnerController {
 			headBranchOwnerDao.deleteNumList(branch_owner_cd);
 			// 연령대 테이블 레코드 삭제
 			headBranchOwnerDao.deleteAgeGroupList(branch_owner_cd);
+			// 회계 테이블 레코드 삭제
+			headBranchOwnerDao.deleteAgeGroupList(branch_owner_cd);
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
@@ -79,6 +81,8 @@ public class HeadBranchOwnerController {
 			headBranchOwnerDao.insertNumList(branchOwner.getBranch_owner_cd());	
 			// 연령대 테이블에 레코드 추가
 			headBranchOwnerDao.insertAgeGroupList(branchOwner.getBranch_owner_cd());
+			// 회계 테이블에 레코드 추가
+			headBranchOwnerDao.insertAccountList(branchOwner.getBranch_owner_cd());
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
