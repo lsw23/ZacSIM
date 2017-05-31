@@ -223,7 +223,12 @@ public class RoomController {
 			//열람석 총 수 만큼 반복문
 			
 			for(int i=0; i<room.getSeat_num(); i++){
-				int cnumber = roomDao.selectMaxCnumber(room);
+				//열람석 번호 자동증가
+				int cnumber = 0;
+				//열람실 최초등록이 아닐경우
+				if(roomcdCount != 0){
+					cnumber = roomDao.selectMaxCnumber(room);
+				}
 				Seat seat = new Seat();
 				seat.setBranch_owner_cd(room.getBranch_owner_cd());
 				seat.setRoom_cd(room.getRoom_cd());
