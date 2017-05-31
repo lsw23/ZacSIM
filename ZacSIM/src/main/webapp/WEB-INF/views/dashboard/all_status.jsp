@@ -56,7 +56,7 @@
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="${pageContext.request.contextPath}/member/member_list" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-4 col-xs-4">
@@ -82,7 +82,7 @@
                 <div class="icon">
                   <i class="ion ion-cash"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#areaChart2" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
           </div><!-- /.row -->
@@ -221,7 +221,7 @@
 			<!-- 원형 차트 3개 end-->
           
        	 <!-- 범위 그래프 차트 -->
-		 <div class="row"> 
+		 <%-- <div class="row"> 
 			<div class="col-md-12">
 				<div class="box box-default">
 					<div class="box-header with-border">
@@ -231,34 +231,54 @@
 						</h3>
 					</div>
 					<div class="box-body chart-responsive">
-						<i class="fa fa-square" style="float: right; color: #CFCFCF;"> <b style="color: black; font-size: 14px;">: 수입 &nbsp;</b></i>
-						<i class="fa fa-square" style="float: right; color: #E1E1E1;"> <b style="color: black; font-size: 14px;">: 수입 &nbsp;</b></i>
-						<i class="fa fa-square" style="float: right; color: #F3F3F3;"> <b style="color: black; font-size: 14px;">: 수입 &nbsp;</b></i>
-						<canvas id="areaChart2" height="250"></canvas>
+						<i class="fa fa-square" style="float: right; color: #24A6BD;"> <b style="color: black; font-size: 14px;">: 합계 &nbsp;</b></i>
+						<i class="fa fa-square" style="float: right; color: #008299;"> <b style="color: black; font-size: 14px;">: 수입 &nbsp;</b></i>
+						<i class="fa fa-square" style="float: right; color: #48CAE1;"> <b style="color: black; font-size: 14px;">: 지출 &nbsp;</b></i>
+						<canvas id="areaChart2" height="300"></canvas>
+						<!-- <div class="chart" id="bar-chart2" style="height: 400px;"></div> -->
 					</div>
 				</div>
 			</div>
-		 </div>
+		 </div> --%>
 		 <!-- 범위 그래프 차트 end -->
 		 
   		 <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-5">
 			 <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header">
                   <i class="fa fa-bar-chart"></i>
                   <h3 class="box-title"><b>회원 연령대별(성별) 그래프</b></h3>
                 </div>
-                <div class="box-body chart-responsive">
-                  <div class="chart" id="bar-chart" style="height: 300px;"></div>
+                <div class="box-body box-success">
+                  <div class="chart" id="bar-chart" style="height: 345px; background-color: #FFF5FF;"></div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col (RIGHT) -->
+            
+            <div class="col-md-7">
+				<div class="box box-success">
+					<div class="box-header with-border">
+						<i class="fa fa-bar-chart-o"></i>
+						<h3 class="box-title">
+							<b>월 매출 합산</b>
+						</h3>
+					</div>
+					<div class="box-body">
+						<i class="fa fa-square" style="float: right; color: #86E57F;"> <b style="color: black; font-size: 14px;">: 합계 &nbsp;</b></i>
+						<i class="fa fa-square" style="float: right; color: #5CD1E5;"> <b style="color: black; font-size: 14px;">: 지출 &nbsp;</b></i>
+						<i class="fa fa-square" style="float: right; color: #6799FF;"> <b style="color: black; font-size: 14px;">: 수입 &nbsp;</b></i>
+						
+						<canvas id="areaChart2" width="auto" height="300"></canvas>
+						<!-- <div class="chart" id="bar-chart2" style="height: 400px;"></div> -->
+					</div>
+				</div>
+			</div>
           </div><!-- /.row -->
           
           <div class="row">
             <div class="col-xs-12">
-           	  <div class="box">
+           	  <div class="box box-info">
                 <div class="box-header">
                   <h3 class="box-title"><b>현재 이용자</b></h3>
                 </div><!-- /.box-header -->
@@ -626,7 +646,87 @@
 	        hideHover: 'auto'
 	     });  
 	  });
-     </script>
+    </script>
+    
+    <!-- <script type="text/javascript">
+      $(function () {
+        "use strict";
+        var januaryIncome = '<c:out value='${income.january}'/>';
+        januaryIncome *= 1; // int변환
+		var februaryIncome = '<c:out value='${income.february}'/>';
+		februaryIncome *= 1;
+		var marchIncome = '<c:out value='${income.march}'/>';
+		marchIncome *= 1;
+		var aprilIncome = '<c:out value='${income.april}'/>';
+		aprilIncome *= 1;
+		var mayIncome = '<c:out value='${income.may}'/>';
+		mayIncome *= 1;
+		var juneIncome = '<c:out value='${income.june}'/>';
+		juneIncome *= 1; 
+		var julyIncome = '<c:out value='${income.july}'/>';
+		julyIncome *= 1;
+		var augustIncome = '<c:out value='${income.august}'/>';
+		augustIncome *= 1;
+		var septemberIncome = '<c:out value='${income.september}'/>';
+		septemberIncome *= 1;
+		var octoberIncome = '<c:out value='${income.october}'/>';
+		octoberIncome *= 1;
+		var novemberIncome = '<c:out value='${income.november}'/>';
+		novemberIncome *= 1; 
+		var decemberIncome = '<c:out value='${income.december}'/>';
+		decemberIncome *= 1;
+        
+		var januaryExpense = '<c:out value='${expense.january}'/>';
+        januaryExpense *= 1; // int변환
+		var februaryExpense = '<c:out value='${expense.february}'/>';
+		februaryExpense *= 1;
+		var marchExpense = '<c:out value='${expense.march}'/>';
+		marchExpense *= 1;
+		var aprilExpense = '<c:out value='${expense.april}'/>';
+		aprilExpense *= 1;
+		var mayExpense = '<c:out value='${expense.may}'/>';
+		mayExpense *= 1;
+		var juneExpense = '<c:out value='${expense.june}'/>';
+		juneExpense *= 1; 
+		var julyExpense = '<c:out value='${expense.july}'/>';
+		julyExpense *= 1;
+		var augustExpense = '<c:out value='${expense.august}'/>';
+		augustExpense *= 1;
+		var septemberExpense = '<c:out value='${expense.september}'/>';
+		septemberExpense *= 1;
+		var octoberExpense = '<c:out value='${expense.october}'/>';
+		octoberExpense *= 1;
+		var novemberExpense = '<c:out value='${expense.november}'/>';
+		novemberExpense *= 1; 
+		var decemberExpense = '<c:out value='${expense.december}'/>';
+		decemberExpense *= 1;
+	   
+	     var bar = new Morris.Bar({
+	        element: 'bar-chart2',
+	        resize: true,
+	        data: [
+	          {y: '1월', a: januaryIncome, b: januaryExpense , c: januaryIncome-januaryExpense},
+	          {y: '2월', a: februaryIncome, b: februaryExpense, c: februaryIncome-februaryExpense},
+	          {y: '3월', a: marchIncome, b: marchExpense, c: marchIncome-marchExpense},
+	          {y: '4월', a: aprilIncome, b: aprilExpense, c: aprilIncome-aprilExpense},
+	          {y: '5월', a: mayIncome, b: mayExpense, c: mayIncome-mayExpense},
+	          {y: '6월', a: juneIncome, b: juneExpense, c: juneIncome-juneExpense},
+	          {y: '7월', a: julyIncome, b: julyExpense, c: julyIncome-julyExpense},
+	          {y: '8월', a: augustIncome, b: augustExpense, c: augustIncome-augustExpense},
+	          {y: '9월', a: septemberIncome, b: septemberExpense, c: septemberIncome-septemberExpense},
+	          {y: '10월', a: octoberIncome, b: octoberExpense, c: octoberIncome-octoberExpense},
+	          {y: '11월', a: novemberIncome, b: novemberExpense, c: novemberIncome-novemberExpense},
+	          {y: '12월', a: decemberIncome, b: decemberExpense, c: decemberIncome-decemberExpense}
+	         
+	        ],
+	        barColors: ['#61DBF0', '#3DB7CC', '#1993A8'],
+	        xkey: 'y',
+	        ykeys: ['a', 'b', 'c'],
+	        labels: ['수입', '지출', '합계'],
+	        hideHover: 'auto'
+	     });  
+	  });
+    </script> -->
      
     <script type="text/javascript">
       $(function () {
@@ -642,9 +742,59 @@
       });
     </script>
     
-    <script>
-	// 분기별 등록자 추이(아이템들끼리 누적 합산되는 그래프)
+   <script>
     $(function(){
+    	
+    	var januaryIncome = '<c:out value='${income.january}'/>';
+        januaryIncome *= 1; // int변환
+		var februaryIncome = '<c:out value='${income.february}'/>';
+		februaryIncome *= 1;
+		var marchIncome = '<c:out value='${income.march}'/>';
+		marchIncome *= 1;
+		var aprilIncome = '<c:out value='${income.april}'/>';
+		aprilIncome *= 1;
+		var mayIncome = '<c:out value='${income.may}'/>';
+		mayIncome *= 1;
+		var juneIncome = '<c:out value='${income.june}'/>';
+		juneIncome *= 1; 
+		var julyIncome = '<c:out value='${income.july}'/>';
+		julyIncome *= 1;
+		var augustIncome = '<c:out value='${income.august}'/>';
+		augustIncome *= 1;
+		var septemberIncome = '<c:out value='${income.september}'/>';
+		septemberIncome *= 1;
+		var octoberIncome = '<c:out value='${income.october}'/>';
+		octoberIncome *= 1;
+		var novemberIncome = '<c:out value='${income.november}'/>';
+		novemberIncome *= 1; 
+		var decemberIncome = '<c:out value='${income.december}'/>';
+		decemberIncome *= 1;
+        
+		var januaryExpense = '<c:out value='${expense.january}'/>';
+        januaryExpense *= 1; // int변환
+		var februaryExpense = '<c:out value='${expense.february}'/>';
+		februaryExpense *= 1;
+		var marchExpense = '<c:out value='${expense.march}'/>';
+		marchExpense *= 1;
+		var aprilExpense = '<c:out value='${expense.april}'/>';
+		aprilExpense *= 1;
+		var mayExpense = '<c:out value='${expense.may}'/>';
+		mayExpense *= 1;
+		var juneExpense = '<c:out value='${expense.june}'/>';
+		juneExpense *= 1; 
+		var julyExpense = '<c:out value='${expense.july}'/>';
+		julyExpense *= 1;
+		var augustExpense = '<c:out value='${expense.august}'/>';
+		augustExpense *= 1;
+		var septemberExpense = '<c:out value='${expense.september}'/>';
+		septemberExpense *= 1;
+		var octoberExpense = '<c:out value='${expense.october}'/>';
+		octoberExpense *= 1;
+		var novemberExpense = '<c:out value='${expense.november}'/>';
+		novemberExpense *= 1; 
+		var decemberExpense = '<c:out value='${expense.december}'/>';
+		decemberExpense *= 1;
+    	
     	var areaChartCanvas = $("#areaChart2").get(0).getContext("2d");
         // This will get the first returned node in the jQuery collection.
         var areaChart = new Chart(areaChartCanvas);
@@ -654,67 +804,67 @@
           datasets: [
               {
            	  label: "수입",
-              fillColor: "#008299", // 그래프 바탕
-              strokeColor: "#008299", //그래프 구분선
-              pointColor: "#008299", //점
+              fillColor: "#B5B2FF", // 그래프 바탕
+              strokeColor: "#B5B2FF", //그래프 구분선
+              pointColor: "#B5B2FF", //점
               pointStrokeColor: "#FFF", //점 테두리
               pointHighlightFill: "#C7C6FF", // 마우스 오버시 점
               pointHighlightStroke: "#3736FF", // 마우스 오버시 점 테두리
-              data: [5
-            	  , 6
-            	  , 3
-            	  , 5
-            	  , 3
-            	  , 1
-            	  , 7
-            	  , 9
-            	  , 7
-            	  , 7
-            	  , 4
-            	  , 5]
+              data: [januaryIncome
+            	  , februaryIncome
+            	  , marchIncome
+            	  , aprilIncome
+            	  , mayIncome
+            	  , juneIncome
+            	  , julyIncome
+            	  , augustIncome
+            	  , septemberIncome
+            	  , octoberIncome
+            	  , novemberIncome
+            	  , decemberIncome]
+             },
+             {
+                 label: "지출",
+                 fillColor: "#B2EBF4", // 그래프 바탕
+                 strokeColor: "#B2EBF4", //위 쪽 그래프 구분선
+                 pointColor: "#B2EBF4", //점
+                 pointStrokeColor: "#FFF", //점 테두리
+                 pointHighlightFill: "#FFC6C6", // 마우스 오버시 점
+                 pointHighlightStroke: "#FF4848", // 마우스 오버시 점 테두리
+                 data: [-januaryExpense
+    	         	  , -februaryExpense
+    	         	  , -marchExpense
+    	         	  , -aprilExpense
+    	         	  , -mayExpense
+    	         	  , -juneExpense
+    	         	  , -julyExpense
+    	         	  , -augustExpense
+    	         	  , -septemberExpense
+    	         	  , -octoberExpense
+    	         	  , -novemberExpense
+    	         	  , -decemberExpense]
              },
              {
               label: "합계",
-              fillColor: "#24A6BD", // 그래프 바탕
-              strokeColor: "#24A6BD", //위 쪽 그래프 구분선
-              pointColor: "#24A6BD", //점
+              fillColor: "#CEF279", // 그래프 바탕
+              strokeColor: "#CEF279", //위 쪽 그래프 구분선
+              pointColor: "#CEF279", //점
               pointStrokeColor: "#FFF", //점 테두리
               pointHighlightFill: "#BFFFB8", // 마우스 오버시 점
               pointHighlightStroke: "#1DDB16", // 마우스 오버시 점 테두리
-              data: [5-1
-            	  , 6-1
-            	  , 3-1	
-            	  , 5-1
-            	  , 3-1
-            	  , 1-1
-            	  , 7-1
-            	  , 9-1
-            	  , 7-1
-            	  , 7-1
-            	  , 4-1
-            	  , 5-1]
-            },
-            {
-             label: "지출",
-             fillColor: "#48CAE1", // 그래프 바탕
-             strokeColor: "#48CAE1", //위 쪽 그래프 구분선
-             pointColor: "#48CAE1", //점
-             pointStrokeColor: "#FFF", //점 테두리
-             pointHighlightFill: "#FFC6C6", // 마우스 오버시 점
-             pointHighlightStroke: "#FF4848", // 마우스 오버시 점 테두리
-             data: [1
-           	  , 1
-           	  , 1
-           	  , 1
-           	  , 1
-           	  , 1
-           	  , 1
-           	  , 1
-           	  , 1
-           	  , 1
-           	  , 1
-           	  , 1]
-             }
+              data: [januaryIncome-januaryExpense
+            	  , februaryIncome-februaryExpense
+            	  , marchIncome-marchExpense	
+            	  , aprilIncome-aprilExpense
+            	  , mayIncome-mayExpense
+            	  , juneIncome-juneExpense
+            	  , julyIncome-julyExpense
+            	  , augustIncome-augustExpense
+            	  , septemberIncome-septemberExpense
+            	  , octoberIncome-octoberExpense
+            	  , novemberIncome-novemberExpense
+            	  , decemberIncome-decemberExpense]
+            }
           ]
         };
 
@@ -735,9 +885,9 @@
           //Boolean - Whether the line is curved between points
           bezierCurve: true, // 굴곡 줄래? 말래?
           //Number - 그래프 굴곡 표현도
-          bezierCurveTension: 0.3, 
+          bezierCurveTension: 0, 
           //Boolean - 값 마다 점 표시
-          pointDot: false, 
+          pointDot: true, 
           //Number - 점 크기
           pointDotRadius: 4, 
           //Number - 점 테두리
@@ -747,9 +897,9 @@
           //Boolean - Whether to show a stroke for datasets
           datasetStroke: true,
           //Number - 그래프 선 굵기
-          datasetStrokeWidth: 4,
+          datasetStrokeWidth: 3,
           //Boolean - 그래프 배경색
-          datasetFill: true,
+          datasetFill: false,
           //Boolean - 그래프 확대?
           maintainAspectRatio: false,
           //Boolean - whether to make the chart responsive to window resizing

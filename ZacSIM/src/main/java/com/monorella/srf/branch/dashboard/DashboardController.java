@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.DashboardAgeGroup;
 import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.UsingMemberList;
@@ -139,6 +140,12 @@ public class DashboardController {
 		//System.out.println("DashboardController-> selectTodayStatus()-> totalExpanseNum: "+totalExpanseNum);
 		model.addAttribute("totalIncomeNum", totalIncomeNum);
 		model.addAttribute("totalExpanseNum", totalExpanseNum);
+		
+		// 월별 수입 지출 총계
+		DashboardAccount income = dashboardDao.selectMonthIncomeTotal(branch_owner_cd);
+		DashboardAccount expense = dashboardDao.selectMonthExpenseTotal(branch_owner_cd);
+		model.addAttribute("income", income);
+		model.addAttribute("expense", expense);
 		
 		return "dashboard/all_status";			
 	

@@ -39,7 +39,7 @@ public class HeadBranchOwnerController {
 			// 연령대 테이블 레코드 삭제
 			headBranchOwnerDao.deleteAgeGroupList(branch_owner_cd);
 			// 회계 테이블 레코드 삭제
-			headBranchOwnerDao.deleteAgeGroupList(branch_owner_cd);
+			headBranchOwnerDao.deleteAccountList(branch_owner_cd);
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}

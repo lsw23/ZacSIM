@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.DashboardAgeGroup;
 import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.UsingMemberList;
@@ -16,6 +17,17 @@ public class DashboardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	// 회계 파트-----------------------------------------------------------------------------------------------
+	// 월별 결제 총액
+	public DashboardAccount selectMonthExpenseTotal(String branch_owner_cd){
+		System.out.println("DashboardDao-> selectMonthExpenseTotal() branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectMonthExpenseTotal", branch_owner_cd);
+	}
+	// 월별 결제 총액
+	public DashboardAccount selectMonthIncomeTotal(String branch_owner_cd){
+		System.out.println("DashboardDao-> selectMonthIncomeTotal() branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectMonthIncomeTotal", branch_owner_cd);
+	}
 	// 당월 지출 총액
 	public int selectTotalExpanse(String branch_owner_cd){
 		System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
