@@ -63,7 +63,7 @@
 									&nbsp;~&nbsp;
 									<input name="endDate" type="date" style="width: 150px; height: 25px;">
 									<input class="btnPadding" type="submit" value="검색"/>
-									<p><small>(기간은 최소 하루 이상으로 선택해 주세요. ex.2017-01-01의 수입내역-> 2017-01-01 ~ 2017-01-02)</small></p>
+									<p><small>(기간은 <b style="color: red;">하루 초과</b>로 선택해 주세요. ex.2017-01-01의 수입내역-> 2017-01-01 ~ 2017-01-02)</small></p>
 								</div>
 							</div><!-- /.box-body -->
 						</form>

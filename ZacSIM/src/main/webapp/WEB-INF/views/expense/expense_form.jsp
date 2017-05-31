@@ -4,11 +4,73 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+	//제이쿼리 사용
+	$(document).ready(function(){
+		$('#expensebutton').click(function(){
+			if($('#expense_breakdown').val()==''){
+				alert('지출내역을 입력하세요');	
+				$('#expense_breakdown').focus();
+			}else if($('#expense_price').val()==''){
+				alert('지출금액을 입력하세요');
+				$('#expense_price').focus();
+			}else if($('#branch_name').val()==''){
+				alert('지출담당자를 입력하세요');
+				$('#branch_name').focus();
+			}else if($('#expense_date').val()==''){
+				alert('지출날짜를 입력하세요');
+				$('#expense_date').focus();
+			}else{
+				$('#addForm').submit();
+			}	
+		});
+	});
+</script> 
+<script type="text/javascript">
+								$(function() {
+									$('#minus').click(function(e) {
+										var stat = $('#expense_amount').val();
+										console.log('stat : ' + stat);
+										var num = stat*1;
+										num--;
+										if (num < 0) {
+											alert('더이상 줄일수 없습니다.');
+											num = 0;
+										}
+										var expense_price = $('#expense_price').val();
+										expense_price *=1;
+										expense_price *= num;
+										console.log('expense_price' + expense_price);
+										$('#expense_amount').val(num);
+										$('#expense_total').val(expense_price);
+									});
+									$('#plus').click(function() {
+										var stat = $('#expense_amount').val();
+										console.log('plus stat ' + stat);
+										var num = stat*1;
+										console.log(num);
+										num +=1;
+									
+										if (num > 99) {
+											alert('더이상 늘릴수 없습니다.');
+											num = 99;
+										}
+										var expense_price = $('#expense_price').val();
+										expense_price *=1;
+										expense_price *= num;
+										console.log('expense_price' + expense_price);
+										$('#expense_amount').val(num);
+										$('#expense_total').val(expense_price);
+									});
+								});
+							</script>
+
 <!-- 헤드 -->
 <c:import url="../module2/head.jsp" />
 <!-- JS -->
 <c:import url="../module2/jsscript.jsp" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 </head>
 <body class="skin-blue">
 	<div class="wrapper">
@@ -75,48 +137,11 @@
 									</div>									
 								</div>
 								<div class="box-footer">
-									<button id="staffbutton" type="submit" class="btn btn-primary">글입력</button>
+									<button id="expensebutton" type="button" class="btn btn-primary">글입력</button>
 									<button type="reset" class="btn btn-primary">초기화</button>
 								</div>
 							</form>
-							<script type="text/javascript">
-								$(function() {
-									$('#minus').click(function(e) {
-										var stat = $('#expense_amount').val();
-										console.log('stat : ' + stat);
-										var num = stat*1;
-										num--;
-										if (num < 0) {
-											alert('더이상 줄일수 없습니다.');
-											num = 0;
-										}
-										var expense_price = $('#expense_price').val();
-										expense_price *=1;
-										expense_price *= num;
-										console.log('expense_price' + expense_price);
-										$('#expense_amount').val(num);
-										$('#expense_total').val(expense_price);
-									});
-									$('#plus').click(function() {
-										var stat = $('#expense_amount').val();
-										console.log('plus stat ' + stat);
-										var num = stat*1;
-										console.log(num);
-										num +=1;
-									
-										if (num > 99) {
-											alert('더이상 늘릴수 없습니다.');
-											num = 99;
-										}
-										var expense_price = $('#expense_price').val();
-										expense_price *=1;
-										expense_price *= num;
-										console.log('expense_price' + expense_price);
-										$('#expense_amount').val(num);
-										$('#expense_total').val(expense_price);
-									});
-								});
-							</script>
+							
 						</div>
 					</div>
 				</div>
