@@ -42,12 +42,12 @@ public class ExpenseController {
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 		String branch_owner_cd = branchOwner.getBranch_owner_cd();
 		System.out.println("StaffController-> StaffList() branch_owner_cd: "+ branch_owner_cd);
-		int joinCount = 0;
-		joinCount = expenseDao.getExpenseCount();
+		/*int joinCount = 0;
+		joinCount = expenseDao.getExpenseCount();*/
 		int pagePerRow = 5;
 		List<Expense> list = expenseDao.selectExpenseList(currentPage, pagePerRow, branch_owner_cd);
-		int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
-		if(joinCount%pagePerRow != 0) {
+		int lastPage = (int)(Math.ceil(pagePerRow));
+		if(pagePerRow != 0) {
 			lastPage++;
 		}
 		
@@ -69,7 +69,7 @@ public class ExpenseController {
 			nextPage = lastPage;
 		}
 		
-		model.addAttribute("joinCount", joinCount);
+	/*	model.addAttribute("joinCount", joinCount);*/
 		model.addAttribute("list", list);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPage", startPage);

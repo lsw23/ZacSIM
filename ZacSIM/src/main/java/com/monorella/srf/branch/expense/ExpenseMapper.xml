@@ -42,7 +42,7 @@
 		WHERE branch_owner_cd = #{branch_owner_cd}
 		GROUP BY branch_owner_cd
 	</select>
-
+<!-- 지출내역 기간별 검색 셀렉트 -->
 <select id="searchExpense" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Expense">
 	SELECT 
 	expense_cd
@@ -56,7 +56,7 @@
 </select>
 
 
-
+<!-- 지출내역 리스트 셀렉트 -->
 <select id="selectExpenseList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Expense">
 	SELECT 	
 	 branch_owner_cd
@@ -70,9 +70,9 @@
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
 
-	<select id="getExpenseCount" resultType="int">
+	<!-- <select id="getExpenseCount" resultType="int">
 		SELECT COUNT(*) FROM branch_expense_tb
-	</select>
+	</select> -->
 	
 <insert id="insertExpense" parameterType="com.monorella.srf.branch.dto.Expense">
 	INSERT INTO branch_expense_tb(

@@ -8,10 +8,6 @@
 <script>
 	//제이쿼리 사용
 	$(document).ready(function(){
-		//alert('jquery test');
-		/* 입력폼 유효성 관련 요구사항
-		1. 모든 폼은 공백 또는 "" 문자는 입력되면 안된다.
-		2. 비밀번호는 4자이상 입력하여야 한다. */
 		$('#expensebutton').click(function(){
 			if($('#expense_breakdown').val()==''){
 				alert('지출내역을 입력하세요');	
