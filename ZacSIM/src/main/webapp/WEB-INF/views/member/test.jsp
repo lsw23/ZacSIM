@@ -26,7 +26,7 @@ p { line-height:1em; margin:0; padding:0; }
 
 <script>
   var i = 0;
-  $("div.overout").mouseover(function() {
+  $("member").mouseover(function() {
     i += 1;
     $(this).find("span").text( "mouse over x " + i );
   }).mouseout(function(){
@@ -34,13 +34,12 @@ p { line-height:1em; margin:0; padding:0; }
   });
 
   var n = 0;
-  $("div.enterleave").mouseenter(function() {
+  $("seattime").mouseenter(function() {
     n += 1;
     $(this).find("span").text( "mouse enter x " + n );
   }).mouseleave(function() {
     $(this).find("span").text("mouse leave");
   });
-
 </script>
 
 </body>

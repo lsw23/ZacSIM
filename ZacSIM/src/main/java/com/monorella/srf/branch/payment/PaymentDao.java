@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.Payment;
 
@@ -13,6 +14,17 @@ public class PaymentDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	
+	// 결제 등록시 월별 결제 총액 업데이트
+	public int modifyMonthIncome(DashboardAccount dashboardAccount){
+		System.out.println("PaymentDao-> modifyMonthIncome()-> dashboardAccount: "+ dashboardAccount);
+		return sqlSessionTemplate.update("com.monorella.srf.branch.payment.PaymentMapper.modifyMonthIncome", dashboardAccount);
+	}
+	// 결제 등록시 월별 결제 총액 셀렉트
+	public DashboardAccount selectMonthIncome(String branch_owner_cd){
+		System.out.println("PaymentDao-> selectMonthIncome()-> branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.payment.PaymentMapper.selectMonthIncome", branch_owner_cd);
+	}
 	
 	
 	//기간만료일 수정

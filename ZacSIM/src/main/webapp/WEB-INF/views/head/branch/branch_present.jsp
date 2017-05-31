@@ -18,15 +18,30 @@
 			<!-- Main content -->
 			<div class="templatemo-content-container row" style="min-height: 700px;">
 				<div class="templatemo-content-widget white-bg">
-					<h2 class="margin-bottom-10">지점 현황</h2>
+					<h1 class="margin-bottom-10">지점 현황</h1>
 					<hr>
 					<!-- main start -->
+					
 					<div>
-					<label>전주점</label>
+					<h2><i class="fa fa-info">_</i></h2>
+					<h3> 본사</h3>
+					<label>주소:  전라북도 전주시 완산구</label>
+					<br>
+					<label>전화번호:  063-123-4567</label>
+					<br>
+					<label>사업자번호:  111-2222-33333</label>				
 					</div>
-					<div>
-					<label>광주점</label>
-					</div>
+					<c:forEach var="l" items="${list}">
+						<div>
+							<h2><i class="fa fa-info">_</i></h2>
+							<h3>${l.branch_nm}</h3>
+							<label>주소:  ${l.branch_addr}</label>
+							<br>
+							<label>전화번호:  ${l.branch_tel}</label>	
+							<br>
+							<label>사업자번호:  ${l.owner_num}</label>			
+						</div>
+					</c:forEach>
 					<br>
 					<br>		
 					<div id="map" style="width:60%;height:300px;"></div>

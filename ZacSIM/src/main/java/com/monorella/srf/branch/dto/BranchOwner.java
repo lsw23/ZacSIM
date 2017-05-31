@@ -18,7 +18,7 @@ public class BranchOwner {
 	private String branch_postcode;//지점 우편번호 
 	private String branch_detail_addr;//지점 상세주소
 	private String branch_contract_file_path; // 계약 정보 파일 경로
-	
+
 	public String getBranch_owner_cd() {
 		return branch_owner_cd;
 	}

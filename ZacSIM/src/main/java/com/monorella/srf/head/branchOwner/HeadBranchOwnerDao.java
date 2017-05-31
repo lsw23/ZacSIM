@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+
 import com.monorella.srf.head.dto.HeadBranchOwner;
 
 @Repository
@@ -13,6 +14,25 @@ public class HeadBranchOwnerDao {
 
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate; 
+	
+
+	// 사업자 삭제시 brunch_dashboard_account_list 테이블 레코드 삭제
+	public int deleteAccountList(String branch_owner_cd){
+		//System.out.println("HeadBranchOwnerDao-> deleteAgeGroupList-> branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.delete("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.deleteAccountList", branch_owner_cd);
+	}
+	// 사업자 등록시 brunch_dashboard_account_list 테이블에 레코드 생성
+	public int insertAccountList(String branch_owner_cd){
+		//System.out.println("HeadBranchOwnerDao-> insertAccountList-> branch_owner_cd: "+ branch_owner_cd);
+		return sqlSessionTemplate.delete("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.insertAccountList", branch_owner_cd);
+	}
+	
+	
+	// 지점현황 리스트 메서드 
+	public List<HeadBranchOwner> selectPresentList(){
+		System.out.println("HeadBranchOwnerDao->selectPresentList");
+		return sqlSessionTemplate.selectList("com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper.selectPresentList");	
+	}
 	
 	// 사업자 삭제시 insert_num_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제
 	public int deleteAgeGroupList(String branch_owner_cd){

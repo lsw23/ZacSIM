@@ -1,6 +1,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.monorella.srf.head.branchOwner.HeadBranchOwnerMapper">
+
+	<!-- 사업자 삭제시 brunch_dashboard_account_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제 -->
+	<delete id="deleteAccountList" parameterType="String">
+		DELETE FROM brunch_dashboard_account_list WHERE branch_owner_cd = #{branch_owner_cd};
+	</delete>
+	<!-- 사업자 등록시  brunch_dashboard_account_list insert-->
+	<select id="insertAccountList" parameterType="String">
+		INSERT INTO brunch_dashboard_account_list (branch_owner_cd, account_type)
+		VALUES (#{branch_owner_cd}, '수입'), (#{branch_owner_cd}, '지출');
+	</select>
+
+	<select id="selectPresentList" resultType="com.monorella.srf.head.dto.HeadBranchOwner">
+	SELECT 
+		branch_owner_cd	
+		,	owner_num
+		, branch_nm
+		, branch_owner_addr 
+	 	, branch_owner_detail_addr
+		, branch_owner_tel
+		, branch_tel
+		, branch_addr 
+		, branch_detail_addr 
+		FROM branch_owner_tb 
+	</select>
 	
 	<!-- 사업자 삭제시 insert_num_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제 -->
 	<delete id="deleteAgeGroupList" parameterType="String">
