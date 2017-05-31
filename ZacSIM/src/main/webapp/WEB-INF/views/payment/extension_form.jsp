@@ -8,7 +8,7 @@
 </head>
 <body class="skin-blue">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-12">
          <!-- Info box -->
              <div class="box box-solid bg-orange">
                <div class="box-header">
@@ -50,7 +50,7 @@
                   	</form>
                   </div> <!-- box_body -->
            </div> <!-- container -->
-      </div> <!-- col-md-6 -->
+      </div> <!-- col-md-12 -->
     </div> <!-- row -->
     
     <c:import url="../module2/jsscript.jsp" />

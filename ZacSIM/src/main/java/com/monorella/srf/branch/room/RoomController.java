@@ -48,19 +48,24 @@ public class RoomController {
 	public String moveSeat(Seat seat){
 		System.out.println("RoomController moveSeat() seat :" + seat);
 		//이전 열람실 코드 구하기
-		String beforeRoomCd = roomDao.selectRoomCdeqSeatCd(seat.getSeat_cd());
+		Seat beforeRoomCd = roomDao.selectRoomCdeqSeatCd(seat.getSeat_cd());
 		System.out.println("beforeRoomCd :" + beforeRoomCd );
 		//이동할 좌석코드 구하기(이전 seat 이후 seatcd)
 		Seat seatcd = roomDao.selectSeatCd(seat);
 		System.out.println("seatcd :" + seatcd);
+		
+		
 		//자리이동 1단계
 		int result = roomDao.modifyMoveSeat(seat, seatcd);
 		System.out.println("자리이동 수정 1단계 성공" + result);
 		//자리이동 2단계
+		seatcd.setColseat_state(beforeRoomCd.getColseat_state());
 		roomDao.modifySeatCdAfter(seatcd);
 		
+		
+		
 		//열람실 현황 modify
-		RoomDashBoard beforeDash = roomDao.selectRoomDashBoard(beforeRoomCd);
+		RoomDashBoard beforeDash = roomDao.selectRoomDashBoard(beforeRoomCd.getRoom_cd());
 		RoomDashBoard afterDash = roomDao.selectRoomDashBoard(seatcd.getRoom_cd());
 		System.out.println("beforeDash" + beforeDash);
 		System.out.println("afterDash" + afterDash);
@@ -87,7 +92,7 @@ public class RoomController {
 		return new ResponseEntity<String>(jsonMain.toString(), responseHeaders, HttpStatus.OK);
 	}
 	
-	//회원 자리 이동
+	//회원 자리 이동 form
 	@RequestMapping(value="/room/move_form", method = RequestMethod.GET)
 	public String seat_move(Seat seat, Model model, HttpSession session){
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
@@ -110,17 +115,14 @@ public class RoomController {
 		List<EndDateList> enddatelist = roomDao.selectCountEndDate(branchOwner, dateNum);
 		System.out.println(enddatelist);
 		ArrayList<PayList> paylist = new ArrayList<PayList>();
-		int paynumber = 0;
 		for(RoomDashBoard rl : roomdashlist){
 			PayList pay = new PayList();
 			//만석률 구하기
 			double percentage = ((double)rl.getPay_seat()/rl.getNotpay_seat())*100;
 			int percent = (int)percentage;
 			//자동증가
-			paynumber += 1; 
 			pay.setRoom_nm(rl.getRoom_nm());
 			pay.setPayment_percentage(percent);
-			pay.setPaynumber(paynumber);
 			paylist.add(pay);
 		}
 		
@@ -223,16 +225,16 @@ public class RoomController {
 			//열람석 총 수 만큼 반복문
 			
 			for(int i=0; i<room.getSeat_num(); i++){
-				//열람석 번호 자동증가
-				int cnumber = 0;
-				//열람실 최초등록이 아닐경우
-				if(roomcdCount != 0){
-					cnumber = roomDao.selectMaxCnumber(room);
-				}
 				Seat seat = new Seat();
 				seat.setBranch_owner_cd(room.getBranch_owner_cd());
 				seat.setRoom_cd(room.getRoom_cd());
-				seat.setSeat_cnumber(cnumber+1);
+				//열람실 최초등록일 경우
+				if(roomcdCount == 0){
+					seat.setSeat_cnumber(i+1);
+				}else{
+					int cnumber = roomDao.selectMaxCnumber(room);
+					seat.setSeat_cnumber(cnumber+1);
+				}
 				roomDao.insertSeat(seat);
 				seatli.add(seat);
 			}

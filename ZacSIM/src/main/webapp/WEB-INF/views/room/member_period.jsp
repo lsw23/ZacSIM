@@ -69,6 +69,7 @@
 		      <th>열람실</th>
 		      <th>열람석</th>
 		      <th>이름</th>
+		      <th>연락처</th>
 		      <th>기간 만료일</th>
 		      <th>기간 연장</th>
 		    </tr>
@@ -80,8 +81,9 @@
 		      <td>${e.room_nm}</td>
 		      <td>${e.seat_cnumber}번</td>
 		      <td>${e.member_nm}</td>
+		      <td>${e.member_tel}</td>
 		      <td>${e.member_end_date}</td>
-		      <td><a href="${pageContext.request.contextPath}/room/member_period?"><button class="btn bg-maroon">기간 연장</button></a></td>
+		      <td><a href="${pageContext.request.contextPath}/payment/extension_form?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"><button class="btn bg-maroon period_btn">기간 연장</button></a></td>
 		    </tr>
 		  </c:forEach>
 		  </tbody>
@@ -107,8 +109,6 @@
     <script src='${pageContext.request.contextPath}/resources/plugins/fastclick/fastclick.min.js'></script>
         <!-- AdminLTE App -->
     <script src="${pageContext.request.contextPath}/resources/dist/js/app.min.js" type="text/javascript"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src=".${pageContext.request.contextPath}/resources/dist/js/demo.js" type="text/javascript"></script>
     <!-- page script -->
     <script type="text/javascript">
       $(function () {
@@ -122,6 +122,8 @@
           "bAutoWidth": false
         });
       });
+      
+      
     </script>
   </body>
 </html>  

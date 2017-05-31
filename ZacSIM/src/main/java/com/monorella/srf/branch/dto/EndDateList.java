@@ -12,7 +12,14 @@ public class EndDateList {
 	private int member_count;
 	private int member_percentage;
 	private int paynumber;
-
+	private String member_tel;
+	
+	public String getMember_tel() {
+		return member_tel;
+	}
+	public void setMember_tel(String member_tel) {
+		this.member_tel = member_tel;
+	}
 	public int getPaynumber() {
 		return paynumber;
 	}
