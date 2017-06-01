@@ -300,6 +300,7 @@
 			 , member_addr
 			 , member_age
 			 , member_seat_state
+			 , member_tel
 			 FROM branch_member_tb
 			  <if test="sv !=null and sv != ''">
 			<if test="so.equals('member_cd')">
