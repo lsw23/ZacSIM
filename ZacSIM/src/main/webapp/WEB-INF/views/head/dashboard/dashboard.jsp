@@ -22,6 +22,10 @@
 					<hr>
 					<!-- main start -->
 					
+					<div id="container" style="width: 70%;">
+				      <canvas id="canvas2"></canvas>
+				   	</div>
+					
 					<!-- main end -->
 				</div>
 				
@@ -37,7 +41,74 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/head/js/bootstrap-filestyle.min.js"></script>
 	<!-- Templatemo Script -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/head/js/templatemo-script.js"></script>
-	
+	<!-- ChartJS 상위버젼 -->
+    <script src="${pageContext.request.contextPath}/resources/chartjs/Chart.bundle.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/chartjs/utils.js"></script>
+    
+    <script>
+        // 가로 바 차트
+        var color = Chart.helpers.color;
+        var horizontalBarChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November"],
+            datasets: [{
+                label: '수입',
+                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1,
+                data: [20
+                    , 21
+                    , 22
+                    , 32
+                    , 15
+                    , 55
+                    , 23
+                    
+                ]
+            }, {
+                label: '지출',
+                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                data: [-23
+                    , -45
+                    , -22
+                    , -16
+                    , -22
+                    , -23
+                    , -15
+                    
+                ]
+            }]
+
+        };
+
+       window.onload = function() {
+            var ctx = document.getElementById("canvas2").getContext("2d");
+            window.myHorizontalBar = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: horizontalBarChartData,
+                options: {
+                    // Elements options apply to all of the options unless overridden in a dataset
+                    // In this case, we are setting the border of each horizontal bar to be 2px wide
+                    elements: {
+                        rectangle: {
+                            borderWidth: 2,
+                        }
+                    },
+                    responsive: true,
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Horizontal Bar Chart'
+                    }
+                }
+            });
+
+        };
+
+    </script>
+    
 </body>
 </html>
 					
