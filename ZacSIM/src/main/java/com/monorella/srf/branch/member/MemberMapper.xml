@@ -203,7 +203,7 @@
 	</delete>
 	
 	<!-- 회원 수정 -->
-	<update id="MemberModify" parameterType="com.monorella.srf.branch.dto.Member">
+	<update id="modifyMember" parameterType="com.monorella.srf.branch.dto.Member">
 		UPDATE branch_member_tb 
             SET branch_owner_cd = #{branch_owner_cd}
             , member_cd = #{member_cd}
@@ -296,10 +296,10 @@
 		SELECT
 			 member_cd
 			 , member_nm
-			 , member_sex
+			 , member_tel
 			 , member_addr
-			 , member_age
 			 , member_seat_state
+			 , member_date
 			 FROM branch_member_tb
 			  <if test="sv !=null and sv != ''">
 			<if test="so.equals('member_cd')">
@@ -308,17 +308,17 @@
 			<if test="so.equals('member_nm')">
 				WHERE member_nm like concat('%',#{sv},'%')
 			</if>
-			<if test="so.equals('member_sex')">
-				WHERE member_sex like concat('%',#{sv},'%')
-			</if>
 			<if test="so.equals('member_tel')">
 				WHERE member_tel like concat('%',#{sv},'%')
 			</if>
-			<if test="so.equals('member_age')">
-				WHERE member_age like concat('%',#{sv},'%') 
+			<if test="so.equals('member_addr')">
+				WHERE member_addr like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_seat_state')">
-				WHERE member_seat_state like concat('%',#{sv},'%')
+				WHERE member_seat_state like concat('%',#{sv},'%') 
+			</if>
+			<if test="so.equals('member_date')">
+				WHERE member_date like concat('%',#{sv},'%')
 			</if>
 			</if> 
 	</select>
