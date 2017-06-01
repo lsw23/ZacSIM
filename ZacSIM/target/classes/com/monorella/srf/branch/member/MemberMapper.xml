@@ -361,6 +361,7 @@
 			, member_nm
 			, member_tel
 			, member_addr
+			, member_seat_state
 			, member_date
 		FROM branch_member_tb
 		ORDER BY inout_num DESC
