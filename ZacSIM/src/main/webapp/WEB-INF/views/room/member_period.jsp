@@ -61,29 +61,36 @@
 		<a href="${pageContext.request.contextPath}/room/member_period?dateNum=3"><button class="btn bg-maroon btn-flat margin">3일</button></a>
 		<a href="${pageContext.request.contextPath}/room/member_period?dateNum=7"><button class="btn bg-maroon btn-flat margin">7일</button></a>
 		<a href="${pageContext.request.contextPath}/room/member_period?dateNum=30"><button class="btn bg-maroon btn-flat margin">30일</button></a>
+		
 		<div class="box-body">
 		<table id="example2" class="table table-bordered table-hover">                                                                                 
 		  <thead>
 		    <tr>
+		      <th></th>
 		      <th>#</th>
 		      <th>열람실</th>
 		      <th>열람석</th>
 		      <th>이름</th>
 		      <th>연락처</th>
 		      <th>기간 만료일</th>
-		      <th>기간 연장</th>
+		      <th>연장</th>
+		      <th>SMS</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 		  <c:forEach var="e" items="${enddatelist}" varStatus="status">
 		    <tr>
+		      <td><input type="checkbox"/></td>
 		      <td>${status.index}</td>
 		      <td>${e.room_nm}</td>
 		      <td>${e.seat_cnumber}번</td>
 		      <td>${e.member_nm}</td>
 		      <td>${e.member_tel}</td>
 		      <td>${e.member_end_date}</td>
-		      <td><a href="${pageContext.request.contextPath}/payment/extension_form?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"><button class="btn bg-maroon period_btn">기간 연장</button></a></td>
+		      <td><a href="${pageContext.request.contextPath}/payment/extension_form?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"><button class="btn bg-maroon period_btn">기간 연장</button></a>
+		      
+		      </td>
+		      <td><a href="${pageContext.request.contextPath}/payment/extension_form?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"><button class="btn bg-maroon period_btn">문자</button></a></td>
 		    </tr>
 		  </c:forEach>
 		  </tbody>
@@ -123,7 +130,8 @@
         });
       });
       
-      
+		$('#member_menu').addClass('active');
+		$('#member04').addClass('active');
     </script>
   </body>
 </html>  

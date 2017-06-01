@@ -1,9 +1,12 @@
 package com.monorella.srf.branch.payment;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.Charges;
 import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.Payment;
@@ -13,6 +16,12 @@ public class PaymentDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	//요금제 조회
+	public List<Charges> selectCharges(String branch_owner_cd){
+		return sqlSessionTemplate.selectList("com.monorella.srf.branch.payment.PaymentMapper.selectCharges", branch_owner_cd);
+	}
+	
 	// 결제 회원 중복확인 
 	public Member checkMember(Member member){
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.payment.PaymentMapper.checkMember", member);

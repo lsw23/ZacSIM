@@ -84,6 +84,7 @@
 		            	<th>이름</th>
 		           	    <th>연락처</th>
 		                <th>주소</th>
+		                <th>회원상태</th>
 		                <th>가입일</th>
             		  </tr>
             		</thead>  
@@ -95,6 +96,12 @@
 			                    <td><a href="${pageContext.request.contextPath}/member/member_view?member_nm=${b.member_nm}">${b.member_nm}</a></td>
 			                    <td>${b.member_tel}</td>
 			                    <td>${b.member_addr}</td>
+			                    <c:if test="${b.member_seat_state eq 'Y'}">
+		            			<td>정회원</td>
+		             			</c:if>
+		              			<c:if test="${b.member_seat_state eq 'N'}">
+		             			<td>일반회원</td>
+		             			</c:if>
 			                    <td>${b.member_date}</td>
 	               		    </tr>
 			 	</c:forEach>

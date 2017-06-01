@@ -53,7 +53,7 @@
                 <li id="member01"><a href="${pageContext.request.contextPath}/member/member_form"><i class="fa fa-circle-o"></i> 회원 등록</a></li>
                 <li id="member02"><a href="${pageContext.request.contextPath}/member/member_list"><i class="fa fa-circle-o"></i> 회원 목록</a></li>
                 <li id="member03"><a href="${pageContext.request.contextPath}/member/member_exit"><i class="fa fa-circle-o"></i> 회원 입퇴실</a></li>
-                <li id="member04"><a href="${pageContext.request.contextPath}/member/member_exit"><i class="fa fa-circle-o"></i> 회원 만료예정</a></li>
+                <li id="member04"><a href="${pageContext.request.contextPath}/room/member_period"><i class="fa fa-circle-o"></i> 회원 만료예정</a></li>
               </ul>
             </li>
             <li class="treeview" id="room_menu">

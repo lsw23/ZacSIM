@@ -5,7 +5,11 @@
   <head>
   	<!-- 헤드 -->
 	<c:import url="../module2/advanced_css.jsp"/>
-	
+	<style>
+		#span01{
+			color:red;
+		}
+	</style>
  </head>
  <body class="skin-blue">
 	<div class="row">
@@ -37,7 +41,7 @@
 					    </div>
 					    
 					    <div class="form-group">
-					    <label for="fname">회원코드&nbsp;</label>
+					    <label for="fname">회원코드&nbsp;&nbsp;<button type="button" id="memberlist">목록</button>&nbsp;&nbsp;<span id="span01"></span> </label>
 					    <input type="text" id="member_cd" name="member_cd" class="form-control">
 					    </div>
 					    
@@ -46,6 +50,13 @@
 					    <input type="date" name="member_regi_date" class="form-control">
 					    </div>
 					    
+					    <c:forEach var="c" items="${chargeslist}">
+						    <label>
+		                      	<input type="radio" name="r3" class="flat-red" value="${c.seat_charges_code}"/>
+		                      	${c.seat_member_type}${c.seat_charges_date}일-${c.seat_charges_price}원
+		                    </label>
+					    </c:forEach>
+					    
 					    <div class="form-group">
 					    <label for="fname">만료일</label>
 					    <input type="date" name="member_end_date" class="form-control">
@@ -53,12 +64,6 @@
 
 						<div class="form-group">
 					    <label for="lname">결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					    <label>
-					    		학생 	<input type="radio" name="r3" class="flat-red" checked/>
-	                    </label>
-	                    <label>
-	                      		일반 <input type="radio" name="r3" class="flat-red"/>
-	                    </label>
 					    <input type="text" id="total_amount" name="total_amount" class="form-control">
 					    </div>
 						
@@ -69,12 +74,10 @@
 					      <option value="cash">현금</option>
 					    </select>
 					    </div>
-
-					    <input type="hidden" value="nice" name="niceValue">
+					    
 
 					    <div class="box-footer">
-					       <button type="submit" class="btn btn-primary" value="결제">결제</button>
-						   <input type="button" class="btn btn-primary" value="창닫기" onclick="window.close()">				   
+					       <button type="submit" class="btn btn-primary" value="결제">결제</button>				   
 					    </div>
 					  </form>
               		</div>
@@ -91,6 +94,13 @@
 	      radioClass: 'iradio_flat-green'
 	    });
 		
+		//목록 검색
+		$('#memberlist').click(function(){
+			console.log('클릭 확인');
+			opener.parent.location='${pageContext.request.contextPath}/member/member_list'; 
+		});
+		
+		
 		//결제 요금 계산
 		$('#discount_amount').blur(function(){
 			console.log('요금 테스트');
@@ -106,15 +116,23 @@
 			var membercd = $('#member_cd').val();
 			var parm = {"member_cd":membercd};
 			
+		$('#member_cd').keyup(function(){
+			$('#span01').html('');
+		});	
+			
+		
 			$.ajax({
 				url:'${pageContext.request.contextPath}/payment/check_membercd',
 				type:'GET',
 				data:parm,
 				success:function(data){
-					alert('성공');
+					console.log('성공' + data.check);
+					if(data.check === 'Y'){
+						$('#span01').html('이미 결제된 회원코드입니다.');
+					}
 				},
 				error:function(XHR, textStatus, error){
-					alert(xhr +','+textStatus+','+ error);
+					$('#span01').html('존재하지 않는 회원코드 입니다.');
 				}
 				
 				

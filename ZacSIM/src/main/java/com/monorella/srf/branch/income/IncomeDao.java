@@ -16,6 +16,11 @@ public class IncomeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	//결제취소 출결번호 테이블에서 해당 회원 삭제
+	public int deleteInout(Payment payment){
+		return sqlSessionTemplate.delete("com.monorella.srf.branch.income.IncomeMapper.deleteInout", payment);
+	}
+	
 	//결제취소 테이블에 insert
 	public int insertCancel(Payment payment){
 		return sqlSessionTemplate.insert("com.monorella.srf.branch.income.IncomeMapper.insertCancel", payment);
