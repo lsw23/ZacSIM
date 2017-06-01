@@ -43,27 +43,27 @@
 						<table class="table">
 							<tbody>
 								<tr>
-									<td>staff_id :</td>
+									<td>직원 아이디</td>
 									<td>${staff.staff_id}</td>
 								</tr>
 								<tr>
-									<td>branch_owner_cd :</td>
+									<td>지점 대표코드 </td>
 									<td>${staff.branch_owner_cd}</td>
 								</tr>
 								<tr>
-									<td>staff_name :</td>
+									<td>직원 이름</td>
 									<td>${staff.staff_name}</td>
 								</tr>
 								<tr>
-									<td>staff_tel :</td>
+									<td>직원 연락처</td>
 									<td>${staff.staff_tel}</td>
 								</tr>
 								<tr>
-									<td>staff_addr :</td>
+									<td>직원 주소</td>
 									<td>${staff.staff_addr}</td>
 								</tr>
 								<tr>
-									<td>staff_in_date :</td>
+									<td>직원 가입일</td>
 									<td>${staff.staff_in_date}</td>
 								</tr>
 							</tbody>
