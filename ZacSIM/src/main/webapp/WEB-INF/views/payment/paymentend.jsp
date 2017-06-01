@@ -18,7 +18,11 @@
              <h3>결제가 완료되었습니다.</h3>
 			 <h3>회원의 출결번호는 ${inouting}입니다.</h3>
    		</div><!-- col-md-12 -->
-	</div>	
+	</div>
+	<c:import url="../module2/jsscript.jsp" />
+	<script>
+		opener.document.location.reload();
+	</script>
 </body>
 </html>
 

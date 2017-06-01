@@ -2,6 +2,19 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.monorella.srf.branch.payment.PaymentMapper">
 	
+	<!-- 요금제 조회 -->
+	<select id="selectCharges" parameterType="String" resultType="com.monorella.srf.branch.dto.Charges">
+		SELECT  
+			seat_charges_code
+			,  branch_owner_cd
+			,  seat_member_type
+			,  seat_charges_date
+			,  seat_charges_price
+		FROM seat_charges
+		WHERE branch_owner_cd = #{branch_owner_cd}
+		ORDER BY seat_charges_price 
+	</select>
+	
 	<!-- 결제 중복확인 -->
 	<select id="checkMember" parameterType="com.monorella.srf.branch.dto.Member" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
@@ -131,7 +144,7 @@
 		SELECT 
 			inout_num 
 			FROM branch_inout_tb 
-			WHERE member_cd = #{member_cd} AND pay_cd = #{pay_cd}
+			WHERE member_cd = #{member_cd} AND seat_cd = #{seat_cd}
 	</select>
 	
 	<!-- 출결번호 member tb에 수정 -->

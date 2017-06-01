@@ -112,7 +112,7 @@
 			UPDATE branch_room_dashboard_tb
 				SET 
 					pay_seat= #{pay_seat},
-					notpay_seat= #{notpay_seat},
+					notpay_seat= #{notpay_seat}
 				WHERE room_cd= #{room_cd}
 	</update>
   	

@@ -5,7 +5,11 @@
   <head>
   	<!-- 헤드 -->
 	<c:import url="../module2/advanced_css.jsp"/>
-	
+	<style>
+		#span01{
+			color:red;
+		}
+	</style>
  </head>
  <body class="skin-blue">
 	<div class="row">
@@ -37,7 +41,7 @@
 					    </div>
 					    
 					    <div class="form-group">
-					    <label for="fname">회원코드&nbsp;</label>
+					    <label for="fname">회원코드&nbsp;&nbsp;<button type="button" id="memberlist">목록</button>&nbsp;&nbsp;<span id="span01"></span> </label>
 					    <input type="text" id="member_cd" name="member_cd" class="form-control">
 					    </div>
 					    
@@ -46,6 +50,13 @@
 					    <input type="date" name="member_regi_date" class="form-control">
 					    </div>
 					    
+					    <c:forEach var="c" items="${chargeslist}">
+						    <label>
+		                      	<input type="radio" name="r3" class="flat-red" value="${c.seat_charges_code}"/>
+		                      	${c.seat_member_type}${c.seat_charges_date}일-${c.seat_charges_price}원
+		                    </label>
+					    </c:forEach>
+					    
 					    <div class="form-group">
 					    <label for="fname">만료일</label>
 					    <input type="date" name="member_end_date" class="form-control">
@@ -53,12 +64,6 @@
 
 						<div class="form-group">
 					    <label for="lname">결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-					    <label>
-					    		학생 	<input type="radio" name="r3" class="flat-red" checked/>
-	                    </label>
-	                    <label>
-	                      		일반 <input type="radio" name="r3" class="flat-red"/>
-	                    </label>
 					    <input type="text" id="total_amount" name="total_amount" class="form-control">
 					    </div>
 						
@@ -69,13 +74,10 @@
 					      <option value="cash">현금</option>
 					    </select>
 					    </div>
-
-					    <input type="hidden" value="nice" name="niceValue">
+					    
 
 					    <div class="box-footer">
-					       <button type="submit" class="btn btn-primary" onclick="getSubmit()" value="결제">결제</button>
-					       <button type="button" id="card">테스트</button>
-						   <input type="button" class="btn btn-primary" value="창닫기" onclick="window.close()">				   
+					       <button type="submit" class="btn btn-primary" value="결제">결제</button>				   
 					    </div>
 					  </form>
               		</div>
@@ -85,14 +87,18 @@
 	</div><!-- row -->
     <!-- JS -->
     <c:import url="../module2/jsscript.jsp" />
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 	<script>
 		//라디오박스 css
 	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
 	      checkboxClass: 'icheckbox_flat-green',
 	      radioClass: 'iradio_flat-green'
 	    });
+		
+		//목록 검색
+		$('#memberlist').click(function(){
+			console.log('클릭 확인');
+			opener.parent.location='${pageContext.request.contextPath}/member/member_list'; 
+		});
 		
 		
 		//결제 요금 계산
@@ -104,39 +110,34 @@
 			$('#total_amount').val(total);
 		});
 		
+		$('#member_cd').blur(function(){
+			console.log('회원코드 중복체크');
+			console.log($('#member_cd').val());
+			var membercd = $('#member_cd').val();
+			var parm = {"member_cd":membercd};
+			
+		$('#member_cd').keyup(function(){
+			$('#span01').html('');
+		});	
+			
 		
-		$('#card').click(function(){
-			var IMP = window.IMP; // 생략가능
-		    IMP.init('imp39602041'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-
-		    IMP.request_pay({
-		        pg : 'inicis', // version 1.1.0부터 지원.
-		        pay_method : 'card',
-		        merchant_uid : 'merchant_' + new Date().getTime(),
-		        name : '주문명:ZakSIM 열람석 이용권',
-		        amount : 2000,
-		        buyer_email : 'iamport@siot.do',
-		        buyer_name : '양지훈',
-		        buyer_tel : '010-1234-5678',
-		        buyer_addr : '서울특별시 강남구 삼성동',
-		        buyer_postcode : '123-456',
-		        m_redirect_url : 'https://www.yourdomain.com/payments/complete'
-		    }, function(rsp) {
-		        if ( rsp.success ) {
-		            var msg = '결제가 완료되었습니다.';
-		            msg += '고유ID : ' + rsp.imp_uid;
-		            msg += '상점 거래ID : ' + rsp.merchant_uid;
-		            msg += '결제 금액 : ' + rsp.paid_amount;
-		            msg += '카드 승인번호 : ' + rsp.apply_num;
-		        } else {
-		            var msg = '결제에 실패하였습니다.';
-		            msg += '에러내용 : ' + rsp.error_msg;
-		        }
-		        alert(msg);
-		    });
+			$.ajax({
+				url:'${pageContext.request.contextPath}/payment/check_membercd',
+				type:'GET',
+				data:parm,
+				success:function(data){
+					console.log('성공' + data.check);
+					if(data.check === 'Y'){
+						$('#span01').html('이미 결제된 회원코드입니다.');
+					}
+				},
+				error:function(XHR, textStatus, error){
+					$('#span01').html('존재하지 않는 회원코드 입니다.');
+				}
+				
+				
+			});
 		});
-		 	
-		
 	</script>
  </body>
 </html>

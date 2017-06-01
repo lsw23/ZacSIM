@@ -12,12 +12,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/templatemo-style.css" rel="stylesheet">
-<style>
-	.test{
-	 background-color:yellow;
-	 border:solid, 1px;
-	}
-</style>
+
 </head>
 <body>
 <!-- Left column -->
@@ -26,11 +21,15 @@
 	<c:import url="../module/top.jsp"/>
 		
 		<div class="templatemo-content-container row" style="min-height: 700px;">
-            <div class="templatemo-content-widget white-bg">  
-                <div class="row">
-                
-             <!--      <h2 class="media-heading text-uppercase blue-text">본사</h2>
-                         
+            <div class="templatemo-content-widget white-bg col-2">
+              <div class="media margin-bottom-30">
+                <div class="media-left padding-right-25">
+                    <img class="media-object img-circle templatemo-img-bordered" src="${pageContext.request.contextPath}/resources/zaksim.png" alt="zaksim">
+                </div>
+                <div class="media-body">
+                  <h2 class="media-heading text-uppercase blue-text">본사</h2>
+                </div>        
+              </div>
               <div class="table-responsive">
                 <table class="table">
                   <tbody>
@@ -50,45 +49,32 @@
                       <td>111-2222-33333</td>                    
                     </tr>                                       
                   </tbody>
-                </table> -->
-				<!-- <div class="templatemo-content-widget white-bg"> -->
-				
+                </table>
+			<!-- Main content -->
+			<div class="templatemo-content-container row" style="min-height: 700px;">
+				<div class="templatemo-content-widget white-bg">
 					<h1 class="margin-bottom-10">지점 현황</h1>
-					<hr>			
-						<div class="col-sm-7">
+					<hr>
+					<!-- main start -->
+					<div class="row">		
 					<c:forEach var="l" items="${list}">
-					<div class="test">
+						<div class="col-sm-7">
+						<img alt="branch" src="${pageContext.request.contextPath}/resources/branch.png"> 
 							<h2><i class="fa fa-info">_</i></h2>
 							<h3>${l.branch_nm}</h3>
 							<label>주소:  ${l.branch_addr}</label>
 							<br>
 							<label>전화번호:  ${l.branch_tel}</label>	
 							<br>
-							<label>사업자번호:  ${l.owner_num}</label>
-					</div>					
-					</c:forEach>
-					</div>	
-					<div class="col-sm-5" id="map" style="width:40%;height:250px;"></div>
+							<label>사업자번호:  ${l.owner_num}</label>			
+						</div>
+					</c:forEach>	
+					<div class="col-sm-5" id="map" style="width:40%;height:300px;"></div>
 				</div>	
 				</div>
-				
-				<div class="templatemo-content-widget white-bg">
-                <i class="fa fa-times"></i>
-                <div class="media">
-                  <div class="media-left">
-                jj
-                  </div>
-                  <div class="media-body">
-                    <h2 class="media-heading text-uppercase">Consectur Fusce Enim</h2>
-                    <p>Phasellus dapibus nulla quis risus auctor, non placerat augue consectetur.</p>  
-                  </div>
-                </div>                
-              </div>   
 				<c:import url="../module/footer.jsp"/>
 			</div>
-</div>
-</div>
-
+</div></div></div>
 
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=0536ec56a5a535f962f3a6c98aa6d73a"></script>
 <script>
