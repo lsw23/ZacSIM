@@ -45,10 +45,10 @@
    	   <tr>
    	   	<th>회원코드</th>
 		<th>이름</th>
-		<th>성별</th>
+		<th>연락처</th>
 		<th>주소</th>
-		<th>나이</th>
 		<th>회원상태</th>
+		<th>가입일</th>
        </tr>
    </thead>
         <tbody>
@@ -57,10 +57,10 @@
 	        <tr>
 	           <td>${s.member_cd}</td>
 	           <td><a href="${pageContext.request.contextPath}/member/member_view?member_nm=${s.member_nm}">${s.member_nm}</a></td>
-	           <td>${s.member_sex}</td>
+	           <td>${s.member_tel}</td>
 	           <td>${s.member_addr}</td>
-	           <td>${s.member_age}</td>
 	           <td>${s.member_seat_state}</td>
+	           <td>${s.member_date}</td>
 	        </tr>
 	 	</c:forEach>
 	  </tbody>
