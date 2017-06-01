@@ -36,6 +36,7 @@
               <div class="box">
                 <div class="box-header">
                   <h3 class="box-title">독서실 회원 검색결과</h3>
+                  <a class="btn btn-sm btn-default" href="${pageContext.request.contextPath}/member/member_list"><i class="fa fa-undo fa-spin"></i></a>
                   <div class="box-tools">
                   </div>
                 </div>
@@ -64,7 +65,6 @@
 	 	</c:forEach>
 	  </tbody>
 	  </table>
-	  <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_list">== 뒤로가기 ==</a>
      </div>
     </div>
    </div>
