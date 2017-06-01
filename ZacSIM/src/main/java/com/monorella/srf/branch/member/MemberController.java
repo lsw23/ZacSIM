@@ -22,8 +22,6 @@ public class MemberController {
 	@Autowired
 	private MemberDao memberDao;
 
-	
-	
 	// 회원 삭제 폼 요청
 	@RequestMapping(value="/member/member_remove", method = RequestMethod.GET)
 	public String MemberRemove(@RequestParam(value="member_cd", required=true) String member_cd){
