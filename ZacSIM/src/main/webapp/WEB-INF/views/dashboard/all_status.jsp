@@ -344,9 +344,10 @@
     <script src="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
     <!-- 페이지 내 href 경로 이동-->
     <script src="${pageContext.request.contextPath}/resources/js/templatemo-script.js"></script>
-     
+    
 
     <!-- Page script -->
+    
     <script>
     	//메뉴 고정
     	$(function(){

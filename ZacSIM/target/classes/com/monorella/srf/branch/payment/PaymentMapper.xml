@@ -2,6 +2,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.monorella.srf.branch.payment.PaymentMapper">
 	
+	<!-- 결제 중복확인 -->
+	<select id="checkMember" parameterType="com.monorella.srf.branch.dto.Member" resultType="com.monorella.srf.branch.dto.Member">
+		SELECT
+		 member_seat_state
+		FROM branch_member_tb
+		WHERE member_cd = #{member_cd}
+	</select>
+	
 	<!-- 결제 등록시 월별 결제 총액 업데이트 -->
 	<update id="modifyMonthIncome" parameterType="com.monorella.srf.branch.dto.DashboardAccount">
 		UPDATE brunch_dashboard_account_list 

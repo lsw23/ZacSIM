@@ -70,7 +70,7 @@ public class RoomDao {
 	}
 	
 	//열람석 code에 일치하는 열람실 Code 조회
-	public String selectRoomCdeqSeatCd(int seat_cd){
+	public Seat selectRoomCdeqSeatCd(int seat_cd){
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.room.RoomMapper.selectRoomCdeqSeatCd", seat_cd);
 	}
 	//열람실 현황 allmodify

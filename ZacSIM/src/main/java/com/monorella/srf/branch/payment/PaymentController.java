@@ -21,6 +21,22 @@ public class PaymentController {
 		
 	@Autowired PaymentDao paymentDao;
 	@Autowired RoomDao roomDao;
+	
+	
+	//회원코드 중복확인
+	@RequestMapping(value="payment/check_membercd", method=RequestMethod.GET)
+	public String checkMember(Member member){
+		System.out.println("checkMemberCd()" + member);
+		Member checkmember = paymentDao.checkMember(member);
+		String result = "";
+		if(checkmember.getMember_seat_state().equals("Y")){
+			result = "Y";
+		}else{
+			result = "N";
+		}
+		return result;
+	}
+	
 	//기간 만료일 연장 성공
 	@RequestMapping(value="payment/extension_success", method=RequestMethod.GET)
 	public String extensionSuccess(){

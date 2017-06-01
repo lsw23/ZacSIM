@@ -41,11 +41,11 @@ public class ExpenseDao {
 		return expenseList;
 	}
 	
-	//전체 공지사항의 수를 구하는 메서드
+	/*//전체 공지사항의 수를 구하는 메서드
 	public int getExpenseCount(){
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.expense.ExpenseMapper.getExpenseCount");
 	}
-			
+		*/	
 	// 지출리스트 메서드
 	public List<Expense> selectExpenseList(int currentPage, int pagePerRow, String branch_owner_cd) {
 		System.out.println("ExpenseDao-> selectExpenseList-> currentPage: " + currentPage 

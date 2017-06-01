@@ -28,23 +28,12 @@
 					<li class="active">직원</li>
 				</ol>
 			</section>
-			<!-- Main content -->
-			<section class="content">
-				<div class="row">
-					<!-- left column -->
-					<div class="col-md-12">
-						<!-- general form elements -->
-						<div class="box box-primary">
-							<div class="box-header">
-								<h3 class="box-title">공지사항 등록</h3>
-							</div>
+			<div class="table-responsive">
 				<!-- 검색 -->
 				<form id="searchFrom" action="${pageContext.request.contextPath}/staffboard/staffboard_search" method="post">
 					<div class="form-group">
 						<div class="row">
-							<div class="col-sm-3">
-							<a href="${pageContext.request.contextPath}/staffboard/staffboard_form">공지사항 입력</a>	
-							</div>
+							<div class="col-sm-3"></div>
 							<div class="col-sm-2">
 								<select name="so" class="form-control" id="sel1">
 									<option value="staffboard_title">제목</option>
@@ -60,6 +49,8 @@
 						</div>
 					</div>
 				</form>
+
+				<div>전체행의 수 : ${staffboard_content}</div>
 				<table class="table">
 					<thead>
 						<tr>
@@ -81,13 +72,38 @@
 						</c:forEach>
 					</tbody>
 				</table>
-			</div>	
-				</div>
-				</div>
-				</section>
-				</div>
-				</div>
-				
+			</div>
+
+			<!-- <div> -->
+				<a href="${pageContext.request.contextPath}/staffboard/staffboard_form">공지사항 입력</a>
+
+			<%-- 	<c:if test="${currentPage > 1}">
+
+					<span><a
+						href="${pageContext.request.contextPath}/staffboard/staffboard_list?currentPage=${previousPage}"><span
+							class="glyphicon glyphicon-chevron-left"></span></a></span>
+					<span><a
+						href="${pageContext.request.contextPath}/staffboard/staffboard_list?currentPage=${currentPage-1}">이전</a></span>
+				</c:if>
+
+				<c:forEach var="i" begin="${startPage}" end="${endPage}" step="1">
+					<c:choose>
+						<c:when test="${i == currentPage}">
+							<span><a href="#">${i}</a></span>
+						</c:when>
+						<c:otherwise>
+							<span><a href="${pageContext.request.contextPath}/staffboard/staffboard_list?currentPage=${i}">${i}</a></span>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+
+				<c:if test="${currentPage < lastPage}">
+					<span><a href="${pageContext.request.contextPath}/staffboard/staffboard_list?currentPage=${currentPage+1}">다음</a></span>
+					<span><a href="${pageContext.request.contextPath}/staffboard/staffboard_list?currentPage=${nextPage}"><span class="glyphicon glyphicon-chevron-right"></span></a></span>
+				</c:if>
+			</div>
+		</div>
+	</div> --%>
 	<script>
 	$('#staffboard_menu').addClass('active');
 </script>

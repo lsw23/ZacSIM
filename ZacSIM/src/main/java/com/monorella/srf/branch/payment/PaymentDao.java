@@ -13,7 +13,10 @@ public class PaymentDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-	
+	// 결제 회원 중복확인 
+	public Member checkMember(Member member){
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.payment.PaymentMapper.checkMember", member);
+	}
 	
 	// 결제 등록시 월별 결제 총액 업데이트
 	public int modifyMonthIncome(DashboardAccount dashboardAccount){
@@ -25,8 +28,6 @@ public class PaymentDao {
 		System.out.println("PaymentDao-> selectMonthIncome()-> branch_owner_cd: "+ branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.payment.PaymentMapper.selectMonthIncome", branch_owner_cd);
 	}
-	
-	
 	//기간만료일 수정
 	public int modifyEndDate(Payment payment){
 		return sqlSessionTemplate.update("com.monorella.srf.branch.payment.PaymentMapper.modifyEndDate", payment);

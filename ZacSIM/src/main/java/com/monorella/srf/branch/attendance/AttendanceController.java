@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.RoomDashBoard;
+import com.monorella.srf.branch.dto.Seat;
 import com.monorella.srf.branch.dto.SeatTime;
 import com.monorella.srf.branch.room.RoomDao;
 
@@ -57,10 +58,10 @@ public class AttendanceController {
 			}
 			
 			//좌석번호와 일치하는 열람실 코드 조회 
-			String room_cd = roomDao.selectRoomCdeqSeatCd(member.getSeat_cd());
-			System.out.println("AttendanceController, room_cd :" + room_cd);
+			Seat seatRoom = roomDao.selectRoomCdeqSeatCd(member.getSeat_cd());
+			System.out.println("AttendanceController, room_cd :" + seatRoom);
 			//열람실 현황 조회
-			RoomDashBoard roomDashBoard = roomDao.selectRoomDashBoard(room_cd);
+			RoomDashBoard roomDashBoard = roomDao.selectRoomDashBoard(seatRoom.getRoom_cd());
 			int in_count = roomDashBoard.getSeat_in(); //입실 수
 			int out_count = roomDashBoard.getSeat_out(); //퇴실 수
 			
