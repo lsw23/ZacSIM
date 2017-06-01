@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.DashboardAgeGroup;
 import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.UsingMemberList;
@@ -37,7 +38,7 @@ public class DashboardController {
 		// 세션에서 오너코드 받기
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 		String branch_owner_cd = branchOwner.getBranch_owner_cd();
-		System.out.println("DashboardController-> selectAllStatus() branch_owner_cd: "+ branch_owner_cd);
+		//System.out.println("DashboardController-> selectAllStatus() branch_owner_cd: "+ branch_owner_cd);
 		
 		// 오늘 날짜 및 해당 월 구하기 -----------------------------------------------------------
 		Date today = new Date();
@@ -139,6 +140,14 @@ public class DashboardController {
 		//System.out.println("DashboardController-> selectTodayStatus()-> totalExpanseNum: "+totalExpanseNum);
 		model.addAttribute("totalIncomeNum", totalIncomeNum);
 		model.addAttribute("totalExpanseNum", totalExpanseNum);
+		
+		// 월별 수입 지출 총계
+		DashboardAccount income = dashboardDao.selectMonthIncomeTotal(branch_owner_cd);
+		DashboardAccount expense = dashboardDao.selectMonthExpenseTotal(branch_owner_cd);
+		//System.out.println("DashboardController-> selectTodayStatus()-> income: "+income);
+		//System.out.println("DashboardController-> selectTodayStatus()-> expense: "+expense);
+		model.addAttribute("income", income);
+		model.addAttribute("expense", expense);
 		
 		return "dashboard/all_status";			
 	

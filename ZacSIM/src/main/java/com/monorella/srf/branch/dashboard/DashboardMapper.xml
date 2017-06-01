@@ -3,24 +3,39 @@
 
 <mapper namespace="com.monorella.srf.branch.dashboard.DashboardMapper">
 	
+	
+	<!-- 회계 파트 -->
+	<!-- 월별 결제 총액 -->
+	<select id="selectMonthExpenseTotal" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAccount">
+		SELECT january, february, march, april, may, june, july, august, september, october, november, december 
+		FROM brunch_dashboard_account_list 
+		WHERE branch_owner_cd = #{branch_owner_cd} 
+		AND account_type = '지출'
+	</select>
+	<select id="selectMonthIncomeTotal" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAccount">
+		SELECT january, february, march, april, may, june, july, august, september, october, november, december 
+		FROM brunch_dashboard_account_list 
+		WHERE branch_owner_cd = #{branch_owner_cd} 
+		AND account_type = '수입'
+	</select>
 	<!-- 당월 지출 총액 -->
 	<select id="selectTotalExpanse" parameterType="String" resultType="int">
-		SELECT SUM(expense_total) FROM branch_expense_tb WHERE expense_month = MONTH(NOW()) AND branch_owner_cd = #{branch_owner_cd}
+		SELECT IFNULL(SUM(expense_total),0) FROM branch_expense_tb WHERE expense_month = MONTH(NOW()) AND branch_owner_cd = #{branch_owner_cd}
 	</select>
 	<!-- 당월 결제 총액 -->
 	<select id="selectTotalIncome" parameterType="String" resultType="int">
-		SELECT SUM(total_amount) FROM branch_pay_tb WHERE pay_month = MONTH(NOW()) AND branch_owner_cd = #{branch_owner_cd}
+		SELECT IFNULL(SUM(total_amount),0) FROM branch_pay_tb WHERE pay_month = MONTH(NOW()) AND branch_owner_cd = #{branch_owner_cd}
 	</select>
 	
 	
-	<!-- 이용중인 회원 중 남자 회원의 연령대별 수 -->
+	<!-- 여자 회원의 연령대별 수 -->
 	<select id="selectUseMemberAgeGroupWomanNum" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAgeGroup">
 		SELECT teens, twenty, thirty, forty, etc 
 		FROM branch_dashboard_age_group 
 		WHERE branch_owner_cd = #{branch_owner_cd}
 		AND member_sex = '여자'
 	</select>
-	<!-- 이용중인 회원 중 남자 회원의 연령대별 수 -->
+	<!-- 남자 회원의 연령대별 수 -->
 	<select id="selectUseMemberAgeGroupMenNum" parameterType="String" resultType="com.monorella.srf.branch.dto.DashboardAgeGroup">
 		SELECT teens, twenty, thirty, forty, etc 
 		FROM branch_dashboard_age_group 

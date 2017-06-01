@@ -5,6 +5,12 @@
   
   <mapper namespace="com.monorella.srf.branch.attendance.AttendanceMapper">
   	
+  	
+  	<!-- 입퇴실 테이블 seat코드로 조회 -->
+  	<select id="selectSeatCd">
+  		
+  	</select>
+  	
   	<!-- 퇴실 시간 insert -->
 	<update id="modifySeatOutTime" parameterType="com.monorella.srf.branch.dto.SeatTime">
 		UPDATE branch_seat_time_tb
@@ -23,7 +29,7 @@
   			,  seat_out_time
   			,  seat_date
   		FROM branch_seat_time_tb
-		WHERE seat_date = #{now_date} AND seat_cd = #{seat_cd} 
+		WHERE seat_date = #{now_date} AND member_cd = #{member_cd}
   	</select>
   	
   	<!-- 입퇴실 테이블 insert -->

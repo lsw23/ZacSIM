@@ -9,14 +9,12 @@
 <c:import url="../module2/jsscript.jsp" />
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-	//제이쿼리 사용
 	$(document).ready(function(){
-		//alert('jquery test');
-		/* 입력폼 유효성 관련 요구사항
-		1. 모든 폼은 공백 또는 "" 문자는 입력되면 안된다.
-		2. 비밀번호는 4자이상 입력하여야 한다. */
-		$('#staffboard_button').click(function(){
-			if($('#staffboard_pw').val.length >3){
+		$('#staffboardbutton').click(function(){
+			if($('#staffboard_pw').val()==''){
+				alert('비밀번호를 입력하세요');
+				$('#staffboard_pw').focus();
+			}else if($('#staffboard_pw').val().length <4){
 				alert('패스워드는 4자이상 이어야 합니다');
 				$('#staffboard_pw').focus();
 			}else if($('#staffboard_title').val()==''){
@@ -34,7 +32,6 @@
 		});
 	});
 </script> 
-
 </head>
 <body class="skin-blue">
 	<div class="wrapper">
@@ -93,9 +90,9 @@
 				                      	<input type="text" class="form-control" id="staff_name" name="staff_name" placeholder="이름을 입력해주세요">
 				                    </div>
 									<div class="box-footer">
-										<input id="staffboard_button" type="submit"class="btn" value="글입력" /> 
-										<input type="reset"class="btn" value="초기화" /> 
-										<a class="btn"href="${pageContext.request.contextPath}/staffboard/staffboard_list">글목록</a>
+										<button id="staffboardbutton" type="button" class="btn btn-primary">글입력</button>
+										<button type="reset" class="btn btn-primary">초기화</button>
+										<a class="btn btn-primary" href="${pageContext.request.contextPath}/staffboard/staffboard_list">글목록</a>
 									</div>
 								</div>
 							</form>

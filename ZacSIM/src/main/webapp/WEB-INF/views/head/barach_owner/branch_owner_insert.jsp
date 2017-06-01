@@ -8,7 +8,6 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/templatemo-style.css" rel="stylesheet">
-
 </head>
 <body>
 	<!-- Left column -->
@@ -22,7 +21,7 @@
 					<h2 class="margin-bottom-10">사업자 정보 등록</h2>
 					<hr>
 					<!-- main start -->
-					<form class="templatemo-login-form" action="${pageContext.request.contextPath}/head/branch_owner_insert_pro" method="post">
+					<form id="insert-form" class="templatemo-login-form" action="${pageContext.request.contextPath}/head/branch_owner_insert_pro" method="post">
 						<div class="row form-group">
 							<div class="col-lg-6 col-md-6 form-group">
 								<label for="inputFirstName">지점 대표 코드</label> 
@@ -116,7 +115,7 @@
 						</div>
 						<hr>
 						<div class="form-group text-right">
-							<button type="submit" class="templatemo-blue-button">Submit</button>
+							<input id="submit-bt" type="button" class="templatemo-blue-button" value="Submit">
 							<button type="reset" class="templatemo-white-button">Reset</button>
 						</div>
 					</form>
@@ -228,36 +227,78 @@
 	<!-- 주소 API end-->
 	
 	<script type="text/javascript">
-	$(document).ready(function(){
-		var idchk= /^[a-zA-Z0-9]{4,15}$/;
-		$('#branch_owner_id').keyup(function(){
-			$('font[name=id_check]').text('');
-			if(!idchk.test($.trim($("#branch_owner_id").val()))){
+		$(document).ready(function(){
+			var idchk= /^[a-zA-Z0-9]{4,15}$/;
+			$('#branch_owner_id').keyup(function(){
 				$('font[name=id_check]').text('');
-				$('font[name=id_check]').html("아이디가 적절하지 않습니다.");
-			}else{
-				$('font[name=id_check]').text('');
-			}
+				if(!idchk.test($.trim($("#branch_owner_id").val()))){
+					$('font[name=id_check]').text('');
+					$('font[name=id_check]').html("아이디가 적절하지 않습니다.");
+				}else{
+					$('font[name=id_check]').text('');
+				}
+			});
+			
+			$('#branch_owner_pw').keyup(function(){
+				 $('font[name=pw_check]').text('');
+			});
+			
+			$('#pw_confirm').keyup(function(){
+				if($('#branch_owner_pw').val()!=$('#pw_confirm').val()){
+				 $('font[name=pw_check]').text('');
+				 $('font[name=pw_check]').html("비밀번호가 일치하지 않습니다");
+				}else{
+				 $('font[name=pw_check]').text('');
+				}
+			});
+			
+			$('#tel_chk').click(function(){
+				var tel = $('#branch_owner_tel').val();
+				$('#branch_tel').val(tel);
+			});
+			
+			//유효성
+			$('#submit-bt').click(function(){
+				if($('#branch_owner_cd').val()==''){
+					$('#branch_owner_cd').focus();
+				}else if($('#owner_num').val()==''){
+					$('#owner_num').focus();
+				}else if($('#branch_owner_cd').val()==''){
+					$('#branch_owner_cd').focus();
+				}else if($('#owner_nm').val()==''){
+					$('#owner_nm').focus();
+				}else if($('#branch_owner_id').val()==''){
+					$('#branch_owner_id').focus();
+				}else if($('#branch_owner_pw').val()==''){
+					$('#branch_owner_pw').focus();
+				}else if($('#pw_confirm').val()==''){
+					$('#pw_confirm').focus();
+				}else if($('#branch_owner_postcode').val()==''){
+					$('#branch_owner_postcode').focus();
+				}else if($('#branch_owner_addr').val()==''){
+					$('#"branch_owner_addr"').focus();
+				}else if($('#branch_owner_detail_addr').val()==''){
+					$('#branch_owner_detail_addr').focus();
+				}else if($('#branch_owner_tel').val()==''){
+					$('#branch_owner_tel').focus();
+				}else if($('#branch_nm').val()==''){
+					$('#branch_nm').focus();
+				}else if($('#branch_tel').val()==''){
+					$('#branch_tel').focus();
+				}else if($('#branch_postcode').val()==''){
+					$('#branch_postcode').focus();
+				}else if($('#branch_addr').val()==''){
+					$('#branch_addr').focus();
+				}else if($('#branch_detail_addr').val()==''){
+					$('#branch_detail_addr').focus();
+				}else{
+					$('#insert-form').submit();
+				}
+			})
+			
 		});
-		
-		$('#branch_owner_pw').keyup(function(){
-			 $('font[name=pw_check]').text('');
-		});
-		
-		$('#pw_confirm').keyup(function(){
-			if($('#branch_owner_pw').val()!=$('#pw_confirm').val()){
-			 $('font[name=pw_check]').text('');
-			 $('font[name=pw_check]').html("비밀번호가 일치하지 않습니다");
-			}else{
-			 $('font[name=pw_check]').text('');
-			}
-		});
-		
-		$('#tel_chk').click(function(){
-			var tel = $('#branch_owner_tel').val();
-			$('#branch_tel').val(tel);
-		});	
-	});
 	</script>
+	
+	
 </body>
 </html>

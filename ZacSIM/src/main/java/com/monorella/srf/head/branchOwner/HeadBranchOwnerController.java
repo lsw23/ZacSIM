@@ -20,22 +20,26 @@ public class HeadBranchOwnerController {
 
 	// 지점 현황
 	@RequestMapping(value="/head/branch/branch_present", method = RequestMethod.GET)
-	public String present(){
-		return "/head/branch/branch_present";
-		
+	public String selectpresentList(Model model){
+		//System.out.println("HeadBranchOwnerController-> selectpresentList()");	
+		List<HeadBranchOwner> list = headBranchOwnerDao.selectPresentList();
+		model.addAttribute("list", list);
+		return "/head/branch/branch_present";		
 	}
 	
 	//사업자 정보 삭제
 	@RequestMapping(value="/head/branch_owner_delete_pro" , method = RequestMethod.GET)
 	public String deleteBranchOwner(@RequestParam(value="branch_owner_cd") String branch_owner_cd){
-		System.out.println("HeadBranchOwnerController-> deleteBranchOwner()-> branch_owner_cd: "+branch_owner_cd);
+		//System.out.println("HeadBranchOwnerController-> deleteBranchOwner()-> branch_owner_cd: "+branch_owner_cd);
 		int result = headBranchOwnerDao.deleteBranchOwner(branch_owner_cd);
-		System.out.println("HeadBranchOwnerController->deleteBranchOwner()-> result: "+result);
+		//System.out.println("HeadBranchOwnerController->deleteBranchOwner()-> result: "+result);
 		if(result==1){
 			// 사업자 삭제시 insert_num_list 테이블에 해당 branch_owner_cd와 관련딘 레코드 삭제
 			headBranchOwnerDao.deleteNumList(branch_owner_cd);
 			// 연령대 테이블 레코드 삭제
 			headBranchOwnerDao.deleteAgeGroupList(branch_owner_cd);
+			// 회계 테이블 레코드 삭제
+			headBranchOwnerDao.deleteAccountList(branch_owner_cd);
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}
@@ -43,7 +47,7 @@ public class HeadBranchOwnerController {
 	//사업자 정보 수정 처리
 	@RequestMapping(value="/head/branch_owner_modify_pro" , method = RequestMethod.POST)
 	public String modifyBranchOwner(HeadBranchOwner branchOwner, Model model){
-		System.out.println("HeadBranchOwnerController-> ModifyBranchOwner()-> branchOwner: "+branchOwner);
+		//System.out.println("HeadBranchOwnerController-> ModifyBranchOwner()-> branchOwner: "+branchOwner);
 		headBranchOwnerDao.modifyBranchOwner(branchOwner);
 		return "redirect:/head/barach_owner/branch_owner_modify?branch_owner_cd="+branchOwner.getBranch_owner_cd();
 	}
@@ -77,6 +81,8 @@ public class HeadBranchOwnerController {
 			headBranchOwnerDao.insertNumList(branchOwner.getBranch_owner_cd());	
 			// 연령대 테이블에 레코드 추가
 			headBranchOwnerDao.insertAgeGroupList(branchOwner.getBranch_owner_cd());
+			// 회계 테이블에 레코드 추가
+			headBranchOwnerDao.insertAccountList(branchOwner.getBranch_owner_cd());
 		}
 		return "redirect:/head/barach_owner/branch_owner_list";
 	}

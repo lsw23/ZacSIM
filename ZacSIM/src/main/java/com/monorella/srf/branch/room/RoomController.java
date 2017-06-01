@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.EndDateList;
 import com.monorella.srf.branch.dto.PayList;
 import com.monorella.srf.branch.dto.Room;
 import com.monorella.srf.branch.dto.RoomDashBoard;
@@ -29,24 +29,43 @@ public class RoomController {
 	@Autowired
 	private RoomDao roomDao;
 	
+	//기간 만료예정
+	@RequestMapping(value="room/member_period", method = RequestMethod.GET)
+	public String memberPeriod(@RequestParam(value="dateNum",required=false, defaultValue="1")int dateNum
+								,  HttpSession session
+								,  Model model){
+		System.out.println("RoomController memberPeriod()");
+		System.out.println("dateNum :" + dateNum);
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		List<EndDateList> enddatelist = roomDao.selectMemberEndDate(branchOwner, dateNum);
+		model.addAttribute("enddatelist", enddatelist);
+		
+		return "room/member_period";
+	}
+	
 	//자리이동
 	@RequestMapping(value="/room/move_pro", method = RequestMethod.POST)
 	public String moveSeat(Seat seat){
 		System.out.println("RoomController moveSeat() seat :" + seat);
 		//이전 열람실 코드 구하기
-		String beforeRoomCd = roomDao.selectRoomCdeqSeatCd(seat.getSeat_cd());
+		Seat beforeRoomCd = roomDao.selectRoomCdeqSeatCd(seat.getSeat_cd());
 		System.out.println("beforeRoomCd :" + beforeRoomCd );
 		//이동할 좌석코드 구하기(이전 seat 이후 seatcd)
 		Seat seatcd = roomDao.selectSeatCd(seat);
 		System.out.println("seatcd :" + seatcd);
+		
+		
 		//자리이동 1단계
 		int result = roomDao.modifyMoveSeat(seat, seatcd);
 		System.out.println("자리이동 수정 1단계 성공" + result);
 		//자리이동 2단계
+		seatcd.setColseat_state(beforeRoomCd.getColseat_state());
 		roomDao.modifySeatCdAfter(seatcd);
 		
+		
+		
 		//열람실 현황 modify
-		RoomDashBoard beforeDash = roomDao.selectRoomDashBoard(beforeRoomCd);
+		RoomDashBoard beforeDash = roomDao.selectRoomDashBoard(beforeRoomCd.getRoom_cd());
 		RoomDashBoard afterDash = roomDao.selectRoomDashBoard(seatcd.getRoom_cd());
 		System.out.println("beforeDash" + beforeDash);
 		System.out.println("afterDash" + afterDash);
@@ -73,7 +92,7 @@ public class RoomController {
 		return new ResponseEntity<String>(jsonMain.toString(), responseHeaders, HttpStatus.OK);
 	}
 	
-	//회원 자리 이동
+	//회원 자리 이동 form
 	@RequestMapping(value="/room/move_form", method = RequestMethod.GET)
 	public String seat_move(Seat seat, Model model, HttpSession session){
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
@@ -89,24 +108,27 @@ public class RoomController {
 	public String room_dashboard(Model model, HttpSession session){
 		System.out.println("room_dashboard()");
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		//열람실 현황테이블 조회
 		List<RoomDashBoard> roomdashlist = roomDao.selectRoomDashBoardNow(branchOwner);
+		//열람실 만료예정자 조회
+		int dateNum = 1;
+		List<EndDateList> enddatelist = roomDao.selectCountEndDate(branchOwner, dateNum);
+		System.out.println(enddatelist);
 		ArrayList<PayList> paylist = new ArrayList<PayList>();
-		int paynumber = 0;
-		
 		for(RoomDashBoard rl : roomdashlist){
 			PayList pay = new PayList();
-			//결제률 구하기
+			//만석률 구하기
 			double percentage = ((double)rl.getPay_seat()/rl.getNotpay_seat())*100;
 			int percent = (int)percentage;
 			//자동증가
-			paynumber += 1; 
 			pay.setRoom_nm(rl.getRoom_nm());
 			pay.setPayment_percentage(percent);
-			pay.setPaynumber(paynumber);
 			paylist.add(pay);
 		}
+		
 		model.addAttribute("roomdashlist", roomdashlist);
 		model.addAttribute("paylist", paylist);
+		model.addAttribute("enddatelist", enddatelist);
 		return "room/room_dashboard";
 	}
 	
@@ -117,43 +139,7 @@ public class RoomController {
 		System.out.println(room);
 		List<Seat> seatlist = roomDao.selectRoomSeat(room);
 		System.out.println(seatlist.get(0).getSeat_row());
-		
-		/*//제일 상위 객체
-		JSONObject obj = new JSONObject();
-		//Person의 JSON정보를 담을 Array 선언
-		JSONArray personArray = new JSONArray();
-		//Person의 한명 정보가 들어갈 JSONObject 선언
-		JSONObject personInfo = new JSONObject();
-		//정보 입력
-		personInfo.put("name", "송강호");
-		personInfo.put("age", "25");
-		//Array에 입력
-		personArray.put(personInfo);
-		
-		personInfo = new JSONObject();
-		personInfo.put("name", "전지현");
-		personInfo.put("age", "21");
-		
-		personArray.put(personInfo);
-		obj.put("persons", personArray);
-		//전체 입력한 값 확인
-		System.out.println(obj);*/
-		
-		
-		JSONObject seat = new JSONObject();
-		JSONArray seatArray = new JSONArray();
-		JSONObject seatRowCol = new JSONObject();
-		
-		
-		String row = seatlist.get(0).getSeat_row()+"";
-		String col = seatlist.get(0).getSeat_col()+"";
-		seatRowCol.put("row", row);
-		seatRowCol.put("col", col);
-		seatArray.put(seatRowCol);
-		seat.put("seat", seatArray);
-		System.out.println(seat);
-		
-				
+	
 		model.addAttribute("seatlist", seatlist);
 		model.addAttribute("room", room);
 	
@@ -239,11 +225,16 @@ public class RoomController {
 			//열람석 총 수 만큼 반복문
 			
 			for(int i=0; i<room.getSeat_num(); i++){
-				int cnumber = roomDao.selectMaxCnumber(room);
 				Seat seat = new Seat();
 				seat.setBranch_owner_cd(room.getBranch_owner_cd());
 				seat.setRoom_cd(room.getRoom_cd());
-				seat.setSeat_cnumber(cnumber+1);
+				//열람실 최초등록일 경우
+				if(roomcdCount == 0){
+					seat.setSeat_cnumber(i+1);
+				}else{
+					int cnumber = roomDao.selectMaxCnumber(room);
+					seat.setSeat_cnumber(cnumber+1);
+				}
 				roomDao.insertSeat(seat);
 				seatli.add(seat);
 			}

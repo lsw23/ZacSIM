@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.DashboardAgeGroup;
 import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.UsingMemberList;
@@ -16,31 +17,42 @@ public class DashboardDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
+	// 회계 파트-----------------------------------------------------------------------------------------------
+	// 월별 결제 총액
+	public DashboardAccount selectMonthExpenseTotal(String branch_owner_cd){
+		//System.out.println("DashboardDao-> selectMonthExpenseTotal() branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectMonthExpenseTotal", branch_owner_cd);
+	}
+	// 월별 결제 총액
+	public DashboardAccount selectMonthIncomeTotal(String branch_owner_cd){
+		//System.out.println("DashboardDao-> selectMonthIncomeTotal() branch_owner_cd: "+branch_owner_cd);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectMonthIncomeTotal", branch_owner_cd);
+	}
 	// 당월 지출 총액
 	public int selectTotalExpanse(String branch_owner_cd){
-		System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
+		//System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectTotalExpanse", branch_owner_cd);
 	}
 	// 당월 결제 총액
 	public int selectTotalIncome(String branch_owner_cd){
-		System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
+		//System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectTotalIncome", branch_owner_cd);
 	}
 	
 	// 이용중 회원-----------------------------------------------------------------------------------------------------
 	// 이용중인 회원 중 여자 회원의 연령대별 수
 	public DashboardAgeGroup selectUseMemberAgeGroupWomanNum(String branch_owner_cd){
-		System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
+		//System.out.println("DashboardDao-> selectUseMemberAgeGroupWomanNum() branch_owner_cd: "+branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberAgeGroupWomanNum", branch_owner_cd);
 	}
 	// 이용중인 회원 중 남자 회원의 연령대별 수
 	public DashboardAgeGroup selectUseMemberAgeGroupMenNum(String branch_owner_cd){
-		System.out.println("DashboardDao-> selectUseMemberAgeGroupMenNum() branch_owner_cd: "+branch_owner_cd);
+		//System.out.println("DashboardDao-> selectUseMemberAgeGroupMenNum() branch_owner_cd: "+branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberAgeGroupMenNum", branch_owner_cd);
 	}
 	//이용중 회원 목록
 	public List<UsingMemberList> selectUseMemberList(String branch_owner_cd){
-		System.out.println("DashboardDao-> selectUseMemberList() branch_owner_cd: "+ branch_owner_cd);
+		//System.out.println("DashboardDao-> selectUseMemberList() branch_owner_cd: "+ branch_owner_cd);
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.dashboard.DashboardMapper.selectUseMemberList", branch_owner_cd);
 	}
 	

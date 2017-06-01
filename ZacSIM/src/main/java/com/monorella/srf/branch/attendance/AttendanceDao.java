@@ -24,7 +24,7 @@ public class AttendanceDao {
 	//입퇴실 테이블 한명의 정보 select
 	public SeatTime selectSeatTimeCd(Member member, String now_date){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("seat_cd", member.getSeat_cd());
+		map.put("member_cd", member.getMember_cd());
 		map.put("now_date", now_date);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.attendance.AttendanceMapper.selectSeatTimeCd", map);
 	}

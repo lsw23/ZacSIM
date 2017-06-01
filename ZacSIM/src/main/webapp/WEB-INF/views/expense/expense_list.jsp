@@ -432,27 +432,28 @@ header, footer, aside, nav, section, article {
 					<div class="col-xs-12">
 						<div class="box">
 							<div class="box-body table-responsive no-padding">
-								<table class="table ">
+								<%-- <div>${joinCount}</div> --%>
+								<table class="table ">	
 									<thead>
-										<tr>
-											<th>지출 번호</th>
+										<tr>										
 											<th>지점 대표코드</th>
 											<th>지출 내역</th>
 											<th>지출 금액</th>
 											<th>지출 담당자</th>
 											<th>지출 날짜</th>
+											<!-- <th>내역 수정</th> -->
 										</tr>
 									</thead>
 									<tbody>
 
 										<c:forEach var="s" items="${list}">
-											<tr>
-												<td>${s.expense_cd}</td>
+											<tr>												
 												<td>${s.branch_owner_cd}</td>
 												<td>${s.expense_breakdown}</td>
 												<td>${s.expense_total}</td>
 												<td>${s.branch_name}</td>
 												<td>${s.expense_date}</td>
+												<%-- <td><a href="${pageContext.request.contextPath}/expense/expense_modify/">내역수정</a></td> --%>
 											</tr>
 										</c:forEach>
 									</tbody>
