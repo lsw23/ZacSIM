@@ -13,45 +13,32 @@
 <link href="${pageContext.request.contextPath}/resources/head/css/font-awesome.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/templatemo-style.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$( function() {
-	  $( "#tabs" ).tabs();
-	});
-</script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
-	.branchOwner-bt1{
-		margin-top: 150px;
-		margin-left: 610px;
-	}
-	
-	.branchOwner-bt2{
-		
-		margin-top: -18px;
-		margin-left: 735px;
-	}
-	
 	.minusMargin{
-		margin-top: -5px;
+		margin-top: -15px;
 	}
 	
 	.button-color{
 		background-color: green;
 		
 	}
+	.margin-top{
+		margin-top: 150px;
+	}
 </style>
 </head>
 <body class="light-gray-bg">
-	<div id="tabs" class="row">
-	  <ul>
-		  
-	    <li class="branchOwner-bt1"><a class="templatemo-blue-button" href="#tabs-1">Owner</a></li>
-	    <li class="branchOwner-bt2"><a class="templatemo-blue-button" href="#tabs-2">Staff</a></li>
-		 
-	  </ul>
-	   <div id="tabs-1" class="minusMargin">
-	    <div class="templatemo-content-widget templatemo-login-widget white-bg">
+		<div class="text-center margin-top">
+		  <button class="w3-bar-item templatemo-blue-button" onclick="openCity('Owner')">Owner</button>
+		  &nbsp;
+		  <button class="w3-bar-item templatemo-blue-button" onclick="openCity('Staff')">Staff</button>
+		  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		</div>
+	   <div id="Owner" class="level minusMargin">
+	    <div class="templatemo-content-widget templatemo-login-widget white-bg" style="padding-bottom: 20px;">
 			<header class="text-center">
 				<h1 style="margin-bottom: 10px;">Zak<b>SIM</b></h1><br>
 				<h1>BranchOwner</h1>
@@ -79,7 +66,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<input id="submit-bt" type="button" class="templatemo-blue-button width-100 button-color" value="Login">
+					<input type="submit" class="templatemo-blue-button width-100 button-color" value="Login">
 				</div>
 			</form>
 		</div>
@@ -90,13 +77,13 @@
 			</p>
 		</div>
       </div>	
-	  <div id="tabs-2" class="minusMargin">
+	  <div id="Staff" class="level minusMargin" style="display:none">
 	    <div class="templatemo-content-widget templatemo-login-widget white-bg" style="padding-bottom: 20px;">
 			<header class="text-center">
 				<h1 style="margin-bottom: 10px;">Zak<b>SIM</b></h1><br>
 				<h1>BranchStaff</h1>
 			</header>
-			<form id="owner-form" class="templatemo-login-form row" action="${pageContext.request.contextPath}/login/loginpro" method="POST">
+			<form id="owner-form" class="templatemo-login-form row" action="${pageContext.request.contextPath}/login/loginStaff" method="POST">
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
@@ -119,7 +106,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<input id="submit-bt" type="button" class="templatemo-blue-button width-100 button-color" value="Login">
+					<input type="submit" class="templatemo-blue-button width-100 button-color" value="Login">
 				</div>
 			</form>
 		</div>
@@ -131,28 +118,16 @@
 		</div>	    
 	  </div>
 	  
-	</div>
-	
-	<%-- <!-- jQuery -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/head/js/jquery-1.11.2.min.js"></script>
-	
-	<script type="text/javascript">
-	$(document).ready(function(){
-		console.log($('#r1').val());
-		if($('#r1').val()=='owner'){
-			console.log('확인1');
-			$('#submit-bt').click(function(){
-				console.log('클릭');
-				var id = $('#branch_owner_id').val();
-				var pw = $('#branch_owner_pw').val();
-				$('#staff_id').val(id);
-				$('#staff_pw').val(pw);
-				$('#owner-form').submit();
-			});
-		}else{
-			
+	<script>
+		function openCity(cityName) {
+		    var i;
+		    var x = document.getElementsByClassName("level");
+		    for (i = 0; i < x.length; i++) {
+		       x[i].style.display = "none";  
+		    }
+		    document.getElementById(cityName).style.display = "block";  
 		}
-	});
-	</script> --%>
+	</script>
+	
 </body>
 </html>
