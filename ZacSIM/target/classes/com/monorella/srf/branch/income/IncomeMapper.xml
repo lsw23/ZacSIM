@@ -3,6 +3,11 @@
 
 <mapper namespace="com.monorella.srf.branch.income.IncomeMapper">
 	
+	<!-- 결제취소시 inout_tb 해당 회원 delete -->
+	<delete id="deleteInout" parameterType="com.monorella.srf.branch.dto.Payment">
+		DELETE FROM branch_inout_tb WHERE member_cd = #{member_cd}
+	</delete>
+	
 	<!-- 결제취소테이블 insert -->
 	<insert id="insertCancel" parameterType="com.monorella.srf.branch.dto.Payment">
 		INSERT INTO branch_cancel_tb(

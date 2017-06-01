@@ -10,7 +10,9 @@
   		SELECT 
 			 member_cd
 			, bm.branch_owner_cd
-			, bm.seat_cd, bm.member_nm
+			, bm.seat_cd
+			, bm.member_nm
+			, bm.member_tel
 			, CURRENT_DATE() AS member_date
 			, bm.member_end_date
 			, bs.seat_cnumber
@@ -29,7 +31,7 @@
 		SELECT 
 			 COUNT(member_cd) AS member_count
 			, br.room_nm
-			, (COUNT(member_cd)/brd.room_personnel*100) AS member_percentage
+			, (COUNT(member_cd)/brd.pay_seat*100) AS member_percentage
 		FROM branch_member_tb bm 
 		INNER JOIN branch_saet_tb bs ON bm.seat_cd = bs.seat_cd
 		INNER JOIN branch_room_tb br ON bs.room_cd = br.room_cd
@@ -55,7 +57,7 @@
   		UPDATE branch_saet_tb
 			SET
 				seat_appoint='Y'
-				, colseat_state ='빈좌석'
+				, colseat_state =#{colseat_state}
 			WHERE seat_cd = #{seat_cd}
   	</update>
   	
@@ -93,7 +95,6 @@
 				, pay_seat=#{pay_seat}
 				, notpay_seat=#{notpay_seat}
 				, room_out=#{room_out}
-				, room_personnel=#{room_personnel}
 			WHERE room_cd =#{room_cd}
 	</update>
 	
@@ -111,8 +112,7 @@
 			UPDATE branch_room_dashboard_tb
 				SET 
 					pay_seat= #{pay_seat},
-					notpay_seat= #{notpay_seat},
-					room_personnel= #{pay_seat}
+					notpay_seat= #{notpay_seat}
 				WHERE room_cd= #{room_cd}
 	</update>
   	
@@ -126,7 +126,6 @@
 			, brd.pay_seat
 			, brd.notpay_seat
 			, brd.room_out
-			, brd.room_personnel
 			, br.room_nm
 		FROM branch_room_dashboard_tb brd
 		INNER JOIN branch_room_tb br ON brd.room_cd = br.room_cd
@@ -142,7 +141,6 @@
   			,(SELECT COUNT(seat_appoint) FROM branch_saet_tb WHERE seat_appoint = 'N' AND room_cd = #{room_cd}) AS notpay_seat
   			,(SELECT COUNT(colseat_state) FROM branch_saet_tb WHERE colseat_state = '입실' AND room_cd = #{room_cd}) AS seat_in
   			,(SELECT COUNT(colseat_state) FROM branch_saet_tb WHERE colseat_state = '퇴실' AND room_cd = #{room_cd}) AS seat_out
-  			,(SELECT COUNT(colseat_state) FROM branch_saet_tb WHERE colseat_state = '입실' AND room_cd = #{room_cd} OR colseat_state = '배치' AND room_cd = #{room_cd}) AS room_personnel
 		FROM branch_saet_tb
 		WHERE room_cd = #{room_cd} LIMIT 1
   	</select>
@@ -165,9 +163,10 @@
   	</select>
   	
   	<!--열람석 code에 일치하는 열람실 Code 조회 -->
-  	<select id="selectRoomCdeqSeatCd" parameterType="int" resultType="String">
+  	<select id="selectRoomCdeqSeatCd" parameterType="int" resultType="com.monorella.srf.branch.dto.Seat">
 	  	SELECT
 			 room_cd
+			 , colseat_state
 		FROM branch_saet_tb
 		WHERE seat_cd = #{seat_cd}	
   	</select>
@@ -249,16 +248,14 @@
 			, seat_out
 			, pay_seat
 			, notpay_seat
-			, room_out
-			, room_personnel)
+			, room_out)
 		VALUES (
 			#{room_cd}
 			, #{seat_in}
 			, #{seat_out}
 			, #{pay_seat}
 			, #{notpay_seat}
-			, 0
-			, #{room_personnel});
+			, 0);
 	</insert>  
 	
 	<!-- 열람석 등록 -->

@@ -58,7 +58,6 @@
 		            	<th>열람실</th>
 		           	    <th>입실</th>
 		                <th>퇴실</th>
-		                <th>총원</th>
 		                <th>결제 열람석 수</th>
 		                <th>미결제 열람석 수</th>
             		  </tr>
@@ -69,7 +68,6 @@
 	                        <td>${rd.room_nm}</td>
 	                        <td>${rd.seat_in}</td>
 	                        <td>${rd.seat_out}</td>
-	                        <td>${rd.room_personnel}</td>
 	                        <td>${rd.pay_seat}</td>
 	                        <td>${rd.notpay_seat}</td>
 	                      </tr> 
@@ -112,6 +110,7 @@
              <th>3일 기준</th>
              <th>인원</th>
            </tr>
+
            <c:forEach var="e" items="${enddatelist}">
             <tr>
             	<td>${e.room_nm}</td>

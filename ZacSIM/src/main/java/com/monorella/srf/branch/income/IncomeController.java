@@ -39,9 +39,12 @@ public class IncomeController {
 		incomeDao.insertCancel(paymentcancel);
 		//결제 row 삭제
 		incomeDao.deleteIncome(payment);
+		
 		if(paymentcancel.getPay_extension().equals("N")){
 			//결제 취소 회원, 열람석 정보 수정
 			schedulerDao.modifyEndDateMember(payment.getMember_cd());
+			//결제 취소 해당회원 출결번호 삭제 
+			incomeDao.deleteInout(payment);
 			//열람실 현황 수정
 			RoomDashBoard roomDashboard = roomDao.selectRoomDashBoard(payment.getRoom_cd());
 			roomDao.modifyRoomDashBoard(roomDashboard);

@@ -1,8 +1,14 @@
 package com.monorella.srf.branch.payment;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.BranchOwner;
+import com.monorella.srf.branch.dto.Charges;
 import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.Payment;
@@ -21,6 +28,29 @@ public class PaymentController {
 		
 	@Autowired PaymentDao paymentDao;
 	@Autowired RoomDao roomDao;
+	
+	//회원코드 중복확인
+	@RequestMapping(value="payment/check_membercd", method=RequestMethod.GET)
+	public ResponseEntity<String> checkMember(Member member){
+		System.out.println("checkMemberCd()" + member);
+		Member checkmember = paymentDao.checkMember(member);
+		String result = "";
+		if(checkmember.getMember_seat_state().equals("Y")){
+			System.out.println("중복 멤버코드");
+			result = "Y";
+		}else{
+			System.out.println("신규 멤버코드");
+			result = "N";
+		}
+		JSONObject jsonMain = new JSONObject();
+		jsonMain.put("check", result);
+		System.out.println(jsonMain.toString());
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "application/json; charset=UTF-8");
+	    return new ResponseEntity<String>(jsonMain.toString(), responseHeaders, HttpStatus.OK);  	
+	}
+	
 	//기간 만료일 연장 성공
 	@RequestMapping(value="payment/extension_success", method=RequestMethod.GET)
 	public String extensionSuccess(){
@@ -61,10 +91,14 @@ public class PaymentController {
 			@RequestParam(value="seat_cd", required=true) String seat_cd,
 			@RequestParam(value="member_cd", required=true) String member_cd){
 
+		List<Charges> chargeslist = paymentDao.selectCharges(branch_owner_cd);
+		System.out.println("PaymentController paymentFrom() chargeslist: "+ chargeslist);
+		model.addAttribute("chargeslist", chargeslist);
 		model.addAttribute("branch_owner_cd", branch_owner_cd);
 		model.addAttribute("room_cd", room_cd);
 		model.addAttribute("seat_cd", seat_cd);
 		model.addAttribute("member_cd", member_cd);
+
 		return "payment/newwinpayment";
 	}
 	
@@ -90,7 +124,6 @@ public class PaymentController {
 		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 		String branch_owner_cd = branchOwner.getBranch_owner_cd();
 		
-		
 		//결제 입력
 		payment.setPay_extension("N");
 		int result = paymentDao.insertPayment(payment);
@@ -101,8 +134,6 @@ public class PaymentController {
 			System.out.println("DashboardAccount-> account: "+account);
 			//월별 결제 총액 brunch_dashboard_account_list에 업데이트
 			paymentDao.modifyMonthIncome(account);
-			
-			
 			//성공시(열람석 지정 'Y'로)
 			paymentDao.modifyPaymentSeat(payment);	
 			//출결번호 테이블 insert
