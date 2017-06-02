@@ -8,7 +8,7 @@
 	<c:import url="../module2/advanced_css.jsp"/>
 	<style>
 		#span01{
-			color:red;
+			color:blue;
 		}
 	</style>
  </head>
@@ -42,24 +42,29 @@
 					    </div>
 					    
 					    <div class="form-group">
-					    <label for="fname">회원코드&nbsp;&nbsp;<button type="button" id="memberlist">목록</button>&nbsp;&nbsp;<span id="span01"></span> </label>
+					    <label for="fname">회원코드&nbsp;&nbsp;<button type="button" id="memberlist">검색</button>&nbsp;&nbsp;<span id="span01"></span> </label>
 					    <input type="text" id="member_cd" name="member_cd" class="form-control">
 					    </div>
 					    
-					    <div class="form-group">
-					    <label for="fname">등록일</label>
-					    <input type="date" name="member_regi_date" class="form-control">
-					    </div>
-					    
+						<div class="form-group">
+						 <label for="fname">요금제</label>
+					    <div>
 					    <c:forEach var="c" items="${chargeslist}">
 						    <label class="test">
 		                      	<input type="radio" name="r3" class="flat-red charges" value="${c.seat_charges_code}"/>
 		                      	${c.seat_member_type}<span class="charges_date">${c.seat_charges_date}</span>일-<span class="charges_prices">${c.seat_charges_price}</span>원
 		                    </label>
 					    </c:forEach>
+					    </div>
+					    </div>
+					    <div class="form-group">
+					    <label for="fname">등록일</label>
+					    <input type="text" name="member_regi_date" id="now_date" class="form-control" readonly="readonly">
+					    </div>
+					    
 					    <div class="form-group">
 					    <label for="fname">만료일</label>
-					    <input type="date" name="member_end_date" class="form-control">
+					    <input type="text" name="member_end_date" id="d-day" class="form-control" readonly="readonly">
 					    </div>
 
 						<div class="form-group">
@@ -74,8 +79,6 @@
 					      <option value="cash">현금</option>
 					    </select>
 					    </div>
-					    
-						 <input type="text" id="tesst"/>
 					    <div class="box-footer">
 					       <button type="submit" class="btn btn-primary" value="결제">결제</button>				   
 					    </div>
@@ -88,11 +91,6 @@
     <!-- JS -->
     <c:import url="../module2/jsscript.jsp" />
 	<script>
-		
-		//값
-		function setChildValue(name){
-      		document.getElementById('tesst').value = name;
-		}
 	
 		//목록 검색
 		$('#memberlist').click(function(){
@@ -106,7 +104,6 @@
 		    specs += ",top=" + top;
 			window.open('${pageContext.request.contextPath}/payment/payment_search', '_blank', specs);
 		});
-		
 		
 		//결제 요금 계산
 		$('#discount_amount').blur(function(){
@@ -142,13 +139,48 @@
 			});
 		});
 		
+		
+		//현재 DATE 구하기  
+	      var now = new Date();
+	      var year= now.getFullYear();
+	      var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+	      var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+	      var now_date = year + '-' + mon + '-' + day;
+	      console.log('now_date :' + now_date);
+	      
+	      $('#now_date').val(now_date);
+	      
+	     //날짜 더하기  함수
+	      function dayPlus(value, num){
+	    	  var arr = value.split('-');
+	    	  var date = new Date(arr[0], arr[1], arr[2]);
+	    	  console.log('date :' + date);
+	    	  console.log('date.getDate() :' + date.getDate() + 'num :' + num);
+	    	  date.setDate(date.getDate() + num);
+	    	  var mon = date.getMonth()>9 ? ''+date.getMonth() : '0'+date.getMonth();
+	    	  var day = date.getDate()>9 ? ''+date.getDate() : '0'+date.getDate();
+	    	  
+	    	  console.log('일자 더하기 :' + date.getFullYear()+'-'+mon+'-'+ day);
+	    	  var plus_date = date.getFullYear()+'-'+mon+'-'+ day;
+	    	  return plus_date;
+	      }
+		
+		
 		$('.charges').on('click', function(){
 			console.log('라디오 확인');
-			console.log($(this).val());
-			console.log($(this).next().html());
-			console.log($(this).next().next().html());
-			
+			console.log($(this).val()); //요금제코드
+			console.log($(this).next().html()); //요금제 기한
+			console.log($(this).next().next().html());//요금제 요금
+			var price = $(this).next().next().html();
+			var num = $(this).next().html() *1;
+			var result = dayPlus(now_date, num);
+			$('#d-day').val(result);
+			$('#total_amount').val(price);
 		});
+		
+		
+
+		
 		
 		/* //라디오박스 css
  	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({

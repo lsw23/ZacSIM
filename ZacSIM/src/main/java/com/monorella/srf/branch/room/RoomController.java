@@ -53,17 +53,14 @@ public class RoomController {
 		//이동할 좌석코드 구하기(이전 seat 이후 seatcd)
 		Seat seatcd = roomDao.selectSeatCd(seat);
 		System.out.println("seatcd :" + seatcd);
-		
-		
+
 		//자리이동 1단계
 		int result = roomDao.modifyMoveSeat(seat, seatcd);
 		System.out.println("자리이동 수정 1단계 성공" + result);
 		//자리이동 2단계
 		seatcd.setColseat_state(beforeRoomCd.getColseat_state());
 		roomDao.modifySeatCdAfter(seatcd);
-		
-		
-		
+
 		//열람실 현황 modify
 		RoomDashBoard beforeDash = roomDao.selectRoomDashBoard(beforeRoomCd.getRoom_cd());
 		RoomDashBoard afterDash = roomDao.selectRoomDashBoard(seatcd.getRoom_cd());
