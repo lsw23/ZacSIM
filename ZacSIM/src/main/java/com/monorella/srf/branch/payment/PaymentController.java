@@ -92,6 +92,15 @@ public class PaymentController {
 		return "redirect:/payment/newwindetail";
 	}
 	
+	//연장 form(회원 기간만료예정자메뉴)
+	@RequestMapping(value="/payment/member_period_extension", method = RequestMethod.GET)
+	public String extensionPaymentFrom02(Member member, Model model){
+		Member detailmember = paymentDao.detailMember(member);
+		model.addAttribute("detailmember", detailmember);
+		return "room/member_period_extension";
+	}
+	
+	
 	//연장 form
 	@RequestMapping(value="/payment/extension_form" , method = RequestMethod.GET)
 	public String extensionPaymentFrom(Member member, Model model){

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
      <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
@@ -7,7 +7,12 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left info">
+              <c:if test="${!empty sessionScope.branchOwner.branch_nm }">
               <p>${sessionScope.branchOwner.branch_nm} <a href="#"><i class="fa fa-circle text-success"></i> Online</a></p>
+              </c:if>
+              <c:if test="${!empty sessionScope.branchStaff.branch_nm}">
+              <p>${sessionScope.branchStaff.branch_nm} <a href="#"><i class="fa fa-circle text-success"></i> Online</a></p>
+              </c:if>
             </div>
           </div> 
           <!-- search form -->

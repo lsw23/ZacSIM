@@ -61,7 +61,8 @@
 		<a href="${pageContext.request.contextPath}/room/member_period?dateNum=3"><button class="btn bg-maroon btn-flat margin">3일</button></a>
 		<a href="${pageContext.request.contextPath}/room/member_period?dateNum=7"><button class="btn bg-maroon btn-flat margin">7일</button></a>
 		<a href="${pageContext.request.contextPath}/room/member_period?dateNum=30"><button class="btn bg-maroon btn-flat margin">30일</button></a>
-		
+		<hr/>
+		&nbsp;&nbsp;<button class="btn bg-olive allcheck" value="checked">전체선택</button>
 		<div class="box-body">
 		<table id="example2" class="table table-bordered table-hover">                                                                                 
 		  <thead>
@@ -79,18 +80,22 @@
 		  </thead>
 		  <tbody>
 		  <c:forEach var="e" items="${enddatelist}" varStatus="status">
+		  	
 		    <tr>
-		      <td><input type="checkbox"/></td>
+		      <td><input type="checkbox" class="checkboxs"/></td>
 		      <td>${status.index}</td>
 		      <td>${e.room_nm}</td>
 		      <td>${e.seat_cnumber}번</td>
 		      <td>${e.member_nm}</td>
 		      <td>${e.member_tel}</td>
 		      <td>${e.member_end_date}</td>
-		      <td><a href="${pageContext.request.contextPath}/payment/extension_form?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"><button class="btn bg-maroon period_btn">기간 연장</button></a>
-		      
+		      <td>
+		      	<input type="hidden" class="member_nm" value="${e.member_nm}">
+		      	<input type="hidden" class="seat_cd" value="${e.seat_cd}"/>
+		      	<button class="btn bg-maroon period_btn period_btn">기간 연장</button>
+		      <%-- <a href="${pageContext.request.contextPath}/payment/member_period_extension?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"></a> --%>
 		      </td>
-		      <td><a href="${pageContext.request.contextPath}/payment/extension_form?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"><button class="btn bg-maroon period_btn">문자</button></a></td>
+		      <td><a href="${pageContext.request.contextPath}"><button class="btn bg-maroon">문자</button></a></td>
 		    </tr>
 		  </c:forEach>
 		  </tbody>
@@ -130,8 +135,38 @@
         });
       });
       
+      //메뉴 고정
 		$('#member_menu').addClass('active');
 		$('#member04').addClass('active');
+		
+		$('.allcheck').on('click', function(){
+			if($(this).val() == 'checked'){
+				$('.checkboxs').prop('checked', true);
+				$(this).val('check');
+				return
+			}else{
+				$('.checkboxs').prop('checked', false);
+				$(this).val('checked');
+				return
+			}		
+		});
+		
+		//기간연장
+		$('.period_btn').click(function(){
+			 var member_nm = $(this).prev().prev().val();
+			 var seat_cd = $(this).prev().val();
+			 console.log('member_nm :' + member_nm);
+			 console.log('seat_cd :' + seat_cd);
+			 	var width=500, height=500;
+			    var left = (screen.availWidth - width)/2;
+			    var top = (screen.availHeight - height)/2;
+			    var specs = "width=" + width;
+			    specs += ",height=" + height;
+			    specs += ",left=" + left;
+			    specs += ",top=" + top;
+				window.open('${pageContext.request.contextPath}/payment/newwindetail?member_nm='+member_nm+'&seat_cd='+seat_cd, '_blank', specs);
+		});
+		
     </script>
   </body>
 </html>  
