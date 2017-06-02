@@ -49,12 +49,9 @@ public class LoginController {
 	
 	//로그인 처리
 	@RequestMapping(value = "/login/loginpro", method = RequestMethod.POST)
-	public String loginPro(BranchOwner branchOwner, HttpServletRequest request
-			, @RequestParam(value="staff_id") String staff_id, @RequestParam(value="staff_pw") String staff_pw){
+	public String loginPro(BranchOwner branchOwner, HttpServletRequest request){
 		//System.out.println("로그인 처리 요청");
 		BranchOwner owner = loginDao.loginBranchOwner(branchOwner);
-		System.out.println("LoginController-> loginPro()-> staff_id:"+staff_id);
-		System.out.println("LoginController-> loginPro()-> staff_pw:"+staff_pw);
 		
 		System.out.println("loginPro: " +owner);
 		if(owner == null){

@@ -299,6 +299,7 @@
 			 , member_tel
 			 , member_addr
 			 , member_seat_state
+			 , member_tel
 			 , member_date
 			 FROM branch_member_tb
 			  <if test="sv !=null and sv != ''">
