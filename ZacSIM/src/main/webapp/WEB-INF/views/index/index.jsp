@@ -3,7 +3,7 @@
 <!DOCTYPE html >
 <html>
 <head>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/main.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
@@ -30,7 +30,7 @@
 
 				<!-- Footer -->
 					<footer id="footer">
-						<span class="copyright">&copy; Untitled. Design: <a href="http://monorella.cafe24.com">Jak Sim</a>.</span>
+						<span class="copyright">&copy; Untitled. Design: <a href="#">Zak Sim</a>.</span>
 					</footer>
 
 			</div>

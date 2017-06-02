@@ -2,7 +2,7 @@
     pageEncoding="utf-8"%>
  <header class="main-header">
    <!-- Logo -->
-   <a href="${pageContext.request.contextPath}/dashboard/today_status" class="logo">Zak<b>SIM</b></a>
+   <a href="${pageContext.request.contextPath}/dashboard/all_status" class="logo">Zak<b>SIM</b></a>
    <!-- Header Navbar: style can be found in header.less -->
    <nav class="navbar navbar-static-top" role="navigation">
      <!-- Sidebar toggle button-->

@@ -21,6 +21,7 @@ import com.monorella.srf.branch.dto.DashboardAccount;
 import com.monorella.srf.branch.dto.Member;
 import com.monorella.srf.branch.dto.Payment;
 import com.monorella.srf.branch.dto.RoomDashBoard;
+import com.monorella.srf.branch.member.MemberDao;
 import com.monorella.srf.branch.room.RoomDao;
 
 @Controller
@@ -28,6 +29,25 @@ public class PaymentController {
 		
 	@Autowired PaymentDao paymentDao;
 	@Autowired RoomDao roomDao;
+	@Autowired MemberDao memberDao;
+	
+	//회원코드 검색 pro
+	@RequestMapping(value="payment/payment_search_pro",method=RequestMethod.GET)
+	public String searchMemberPro(@RequestParam(value="sv", required=true)String sv
+									, Model model){
+		System.out.println("sv :" + sv);
+		String so = "member_nm";
+		List<Member> memberlist = memberDao.searchMember(so, sv);
+		System.out.println(memberlist);
+		model.addAttribute("memberlist", memberlist);
+		return "payment/payment_search_pro";
+	}
+	
+	//회원코드 검색 form
+	@RequestMapping(value="payment/payment_search", method=RequestMethod.GET)
+	public String searchMember(){
+		return "payment/payment_search";
+	}
 	
 	//회원코드 중복확인
 	@RequestMapping(value="payment/check_membercd", method=RequestMethod.GET)

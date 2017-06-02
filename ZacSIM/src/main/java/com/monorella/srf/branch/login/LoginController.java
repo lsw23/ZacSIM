@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.member.MemberDao;
@@ -51,6 +52,7 @@ public class LoginController {
 	public String loginPro(BranchOwner branchOwner, HttpServletRequest request){
 		//System.out.println("로그인 처리 요청");
 		BranchOwner owner = loginDao.loginBranchOwner(branchOwner);
+		
 		System.out.println("loginPro: " +owner);
 		if(owner == null){
 			System.out.println("아이디와 비번이 일치하지 않습니다.");
@@ -59,6 +61,7 @@ public class LoginController {
 			System.out.println("로그인 성공");
 			request.getSession().setAttribute("branchOwner", owner);
 		}
+		
 		return "redirect:/dashboard/all_status";
 
 	}

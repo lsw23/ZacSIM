@@ -13,97 +13,122 @@
 <link href="${pageContext.request.contextPath}/resources/head/css/font-awesome.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/templatemo-style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+	.minusMargin{
+		margin-top: -15px;
+	}
+	
+	.button-color{
+		background-color: green;
+		
+	}
+	.margin-top{
+		margin-top: 150px;
+	}
+</style>
 </head>
 <body class="light-gray-bg">
-	<h2 style="color:white;"><a href="${pageContext.request.contextPath}/index/index">메인 페이지</a></h2>
-	<div class="templatemo-content-widget templatemo-login-widget white-bg"
-	style="margin-top: 150px;">
-		<header class="text-center">
-			<h1>Zak<b>SIM</b>(지점)</h1>
-		</header>
-		<form class="templatemo-login-form" action="${pageContext.request.contextPath}/login/loginpro" method="POST">
-			<div class="form-group">
-				<div class="input-group">
-					<div class="input-group-addon">
-						<i class="fa fa-user fa-fw"></i>
+		<div class="text-center margin-top">
+		  <button class="w3-bar-item templatemo-blue-button" onclick="openCity('Owner')">Owner</button>
+		  &nbsp;
+		  <button class="w3-bar-item templatemo-blue-button" onclick="openCity('Staff')">Staff</button>
+		  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		</div>
+	   <div id="Owner" class="level minusMargin">
+	    <div class="templatemo-content-widget templatemo-login-widget white-bg" style="padding-bottom: 20px;">
+			<header class="text-center">
+				<h1 style="margin-bottom: 10px;">Zak<b>SIM</b></h1><br>
+				<h1>BranchOwner</h1>
+			</header>
+			<form id="owner-form" class="templatemo-login-form row" action="${pageContext.request.contextPath}/login/loginpro" method="POST">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-user fa-fw"></i>
+						</div>
+						<input type="text" class="form-control" id="username" name="branch_owner_id"  value="bid001" required="required"/>
 					</div>
-					<input type="text" class="form-control" id="username" name="branch_owner_id"  value="bid001" required="required"/>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="input-group">
-					<div class="input-group-addon">
-						<i class="fa fa-key fa-fw"></i>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-key fa-fw"></i>
+						</div>
+						<input type="password" class="form-control" id="password" name="branch_owner_pw"  value="bpw001" required="required"/>
 					</div>
-					<input type="password" class="form-control" id="password" name="branch_owner_pw"  value="bpw001" required="required"/>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="checkbox squaredTwo">
-					<input type="checkbox" id="c1" name="cc" /> <label for="c1"><span></span>Remember me</label>
+				<div class="form-group">
+					<div class="checkbox squaredTwo">
+						<input type="checkbox" id="c1" name="cc" /> <label for="c1"><span></span>Remember me</label>
+					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<button type="submit" class="templatemo-blue-button width-100">Login</button>
-			</div>
-		</form>
-	</div>
-	<div
-		class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-		<p>
-			Not a registered user yet? <strong><a href="#"
-				class="blue-text">Sign up now!</a></strong>
-		</p>
-	</div>
+				<div class="form-group">
+					<input type="submit" class="templatemo-blue-button width-100 button-color" value="Login">
+				</div>
+			</form>
+		</div>
+		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+			<p>
+				Not a registered user yet? <strong><a href="#"
+					class="blue-text">Sign up now!</a></strong>
+			</p>
+		</div>
+      </div>	
+      
+	  <div id="Staff" class="level minusMargin" style="display:none">
+	    <div class="templatemo-content-widget templatemo-login-widget white-bg" style="padding-bottom: 20px;">
+			<header class="text-center">
+				<h1 style="margin-bottom: 10px;">Zak<b>SIM</b></h1><br>
+				<h1>BranchStaff</h1>
+			</header>
+			<form id="owner-form" class="templatemo-login-form row" action="${pageContext.request.contextPath}/login/loginStaff" method="POST">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-user fa-fw"></i>
+						</div>
+						<input type="text" class="form-control" id="username" name="branch_owner_id"  value="bid001" required="required"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="fa fa-key fa-fw"></i>
+						</div>
+						<input type="password" class="form-control" id="password" name="branch_owner_pw"  value="bpw001" required="required"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="checkbox squaredTwo">
+						<input type="checkbox" id="c1" name="cc" /> <label for="c1"><span></span>Remember me</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<input type="submit" class="templatemo-blue-button width-100 button-color" value="Login">
+				</div>
+			</form>
+		</div>
+		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+			<p>
+				Not a registered user yet? <strong><a href="#"
+					class="blue-text">Sign up now!</a></strong>
+			</p>
+		</div>	    
+	  </div>
+	  
+	<script>
+		function openCity(cityName) {
+		    var i;
+		    var x = document.getElementsByClassName("level");
+		    for (i = 0; i < x.length; i++) {
+		       x[i].style.display = "none";  
+		    }
+		    document.getElementById(cityName).style.display = "block";  
+		}
+	</script>
+	
 </body>
 </html>
-	
-	
-	<%-- 	<meta charset="UTF-8">
-	<title>ZakSIM</title>
-		<link rel= "stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/login.css">
-		<style>
-			#logo{
-				color : white;
-			}
-			body{
-				background : bluesky;
-			}
-			
-			#formMargin{
-				margin-top: 150px;
-			}
-		</style>
-	</head>
-	<body>
-	<!-- Form-->
-	<h1 id="logo">ZakSIM 지점사이트</h1>
-	<h2 id="logo"><a href="${pageContext.request.contextPath}/head">본사 사이트</a></h2>
-	<div class="form formMargin">
-	  <div class="form-panel one">
-	    <div class="form-content">
-	      <form action="${pageContext.request.contextPath}/login/loginpro" method="post">
-	        <div class="form-group">
-	          <label for="username">아이디</label	          <input type="text" id="username" name="branch_owner_id" value="bid001" required="required"/>
-	        </div>
-	        <div class="form-group">
-	          <label for="password">비밀번호</label>
-	          <input type="password" id="password" name="branch_owner_pw"  value="bpw001" required="required"/>
-	        </div>
-	        <div class="form-group">
-	          <label class="form-remember">
-	            <input type="checkbox"/>Remember Me
-	          </label><a href="#" class="form-recovery">비밀번호찾기</a>
-	        </div>
-	        <div class="form-group">
-	          <button type="submit">로그인</button>
-	        </div>
-	      </form>
-	    </div>
-	  </div>
-	</div>
-	 --%>
-	
-	
-	
-

@@ -490,7 +490,6 @@
         var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
         // This will get the first returned node in the jQuery collection.
         var areaChart = new Chart(areaChartCanvas);
-
         var areaChartData = {
           labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
           datasets: [
@@ -559,7 +558,6 @@
             }
           ]
         };
-
         var areaChartOptions = {
 		  showLabel: true,
           //Boolean - 가로 세로 값
@@ -597,10 +595,8 @@
           //Boolean - whether to make the chart responsive to window resizing
           responsive: true
         };
-
         //Create the line chart
         areaChart.Line(areaChartData, areaChartOptions);
-
      });
     </script>
 
@@ -798,7 +794,6 @@
     	var areaChartCanvas = $("#areaChart2").get(0).getContext("2d");
         // This will get the first returned node in the jQuery collection.
         var areaChart = new Chart(areaChartCanvas);
-
         var areaChartData = {
           labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
           datasets: [
@@ -867,7 +862,6 @@
             }
           ]
         };
-
         var areaChartOptions = {
 		  showLabel: true,
           //Boolean - 가로 세로 값
@@ -905,7 +899,6 @@
           //Boolean - whether to make the chart responsive to window resizing
           responsive: true
         };
-
         //Create the line chart
         areaChart.Line(areaChartData, areaChartOptions);
     });

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE>
 <html>
   <head>
@@ -51,12 +52,11 @@
 					    </div>
 					    
 					    <c:forEach var="c" items="${chargeslist}">
-						    <label>
-		                      	<input type="radio" name="r3" class="flat-red" value="${c.seat_charges_code}"/>
-		                      	${c.seat_member_type}${c.seat_charges_date}일-${c.seat_charges_price}원
+						    <label class="test">
+		                      	<input type="radio" name="r3" class="flat-red charges" value="${c.seat_charges_code}"/>
+		                      	${c.seat_member_type}<span class="charges_date">${c.seat_charges_date}</span>일-<span class="charges_prices">${c.seat_charges_price}</span>원
 		                    </label>
 					    </c:forEach>
-					    
 					    <div class="form-group">
 					    <label for="fname">만료일</label>
 					    <input type="date" name="member_end_date" class="form-control">
@@ -75,29 +75,36 @@
 					    </select>
 					    </div>
 					    
-
+						 <input type="text" id="tesst"/>
 					    <div class="box-footer">
 					       <button type="submit" class="btn btn-primary" value="결제">결제</button>				   
 					    </div>
 					  </form>
               		</div>
              	</div>
-            
+           
 		 </div><!-- col-md-12 -->
 	</div><!-- row -->
     <!-- JS -->
     <c:import url="../module2/jsscript.jsp" />
 	<script>
-		//라디오박스 css
-	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-	      checkboxClass: 'icheckbox_flat-green',
-	      radioClass: 'iradio_flat-green'
-	    });
 		
+		//값
+		function setChildValue(name){
+      		document.getElementById('tesst').value = name;
+		}
+	
 		//목록 검색
 		$('#memberlist').click(function(){
-			console.log('클릭 확인');
-			opener.parent.location='${pageContext.request.contextPath}/member/member_list'; 
+			console.log('확인');
+			var width=400, height=300;
+		    var left = screen.availWidth - (width+150);
+		    var top = (screen.availHeight - height)/2;
+		    var specs = "width=" + width;
+		    specs += ",height=" + height;
+		    specs += ",left=" + left;
+		    specs += ",top=" + top;
+			window.open('${pageContext.request.contextPath}/payment/payment_search', '_blank', specs);
 		});
 		
 		
@@ -119,8 +126,6 @@
 		$('#member_cd').keyup(function(){
 			$('#span01').html('');
 		});	
-			
-		
 			$.ajax({
 				url:'${pageContext.request.contextPath}/payment/check_membercd',
 				type:'GET',
@@ -134,10 +139,22 @@
 				error:function(XHR, textStatus, error){
 					$('#span01').html('존재하지 않는 회원코드 입니다.');
 				}
-				
-				
 			});
 		});
+		
+		$('.charges').on('click', function(){
+			console.log('라디오 확인');
+			console.log($(this).val());
+			console.log($(this).next().html());
+			console.log($(this).next().next().html());
+			
+		});
+		
+		/* //라디오박스 css
+ 	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+	      checkboxClass: 'icheckbox_flat-green',
+	      radioClass: 'iradio_flat-green'
+	    });  */
 	</script>
  </body>
 </html>
