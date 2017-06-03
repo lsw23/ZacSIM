@@ -29,70 +29,67 @@
 		    </ol>
 		    </section>
 			<section class="content">
-			<div class="col-md-9 col-lg-12 main" id="wrap">
-			
-			<div class="row">
-            <div class="col-xs-12">
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">독서실 회원 상세정보</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding">
-                  <table class="table table-hover">
-		          <tr>
-                	<td>독서실 회원코드 :</td>
-                	<td>${member.member_cd}</td>
-		          </tr>
-		          <tr>
-		            <td>출결번호 :</td>
-                	<td>${member.inout_num}</td>
-		          </tr>
-		          <tr>
-		            <td>이름 :</td>
-		            <td>${member.member_nm}</td>
-		          </tr>
-		          <tr>
-		            <td>성별 :</td>
-		            <td>${member.member_sex}</td>
-		          </tr>
-		          <tr>
-		            <td>나이 :</td>
-		            <td>${member.member_age}</td>
-		          </tr>
-		           <tr>
-		              <td>등록일 :</td>
-		              <td>${member.member_regi_date}</td>
-		           </tr>
-		           <tr>
-		              <td>기간만료일 :</td>
-		              <td>${member.member_end_date}</td>
-		           </tr>
-		           <tr>
-		              <td>회원상태 :</td>
-		              <c:if test="${member.member_seat_state eq 'Y'}">
-		              <td>정회원</td>
-		              </c:if>
-		              <c:if test="${member.member_seat_state eq 'N'}">
-		              <td>일반회원</td>
-		              </c:if>
-		           </tr>
-		           <tr>
-		              <td>등록경로 :</td>
-		              <td>${member.member_regi_path}</td>
-		           </tr>
-		           <tr>
-		              <td>이용목적 :</td>
-		              <td>${member.member_use_pur}</td>
-		           </tr>
-		           </table>
-		           <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_modify?member_nm=${member.member_nm}">회원 수정</a>
-   				   <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_remove?member_cd=${member.member_cd}">회원 삭제</a>
-  				   <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_list">회원리스트</a>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div>
-           </div>
-           </div>
+				<div class="row" >
+					<div class="col-md-12">
+		              <div class="box box-primary">
+		                <div class="box-header">
+		                  <h3 class="box-title">독서실 회원 상세정보</h3>
+		                </div><!-- /.box-header -->
+		                <div class="box-body table-responsive no-padding">
+		                  <table class="table table-hover">
+				          <tr>
+		                	<td>독서실 회원코드 :</td>
+		                	<td>${member.member_cd}</td>
+				          </tr>
+				          <tr>
+				            <td>출결번호 :</td>
+		                	<td>${member.inout_num}</td>
+				          </tr>
+				          <tr>
+				            <td>이름 :</td>
+				            <td>${member.member_nm}</td>
+				          </tr>
+				          <tr>
+				            <td>성별 :</td>
+				            <td>${member.member_sex}</td>
+				          </tr>
+				          <tr>
+				            <td>나이 :</td>
+				            <td>${member.member_age}</td>
+				          </tr>
+				           <tr>
+				              <td>등록일 :</td>
+				              <td>${member.member_regi_date}</td>
+				           </tr>
+				           <tr>
+				              <td>기간만료일 :</td>
+				              <td>${member.member_end_date}</td>
+				           </tr>
+				           <tr>
+				              <td>회원상태 :</td>
+				              <c:if test="${member.member_seat_state eq 'Y'}">
+				              <td>정회원</td>
+				              </c:if>
+				              <c:if test="${member.member_seat_state eq 'N'}">
+				              <td>일반회원</td>
+				              </c:if>
+				           </tr>
+				           <tr>
+				              <td>등록경로 :</td>
+				              <td>${member.member_regi_path}</td>
+				           </tr>
+				           <tr>
+				              <td>이용목적 :</td>
+				              <td>${member.member_use_pur}</td>
+				           </tr>
+				           </table>
+				           <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_modify?member_nm=${member.member_nm}">회원 수정</a>
+		   				   <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_remove?member_cd=${member.member_cd}">회원 삭제</a>
+		  				   <a class="btn btn-default" href="${pageContext.request.contextPath}/member/member_list">회원리스트</a>
+		                </div><!-- /.box-body -->
+		              </div><!-- /.box -->
+					</div>
+	           </div>
           </section>  
           </div>    
       </div><!-- /.content-wrapper -->
