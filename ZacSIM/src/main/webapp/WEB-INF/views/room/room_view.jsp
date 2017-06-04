@@ -52,7 +52,8 @@
 					<div id="containment-wrapper">
 						<form action="${pageContext.request.contextPath}/room/room_placement" id="col_form" method="post">
 						<c:forEach var="s" items="${seatlist}">
-							<div class="draggable seatdraggable ui-widget-content">
+							<div class="draggable seatdraggable ui-widget-content seat_btn">
+								<input type="hidden" class="member_cd" name="member_cd" value="${s.member_cd }"/>
 								<input type="hidden" class="seat_left" name="seat_left" value="${s.seat_col}">
 								<input type="hidden" class="seat_top" name="seat_top" value="${s.seat_row}">
 								<input type="hidden" name="room_cd" value="${s.room_cd}">								
@@ -67,7 +68,7 @@
 				</div>
 				
 				<div class="col-xs-3">
-				<div style="clear: both; width: 200px;">
+				<!-- <div style="clear: both; width: 200px;">
 				
 				<div class="box box-solid box-warning">
 	                <div class="box-header">
@@ -78,10 +79,10 @@
 	                <div class="box-body">
 						<button id="add_btn" type="button" class="btn btn-block btn-info btn-xs">수정</button>
 						<button id="cancel_btn" type="button" class="btn btn-block btn-danger btn-xs">취소</button>
-	                </div><!-- /.box-body -->
-	              </div><!-- /.box -->
+	                </div>/.box-body
+	              </div>/.box
 				
-				</div>
+				</div> -->
 				</div>
 			</div><!-- row -->
 		</section><!-- content -->
@@ -99,6 +100,54 @@
 		});
 		
 		$('.member_nm').parent().css('background-color', '#84C8DC');
+		
+		
+		
+		/* var contextPath = '<c:out value='${pageContext.request.contextPath}'/>';
+	     
+		// window.name = "부모창 이름"; 
+        window.name = "parentForm";
+        
+		$('.seat_btn').click(function(){
+			console.log('클릭');
+			var seat_cd = $(this).attr('value');
+			console.log('seat_cd = ' + seat_cd);
+		    var branch_owner_cd = $("input[name=chk]:eq(0)").val();
+		    console.log('branch_owner_cd = ' + branch_owner_cd);
+		    var room_cd = $(this).prev().val();
+		    console.log('room_cd = ' + room_cd);
+		    var member_cd = $(this).prev().prev().val();
+		    console.log('member_cd = ' + member_cd);
+		    
+		    var windetail = $(this).find('.windetail').text();
+		    console.log('windetail = ' + windetail);
+		    var windetailon = $(this).find('.windetailon').text();
+		    console.log('windetailon = ' + windetailon);
+		    
+		    if (windetail==("빈좌석")){		    	
+		    var width=500, height=800;
+		    var left = (screen.availWidth - width)/2;
+		    var top = (screen.availHeight - height)/2;
+		    var specs = "width=" + width;
+		    specs += ",height=" + height;
+		    specs += ",left=" + left;
+		    specs += ",top=" + top;
+			//결제창
+			window.open(contextPath+'/payment/newwinpayment?branch_owner_cd='+branch_owner_cd+'&room_cd='+room_cd+'&seat_cd='+seat_cd+'&member_cd='+member_cd, '_blank', specs);
+		    } else {
+			    var width=500, height=500;
+			    var left = (screen.availWidth - width)/2;
+			    var top = (screen.availHeight - height)/2;
+			    var specs = "width=" + width;
+			    specs += ",height=" + height;
+			    specs += ",left=" + left;
+			    specs += ",top=" + top;
+			//상세정보
+				var seat_cd = $(this).val();
+				window.open(contextPath+'/payment/newwindetail?member_nm='+windetailon+'&seat_cd='+seat_cd, '_blank', specs);
+		    }
+		}); */
+		
 	</script>
 </body>
 </html>

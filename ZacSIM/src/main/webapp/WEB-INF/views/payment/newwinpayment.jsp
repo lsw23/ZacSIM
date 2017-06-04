@@ -179,8 +179,9 @@
 		});
 		
 		
-
-		
+		function setChildValue(name){
+		      document.getElementById("member_cd").value = name;
+		}
 		
 		/* //라디오박스 css
  	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
