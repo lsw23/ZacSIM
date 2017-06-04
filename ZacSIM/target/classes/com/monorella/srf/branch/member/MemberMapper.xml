@@ -228,7 +228,7 @@
 			, s.seat_out_time 
 			FROM branch_member_tb AS m
 			INNER join branch_seat_time_tb AS s
-			ON m.member_cd = s.member_cd 
+			ON m.member_cd = s.member_cd
 			WHERE m.member_nm = #{member_nm}
 	</select>	
 	
