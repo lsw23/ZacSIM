@@ -37,6 +37,7 @@ public class PaymentDao {
 		System.out.println("PaymentDao-> selectMonthIncome()-> branch_owner_cd: "+ branch_owner_cd);
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.payment.PaymentMapper.selectMonthIncome", branch_owner_cd);
 	}
+	
 	//기간만료일 수정
 	public int modifyEndDate(Payment payment){
 		return sqlSessionTemplate.update("com.monorella.srf.branch.payment.PaymentMapper.modifyEndDate", payment);
