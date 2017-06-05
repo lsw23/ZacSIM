@@ -3,7 +3,7 @@ package com.monorella.srf.branch.dto;
 public class BranchOwner {
 
 	private String branch_owner_cd; //지점대표코드
-	private String owner_num;       //사업자 번호
+	private String owner_num; //사업자 번호
 	private String branch_owner_id; //사업자 아이디
 	private String branch_owner_pw; //비밀번호
 	private String branch_owner_addr; //사업자 주소
