@@ -101,10 +101,11 @@ public class MemberDao {
     }
 	
 	// 입퇴실 내역검색 메서드
-		public List<Member> exeMember(String so, String sv){
+		public List<Member> exeMember(String so, String sv, BranchOwner branchOwner){
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("so", so);
 			map.put("sv", sv);
+			map.put("branch_owner_cd", branchOwner.getBranch_owner_cd());
 			System.out.println("7st exelist");
 			return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.exeMember", map);
 			 
@@ -122,10 +123,11 @@ public class MemberDao {
 	}*/
 	
 	// 회원검색 메서드
-	public List<Member> searchMember(String so, String sv){
+	public List<Member> searchMember(String so, String sv, BranchOwner branchOwner){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("so", so);
 		map.put("sv", sv);
+		map.put("branch_owner_cd", branchOwner.getBranch_owner_cd());
 		List<Member> memberList = null;
 		System.out.println("7st searchMember");
 		memberList = sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.searchMember", map);
@@ -133,19 +135,21 @@ public class MemberDao {
 	}
 
 	// 입퇴실 리스트 메서드
-	public List<SeatTime> listExit(int currentPage, int pagePerRow) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public List<SeatTime> listExit(int currentPage, int pagePerRow, BranchOwner branchOwner) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("beginRow", (currentPage-1)*pagePerRow);
 		map.put("pagePerRow", pagePerRow);
+		map.put("branch_owner_cd", branchOwner.getBranch_owner_cd());
 		System.out.println("6st listExit");
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.exitList", map);
 	}
 
 	// 입퇴실 회원 리스트 메서드
-	public List<Member> selectMemberExit(int currentPage, int pagePerRow) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public List<Member> selectMemberExit(int currentPage, int pagePerRow, BranchOwner branchOwner) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("beginRow", (currentPage-1)*pagePerRow);
 		map.put("pagePerRow", pagePerRow);
+		map.put("branch_owner_cd", branchOwner.getBranch_owner_cd());
 		System.out.println("6st selectMemberExit");
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.selectMemberExit", map);
 	}

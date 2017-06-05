@@ -8,13 +8,14 @@
 	$(document).ready(function(){
 		//console.log("하이");
 		$('#modifyForm').click(function(){
+		var member_sex = $('#member_sex').val();
 		var member_regi_path = $('#member_regi_path').val();
 		var member_use_pur = $('#member_use_pur').val();
 		if($('#member_nm').val()=='') {
             alert('이름을 입력해주세요');
             $('#member_nm').focus();
-		} else if($('#member_sex').val()=='') {
-            alert('성별을 입력해주세요');
+		} else if(member_sex == '선택'){
+            alert('성별을 선택해 주세요');
             $('#member_sex').focus();    
 		} else if($('#member_tel').val()=='') {
             alert('연락처를 입력해주세요');
@@ -93,15 +94,9 @@
 							<input type="text" class="form-control" value="${member.member_tel}" id="member_tel" name="member_tel" placeholder="연락처를 입력해주세요">
 						</div>
 						<div class="form-group">
-								<label class="control-label" for="inputLarge">주소</label>
-								<!-- <input type="text" class="form-control" id="member_addr" name="member_addr" placeholder="주소를 입력해주세요"> -->
-									<div>
-										<input type="text" id="member_postcode"  name="member_postcode" placeholder="우편번호">
-										<input type="button"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-										<input type="text" id="member_addr" name="member_addr" class="form-control" placeholder="주소">
-										<input type="text" id="member_detail_addr" name="member_detail_addr" class="form-control"  placeholder="상세주소">
-									</div>	
-							</div>
+							<label class="control-label" for="inputLarge">주소</label>
+							<input type="text" class="form-control" value="${member.member_addr}" id="member_age" name="member_age" placeholder="나이를 입력해주세요">
+						</div>
 						<div class="form-group">
 							<label class="control-label" for="inputLarge">나이</label>
 							<input type="text" class="form-control" value="${member.member_age}" id="member_age" name="member_age" placeholder="나이를 입력해주세요">
