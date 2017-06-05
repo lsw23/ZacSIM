@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.DashboardAgeGroup;
 import com.monorella.srf.branch.dto.InsertNumList;
 import com.monorella.srf.branch.dto.Member;
@@ -82,10 +83,10 @@ public class MemberDao {
 		return sqlSessionTemplate.update("com.monorella.srf.branch.member.MemberMapper.MemberModify", member);
 	}
 
-	// 하나의 입퇴실회원 보기
-	public Member getMeberView(String member_cd){
-		System.out.println("MemberDao->getMeberView->"+member_cd);
-		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMeberView",member_cd);
+	// 하나의 입퇴실 회원 보기
+	public Member getMeberView(String member_nm){
+		System.out.println("MemberDao->getMeberView->"+member_nm);
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.member.MemberMapper.getMeberView",member_nm);
 	}
 	//하나의 입퇴실 보기
 		public List<SeatTime> getExit(String member_nm) {
@@ -150,10 +151,11 @@ public class MemberDao {
 	}
 
 	// 회원리스트 메서드
-	public List<Member> selectMemberList(int currentPage, int pagePerRow) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
+	public List<Member> selectMemberList(int currentPage, int pagePerRow, BranchOwner branchOwner ) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("beginRow", (currentPage-1)*pagePerRow);
 		map.put("pagePerRow", pagePerRow);
+		map.put("branch_owner_cd", branchOwner.getBranch_owner_cd());
 		System.out.println("6st selectMemberList");
 		return sqlSessionTemplate.selectList("com.monorella.srf.branch.member.MemberMapper.selectMemberList", map);
 	}

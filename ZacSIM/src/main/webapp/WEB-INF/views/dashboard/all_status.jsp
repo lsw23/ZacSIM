@@ -89,7 +89,7 @@
           
           <!-- 박스 6개 -->
           <div class="row">
-            <div class="col-md-2 col-sm-6 col-xs-6">
+            <div class="col-md-4 col-sm-6 col-xs-6">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion ion-person"></i></span>
                 <div class="info-box-content">
@@ -98,16 +98,7 @@
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
              </div><!-- /.col -->
-             <div class="col-md-2 col-sm-6 col-xs-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-person-stalker"></i></span>
-                <div class="info-box-content">
-                  <h3 class="info-box-text"><b>${month}월</b> 등록</h3>
-                  <span class="info-box-number">${monthMemberNo} <small>명</small></span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-             </div><!-- /.col -->
-		     <div class="col-md-2 col-sm-6 col-xs-6">
+             <div class="col-md-4 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-green"><i class="ion ion-log-out"></i></span>
 	               <div class="info-box-content">
@@ -116,16 +107,7 @@
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-6">
-	             <div class="info-box">
-	               <span class="info-box-icon bg-green"><i class="ion ion-android-close"></i></span>
-	               <div class="info-box-content">
-	                 <h3 class="info-box-text">미결제</h3>
-	                 <span class="info-box-number">${unpaidMemberNo} <small>명</small></span>
-	               </div><!-- /.info-box-content -->
-	             </div><!-- /.info-box -->
-	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-6">
+	          <div class="col-md-4 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-yellow"><i class="ion ion-happy-outline"></i></span>
 	               <div class="info-box-content">
@@ -134,7 +116,26 @@
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-6">
+	         
+             <div class="col-md-4 col-sm-6 col-xs-6">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-person-stalker"></i></span>
+                <div class="info-box-content">
+                  <h3 class="info-box-text"><b>${month}월</b> 등록</h3>
+                  <span class="info-box-number">${monthMemberNo} <small>명</small></span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+             </div><!-- /.col -->
+	         <div class="col-md-4 col-sm-6 col-xs-6">
+	             <div class="info-box">
+	               <span class="info-box-icon bg-green"><i class="ion ion-android-close"></i></span>
+	               <div class="info-box-content">
+	                 <h3 class="info-box-text">미결제</h3>
+	                 <span class="info-box-number">${unpaidMemberNo} <small>명</small></span>
+	               </div><!-- /.info-box-content -->
+	             </div><!-- /.info-box -->
+	         </div><!-- /.col -->
+	         <div class="col-md-4 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-yellow"><i class="ion ion-sad-outline"></i></span>
 	               <div class="info-box-content">

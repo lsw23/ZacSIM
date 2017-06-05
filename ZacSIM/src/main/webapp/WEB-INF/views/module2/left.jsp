@@ -52,7 +52,6 @@
               <a href="#">
                 <i class="fa fa-edit"></i> <span>회원</span>
                 <i class="fa fa-angle-left pull-right"></i>
-                <small class="label pull-right bg-red">new</small>
               </a>
               <ul class="treeview-menu">
                 <li id="member01"><a href="${pageContext.request.contextPath}/member/member_form"><i class="fa fa-circle-o"></i> 회원 등록</a></li>
@@ -92,7 +91,6 @@
             <li id="staffboard_menu">
               <a href="${pageContext.request.contextPath}/staffboard/staffboard_list">
                 <i class="fa fa-envelope"></i> <span>공지사항</span>
-                <small class="label pull-right bg-yellow">12</small>
               </a>
             </li>
             <li id="charges_menu"><a href="${pageContext.request.contextPath}/charges/charges_form"><i class="fa fa-book"></i> 요금제 설정</a></li>
