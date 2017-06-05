@@ -154,7 +154,12 @@
 		WHERE room_cd = #{room_cd} AND seat_cnumber = #{seat_cnumber}
   	</select>
   	
-  	<!-- 열람실 코드 전체 가져오기  -->
+  	<!-- 지점별 열람실 코드 조회 -->
+  	<select id="selectRoomCdBranch" parameterType="com.monorella.srf.branch.dto.Room" resultType="int">
+  		SELECT COUNT(room_cd) FROM branch_room_tb WHERE branch_owner_cd = #{branch_owner_cd}
+  	</select>
+  	
+  	<!-- 열람실 코드 전체 조회  -->
   	<select id="selectRoomAllCd" resultType="com.monorella.srf.branch.dto.Room">
   		SELECT 
 			room_cd

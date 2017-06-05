@@ -15,8 +15,19 @@
                  <h2 class="box-title"><i class="fa fa-pagelines"></i>결제</h2>
     	       </div>
              </div><!-- box box-solid bg-aqua -->
-             <h3>결제가 완료되었습니다.</h3>
-			 <h3>회원의 출결번호는 ${inouting}입니다.</h3>
+              <div class="col-md-12">
+              <!-- small box -->
+              <div class="small-box bg-blue">
+                <div class="inner">
+                  <h2>결제가 정상처리되었습니다. </h2>
+                  <h3>출결번호 : ${inouting}</h3>
+
+                </div>
+                <div class="icon">
+                  <i class="ion ion-ios-cart-outline"></i>
+                </div>
+              </div>
+            </div><!-- ./col -->
    		</div><!-- col-md-12 -->
 	</div>
 	<c:import url="../module2/jsscript.jsp" />

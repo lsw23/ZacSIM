@@ -25,7 +25,7 @@
                 <div class="container">
                 <!-- form start -->
                   <div class="box-body">
-                      <form name="myForm" name="postForm" method="post" action="${pageContext.request.contextPath}/payment/paymentend">					    
+                      <form name="myForm" id="myForm" method="post" action="${pageContext.request.contextPath}/payment/paymentend">					    
 					    <div class="form-group">
 					    <label for="fname">지점대표코드</label>
 					    <input type="text" id="branch_owner_cd" name="branch_owner_cd" class="form-control" value="${branch_owner_cd}" readonly>
@@ -49,8 +49,12 @@
 						<div class="form-group">
 						 <label for="fname">요금제</label>
 					    <div>
+					     	<c:if test="${empty chargeslist}">
+					    		<code>요금제설정</code>(왼쪽 메뉴)에서 요금제를 등록해주세요. 
+					    	</c:if>
 					    <c:forEach var="c" items="${chargeslist}">
-						    <label class="test">
+					   
+						    <label class="test" id="charges">
 		                      	<input type="radio" name="r3" class="flat-red charges" value="${c.seat_charges_code}"/>
 		                      	${c.seat_member_type}<span class="charges_date">${c.seat_charges_date}</span>일-<span class="charges_prices">${c.seat_charges_price}</span>원
 		                    </label>
@@ -80,7 +84,7 @@
 					    </select>
 					    </div>
 					    <div class="box-footer">
-					       <button type="submit" class="btn btn-primary" value="결제">결제</button>				   
+					       <button type="submit" class="btn btn-primary" id="btn" value="결제">결제</button>				   
 					    </div>
 					  </form>
               		</div>
@@ -120,7 +124,7 @@
 			var membercd = $('#member_cd').val();
 			var parm = {"member_cd":membercd};
 			
-		$('#member_cd').keyup(function(){
+		$('#member_cd').blur(function(){
 			$('#span01').html('');
 		});	
 			$.ajax({
@@ -178,16 +182,35 @@
 			$('#total_amount').val(price);
 		});
 		
-		
+		//자식창 회원코드 클릭시 값 가져오는 함수
 		function setChildValue(name){
-		      document.getElementById("member_cd").value = name;
+		    $('#member_cd').val(name);
+		    $('#member_cd').focus();
+		    return;
 		}
 		
-		/* //라디오박스 css
- 	    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
-	      checkboxClass: 'icheckbox_flat-green',
-	      radioClass: 'iradio_flat-green'
-	    });  */
+		//유효성 검사
+		var re_str = /^[가-힣a-z0-9_-]+$/;
+    	var re_num = /^[0-9]+$/;
+    	
+    	$('#btn').click(function(){
+    			if(re_str.test($('#member_cd').val()) != true){
+ 					alert('회원코드를 입력해주세요.');
+ 					$('#member_cd').focus();
+ 					return false;
+    			}else if(re_str.test($('#d-day').val()) != true){
+    				alert('요금제를 선택해주세요.');
+    				$('#charges').focus();
+    				return false;
+    			}else if(re_num.test($('#total_amount').val()) != true){
+    				alert('숫자만 입력해주세요.');
+    				$('#total_amount').focus();
+    				return false;
+    			}else{
+    				$('#myForm').submit();
+    			}
+    	});
+		
 	</script>
  </body>
 </html>
