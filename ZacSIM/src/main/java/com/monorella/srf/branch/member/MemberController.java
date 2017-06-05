@@ -122,11 +122,11 @@ public class MemberController {
 				System.out.println("member_exit 요청1");
 				List<Member> memberexit = memberDao.exitMember();
 				System.out.println("member_exit 요청1");
-				List<SeatTime> listExit = memberDao.Exit();
+				
 				System.out.println("member_exit 입퇴실 요청2");
 				model.addAttribute("memberexit", memberexit);
 				System.out.println("member_exit 요청1");
-				model.addAttribute("listExit", listExit);
+				
 				System.out.println("member_exit 입퇴실 요청2");
 				BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 				if(currentPage < 1){
@@ -138,17 +138,17 @@ public class MemberController {
 
 				int pagePerRow = 10;
 				List<Member> list = memberDao.selectMemberExit(currentPage, pagePerRow, branchOwner);
-
+				List<SeatTime> listExit = memberDao.listExit(currentPage, pagePerRow, branchOwner);	
 				int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
 				if(joinCount%pagePerRow != 0) {
 					lastPage++;
 				}
 
 				int countPage = 5;
-				int startPage = ((currentPage - 1)/10)*10+1;
+				int startPage = ((currentPage - 1)/5)*5+1;
 				int endPage = startPage + countPage-1;
-				int nextPage = ((currentPage - 1)/10)*10+2;
-				int previousPage = ((currentPage - 1)/10)*10-10+1;
+				int nextPage = ((currentPage - 1)/5)*5+2;
+				int previousPage = ((currentPage - 1)/5)*5-2+1;
 
 				if(previousPage <= 0) {
 					previousPage = 1;
@@ -170,6 +170,7 @@ public class MemberController {
 				model.addAttribute("nextPage", nextPage);
 				model.addAttribute("previousPage", previousPage);
 				model.addAttribute("lastPage", lastPage);
+				model.addAttribute("listExit", listExit);
 				
 				System.out.println("member_exit1,2 요청완료");
 				
@@ -195,11 +196,11 @@ public class MemberController {
 			lastPage++;
 		}
 
-		int countPage = 3;
-		int startPage = ((currentPage - 1)/3)*3+1;
+		int countPage = 5;
+		int startPage = ((currentPage - 1)/5)*5+1;
 		int endPage = startPage + countPage-1;
-		int nextPage = ((currentPage - 1)/3)*3+2;
-		int previousPage = ((currentPage - 1)/3)*3-2+1;
+		int nextPage = ((currentPage - 1)/5)*5+2;
+		int previousPage = ((currentPage - 1)/5)*5-2+1;
 
 		if(previousPage <= 0) {
 			previousPage = 1;

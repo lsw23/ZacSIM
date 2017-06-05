@@ -55,20 +55,20 @@
 				    <form id="searchMember" action="${pageContext.request.contextPath}/member/member_search" method="post">
 					<div class="form-group">
 					 <div class="row">
-					  <div class="col-sm-4">
-					   <select name="so" class="form-control" id="sel1">
-					    <option value="member_cd">CODE</option>
-							<option value="member_nm">이름</option>
-							<option value="member_sex">성별</option>
-						    <option value="member_seat_state">회원상태</option>
-					  </select>
-					  </div>
-					   <div class="col-sm-6">
-					   		<input name="sv" id="searchForm" type="text" class="form-control" placeholder="검색을 입력하시오."/>
-					   </div>
-					   <div class="col-sm-2">
-					   		<button type="button" id="searchBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
-					   </div>
+						   <div class="col-sm-4">
+							   <select name="so" class="form-control" id="sel1">
+							    	<option value="member_cd">CODE</option>
+									<option value="member_nm">이름</option>
+									<option value="member_sex">성별</option>
+								    <option value="member_seat_state">회원상태</option>
+							   </select>
+						   </div>
+						   <div class="col-sm-6">
+						   		<input name="sv" id="searchForm" type="text" class="form-control" placeholder="검색을 입력하시오."/>
+						   </div>
+						   <div class="col-sm-2">
+						   		<button type="button" id="searchBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+						   </div>
 					   </div>
 					</div>
 					</form>
