@@ -21,7 +21,6 @@
                 <div class="inner">
                   <h2>결제가 정상처리되었습니다. </h2>
                   <h3>출결번호 : ${inouting}</h3>
-
                 </div>
                 <div class="icon">
                   <i class="ion ion-ios-cart-outline"></i>
