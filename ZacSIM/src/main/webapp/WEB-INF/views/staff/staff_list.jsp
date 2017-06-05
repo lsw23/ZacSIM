@@ -88,7 +88,7 @@
 											<th>직원 이름</th>
 											<th>직원 연락처</th>
 											<th>직원 주소</th>
-											<th>직원 가입일</th>
+											<th>직원 등록일</th>
 										</tr>
 									</thead>
 									<tbody>

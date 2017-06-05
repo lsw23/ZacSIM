@@ -34,10 +34,11 @@ public class PaymentController {
 	//회원코드 검색 pro
 	@RequestMapping(value="payment/payment_search_pro",method=RequestMethod.GET)
 	public String searchMemberPro(@RequestParam(value="sv", required=true)String sv
-									, Model model){
+									, Model model, HttpSession session){
 		System.out.println("sv :" + sv);
 		String so = "member_nm";
-		List<Member> memberlist = memberDao.searchMember(so, sv);
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		List<Member> memberlist = memberDao.searchMember(so, sv, branchOwner);
 		System.out.println(memberlist);
 		model.addAttribute("memberlist", memberlist);
 		return "payment/payment_search_pro";
