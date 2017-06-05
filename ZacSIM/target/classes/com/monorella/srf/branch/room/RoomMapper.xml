@@ -31,7 +31,7 @@
 		SELECT 
 			 COUNT(member_cd) AS member_count
 			, br.room_nm
-			, (COUNT(member_cd)/brd.pay_seat*100) AS member_percentage
+			, (COUNT(member_cd)/brd.total_seat*100) AS member_percentage
 		FROM branch_member_tb bm 
 		INNER JOIN branch_saet_tb bs ON bm.seat_cd = bs.seat_cd
 		INNER JOIN branch_room_tb br ON bs.room_cd = br.room_cd
@@ -94,7 +94,6 @@
 				, seat_out=#{seat_out}
 				, pay_seat=#{pay_seat}
 				, notpay_seat=#{notpay_seat}
-				, room_out=#{room_out}
 			WHERE room_cd =#{room_cd}
 	</update>
 	
@@ -125,7 +124,7 @@
 			, brd.seat_out
 			, brd.pay_seat
 			, brd.notpay_seat
-			, brd.room_out
+			, brd.total_seat
 			, br.room_nm
 		FROM branch_room_dashboard_tb brd
 		INNER JOIN branch_room_tb br ON brd.room_cd = br.room_cd
@@ -155,7 +154,12 @@
 		WHERE room_cd = #{room_cd} AND seat_cnumber = #{seat_cnumber}
   	</select>
   	
-  	<!-- 열람실 코드 전체 가져오기  -->
+  	<!-- 지점별 열람실 코드 조회 -->
+  	<select id="selectRoomCdBranch" parameterType="com.monorella.srf.branch.dto.Room" resultType="int">
+  		SELECT COUNT(room_cd) FROM branch_room_tb WHERE branch_owner_cd = #{branch_owner_cd}
+  	</select>
+  	
+  	<!-- 열람실 코드 전체 조회  -->
   	<select id="selectRoomAllCd" resultType="com.monorella.srf.branch.dto.Room">
   		SELECT 
 			room_cd
@@ -248,14 +252,14 @@
 			, seat_out
 			, pay_seat
 			, notpay_seat
-			, room_out)
+			, total_seat)
 		VALUES (
 			#{room_cd}
 			, #{seat_in}
 			, #{seat_out}
 			, #{pay_seat}
 			, #{notpay_seat}
-			, 0);
+			, #{pay_seat}+#{notpay_seat});
 	</insert>  
 	
 	<!-- 열람석 등록 -->

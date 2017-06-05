@@ -60,6 +60,7 @@
 		                <th>퇴실</th>
 		                <th>결제 열람석 수</th>
 		                <th>미결제 열람석 수</th>
+		                <th>총 열람석 수</th>
             		  </tr>
                     </thead>
                     <tbody>
@@ -70,6 +71,7 @@
 	                        <td>${rd.seat_out}</td>
 	                        <td>${rd.pay_seat}</td>
 	                        <td>${rd.notpay_seat}</td>
+	                        <td>${rd.total_seat}</td>
 	                      </tr> 
                        </c:forEach>
                     </tbody>

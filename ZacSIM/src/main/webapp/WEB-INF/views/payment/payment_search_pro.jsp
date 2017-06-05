@@ -40,6 +40,7 @@
 							<tr>
 								<th>코드</th>
 								<th>이름</th>
+								<th>나이</th>
 								<th>연락처</th>
 								<th>등급</th>
 							</tr>
@@ -54,6 +55,7 @@
 								<tr>
 									<td><a href="#" class="member_cd">${m.member_cd}</a></td>
 									<td>${m.member_nm}</td>
+									<td>${m.member_age}</td>
 									<td>${m.member_tel}</td>
 								<c:if test="${m.member_seat_state == 'Y'}">
 									<td>정회원</td>

@@ -10,11 +10,13 @@
 	</delete>
 	
 <update id="modifyStaff" parameterType="com.monorella.srf.branch.dto.Staff">
-	UPDATE branch_staff_tb SET branch_owner_cd=#{branch_owner_cd}
+	UPDATE branch_staff_tb SET 
+	branch_owner_cd=#{branch_owner_cd}
 	, staff_name=#{staff_name} 
 	, staff_tel=#{staff_tel}
+	, staff_postcode=#{staff_postcode}
 	, staff_addr=#{staff_addr}
-	, staff_in_date=#{staff_in_date}
+	, staff_detail_addr=#{staff_detail_addr}
 	WHERE staff_id=#{staff_id} 
 	AND staff_pw=#{staff_pw}
 	</update>
@@ -101,7 +103,9 @@
 		, staff_pw
 		, staff_name
 		, staff_tel
+		, staff_postcode
 		, staff_addr
+		, staff_detail_addr
 		, staff_in_date) 
 	VALUES(
 		#{staff_id}
@@ -109,8 +113,10 @@
 		, #{staff_pw}
 		, #{staff_name}
 		, #{staff_tel}
+		, #{staff_postcode}
 		, #{staff_addr}
-		, #{staff_in_date}
+		, #{staff_detail_addr}
+		, now()
 	)
 	</insert>
   </mapper>

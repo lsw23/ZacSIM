@@ -281,6 +281,7 @@
 	 <select id="exeMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			 member_tel
+			 , branch_owner_cd
 			 , member_nm
 			 FROM branch_member_tb
 			  <if test="sv !=null and sv != ''">
@@ -297,6 +298,7 @@
 	<select id="searchMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			 member_cd
+			 , branch_owner_cd
 			 , member_nm
 			 , member_tel
 			 , member_addr
@@ -305,24 +307,26 @@
 			 , member_age
 			 , member_date
 			 FROM branch_member_tb
+			 WHERE branch_owner_cd = #{branch_owner_cd}
+			 AND
 			  <if test="sv !=null and sv != ''">
 			<if test="so.equals('member_cd')">
-			WHERE member_cd like concat('%',#{sv},'%')
+			 member_cd like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_nm')">
-				WHERE member_nm like concat('%',#{sv},'%')
+				 member_nm like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_tel')">
-				WHERE member_tel like concat('%',#{sv},'%')
+				member_tel like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_addr')">
-				WHERE member_addr like concat('%',#{sv},'%')
+				 member_addr like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_seat_state')">
-				WHERE member_seat_state like concat('%',#{sv},'%') 
+				member_seat_state like concat('%',#{sv},'%') 
 			</if>
 			<if test="so.equals('member_date')">
-				WHERE member_date like concat('%',#{sv},'%')
+				member_date like concat('%',#{sv},'%')
 			</if>
 			</if> 
 	</select>
@@ -345,6 +349,7 @@
 		FROM branch_member_tb AS m
 		INNER join branch_seat_time_tb AS s
 		ON m.member_cd = s.member_cd
+		WHERE branch_owner_cd = #{branch_owner_cd}
 		ORDER BY seat_time_cd  DESC
 	</select>
 
@@ -352,8 +357,10 @@
 	<select id="selectMemberExit" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			member_tel
+			, branch_owner_cd
 			, member_nm
 		FROM branch_member_tb
+		WHERE branch_owner_cd = #{branch_owner_cd}
 		ORDER BY inout_num DESC
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>

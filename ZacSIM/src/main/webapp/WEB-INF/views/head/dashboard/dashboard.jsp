@@ -22,7 +22,7 @@
 					<hr>
 					<!-- main start -->
 					
-					<div id="container" style="width: 70%;">e
+					<div id="container" style="width: 80%;">
 				      <canvas id="canvas2"></canvas>
 				      <div>
 				      <c:forEach var="b" items="${branchlist}">
