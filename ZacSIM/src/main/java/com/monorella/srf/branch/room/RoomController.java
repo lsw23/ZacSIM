@@ -115,7 +115,7 @@ public class RoomController {
 		for(RoomDashBoard rl : roomdashlist){
 			PayList pay = new PayList();
 			//만석률 구하기
-			double percentage = ((double)rl.getPay_seat()/rl.getNotpay_seat())*100;
+			double percentage = ((double)rl.getPay_seat()/rl.getTotal_seat())*100;
 			int percent = (int)percentage;
 			//자동증가
 			pay.setRoom_nm(rl.getRoom_nm());
@@ -205,6 +205,8 @@ public class RoomController {
 		System.out.println("room_pro 열람실 등록");
 		//열랑실 코드 총 수 조회
 		int roomcdCount = roomDao.selectCountRoomCd();
+		//지점별 열람실 코드 조회
+		int roomcd = roomDao.selectRoomCdBranch(room);
 		System.out.println("roomcdCount" + roomcdCount);
 		if(roomcdCount == 0){
 			//열람실 최초 등록
@@ -226,7 +228,7 @@ public class RoomController {
 				seat.setBranch_owner_cd(room.getBranch_owner_cd());
 				seat.setRoom_cd(room.getRoom_cd());
 				//열람실 최초등록일 경우
-				if(roomcdCount == 0){
+				if(roomcd == 0){
 					seat.setSeat_cnumber(i+1);
 				}else{
 					int cnumber = roomDao.selectMaxCnumber(room);
