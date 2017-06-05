@@ -44,7 +44,7 @@
 		  <section class="content-header">
 		    <h1>
 		       	기간만료
-		      <small>현재날짜 <fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/></small>
+		      <small>현재날짜 <fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/> (매일 오전 06:00에 기간 만료처리가 진행됩니다.)</small>
 		    </h1>
 		    <ol class="breadcrumb">
 		      <li><a href="${pageContext.request.contextPath}/home/NewFile"><i class="fa fa-dashboard"></i>Home</a></li>
@@ -95,7 +95,7 @@
 		      	<button class="btn bg-maroon period_btn period_btn">기간 연장</button>
 		      <%-- <a href="${pageContext.request.contextPath}/payment/member_period_extension?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"></a> --%>
 		      </td>
-		      <td><a href="${pageContext.request.contextPath}"><button class="btn bg-maroon">문자</button></a></td>
+		      <td><a href="#"><button class="btn bg-maroon">문자</button></a></td>
 		    </tr>
 		  </c:forEach>
 		  </tbody>
