@@ -113,10 +113,13 @@ var positions = [
         latlng: new daum.maps.LatLng(35.850013, 127.161777)
     },
     {
-        content: '<div>광주점</div>', 
-        latlng: new daum.maps.LatLng(35.165509, 126.909168)
+        content: '<div>신림점</div>', 
+        latlng: new daum.maps.LatLng(37.460450, 126.953609)
+    },
+    {
+        content: '<div>가양점</div>', 
+        latlng: new daum.maps.LatLng(36.341096, 127.442456)
     }
-   
 ];
 
 for (var i = 0; i < positions.length; i ++) {
