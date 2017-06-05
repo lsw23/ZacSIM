@@ -9,9 +9,6 @@
 <link href="${pageContext.request.contextPath}/resources/head/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/templatemo-style.css" rel="stylesheet">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 	<!-- Left column -->
@@ -124,12 +121,9 @@
 								<input type="button" class="templatemo-white-button" value="back"/>
 							</a>
 							<button type="submit" class="templatemo-blue-button">Modify</button>
-							<input type="button" id="delete" class="templatemo-blue-button" data-toggle="modal" data-target="#myModal" value="DELETE"/>
-							<%-- <a href="${pageContext.request.contextPath}/head/branch_owner_delete_pro?branch_owner_cd=${info.branch_owner_cd}">
-								
-							</a> --%>
-							
-							<input id="pw" type="text" value="${head_pw}" hidden>
+							<a href="${pageContext.request.contextPath}/head/branch_owner_delete_pro?branch_owner_cd=${info.branch_owner_cd}">
+								<input type="button" id="delete" class="templatemo-blue-button" data-toggle="modal" data-target="#myModal" value="DELETE"/>
+							</a>
 						</div>
 					</form>
 					<!-- main end -->
@@ -138,22 +132,19 @@
 				
 			  <!-- Modal -->
 			  <div class="modal fade" id="myModal" role="dialog">
-			    <div class="modal-dialog text-center">
+			    <div class="modal-dialog">
 			    
 			      <!-- Modal content-->
-			      <div class="modal-content" style="width: 400px; margin: auto; margin-top: 250px;">
+			      <div class="modal-content">
 			        <div class="modal-header">
 			          <button type="button" class="close" data-dismiss="modal">&times;</button>
-			          <h4 class="modal-title">중앙 관리자 비밀번호를 입력해주세요.</h4>
+			          <h4 class="modal-title">관리자 비밀번호를 입력해주세요.</h4>
 			        </div>
 			        <div class="modal-body">
-			        	<input type="password" class="form-control" id="head_pw" name="head_pw">
-			        	<font name="pw_chk" size="2" color="red"></font>
+			          <input name="head_pw">
 			        </div>
 			        <div class="modal-footer">
-				        <center>
-							<button id="head_pw_chk" type="button" class="btn btn-default" data-dismiss="modal">확인</button>
-				        </center>
+			          <button type="button" class="btn btn-default" data-dismiss="modal">확인</button>
 			        </div>
 			      </div>
 			      
@@ -173,26 +164,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/head/js/templatemo-script.js"></script>
 	
 	<!-- 주소 API -->
-	<script>
-		$(document).ready(function(){
-			/* $('#head_pw_chk').keyup(function(){
-				 $('font[name=pw_chk]').text('');
-				 
-				if($('#head_pw_chk').val()!=$('#pw').val()){
-					 $('font[name=pw_chk]').text('');
-					 $('font[name=pw_chk]').html("비밀번호가 일치하지 않습니다");
-				}else{
-					 $('font[name=pw_chk]').text('');
-				}
-			}); */
-			
-			$('#head_pw_chk').click(function(){
-				if($('#head_pw').val()==$('#pw').val()){
-					$(location).attr('href',"${pageContext.request.contextPath}/head/branch_owner_delete_pro?branch_owner_cd=${info.branch_owner_cd}");
-				}
-			});
-		})
-	</script>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
 	    function sample6_execDaumPostcode() {
