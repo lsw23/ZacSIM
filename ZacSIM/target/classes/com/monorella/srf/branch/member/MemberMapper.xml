@@ -68,6 +68,7 @@
 		member_sex
 		FROM branch_member_tb
 		WHERE member_sex = '여자'
+		AND branch_owner_cd = #{branch_owner_cd}
 		GROUP BY branch_owner_cd
 		]]>
 	</select>
@@ -81,7 +82,7 @@
 		WHERE member_age >= 10 
 		AND member_age < 20
 		AND member_sex = '남자'
-		AND branch_owner_cd = #{branch_owner_cd}) AS teens
+		AND branch_owner_cd = 'M1') AS teens
 		,
 		(SELECT COUNT(*) 
 		FROM branch_member_tb
@@ -113,6 +114,7 @@
 		member_sex
 		FROM branch_member_tb
 		WHERE member_sex = '남자'
+		AND branch_owner_cd = #{branch_owner_cd}
 		GROUP BY branch_owner_cd
 		]]>
 	</select>
@@ -197,8 +199,8 @@
 	
 	<!-- 회원 삭제 -->
 	<delete id="MemberRemove" parameterType="com.monorella.srf.branch.dto.Member">
-		DELETE FROM branch_member_tb 
-		WHERE member_cd = #{member_cd} 
+		DELETE FROM branch_member_tb
+		WHERE member_cd = #{member_cd}
 		AND branch_owner_cd = #{branch_owner_cd}
 	</delete>
 	
@@ -300,6 +302,7 @@
 			 , member_addr
 			 , member_seat_state
 			 , member_tel
+			 , member_age
 			 , member_date
 			 FROM branch_member_tb
 			  <if test="sv !=null and sv != ''">
@@ -359,12 +362,14 @@
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			member_cd
+			, branch_owner_cd
 			, member_nm
 			, member_tel
 			, member_addr
 			, member_seat_state
 			, member_date
 		FROM branch_member_tb
+		WHERE branch_owner_cd = #{branch_owner_cd}
 		ORDER BY inout_num DESC
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>

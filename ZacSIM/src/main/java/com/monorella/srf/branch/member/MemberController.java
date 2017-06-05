@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.DashboardAgeGroup;
@@ -175,26 +176,27 @@ public class MemberController {
 	// 리스트 및 페이징 요청
 	@RequestMapping(value="/member/member_list", method = RequestMethod.GET)
 	public String selectMemberList(Model model
-            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+            , HttpSession session) {
 		System.out.println("/member/member_list 요청");
-
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 		if(currentPage < 1){
 			currentPage = 1;
             }
 		int joinCount = 0;
 		joinCount = memberDao.selectMemberCount();
 		int pagePerRow = 10;
-		List<Member> list = memberDao.selectMemberList(currentPage, pagePerRow);
+		List<Member> list = memberDao.selectMemberList(currentPage, pagePerRow,branchOwner);
 		int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
 		if(joinCount%pagePerRow != 0) {
 			lastPage++;
 		}
 
-		int countPage = 5;
-		int startPage = ((currentPage - 1)/10)*10+1;
+		int countPage = 3;
+		int startPage = ((currentPage - 1)/3)*3+1;
 		int endPage = startPage + countPage-1;
-		int nextPage = ((currentPage - 1)/10)*10+2;
-		int previousPage = ((currentPage - 1)/10)*10-10+1;
+		int nextPage = ((currentPage - 1)/3)*3+2;
+		int previousPage = ((currentPage - 1)/3)*3-2+1;
 
 		if(previousPage <= 0) {
 			previousPage = 1;
