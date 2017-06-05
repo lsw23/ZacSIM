@@ -5,6 +5,12 @@
  <head>
 	  	<!-- 헤드 -->
 	<c:import url="../module2/advanced_css.jsp"/>
+	<style>
+		    body{
+		    	 background-color: #8dc9de;
+		    }
+		   
+	</style>
  </head>
  <body class="skin-blue">
 	<div class="row">
@@ -17,6 +23,7 @@
              </div><!-- box box-solid bg-aqua -->
               <div class="col-md-12">
               <!-- small box -->
+              <br/><br/><br/><br/><br/><br/><br/><br/><br/>
               <div class="small-box bg-blue">
                 <div class="inner">
                   <h2>결제가 정상처리되었습니다. </h2>
