@@ -7,11 +7,17 @@ public class RoomDashBoard {
 	private	int seat_out; //퇴실 수 
 	private	int pay_seat; // 결제 열람석 수
 	private	int notpay_seat; // 미결제 열람석 수
+	private int total_seat; //총 열람석 수 
 	private	int room_out; //만료예정 수
 	private	int room_personnel; //총원 수 
 	private String room_nm; //열람실 이름
 	
-	
+	public int getTotal_seat() {
+		return total_seat;
+	}
+	public void setTotal_seat(int total_seat) {
+		this.total_seat = total_seat;
+	}
 	public String getRoom_nm() {
 		return room_nm;
 	}

@@ -115,7 +115,7 @@ public class RoomController {
 		for(RoomDashBoard rl : roomdashlist){
 			PayList pay = new PayList();
 			//만석률 구하기
-			double percentage = ((double)rl.getPay_seat()/rl.getNotpay_seat())*100;
+			double percentage = ((double)rl.getPay_seat()/rl.getTotal_seat())*100;
 			int percent = (int)percentage;
 			//자동증가
 			pay.setRoom_nm(rl.getRoom_nm());

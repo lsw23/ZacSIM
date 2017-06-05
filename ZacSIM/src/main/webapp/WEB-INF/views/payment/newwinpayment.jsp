@@ -92,10 +92,10 @@
     <c:import url="../module2/jsscript.jsp" />
 	<script>
 	
-		//목록 검색
+		//회원 검색
 		$('#memberlist').click(function(){
 			console.log('확인');
-			var width=400, height=300;
+			var width=500, height=300;
 		    var left = screen.availWidth - (width+150);
 		    var top = (screen.availHeight - height)/2;
 		    var specs = "width=" + width;
