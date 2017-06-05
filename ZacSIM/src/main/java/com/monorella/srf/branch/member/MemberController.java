@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-
 import com.monorella.srf.branch.dto.BranchOwner;
 import com.monorella.srf.branch.dto.DashboardAgeGroup;
 import com.monorella.srf.branch.dto.InsertNumList;
@@ -88,9 +86,11 @@ public class MemberController {
 		@RequestMapping(value="/member/member_exe", method = {RequestMethod.GET, RequestMethod.POST})
 		public String MemberExe(Model model
 				, @RequestParam("so") String so
-				, @RequestParam("sv") String sv){
+				, @RequestParam("sv") String sv
+				, HttpSession session){
 			System.out.println("MemberController->MemberExe()" + so + sv);
-			List<Member> memberexit = memberDao.exeMember(so, sv);
+			BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+			List<Member> memberexit = memberDao.exeMember(so, sv, branchOwner);
 			System.out.println(memberexit);
 			model.addAttribute("memberexit", memberexit);
 			model.addAttribute("so", so);
@@ -102,9 +102,11 @@ public class MemberController {
 	@RequestMapping(value="/member/member_search", method = {RequestMethod.GET, RequestMethod.POST})
 	public String MemberSearch(Model model
 			, @RequestParam("so") String so
-			, @RequestParam("sv") String sv){
+			, @RequestParam("sv") String sv
+			, HttpSession session){
 		System.out.println("MemberController->MemberSearch()" + so + sv);
-		List<Member> searchlist = memberDao.searchMember(so, sv);
+		BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
+		List<Member> searchlist = memberDao.searchMember(so, sv, branchOwner);
 		System.out.println(searchlist);
 		model.addAttribute("searchlist", searchlist);
 		model.addAttribute("so", so);
@@ -115,7 +117,8 @@ public class MemberController {
 	// 입퇴실 및 페이징 요청
 			@RequestMapping(value="/member/member_exit", method = RequestMethod.GET)
 			public String selectMemberExit(Model model
-		            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		            , @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage
+		            , HttpSession session) {
 				System.out.println("member_exit 요청1");
 				List<Member> memberexit = memberDao.exitMember();
 				System.out.println("member_exit 요청1");
@@ -125,7 +128,7 @@ public class MemberController {
 				System.out.println("member_exit 요청1");
 				model.addAttribute("listExit", listExit);
 				System.out.println("member_exit 입퇴실 요청2");
-
+				BranchOwner branchOwner = (BranchOwner)session.getAttribute("branchOwner");
 				if(currentPage < 1){
 					currentPage = 1;
 		            }
@@ -134,7 +137,7 @@ public class MemberController {
 				joinCount = memberDao.exitMemberCount();
 
 				int pagePerRow = 10;
-				List<Member> list = memberDao.selectMemberExit(currentPage, pagePerRow);
+				List<Member> list = memberDao.selectMemberExit(currentPage, pagePerRow, branchOwner);
 
 				int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
 				if(joinCount%pagePerRow != 0) {
@@ -186,7 +189,7 @@ public class MemberController {
 		int joinCount = 0;
 		joinCount = memberDao.selectMemberCount();
 		int pagePerRow = 10;
-		List<Member> list = memberDao.selectMemberList(currentPage, pagePerRow,branchOwner);
+		List<Member> list = memberDao.selectMemberList(currentPage, pagePerRow, branchOwner);
 		int lastPage = (int)(Math.ceil(joinCount / pagePerRow));
 		if(joinCount%pagePerRow != 0) {
 			lastPage++;
