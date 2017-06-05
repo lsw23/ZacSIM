@@ -106,8 +106,28 @@
 										<input type="button"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 										<input type="text" id="staff_addr" name="staff_addr" class="form-control" placeholder="주소">
 										<input type="text" id="staff_detail_addr" name="staff_detail_addr" class="form-control"  placeholder="상세주소">
-									</div>	
-										<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+									</div>											
+									</div>
+								</div>
+								<!-- /.box-body -->
+
+								<div class="box-footer">
+									<button id="staffbutton" type="button" class="btn btn-primary">글입력</button>
+									<button type="reset" class="btn btn-primary">초기화</button>
+								</div>
+							</form>
+						</div>
+						<!-- /.box -->
+
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<!-- JS -->
+<c:import url="../module2/jsscript.jsp" />
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 										<script>
 										    function sample6_execDaumPostcode() {
 										        new daum.Postcode({
@@ -151,25 +171,6 @@
 										        }).open();
 										    }
 										</script>
-									</div>
-								</div>
-								<!-- /.box-body -->
-
-								<div class="box-footer">
-									<button id="staffbutton" type="button" class="btn btn-primary">글입력</button>
-									<button type="reset" class="btn btn-primary">초기화</button>
-								</div>
-							</form>
-						</div>
-						<!-- /.box -->
-
-					</div>
-				</div>
-			</section>
-		</div>
-	</div>
-	<!-- JS -->
-<c:import url="../module2/jsscript.jsp" />
 <script>
 	$('#staff_menu').addClass('active');
 	$('#staff01').addClass('active');
