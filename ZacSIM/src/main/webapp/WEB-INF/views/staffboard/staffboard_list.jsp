@@ -113,10 +113,13 @@
 													<span aria-hidden="true">&raquo;</span>
 														<span class="sr-only">Next</span>	
 												</a></li>
-												<a style="float: right;" href="${pageContext.request.contextPath}/staffboard/staffboard_form"><button class="btn btn-default">공지사항입력</button></a>
+												
 											</c:if>
+											
 										</ul>
-										
+				
+										<a style="float: right;" href="${pageContext.request.contextPath}/staffboard/staffboard_form"><button class="btn btn-default">공지사항입력</button></a>
+																		
 									</nav> 
 								</div>
 								

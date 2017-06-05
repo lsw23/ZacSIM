@@ -72,8 +72,7 @@
 		</div>
 		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
 			<p>
-				Not a registered user yet? <strong><a href="#"
-					class="blue-text">Sign up now!</a></strong>
+				<a href="${pageContext.request.contextPath}/head" class="blue-text" style="font-size: 13px;">본사 로그인 바로가기</a>
 			</p>
 		</div>
       </div>	
@@ -112,11 +111,7 @@
 			</form>
 		</div>
 		<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-			<p>
-				Not a registered user yet? <strong><a href="#"
-					class="blue-text">Sign up now!</a></strong>
-			</p>
-		</div>	    
+			<a href="${pageContext.request.contextPath}/head" class="blue-text" style="font-size: 13px;">본사 로그인 바로가기</a>
 	  </div>
 	  
 	<script>
