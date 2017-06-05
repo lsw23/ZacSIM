@@ -18,7 +18,7 @@
 
 </head>
 <body class="light-gray-bg">
-	<h2 style="color:white;"><a href="${pageContext.request.contextPath}/login/loginFrom">전주점 사이트</a></h2>
+	
 	<div class="templatemo-content-widget templatemo-login-widget white-bg"
 	style="margin-top: 150px;">
 		<header class="text-center">
@@ -53,12 +53,8 @@
 			</div>
 		</form>
 	</div>
-	<div
-		class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
-		<p>
-			Not a registered user yet? <strong><a href="#"
-				class="blue-text">Sign up now!</a></strong>
-		</p>
+	<div class="templatemo-content-widget templatemo-login-widget templatemo-register-widget white-bg">
+		<a href="${pageContext.request.contextPath}/login/loginFrom" class="blue-text" style="font-size: 13px;">지점 로그인 바로가기</a>
 	</div>
 </body>
 </html>

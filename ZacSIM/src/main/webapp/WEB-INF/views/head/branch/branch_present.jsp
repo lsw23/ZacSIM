@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,29 +8,23 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/head/css/templatemo-style.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/templatemo-style.css" rel="stylesheet">
 
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/templatemo-style.css" rel="stylesheet">
-<style>
-	.test{
-	 background-color:yellow;
-	 border:solid, 1px;
-	}
-</style>
 </head>
 <body>
-<!-- Left column -->
-	<c:import url="../module/left.jsp"/>
-	<!-- top column -->	
-	<c:import url="../module/top.jsp"/>
-		
-		<div class="templatemo-content-container row" style="min-height: 700px;">
-            <div class="templatemo-content-widget white-bg">  
-                <div class="row">
-                
-             <!--      <h2 class="media-heading text-uppercase blue-text">본사</h2>
+	<!-- Left column -->
+	<c:import url="../module/left.jsp" />
+	<!-- top column -->
+	<c:import url="../module/top.jsp" />
+
+	<div class="templatemo-content-container row"
+		style="min-height: 700px;">
+		<div class="templatemo-content-widget white-bg">
+			<div class="row">
+
+				<!--      <h2 class="media-heading text-uppercase blue-text">본사</h2>
                          
               <div class="table-responsive">
                 <table class="table">
@@ -52,27 +47,38 @@
                   </tbody>
                 </table> -->
 				<!-- <div class="templatemo-content-widget white-bg"> -->
-				
-					<h1 class="margin-bottom-10">지점 현황</h1>
-					<hr>			
-						<div class="col-sm-7">
+
+				<h1 class="margin-bottom-10">지점 현황</h1>
+				<hr>
+				<div class="col-sm-7">
 					<c:forEach var="l" items="${list}">
-					<div class="test">
-							<h2><i class="fa fa-info">_</i></h2>
+						<div class="table-responsive">
 							<h3>${l.branch_nm}</h3>
-							<label>주소:  ${l.branch_addr}</label>
+							<table class="table">
+								<tbody>
+									<tr>
+										<td><div class="circle green-bg"></div></td>
+										<td><label>주소: ${l.branch_addr}</label></td>
+									</tr>
+									<tr>
+										<td><div class="circle pink-bg"></div></td>
+										<td><label>전화번호: ${l.branch_tel}</label></td>
+									</tr>
+									<tr>
+										<td><div class="circle blue-bg"></div></td>
+										<td><label>사업자번호: ${l.owner_num}</label><td>
+									</tr>
+								</tbody>
+							</table>
 							<br>
-							<label>전화번호:  ${l.branch_tel}</label>	
-							<br>
-							<label>사업자번호:  ${l.owner_num}</label>
-					</div>					
+						</div>
 					</c:forEach>
-					</div>	
-					<div class="col-sm-5" id="map" style="width:40%;height:250px;"></div>
-				</div>	
 				</div>
-				
-				<div class="templatemo-content-widget white-bg">
+				<div class="col-sm-5" id="map" style="width: 40%; height: 600px;"></div>
+			</div>
+		</div>
+
+		<!-- <div class="templatemo-content-widget white-bg">
                 <i class="fa fa-times"></i>
                 <div class="media">
                   <div class="media-left">
@@ -83,19 +89,19 @@
                     <p>Phasellus dapibus nulla quis risus auctor, non placerat augue consectetur.</p>  
                   </div>
                 </div>                
-              </div>   
-				<c:import url="../module/footer.jsp"/>
-			</div>
-</div>
-</div>
+              </div>    -->
+		<c:import url="../module/footer.jsp" />
+	</div>
 
 
-<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=0536ec56a5a535f962f3a6c98aa6d73a"></script>
-<script>
+
+	<script type="text/javascript"
+		src="//apis.daum.net/maps/maps3.js?apikey=0536ec56a5a535f962f3a6c98aa6d73a"></script>
+	<script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
     mapOption = { 
         center: new daum.maps.LatLng(35.843435, 127.130736), // 지도의 중심좌표
-        level: 20 // 지도의 확대 레벨
+        level: 13 // 지도의 확대 레벨
     };
 
 var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -177,12 +183,15 @@ for (var i = 0; i < positions.length; i ++) {
 */
 </script>
 
-<!-- JS -->
+	<!-- JS -->
 	<!-- jQuery -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/head/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/head/js/jquery-1.11.2.min.js"></script>
 	<!-- http://markusslima.github.io/bootstrap-filestyle/ -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/head/js/bootstrap-filestyle.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/head/js/bootstrap-filestyle.min.js"></script>
 	<!-- Templatemo Script -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/head/js/templatemo-script.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/head/js/templatemo-script.js"></script>
 </body>
 </html>

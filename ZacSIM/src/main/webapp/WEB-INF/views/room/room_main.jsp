@@ -108,19 +108,31 @@
 					 <input type="hidden" name="chk" class="mcd" class="mcdc" value="${s.member_cd}">
 					 <input type="hidden" name="chk" class="rcd" value="${s.room_cd}">	
 					 <button class="btn bg-olive btn-flat margin seat_btn" id="scd" value="${s.seat_cd}">	
-						<p>${s.seat_cnumber}</p>
+							<c:if test="${s.colseat_state eq '빈좌석' or s.colseat_state eq '배치' }">
+								<p>${s.seat_cnumber}</p>
+							</c:if>
+							<c:if test="${s.colseat_state eq '입실'}">
+								<p>${s.seat_cnumber} <small class="label pull-right bg-yellow"> ${s.colseat_state}</small></p>
+							</c:if>
+							<c:if test="${s.colseat_state eq '퇴실'}">
+								<p>${s.seat_cnumber} <small class="label pull-right bg-red">${s.colseat_state}</small></p>
+							</c:if>
+
 							<c:choose> 
 							 <c:when test="${s.member_nm eq null}">
 								<p class="windetail">빈좌석</p>
+								<p>_________</p>
 							 </c:when>
 							 <c:otherwise>
 							 	<p class="windetailon">${s.member_nm}</p>
-							 	<%-- <p>${s.member_end_date}</p> --%>
+							 	<p class="end_date">${s.member_end_date}</p>
 							 </c:otherwise>
 							</c:choose>
 						</button>
 					</c:if>		
-				</c:forEach>			
+				</c:forEach>	
+				
+					
 			</div>
 			<hr>
 			</c:forEach>
@@ -140,8 +152,24 @@
 	if($('.windetailon').length > 0){
 		console.log('헬로우');
 		$('.windetailon').parent().removeClass('bg-olive');
-		$('.windetailon').parent().addClass('bg-bluesky');
+		$('.windetailon').parent().addClass('bg-bluesky');	
 	}
+	
+	
+	 var now = new Date();
+     var year= now.getFullYear();
+     var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+     var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+     var now_date = year + '-' + mon + '-' + day;
+	 console.log('now_date :' + now_date);
+	 
+	 $('.end_date').each(function(){
+			var s = $(this).text();
+	 		if(now_date == s){
+	 			$(this).parent().addClass('bg-red');	
+	 		}
+	 });
+	
 </script>
 </body>
 </html>

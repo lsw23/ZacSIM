@@ -163,6 +163,7 @@ public class PaymentController {
 			System.out.println("DashboardAccount-> account: "+account);
 			//월별 결제 총액 brunch_dashboard_account_list에 업데이트
 			paymentDao.modifyMonthIncome(account);
+			
 			//성공시(열람석 지정 'Y'로)
 			paymentDao.modifyPaymentSeat(payment);	
 			//출결번호 테이블 insert
