@@ -54,12 +54,11 @@
 	
 	<select id="selectIncomeSum" parameterType="java.util.Map" resultType="int">
 		<![CDATA[ SELECT SUM(bp.total_amount) AS total
-				FROM branch_pay_tb bp
-				INNER JOIN branch_member_tb bm
-				ON bp.member_cd = bm.member_cd
-				WHERE bp.pay_date >= #{startDate}
-				AND bp.pay_date <= #{endDate}
-				AND bp.branch_owner_cd = #{branch_owner_cd};]]>
+			FROM branch_pay_tb bp
+			INNER JOIN branch_member_tb bm
+			ON bp.member_cd = bm.member_cd
+			WHERE (bp.pay_date BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL +1 DAY))
+			AND bp.branch_owner_cd = #{branch_owner_cd};]]>
 	</select>
 	
 	<select id="selectIncomeList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Payment">
@@ -77,8 +76,7 @@
 				FROM branch_pay_tb bp
 				INNER JOIN branch_member_tb bm
 				ON bp.member_cd = bm.member_cd
-				WHERE bp.pay_date >= #{startDate}
-				AND bp.pay_date <= #{endDate}
+				WHERE (bp.pay_date BETWEEN #{startDate} AND DATE_ADD(#{endDate}, INTERVAL +1 DAY))
 				AND bp.branch_owner_cd = #{branch_owner_cd}
 				ORDER BY bp.pay_date DESC; ]]>
 	</select>

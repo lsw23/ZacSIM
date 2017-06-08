@@ -95,10 +95,7 @@ public class IncomeController {
 		List<Payment> pay = incomeDao.selectIncomeList(startDate, endDate, branch_owner_cd);
 		System.out.println("IncomeController-> selectIncomeList()-> pay: "+ pay);
 			
-		if(pay.isEmpty()){
-			String getNull = "선택하신 기간에는 수입 항목이 없습니다.";
-			model.addAttribute("getNull", getNull);
-		    		
+		if(pay.isEmpty()){ 		
 		    //기간 수입 합계
  			int total = 0;
  			
