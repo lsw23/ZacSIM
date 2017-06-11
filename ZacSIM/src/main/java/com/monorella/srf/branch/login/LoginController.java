@@ -24,10 +24,10 @@ public class LoginController {
 		return "pages/tables/data_tb";
 	}
 	
-	//테스트
-	@RequestMapping(value = "/home/NewFile", method = RequestMethod.GET)
+	//홈
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String main_form(){
-		return "home/NewFile";
+		return "home";
 	}
 	
 	//로그아웃 처리
@@ -36,10 +36,11 @@ public class LoginController {
 		return "login/login_logout";
 	}
 	
-	//메인 화면
+	
+	//index
 	@RequestMapping(value = "/",  method = RequestMethod.GET)
 	public String main(){
-		return "index/index";
+		return "index";
 		
 	}
 	//로그인 폼

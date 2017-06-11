@@ -198,6 +198,10 @@
  					alert('회원코드를 입력해주세요.');
  					$('#member_cd').focus();
  					return false;
+    			}else if($('#span01').html() != ''){
+					alert('존재하지 않는 코드이거 이미 결제된 코드입니다.');    					
+					$('#member_cd').focus();
+					return false;
     			}else if(re_str.test($('#d-day').val()) != true){
     				alert('요금제를 선택해주세요.');
     				$('#charges').focus();
