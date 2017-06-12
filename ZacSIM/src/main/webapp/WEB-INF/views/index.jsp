@@ -551,7 +551,7 @@
 					<h2 class="to-animate">ERD</h2>
 				</div>
 			</div>
-			<img alt="ERD" width="120%" src="${pageContext.request.contextPath}/resources/elate/images/erd.png">
+			<img alt="ERD" width="120%" src="${pageContext.request.contextPath}/resources/elate/images/erd2.png">
 		</div>
 	</section>
 		
