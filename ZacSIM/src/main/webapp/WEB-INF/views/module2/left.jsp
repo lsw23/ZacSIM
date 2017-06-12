@@ -37,29 +37,6 @@
                 <li id="dashboard02"><a href="${pageContext.request.contextPath}/dashboard/all_status"><i class="fa fa-circle-o"></i>지점 현황</a></li>
               </ul>
             </li>
-            <li class="treeview" id="staff_menu">
-              <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>직원</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li id="staff01"><a href="${pageContext.request.contextPath}/staff/staff_form"><i class="fa fa-circle-o"></i> 직원 등록</a></li>
-                <li id="staff02"><a href="${pageContext.request.contextPath}/staff/staff_list"><i class="fa fa-circle-o"></i> 직원 목록</a></li>
-              </ul>
-            </li>
-            <li class="treeview" id="member_menu">
-              <a href="#">
-                <i class="fa fa-edit"></i> <span>회원</span>
-                <i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li id="member01"><a href="${pageContext.request.contextPath}/member/member_form"><i class="fa fa-circle-o"></i> 회원 등록</a></li>
-                <li id="member02"><a href="${pageContext.request.contextPath}/member/member_list"><i class="fa fa-circle-o"></i> 회원 목록</a></li>
-                <li id="member03"><a href="${pageContext.request.contextPath}/member/member_exit"><i class="fa fa-circle-o"></i> 회원 입퇴실</a></li>
-                <li id="member04"><a href="${pageContext.request.contextPath}/room/member_period"><i class="fa fa-circle-o"></i> 회원 만료예정</a></li>
-              </ul>
-            </li>
             <li class="treeview" id="room_menu">
               <a href="#">
                 <i class="fa fa-table"></i> <span>열람실</span>
@@ -71,6 +48,31 @@
                 <li id="room03"><a href="${pageContext.request.contextPath}/room/room_dashboard"><i class="fa fa-circle-o"></i>열람실 현황</a></li>
               </ul>
             </li>
+             <li class="treeview" id="member_menu">
+              <a href="#">
+                <i class="fa fa-edit"></i> <span>회원</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li id="member01"><a href="${pageContext.request.contextPath}/member/member_form"><i class="fa fa-circle-o"></i> 회원 등록</a></li>
+                <li id="member02"><a href="${pageContext.request.contextPath}/member/member_list"><i class="fa fa-circle-o"></i> 회원 목록</a></li>
+                <li id="member03"><a href="${pageContext.request.contextPath}/member/member_exit"><i class="fa fa-circle-o"></i> 회원 입퇴실</a></li>
+                <li id="member04"><a href="${pageContext.request.contextPath}/room/member_period"><i class="fa fa-circle-o"></i> 회원 만료예정</a></li>
+              </ul>
+            </li>
+            <li class="treeview" id="staff_menu">
+              <a href="#">
+                <i class="fa fa-laptop"></i>
+                <span>직원</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li id="staff01"><a href="${pageContext.request.contextPath}/staff/staff_form"><i class="fa fa-circle-o"></i> 직원 등록</a></li>
+                <li id="staff02"><a href="${pageContext.request.contextPath}/staff/staff_list"><i class="fa fa-circle-o"></i> 직원 목록</a></li>
+              </ul>
+            </li>
+           
+
             <li class="treeview" id="account_menu">
               <a href="#">
                 <i class="fa fa-credit-card"></i> <span>회계</span>

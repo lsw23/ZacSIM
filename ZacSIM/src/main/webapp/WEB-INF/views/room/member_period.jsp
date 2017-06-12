@@ -75,7 +75,6 @@
 		      <th>연락처</th>
 		      <th>기간 만료일</th>
 		      <th>연장</th>
-		      <th>SMS</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -95,7 +94,6 @@
 		      	<button class="btn bg-maroon period_btn period_btn">기간 연장</button>
 		      <%-- <a href="${pageContext.request.contextPath}/payment/member_period_extension?member_nm=${e.member_nm}&seat_cd=${e.seat_cd}"></a> --%>
 		      </td>
-		      <td><a href="#"><button class="btn bg-maroon">문자</button></a></td>
 		    </tr>
 		  </c:forEach>
 		  </tbody>
