@@ -278,7 +278,7 @@
 			<div class="row row-bottom-padded-sm">
 				<div class="col-md-3 col-sm-6 col-xxs-12">
 					<a href="images/work_1.jpg" class="fh5co-project-item image-popup to-animate">
-						<img src="${pageContext.request.contextPath}/resources/elate/images/K-011.png" alt="Image" class="img-responsive">
+						<img src="${pageContext.request.contextPath}/resources/elate/images/K-025.png" alt="Image" class="img-responsive">
 						<div class="fh5co-text">
 						<h2>박석민</h2>
 						
@@ -286,8 +286,8 @@
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 col-xxs-12">
-					<a href="images/work_2.jpg" class="fh5co-project-item image-popup to-animate">
-						<img src="${pageContext.request.contextPath}/resources/elate/images/K-011.png" alt="Image" class="img-responsive">
+					<a href="http://yjh0903.cafe24.com" class="fh5co-project-item to-animate">
+						<img src="${pageContext.request.contextPath}/resources/elate/images/K-025.png" alt="Image" class="img-responsive">
 						<div class="fh5co-text">
 						<h2>양지훈</h2>
 						
@@ -298,8 +298,8 @@
 				<div class="clearfix visible-sm-block"></div>
 
 				<div class="col-md-3 col-sm-6 col-xxs-12">
-					<a href="images/work_3.jpg" class="fh5co-project-item image-popup to-animate">
-						<img src="${pageContext.request.contextPath}/resources/elate/images/K-011.png" alt="Image" class="img-responsive">
+					<a href="http://dprtm77.cafe24.com" class="fh5co-project-item to-animate">
+						<img src="${pageContext.request.contextPath}/resources/elate/images/K-025.png" alt="Image" class="img-responsive">
 						<div class="fh5co-text">
 						<h2>이승욱</h2>
 						
@@ -308,7 +308,7 @@
 				</div>
 				<div class="col-md-3 col-sm-6 col-xxs-12">
 					<a href="images/work_4.jpg" class="fh5co-project-item image-popup to-animate">
-						<img src="${pageContext.request.contextPath}/resources/elate/images/K-011.png" alt="Image" class="img-responsive">
+						<img src="${pageContext.request.contextPath}/resources/elate/images/K-025.png" alt="Image" class="img-responsive">
 						<div class="fh5co-text">
 						<h2>이주녕</h2>
 						
@@ -330,7 +330,9 @@
 					<div class="row">
 						<div class="col-md-10 subtext to-animate">
 							<h3>1.프로젝트 기본정보</h3>
+							<p>  본 프로젝트는 Chrome에 최적화되어 있습니다. (최적 해상도는 가로 1600)</p>
 							<h3> *프로젝트 명 : 독서실 프랜차이즈 관리시스템</h3>
+							
 							<table class="table">
 								<tr>
 									<td>총 기간</td>
@@ -380,7 +382,53 @@
 							<li>회원으로부터 수집된 데이터를 바탕으로 2차 정보를 생산, 지점 및 본사에 제공한다.</li>
 							<li>webhosting 서비스로 개발 이후 에러와 오류에 대한 유지보수를 경험한다.</li>
 							<li>프로젝트에 참여한 각 팀원들 개발 역량의 상향평준화 꾀한다.</li>
-							
+							<br/>
+							<h3>*개발 환경 :</h3>
+							<table class="table">
+								<tr>
+									<td>OS</td>
+									<td>Window7</td>
+								</tr>
+								<tr>
+									<td>웹브라우저</td>
+									<td>Chrome</td>
+								</tr>
+								<tr>
+									<td>WAS</td>
+									<td>Apache Tomcat 8.0.35</td>
+								</tr>
+								<tr>
+									<td rowspan="6">언어</td>
+									<td>java1.8</td>
+								</tr>
+								<tr>
+									<td>javascript</td>
+								</tr>
+								<tr>
+									<td>jquery</td>
+								</tr>
+								<tr>
+									<td>ajax</td>
+								</tr>
+								<tr>
+									<td>jsp 2.3</td>
+								</tr>
+								<tr>
+									<td>html5</td>
+								</tr>
+								<tr>
+									<td>프레임워크</td>
+									<td>spring framwork 4.1.1, maven, mybatis 3.4.1, bootstrap </td>
+								</tr>
+								<tr>
+									<td>DB</td>
+									<td>MySQL 5.1.39</td>
+								</tr>
+								<tr>
+									<td>툴</td>
+									<td>spring tool suite, HeidiSQL, eXerd, git</td>
+								</tr>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -477,6 +525,14 @@
 							<td>공지-관리</td>
 							<td>공지 관리 담당 / 입력, 리스트, 상세보기 및 수정 삭제 처리</td>
 						</tr>
+						<tr>
+							<td>지출-관리</td>
+							<td>지출 관리 담당/ 지출 내역 리스트, 기간 검색</td>
+						</tr>
+						<tr>
+							<td>본사-관리</td>
+							<td>본사 관리 담당 / 지점현황 입력, 리스트, 다음 지도 API 활용하여 지점위치 표시</td>
+						</tr>
 					</table>
 				</div>
 				
@@ -495,7 +551,7 @@
 					<h2 class="to-animate">ERD</h2>
 				</div>
 			</div>
-			<img alt="ERD" width="120%" src="${pageContext.request.contextPath}/resources/elate/images/erd.png">
+			<img alt="ERD" width="120%" src="${pageContext.request.contextPath}/resources/elate/images/erd2.png">
 		</div>
 	</section>
 		
