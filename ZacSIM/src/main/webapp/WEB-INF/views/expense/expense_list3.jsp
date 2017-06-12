@@ -191,7 +191,7 @@ header, footer, aside, nav, section, article {
 	border: 1px solid #dbdbdb
 }
 
-   .btncalendar{
+.btncalendar{
   display:inline-block;
   width:22px;
   height:22px;
@@ -209,7 +209,7 @@ header, footer, aside, nav, section, article {
 <script>                
 
         $(document).ready(function() {
-        	
+   
 
             //datepicker 한국어로 사용하기 위한 언어설정
             $.datepicker.setDefaults($.datepicker.regional['ko']);     
@@ -270,7 +270,6 @@ header, footer, aside, nav, section, article {
                     $('input:checked').parent(".chkbox2").addClass("on");                    
                 });
             };
-            
             $(".dateclick").dateclick();    // DateClick
             $(".searchDate").schDate();        // searchDate
             
@@ -415,6 +414,8 @@ header, footer, aside, nav, section, article {
 																<input type="text" class="datepicker inpType" name="searchEndDate" id="searchEndDate"> 
 																<a href="#none" class="btncalendar dateclick">기간</a>
 															</span>
+															<button id="staffbutton" type="submit" class="btn btn-default">검색</button>
+															<button type="reset" class="btn btn-default">초기화</button>
 														</div>
 													</td>
 												</tr>
@@ -424,36 +425,34 @@ header, footer, aside, nav, section, article {
 								</div>							
 								<div class="box-footer">
 									<a href="${pageContext.request.contextPath}/expense/expense_form" class="btn btn-default">지출내역추가</a>
-									<button id="staffbutton" type="submit" class="btn btn-default">기간 검색</button>
-									<button type="reset" class="btn btn-default">초기화</button>
 								</div>
 							</form>
 						</div>
 					</div>
 					<div class="col-xs-12">
 						<div class="box">
-							<div class="box-body table-responsive no-padding">
-								<table class="table ">
+							
+							<div class="table-responsive no-padding">
+								<table class="table ">	
 									<thead>
-										<tr>
-											<th>지출 번호</th>
+										<tr>										
 											<th>지점 대표코드</th>
 											<th>지출 내역</th>
 											<th>지출 금액</th>
 											<th>지출 담당자</th>
 											<th>지출 날짜</th>
+											<!-- <th>내역 수정</th> -->
 										</tr>
 									</thead>
 									<tbody>
-
 										<c:forEach var="s" items="${list}">
-											<tr>
-												<td>${s.expense_cd}</td>
+											<tr>												
 												<td>${s.branch_owner_cd}</td>
 												<td>${s.expense_breakdown}</td>
 												<td>${s.expense_total}</td>
 												<td>${s.branch_name}</td>
 												<td>${s.expense_date}</td>
+												<%-- <td><a href="${pageContext.request.contextPath}/expense/expense_modify/">내역수정</a></td> --%>
 											</tr>
 										</c:forEach>
 									</tbody>

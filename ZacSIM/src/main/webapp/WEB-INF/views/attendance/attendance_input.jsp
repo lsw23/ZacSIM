@@ -21,7 +21,7 @@
 		                  <form>
 		                  	<div class="form-group">
 		                      <label for="exampleInputPassword1">출결번호</label>
-		                      <input type="password" class="form-control" id="inout_num" name="inout_num" value="0023">
+		                      <input type="password" class="form-control" id="inout_num" name="inout_num">
 		                      <button type="button" class="btn btn-block btn-info btn-flat" id="check_btn">확인</button>
 		                    </div>
 		                  </form>

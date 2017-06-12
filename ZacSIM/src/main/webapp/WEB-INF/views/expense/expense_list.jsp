@@ -404,13 +404,13 @@ header, footer, aside, nav, section, article {
 														</ul>
 														<div class="clearfix">
 															<!-- 시작일 -->
-															<span class="dset"> 
+															<span> 
 																<input type="text" class="datepicker inpType" name="searchStartDate" id="searchStartDate"> 
 																<a href="#none" class="btncalendar dateclick">기간</a>
 															</span> 
-															<span class="demi">~</span>
+															~
 															<!-- 종료일 -->
-															<span class="dset"> 
+															<span> 
 																<input type="text" class="datepicker inpType" name="searchEndDate" id="searchEndDate"> 
 																<a href="#none" class="btncalendar dateclick">기간</a>
 															</span>
@@ -423,16 +423,14 @@ header, footer, aside, nav, section, article {
 										</table>
 									</div>
 								</div>							
-								<div class="box-footer">
-									<a href="${pageContext.request.contextPath}/expense/expense_form" class="btn btn-default">지출내역추가</a>
-								</div>
+								
 							</form>
 						</div>
 					</div>
 					<div class="col-xs-12">
 						<div class="box">
-							<div class="box-body table-responsive no-padding">
-								<%-- <div>${joinCount}</div> --%>
+							<div class="box-body">
+								
 								<table class="table ">	
 									<thead>
 										<tr>										
@@ -445,7 +443,6 @@ header, footer, aside, nav, section, article {
 										</tr>
 									</thead>
 									<tbody>
-
 										<c:forEach var="s" items="${list}">
 											<tr>												
 												<td>${s.branch_owner_cd}</td>
@@ -458,37 +455,41 @@ header, footer, aside, nav, section, article {
 										</c:forEach>
 									</tbody>
 								</table>
-								<div>
-									<nav aria-label="Page navigation example">
-										<ul class="pagination justify-content-center">
-											<c:if test="${currentPage > 1}">
-												<li class="page-item">
-												<a class="page-link" href="${pageContext.request.contextPath}/expense/expense_list?currentPage=${currentPage-1}" aria-label="Previous"> 
-												<span aria-hidden="true">&laquo;</span>
-												<span class="sr-only">Previous</span>
-												</a></li>
+											
+								<nav aria-label="Page navigation example text-center">
+									<ul class="pagination justify-content-center">
+										<c:if test="${currentPage > 1}">
+											<li class="page-item">
+											<a class="page-link" href="${pageContext.request.contextPath}/expense/expense_list?currentPage=${currentPage-1}" aria-label="Previous"> 
+											<span aria-hidden="true">&laquo;</span>
+											<span class="sr-only">Previous</span>
+											</a></li>
+										</c:if>
+										<c:forEach var="i" begin="${startPage}" end="${endPage}"
+											step="1">
+											<c:if test="${i == currentPage}">
+												<li class="page-item"><a class="page-link" href="#">${i}</a></li>
 											</c:if>
-											<c:forEach var="i" begin="${startPage}" end="${endPage}"
-												step="1">
-												<c:if test="${i == currentPage}">
-													<li class="page-item"><a class="page-link" href="#">${i}</a></li>
-												</c:if>
-												<c:if test="${i != currentPage}">
-													<li class="page-item">
-													<a class="page-link" href="${pageContext.request.contextPath}/expense/expense_list?currentPage=${i}">${i}</a></li>
-												</c:if>
-											</c:forEach>
-											<c:if test="${currentPage < lastPage}">
+											<c:if test="${i != currentPage}">
 												<li class="page-item">
-												<a class="page-link" href="${pageContext.request.contextPath}/expense/expense_list?currentPage=${currentPage+1}" aria-label="Next"> 
-													<span aria-hidden="true">&raquo;</span>
-													<span class="sr-only">Next</span>
-												</a></li>
+												<a class="page-link" href="${pageContext.request.contextPath}/expense/expense_list?currentPage=${i}">${i}</a></li>
 											</c:if>
-										</ul>
-									</nav>
-								</div>
-							</div>
+										</c:forEach>
+										<c:if test="${currentPage < lastPage}">
+											<li class="page-item">
+											<a class="page-link" href="${pageContext.request.contextPath}/expense/expense_list?currentPage=${currentPage+1}" aria-label="Next"> 
+												<span aria-hidden="true">&raquo;</span>
+												<span class="sr-only">Next</span>
+											</a></li>
+										</c:if>
+									</ul>
+									<a href="${pageContext.request.contextPath}/expense/expense_form" class="btn btn-default" style="margin-top: -63px;">
+										지출내역추가
+									</a>
+								</nav>
+								
+									
+							</div><!-- box-body end -->
 						</div>
 					</div>
 				</div>

@@ -46,7 +46,7 @@
         <section class="content">
 		<div class="row">
         <div class="col-md-12">
-		<div class="box">
+		<div class="box box-info">
                 <div class="box-header">
                 	<h3>종합 현황</h3>
                 </div><!-- /.box-header -->
@@ -81,7 +81,7 @@
 			</div>
 			
 			<div class="col-md-12">
-              <div class="box">
+              <div class="box box-info">
                 <div class="box-header">
                 	<h3>열람실 만석률</h3>
                 </div><!-- /.box-header -->
@@ -100,7 +100,7 @@
             </div><!-- /.col -->
             
             <div class="col-md-12">
-              <div class="box">
+              <div class="box box-info">
                 <div class="box-header">
                 	<h3>기간 만료 예정</h3>
                 	<a href="${pageContext.request.contextPath}/room/member_period?">상세보기</a>

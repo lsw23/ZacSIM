@@ -340,7 +340,7 @@
 	</select>
 
 	<!-- 입퇴실 내역 -->
-	<select id="exitList" resultType="com.monorella.srf.branch.dto.SeatTime">
+	<select id="exitList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.SeatTime">
 		SELECT
 			m.member_nm
 			, s.seat_date
@@ -349,7 +349,7 @@
 		FROM branch_member_tb AS m
 		INNER join branch_seat_time_tb AS s
 		ON m.member_cd = s.member_cd
-		WHERE branch_owner_cd = #{branch_owner_cd}
+		WHERE m.branch_owner_cd = #{branch_owner_cd}
 		ORDER BY seat_time_cd  DESC
 	</select>
 
@@ -364,7 +364,7 @@
 		ORDER BY inout_num DESC
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
-	
+
 	<!-- 회원 리스트 -->	
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
@@ -398,9 +398,9 @@
 		  	 , member_age
 		  	 , member_seat_state
 	  	FROM branch_member_tb
-	  	ORDER BY member_cd DESC 
+	  	ORDER BY member_cd DESC
   </select>
-  
+
 	<!-- 회원 조회 -->
 	<select id="selectMember" resultType="com.monorella.srf.branch.dto.Member">
 	  	SELECT
@@ -469,9 +469,9 @@
 			, now()
 			, #{member_regi_path}
 			, #{member_use_pur}
-		)	
+		)
   	</insert>
- 	
+
  	<!-- 입퇴실 코드 COUNT -->
  	<select id="exitMemberCode" resultType="int">
   		SELECT COUNT(member_cd) FROM branch_member_tb

@@ -67,13 +67,13 @@
               </a>
               <ul class="treeview-menu">
                 <li id="room01"><a href="${pageContext.request.contextPath}/room/room_form"><i class="fa fa-circle-o"></i>열람실 등록</a></li>
-                <li id="room02" ><a href="${pageContext.request.contextPath}/room/room_main"><i class="fa fa-circle-o"></i>열람실 관리</a></li>
+                <li id="room02" ><a href="${pageContext.request.contextPath}/room/room_main"><i class="fa fa-circle-o"></i>열람석 결제</a></li>
                 <li id="room03"><a href="${pageContext.request.contextPath}/room/room_dashboard"><i class="fa fa-circle-o"></i>열람실 현황</a></li>
               </ul>
             </li>
             <li class="treeview" id="account_menu">
               <a href="#">
-                <i class="fa fa-credit-card"></i> <span>결제</span>
+                <i class="fa fa-credit-card"></i> <span>회계</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu" >

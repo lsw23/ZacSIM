@@ -40,7 +40,7 @@
 						<i class="fa fa-key fa-fw"></i>
 					</div>
 					<input type="password" class="form-control" 
-						id="head_pw" name="head_pw" type="password" value="pw01">
+						id="head_pw" name="head_pw" type="password" value="7171008">
 				</div>
 			</div>
 			<div class="form-group">
