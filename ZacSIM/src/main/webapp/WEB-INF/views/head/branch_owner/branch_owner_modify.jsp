@@ -120,7 +120,7 @@
 							</div>
 						</div>
 						<div class="form-group text-right">
-							<a href="${pageContext.request.contextPath}/head/barach_owner/branch_owner_list">
+							<a href="${pageContext.request.contextPath}/head/branch_owner/branch_owner_list">
 								<input type="button" class="templatemo-white-button" value="back"/>
 							</a>
 							<button type="submit" class="templatemo-blue-button">Modify</button>
