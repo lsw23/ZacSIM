@@ -40,23 +40,23 @@
 								<table class="table">
 									<tbody>
 										<tr>
-											<td>staffboard_no :</td>
+											<td>공지사항 번호 :</td>
 											<td>${staffboard.staffboard_no}</td>
 										</tr>
 										<tr>
-											<td>staffboard_title :</td>
+											<td>공지사항 제목 :</td>
 											<td>${staffboard.staffboard_title}</td>
 										</tr>
 										<tr>
-											<td>staffboard_content :</td>
+											<td>공지사항 내용 :</td>
 											<td>${staffboard.staffboard_content}</td>
 										</tr>
 										<tr>
-											<td>staff_name :</td>
+											<td>공지사항 작성자 :</td>
 											<td>${staffboard.staff_name}</td>
 										</tr>
 										<tr>
-											<td>staffboard_date :</td>
+											<td>공지사항 등록일 :</td>
 											<td>${staffboard.staffboard_date}</td>
 										</tr>
 									</tbody>

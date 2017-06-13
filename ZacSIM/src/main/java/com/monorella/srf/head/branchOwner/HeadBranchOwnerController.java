@@ -41,7 +41,7 @@ public class HeadBranchOwnerController {
 			// 회계 테이블 레코드 삭제
 			headBranchOwnerDao.deleteAccountList(branch_owner_cd);
 		}
-		return "redirect:/head/barach_owner/branch_owner_list";
+		return "redirect:/head/branch_owner/branch_owner_list";
 	}
 	
 	//사업자 정보 수정 처리
@@ -49,26 +49,26 @@ public class HeadBranchOwnerController {
 	public String modifyBranchOwner(HeadBranchOwner branchOwner, Model model){
 		//System.out.println("HeadBranchOwnerController-> ModifyBranchOwner()-> branchOwner: "+branchOwner);
 		headBranchOwnerDao.modifyBranchOwner(branchOwner);
-		return "redirect:/head/barach_owner/branch_owner_modify?branch_owner_cd="+branchOwner.getBranch_owner_cd();
+		return "redirect:/head/branch_owner/branch_owner_modify?branch_owner_cd="+branchOwner.getBranch_owner_cd();
 	}
 	
 	//사업자 정보 수정 폼, 단일 사업자 정보 조회
-	@RequestMapping(value="/head/barach_owner/branch_owner_modify" , method = RequestMethod.GET)
+	@RequestMapping(value="/head/branch_owner/branch_owner_modify" , method = RequestMethod.GET)
 	public String selectOneBranchOwner(@RequestParam(value="branch_owner_cd") String branch_owner_cd, Model model){
 		//System.out.println("HeadBranchOwnerController-> SelectOneBranchOwner()-> owner_num: "+owner_num);
 		HeadBranchOwner info = headBranchOwnerDao.selectOneBranchOwner(branch_owner_cd);
 		//System.out.println("HeadBranchOwnerController-> SelectOneBranchOwner()-> info: "+info);
 		model.addAttribute("info", info);
-		return "/head/barach_owner/branch_owner_modify";
+		return "/head/branch_owner/branch_owner_modify";
 	}
 	
 	//사업자 목록
-	@RequestMapping(value="/head/barach_owner/branch_owner_list" , method = RequestMethod.GET)
+	@RequestMapping(value="/head/branch_owner/branch_owner_list" , method = RequestMethod.GET)
 	public String selectBranchOwnerList(Model model){
 		//System.out.println("HeadBranchOwnerController-> selectBranchOwnerList()");
 		List<HeadBranchOwner> ownerList = headBranchOwnerDao.selectBranchOwnerList(); //이용중 회원 목록
 		model.addAttribute("ownerList", ownerList);
-		return "/head/barach_owner/branch_owner_list";
+		return "/head/branch_owner/branch_owner_list";
 	}
 	
 	//사업자 등록 요청
@@ -84,13 +84,13 @@ public class HeadBranchOwnerController {
 			// 회계 테이블에 레코드 추가
 			headBranchOwnerDao.insertAccountList(branchOwner.getBranch_owner_cd());
 		}
-		return "redirect:/head/barach_owner/branch_owner_list";
+		return "redirect:/head/branch_owner/branch_owner_list";
 	}
 	
 	//사업자 등록 폼 요청
-	@RequestMapping(value="/head/barach_owner/branch_owner_insert", method=RequestMethod.GET)
+	@RequestMapping(value="/head/branch_owner/branch_owner_insert", method=RequestMethod.GET)
 	public String branchOwnerForm(){
 		//System.out.println("HeadBranchOwnerController-> branchOwnerForm()");
-		return "/head/barach_owner/branch_owner_insert";
+		return "/head/branch_owner/branch_owner_insert";
 	}
 }

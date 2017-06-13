@@ -40,7 +40,7 @@
 		                    <tr>
 		                      <td>${o.owner_num}</td>
 		                      <td>
-			                      <a href="${pageContext.request.contextPath}/head/barach_owner/branch_owner_modify?branch_owner_cd=${o.branch_owner_cd}">
+			                      <a href="${pageContext.request.contextPath}/head/branch_owner/branch_owner_modify?branch_owner_cd=${o.branch_owner_cd}">
 			                      	${o.owner_nm}
 			                      </a>	
 		                      </td>
