@@ -299,7 +299,7 @@
 
 				<div class="col-md-3 col-sm-6 col-xxs-12">
 					<a href="http://dprtm77.cafe24.com" class="fh5co-project-item to-animate">
-						<img src="${pageContext.request.contextPath}/resources/elate/images/K-025.png" alt="Image" class="img-responsive">
+						<img src="${pageContext.request.contextPath}/resources/elate/images/K-036.png" height="150px" alt="Image" class="img-responsive">
 						<div class="fh5co-text">
 						<h2>이승욱</h2>
 						
@@ -307,8 +307,8 @@
 					</a>
 				</div>
 				<div class="col-md-3 col-sm-6 col-xxs-12">
-					<a href="images/work_4.jpg" class="fh5co-project-item image-popup to-animate">
-						<img src="${pageContext.request.contextPath}/resources/elate/images/K-025.png" alt="Image" class="img-responsive">
+					<a href="http://mandragora.cafe24.com" class="fh5co-project-item to-animate">
+						<img src="${pageContext.request.contextPath}/resources/elate/images/K-029.png" height="150px" alt="Image" class="img-responsive">
 						<div class="fh5co-text">
 						<h2>이주녕</h2>
 						

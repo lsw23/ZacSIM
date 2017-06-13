@@ -19,9 +19,6 @@
 		    $( "#draggable" ).draggable({ axis: "y" });
 		    $( ".seatdraggable" ).draggable({ containment: "#containment-wrapper", scroll: false });
 		  });
-		
-		  
-		  
 		</script>
 		
 	</head>
