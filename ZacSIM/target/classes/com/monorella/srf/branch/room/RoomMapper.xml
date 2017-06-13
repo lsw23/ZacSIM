@@ -177,7 +177,7 @@
   	
   	<!-- 열람실 코드 가져오기 -->
   	<select id="selectRoomCd" resultType="String">
-  		SELECT MAX(room_cd) FROM branch_room_tb
+  		SELECT  CONCAT(LEFT(room_cd, 7) , MAX(SUBSTRING(room_cd, 8) + 0)) AS room_cd FROM branch_room_tb
   	</select>
   
   	<!-- 열람실별 열람석 정보 가져오기 -->
