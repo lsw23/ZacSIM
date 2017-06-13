@@ -5,10 +5,10 @@
 				<div class="row">
 					<nav class="templatemo-top-nav col-lg-12 col-md-12">
 						<ul class="text-uppercase">
-							<li><a href="#">Lee Ju Nyeoung</a></li>
-							<li><a href="#">Yang Ji Hun</a></li>
+							<li><a href="http://monorella.cafe24.com/">Lee Ju Nyeoung</a></li>
+							<li><a href="http://dprtm77.cafe24.com/">Lee Seung Wook</a></li>
+							<li><a href="http://yjh0903.cafe24.com/">Yang Ji Hun</a></li>
 							<li><a href="#">Park Suck Min</a></li>
-							<li><a href="#">Lee Seung Wook</a></li>
 						</ul>
 					</nav>
 				</div>

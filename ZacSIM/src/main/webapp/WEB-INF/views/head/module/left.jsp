@@ -6,7 +6,7 @@
 				<center><h1>Zak<b>SIM</b></h1></center>
 			</header>
 			<div class="profile-photo-container">
-				<img src="${pageContext.request.contextPath}/resources/head/images/profile-photo.jpg" alt="Profile Photo"
+				<img src="http://imgnews.naver.com/image/014/2017/06/02/0003823818_001_20170602135905014.jpg" alt="Profile Photo"
 					class="img-responsive">
 				<div class="profile-photo-overlay"></div>
 			</div>

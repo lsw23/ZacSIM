@@ -246,7 +246,7 @@
 					<div class="overlay-darker"></div>
 					<div class="overlay"></div>
 					<div class="fh5co-text">
-						<div><img alt="중앙관리자" width="300px" src="${pageContext.request.contextPath}/resources/elate/images/K-012.png"> </div>
+						<div><img alt="중앙관리자" width="300px" src="${pageContext.request.contextPath}/resources/elate/images/ZakSIM_main.png"> </div>
 						
 						<p>본사</p>
 						<p><a href="${pageContext.request.contextPath}/head" class="btn btn-primary">Click</a></p>
