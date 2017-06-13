@@ -74,17 +74,14 @@ public class LoginController {
 	public String loginPro(BranchOwner branchOwner, HttpServletRequest request){
 		//System.out.println("로그인 처리 요청");
 		BranchOwner owner = loginDao.loginBranchOwner(branchOwner);
-		
-		System.out.println("loginPro: " +owner);
+		//System.out.println("loginPro: " +owner);
 		if(owner == null){
-			System.out.println("아이디와 비번이 일치하지 않습니다.");
+			//System.out.println("아이디와 비번이 일치하지 않습니다.");
 			return "redirect:/login/loginFrom";
 		}else{
-			System.out.println("로그인 성공");
+			//System.out.println("로그인 성공");
 			request.getSession().setAttribute("branchOwner", owner);
 		}
-		
 		return "redirect:/dashboard/all_status";
-
 	}
 }
