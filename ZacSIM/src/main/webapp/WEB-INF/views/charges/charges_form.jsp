@@ -34,7 +34,7 @@
 		      <small>Control panel</small>
 		    </h1>
 		    <ol class="breadcrumb">
-		      <li><a href="${pageContext.request.contextPath}/dashboard/today_status"><i class="fa fa-book"></i>Home</a></li>
+		      <li><a href="#"><i class="fa fa-book"></i>Home</a></li>
 		      <li class="active">요금제</li>
 		    </ol>
 		  </section>

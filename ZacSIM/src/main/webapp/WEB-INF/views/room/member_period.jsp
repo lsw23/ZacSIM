@@ -47,7 +47,7 @@
 		      <small>현재날짜 <fmt:formatDate value="${toDay}" pattern="yyyy-MM-dd"/> (매일 오전 06:00에 기간 만료처리가 진행됩니다.)</small>
 		    </h1>
 		    <ol class="breadcrumb">
-		      <li><a href="${pageContext.request.contextPath}/home/NewFile"><i class="fa fa-dashboard"></i>Home</a></li>
+		      <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
 		      <li class="active">기간만료</li>
 		    </ol>              
 		  </section>

@@ -86,7 +86,7 @@
 	    </h1>
 	    
 	    <ol class="breadcrumb">
-	      <li><a href="${pageContext.request.contextPath}/dashboard/today_status"><i class="fa fa-table"></i>Home</a></li>
+	      <li><a href="#"><i class="fa fa-table"></i>Home</a></li>
 	      <li class="active">열람실관리</li>
 	    </ol>
 	  </section>
