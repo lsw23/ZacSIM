@@ -277,17 +277,8 @@
 			<h3 id="team">팀원 개인포트폴리오</h3>
 			<div class="row row-bottom-padded-sm">
 				<div class="col-md-3 col-sm-6 col-xxs-12">
-					<a href="images/work_1.jpg" class="fh5co-project-item image-popup to-animate">
-						<img src="${pageContext.request.contextPath}/resources/elate/images/K-025.png" alt="Image" class="img-responsive">
-						<div class="fh5co-text">
-						<h2>박석민</h2>
-						
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xxs-12">
 					<a href="http://yjh0903.cafe24.com" class="fh5co-project-item to-animate">
-						<img src="${pageContext.request.contextPath}/resources/elate/images/K-025.png" alt="Image" class="img-responsive">
+						<img src="${pageContext.request.contextPath}/resources/elate/images/K-037.png" alt="Image" class="img-responsive">
 						<div class="fh5co-text">
 						<h2>양지훈</h2>
 						
