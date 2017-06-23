@@ -52,7 +52,7 @@
 					 		</c:if>
 							 <c:forEach var="m" items="${memberlist}">
 								<tr>
-									<td class="member_cd">${m.member_cd}</td>
+									<td><a href="#" class="member_cd">${m.member_cd}</a></td>
 									<td>${m.member_nm}</td>
 									<td>${m.member_tel}</td>
 								<c:if test="${m.member_seat_state == 'Y'}">
@@ -78,10 +78,12 @@
 	<script>
 		function sendChildValue(name){
 			opener.setChildValue(name);
+			window.close();
 		}
 		$('.member_cd').click(function(){
-			console.log('클릭');
-			sendChildValue('${m.member_cd}');
+			console.log('졸려');
+			var code = $(this).text();
+			sendChildValue(code);
 		});
 	</script>
 	

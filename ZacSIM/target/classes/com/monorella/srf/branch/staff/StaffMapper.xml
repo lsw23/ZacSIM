@@ -101,6 +101,7 @@
 		, staff_pw
 		, staff_name
 		, staff_tel
+		, staff_postcode
 		, staff_addr
 		, staff_in_date) 
 	VALUES(
@@ -109,6 +110,7 @@
 		, #{staff_pw}
 		, #{staff_name}
 		, #{staff_tel}
+		, #{staff_postcode}
 		, #{staff_addr}
 		, #{staff_in_date}
 	)

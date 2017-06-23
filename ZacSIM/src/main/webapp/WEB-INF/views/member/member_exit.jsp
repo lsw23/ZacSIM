@@ -66,10 +66,10 @@
 						<option value="member_nm">이름</option>
 					  </select>
 			 	 	 </div>
-			   <div class="col-sm-6">
+			   <div class="col-sm-5">
 			   		<input name="sv" id="exitForm" type="text" class="form-control" placeholder="검색을 입력하시오."/>
 			   </div>
-			   <div class="col-sm-2">
+			   <div class="col-sm-3">
 			   		<button type="button" id="exitBtn" class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
 			   		<button type="reset" id="backBtn" class="btn btn-sm btn-default"><i class="fa fa-refresh fa-spin"></i></button>
 			   </div>
