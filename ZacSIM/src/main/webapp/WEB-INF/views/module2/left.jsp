@@ -37,22 +37,21 @@
                 <li id="dashboard02"><a href="${pageContext.request.contextPath}/dashboard/all_status"><i class="fa fa-circle-o"></i>지점 현황</a></li>
               </ul>
             </li>
-            <li class="treeview" id="staff_menu">
+            <li class="treeview" id="room_menu">
               <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>직원</span>
+                <i class="fa fa-table"></i> <span>열람실 관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li id="staff01"><a href="${pageContext.request.contextPath}/staff/staff_form"><i class="fa fa-circle-o"></i> 직원 등록</a></li>
-                <li id="staff02"><a href="${pageContext.request.contextPath}/staff/staff_list"><i class="fa fa-circle-o"></i> 직원 목록</a></li>
+                <li id="room01"><a href="${pageContext.request.contextPath}/room/room_form"><i class="fa fa-circle-o"></i>열람실 등록</a></li>
+                <li id="room02" ><a href="${pageContext.request.contextPath}/room/room_main"><i class="fa fa-circle-o"></i>열람석 결제</a></li>
+                <li id="room03"><a href="${pageContext.request.contextPath}/room/room_dashboard"><i class="fa fa-circle-o"></i>열람실 현황</a></li>
               </ul>
             </li>
-            <li class="treeview" id="member_menu">
+             <li class="treeview" id="member_menu">
               <a href="#">
-                <i class="fa fa-edit"></i> <span>회원</span>
+                <i class="fa fa-edit"></i> <span>회원 관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
-                <small class="label pull-right bg-red">new</small>
               </a>
               <ul class="treeview-menu">
                 <li id="member01"><a href="${pageContext.request.contextPath}/member/member_form"><i class="fa fa-circle-o"></i> 회원 등록</a></li>
@@ -61,20 +60,22 @@
                 <li id="member04"><a href="${pageContext.request.contextPath}/room/member_period"><i class="fa fa-circle-o"></i> 회원 만료예정</a></li>
               </ul>
             </li>
-            <li class="treeview" id="room_menu">
+            <li class="treeview" id="staff_menu">
               <a href="#">
-                <i class="fa fa-table"></i> <span>열람실</span>
+                <i class="fa fa-laptop"></i>
+                <span>직원 관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li id="room01"><a href="${pageContext.request.contextPath}/room/room_form"><i class="fa fa-circle-o"></i>열람실 등록</a></li>
-                <li id="room02" ><a href="${pageContext.request.contextPath}/room/room_main"><i class="fa fa-circle-o"></i>열람실 관리</a></li>
-                <li id="room03"><a href="${pageContext.request.contextPath}/room/room_dashboard"><i class="fa fa-circle-o"></i>열람실 현황</a></li>
+                <li id="staff01"><a href="${pageContext.request.contextPath}/staff/staff_form"><i class="fa fa-circle-o"></i> 직원 등록</a></li>
+                <li id="staff02"><a href="${pageContext.request.contextPath}/staff/staff_list"><i class="fa fa-circle-o"></i> 직원 목록</a></li>
               </ul>
             </li>
+           
+
             <li class="treeview" id="account_menu">
               <a href="#">
-                <i class="fa fa-credit-card"></i> <span>결제</span>
+                <i class="fa fa-credit-card"></i> <span>회계 관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu" >
@@ -86,17 +87,17 @@
             <li class="header">Sub Menu</li>
             <li id="attendance_menu">
               <a href="${pageContext.request.contextPath}/attendance/attendance_form">
-                <i class="fa fa-bell-o"></i> <span>출결번호</span>
+                <i class="fa fa-bell-o"></i> <span>출결번호 관리</span>
               </a>
+            </li>
+            <li id="charges_menu">
+            	<a href="${pageContext.request.contextPath}/charges/charges_form"><i class="fa fa-book"></i> 요금제 설정</a>
             </li>
             <li id="staffboard_menu">
               <a href="${pageContext.request.contextPath}/staffboard/staffboard_list">
                 <i class="fa fa-envelope"></i> <span>공지사항</span>
-                <small class="label pull-right bg-yellow">12</small>
               </a>
             </li>
-            <li id="charges_menu"><a href="${pageContext.request.contextPath}/charges/charges_form"><i class="fa fa-book"></i> 요금제 설정</a></li>
-       
           </ul>
         </section>
         <!-- /.sidebar -->

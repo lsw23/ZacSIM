@@ -17,7 +17,7 @@ public class Scheduler {
 	@Autowired
 	private RoomDao roomDao;
 	
-	@Scheduled(cron = "0 08 14 * * *")
+	@Scheduled(cron = "0 18 14 * * *")
 	public void cronTest(){
 		try{
 			System.out.println("만료일처리 실행");

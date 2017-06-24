@@ -37,7 +37,7 @@
 	      <small>등록</small>
 	    </h1>
 	    <ol class="breadcrumb">
-	      <li><a href="${pageContext.request.contextPath}/dashboard/today_status"><i class="fa fa-table"></i>Home</a></li>
+	      <li><a href="#"><i class="fa fa-table"></i>Home</a></li>
 	      <li class="active">열람실</li>
 	    </ol>
 	  </section>
@@ -95,7 +95,6 @@
 		           	    <th>열람실 이름</th>
 		                <th>총 열람석 수</th>
 		                <th>구분</th>
-		                <th>수정</th>
 		                <th>삭제</th>
             		  </tr>
                     </thead>
@@ -106,7 +105,6 @@
                       		<td>${r.room_nm}</td>
                       		<td>${r.seat_num}</td>
                       		<td>${r.room_division}</td>
-                      		<td><a href="#"><button id="update_btn"><i class="fa  fa-eraser"></i></button></a></td>
                       		<td><a href="${pageContext.request.contextPath}/room/room_delete?room_cd=${r.room_cd}"><button><i class="fa  fa-times"></i></button></a></td>
                       	</tr>
                       </c:forEach>

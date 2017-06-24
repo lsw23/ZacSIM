@@ -63,7 +63,6 @@
 									&nbsp;~&nbsp;
 									<input name="endDate" type="date" style="width: 150px; height: 25px;">
 									<input class="btnPadding" type="submit" value="검색"/>
-									<p><small>(기간은 <b style="color: red;">하루 초과</b>로 선택해 주세요. ex.2017-01-01의 수입내역-> 2017-01-01 ~ 2017-01-02)</small></p>
 								</div>
 							</div><!-- /.box-body -->
 						</form>
@@ -86,7 +85,7 @@
 									</tr>
 			                    </thead>
 			                    <tbody>
-			                    	<p style="color: #2D0087;">${getNull}</p>
+			                    	<%-- <p style="color: #2D0087;">${getNull}</p> --%>
 				                    <c:forEach var="p" items="${pay}">
 										<tr>
 											<td>${p.member_nm}</td>
@@ -142,7 +141,8 @@
 	<!-- DATA TABES SCRIPT -->
     <script src="${pageContext.request.contextPath}/resources/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/resources/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
-    
+   
+   
     <script>
     //메뉴 고정
     	$(function(){
@@ -159,12 +159,10 @@
           "bLengthChange": true, // jquery.dataTables.js 파일 내에 aLengthMenu로 find
           "bFilter": false,
           "bSort": false,
-          "bInfo": true,
+          "bInfo": true, // 전체 글 수 페이지 첫번째 글, 마지막 글 번호
           "bAutoWidth": true
         });
-      });
-      
-      
+      }); 
     </script> 
 </body>
 </html>

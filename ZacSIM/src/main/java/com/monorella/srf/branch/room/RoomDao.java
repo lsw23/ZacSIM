@@ -98,6 +98,11 @@ public class RoomDao {
 		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.room.RoomMapper.selectRoomDashBoard", room_cd);
 	}
 	
+	//지점별 열람실 코드 조회
+	public int selectRoomCdBranch(Room room){
+		return sqlSessionTemplate.selectOne("com.monorella.srf.branch.room.RoomMapper.selectRoomCdBranch", room);
+	}
+	
 	//열람실 코드 전체 조회
 	public List<Room> selectRoomCdAll(){
 		return sqlSessionTemplate.selectList("");

@@ -22,7 +22,7 @@
 		      <small>.</small>
 		    </h1>
 		    <ol class="breadcrumb">
-		      <li><a href="${pageContext.request.contextPath}/dashboard/today_status"><i class="fa fa-bell-o"></i>Home</a></li>
+		      <li><a href="#"><i class="fa fa-bell-o"></i>Home</a></li>
 		      
 		    </ol>
 		  </section>

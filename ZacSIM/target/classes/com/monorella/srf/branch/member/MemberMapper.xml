@@ -68,6 +68,7 @@
 		member_sex
 		FROM branch_member_tb
 		WHERE member_sex = '여자'
+		AND branch_owner_cd = #{branch_owner_cd}
 		GROUP BY branch_owner_cd
 		]]>
 	</select>
@@ -81,7 +82,7 @@
 		WHERE member_age >= 10 
 		AND member_age < 20
 		AND member_sex = '남자'
-		AND branch_owner_cd = #{branch_owner_cd}) AS teens
+		AND branch_owner_cd = 'M1') AS teens
 		,
 		(SELECT COUNT(*) 
 		FROM branch_member_tb
@@ -113,6 +114,7 @@
 		member_sex
 		FROM branch_member_tb
 		WHERE member_sex = '남자'
+		AND branch_owner_cd = #{branch_owner_cd}
 		GROUP BY branch_owner_cd
 		]]>
 	</select>
@@ -197,8 +199,8 @@
 	
 	<!-- 회원 삭제 -->
 	<delete id="MemberRemove" parameterType="com.monorella.srf.branch.dto.Member">
-		DELETE FROM branch_member_tb 
-		WHERE member_cd = #{member_cd} 
+		DELETE FROM branch_member_tb
+		WHERE member_cd = #{member_cd}
 		AND branch_owner_cd = #{branch_owner_cd}
 	</delete>
 	
@@ -279,6 +281,7 @@
 	 <select id="exeMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			 member_tel
+			 , branch_owner_cd
 			 , member_nm
 			 FROM branch_member_tb
 			  <if test="sv !=null and sv != ''">
@@ -295,31 +298,35 @@
 	<select id="searchMember" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			 member_cd
+			 , branch_owner_cd
 			 , member_nm
 			 , member_tel
 			 , member_addr
 			 , member_seat_state
 			 , member_tel
+			 , member_age
 			 , member_date
 			 FROM branch_member_tb
+			 WHERE branch_owner_cd = #{branch_owner_cd}
+			 AND
 			  <if test="sv !=null and sv != ''">
 			<if test="so.equals('member_cd')">
-			WHERE member_cd like concat('%',#{sv},'%')
+			 member_cd like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_nm')">
-				WHERE member_nm like concat('%',#{sv},'%')
+				 member_nm like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_tel')">
-				WHERE member_tel like concat('%',#{sv},'%')
+				member_tel like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_addr')">
-				WHERE member_addr like concat('%',#{sv},'%')
+				 member_addr like concat('%',#{sv},'%')
 			</if>
 			<if test="so.equals('member_seat_state')">
-				WHERE member_seat_state like concat('%',#{sv},'%') 
+				member_seat_state like concat('%',#{sv},'%') 
 			</if>
 			<if test="so.equals('member_date')">
-				WHERE member_date like concat('%',#{sv},'%')
+				member_date like concat('%',#{sv},'%')
 			</if>
 			</if> 
 	</select>
@@ -333,7 +340,7 @@
 	</select>
 
 	<!-- 입퇴실 내역 -->
-	<select id="exitList" resultType="com.monorella.srf.branch.dto.SeatTime">
+	<select id="exitList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.SeatTime">
 		SELECT
 			m.member_nm
 			, s.seat_date
@@ -342,6 +349,7 @@
 		FROM branch_member_tb AS m
 		INNER join branch_seat_time_tb AS s
 		ON m.member_cd = s.member_cd
+		WHERE m.branch_owner_cd = #{branch_owner_cd}
 		ORDER BY seat_time_cd  DESC
 	</select>
 
@@ -349,22 +357,26 @@
 	<select id="selectMemberExit" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			member_tel
+			, branch_owner_cd
 			, member_nm
 		FROM branch_member_tb
+		WHERE branch_owner_cd = #{branch_owner_cd}
 		ORDER BY inout_num DESC
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
-	
+
 	<!-- 회원 리스트 -->	
 	<select id="selectMemberList" parameterType="java.util.Map" resultType="com.monorella.srf.branch.dto.Member">
 		SELECT
 			member_cd
+			, branch_owner_cd
 			, member_nm
 			, member_tel
 			, member_addr
 			, member_seat_state
 			, member_date
 		FROM branch_member_tb
+		WHERE branch_owner_cd = #{branch_owner_cd}
 		ORDER BY inout_num DESC
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
@@ -386,9 +398,9 @@
 		  	 , member_age
 		  	 , member_seat_state
 	  	FROM branch_member_tb
-	  	ORDER BY member_cd DESC 
+	  	ORDER BY member_cd DESC
   </select>
-  
+
 	<!-- 회원 조회 -->
 	<select id="selectMember" resultType="com.monorella.srf.branch.dto.Member">
 	  	SELECT
@@ -457,9 +469,9 @@
 			, now()
 			, #{member_regi_path}
 			, #{member_use_pur}
-		)	
+		)
   	</insert>
- 	
+
  	<!-- 입퇴실 코드 COUNT -->
  	<select id="exitMemberCode" resultType="int">
   		SELECT COUNT(member_cd) FROM branch_member_tb

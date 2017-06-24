@@ -86,7 +86,7 @@
 	    </h1>
 	    
 	    <ol class="breadcrumb">
-	      <li><a href="${pageContext.request.contextPath}/dashboard/today_status"><i class="fa fa-table"></i>Home</a></li>
+	      <li><a href="#"><i class="fa fa-table"></i>Home</a></li>
 	      <li class="active">열람실관리</li>
 	    </ol>
 	  </section>
@@ -95,46 +95,44 @@
       <section class="content">
 	<!-- main -->
 	<div class="row">	
-	  <div class="col-md-9 col-lg-10 main" id="wrap">		
-			<c:forEach var="r" items="${roomlist}">
-				<a href="${pageContext.request.contextPath}/room/room_view?room_cd=${r.room_cd}&room_nm=${r.room_nm}"><button class="btn bg-purple margin">열람실 ${r.room_nm}</button></a>
+	  <div class="col-md-9 col-lg-10 main" id="wrap">
+	  		
+				<c:forEach var="r" items="${roomlist}">
+					<a href="${pageContext.request.contextPath}/room/room_view?room_cd=${r.room_cd}&room_nm=${r.room_nm}"><button class="btn bg-purple margin">열람실 ${r.room_nm}</button></a>
 
-
-			<div class="col-sm-12">
-				<c:forEach var="s" items="${seatlist}">
-					<c:if test="${s.room_cd eq r.room_cd}">
-					 <input type="hidden" class="get_seat" value="${s.seat_cd}"/>
-	 				 <input type="hidden" name="chk" class="bocd" value="${s.branch_owner_cd}">
-					 <input type="hidden" name="chk" class="mcd" class="mcdc" value="${s.member_cd}">
-					 <input type="hidden" name="chk" class="rcd" value="${s.room_cd}">	
-					 <button class="btn bg-olive btn-flat margin seat_btn" id="scd" value="${s.seat_cd}">	
-							<c:if test="${s.colseat_state eq '빈좌석' or s.colseat_state eq '배치' }">
-								<p>${s.seat_cnumber}</p>
-							</c:if>
-							<c:if test="${s.colseat_state eq '입실'}">
-								<p>${s.seat_cnumber} <small class="label pull-right bg-yellow"> ${s.colseat_state}</small></p>
-							</c:if>
-							<c:if test="${s.colseat_state eq '퇴실'}">
-								<p>${s.seat_cnumber} <small class="label pull-right bg-red">${s.colseat_state}</small></p>
-							</c:if>
-
-							<c:choose> 
-							 <c:when test="${s.member_nm eq null}">
-								<p class="windetail">빈좌석</p>
-								<p>_________</p>
-							 </c:when>
-							 <c:otherwise>
-							 	<p class="windetailon">${s.member_nm}</p>
-							 	<p class="end_date">${s.member_end_date}</p>
-							 </c:otherwise>
-							</c:choose>
-						</button>
-					</c:if>		
-				</c:forEach>	
-				
-					
-			</div>
-			<hr>
+				<div class="col-sm-12">
+					<c:forEach var="s" items="${seatlist}">
+						<c:if test="${s.room_cd eq r.room_cd}">
+						 <input type="hidden" class="get_seat" value="${s.seat_cd}"/>
+		 				 <input type="hidden" name="chk" class="bocd" value="${s.branch_owner_cd}">
+						 <input type="hidden" name="chk" class="mcd" class="mcdc" value="${s.member_cd}">
+						 <input type="hidden" name="chk" class="rcd" value="${s.room_cd}">	
+						 <button class="btn bg-olive btn-flat margin seat_btn" id="scd" value="${s.seat_cd}">	
+								<c:if test="${s.colseat_state eq '빈좌석' or s.colseat_state eq '배치' }">
+									<p>${s.seat_cnumber}</p>
+								</c:if>
+								<c:if test="${s.colseat_state eq '입실'}">
+									<p>${s.seat_cnumber} <small class="label pull-right bg-yellow"> ${s.colseat_state}</small></p>
+								</c:if>
+								<c:if test="${s.colseat_state eq '퇴실'}">
+									<p>${s.seat_cnumber} <small class="label pull-right bg-red">${s.colseat_state}</small></p>
+								</c:if>
+	
+								<c:choose> 
+								 <c:when test="${s.member_nm eq null}">
+									<p class="windetail">빈좌석</p>
+									<p>_________</p>
+								 </c:when>
+								 <c:otherwise>
+								 	<p class="windetailon">${s.member_nm}</p>
+								 	<p class="end_date">${s.member_end_date}</p>
+								 </c:otherwise>
+								</c:choose>
+							</button>
+						</c:if>		
+					</c:forEach>	
+				</div>
+				<hr>
 			</c:forEach>
 
 			</div> <!-- col-md-9 col-lg-10 main -->

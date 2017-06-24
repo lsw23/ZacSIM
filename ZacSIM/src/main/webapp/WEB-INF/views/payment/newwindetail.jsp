@@ -44,7 +44,6 @@
 						</div>
 						<a href="${pageContext.request.contextPath}/payment/extension_form?member_nm=${detailmember.member_nm}&seat_cd=${detailmember.seat_cd}"><button type="button" class="btn btn-primary">기간 연장</button></a>
 						<a href="${pageContext.request.contextPath}/room/move_form?seat_cd=${detailmember.seat_cd}"><button type="button" class="btn btn-primary">좌석 이동</button></a>
-						<button type="button" class="btn btn-primary">좌석 해제</button>
                 </form>         
               </div>
             </div>

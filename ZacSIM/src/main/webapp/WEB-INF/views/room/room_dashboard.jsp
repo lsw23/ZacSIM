@@ -37,7 +37,7 @@
 		      <small>현황</small>
 		    </h1>
 		    <ol class="breadcrumb">
-		      <li><a href="${pageContext.request.contextPath}/dashboard/today_status"><i class="fa fa-table"></i>Home</a></li>
+		      <li><a href="#"><i class="fa fa-table"></i>Home</a></li>
 		      <li class="active">열람실 관리</li>
 		    </ol>
 		  </section>
@@ -46,7 +46,7 @@
         <section class="content">
 		<div class="row">
         <div class="col-md-12">
-		<div class="box">
+		<div class="box box-info">
                 <div class="box-header">
                 	<h3>종합 현황</h3>
                 </div><!-- /.box-header -->
@@ -60,6 +60,7 @@
 		                <th>퇴실</th>
 		                <th>결제 열람석 수</th>
 		                <th>미결제 열람석 수</th>
+		                <th>총 열람석 수</th>
             		  </tr>
                     </thead>
                     <tbody>
@@ -70,6 +71,7 @@
 	                        <td>${rd.seat_out}</td>
 	                        <td>${rd.pay_seat}</td>
 	                        <td>${rd.notpay_seat}</td>
+	                        <td>${rd.total_seat}</td>
 	                      </tr> 
                        </c:forEach>
                     </tbody>
@@ -79,7 +81,7 @@
 			</div>
 			
 			<div class="col-md-12">
-              <div class="box">
+              <div class="box box-info">
                 <div class="box-header">
                 	<h3>열람실 만석률</h3>
                 </div><!-- /.box-header -->
@@ -98,7 +100,7 @@
             </div><!-- /.col -->
             
             <div class="col-md-12">
-              <div class="box">
+              <div class="box box-info">
                 <div class="box-header">
                 	<h3>기간 만료 예정</h3>
                 	<a href="${pageContext.request.contextPath}/room/member_period?">상세보기</a>

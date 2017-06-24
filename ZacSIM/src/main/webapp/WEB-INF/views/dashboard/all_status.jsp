@@ -89,43 +89,25 @@
           
           <!-- 박스 6개 -->
           <div class="row">
-            <div class="col-md-2 col-sm-6 col-xs-6">
+            <div class="col-md-4 col-sm-6 col-xs-6">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion ion-person"></i></span>
                 <div class="info-box-content">
-                  <h3 class="info-box-text">금일 등록</h3>
+                  <h3 class="info-box-text">금일 등록 회원</h3>
                   <span class="info-box-number">${todayMemberNo} <small>명</small></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
              </div><!-- /.col -->
-             <div class="col-md-2 col-sm-6 col-xs-6">
-              <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-person-stalker"></i></span>
-                <div class="info-box-content">
-                  <h3 class="info-box-text"><b>${month}월</b> 등록</h3>
-                  <span class="info-box-number">${monthMemberNo} <small>명</small></span>
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-             </div><!-- /.col -->
-		     <div class="col-md-2 col-sm-6 col-xs-6">
+             <div class="col-md-4 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-green"><i class="ion ion-log-out"></i></span>
 	               <div class="info-box-content">
-	                 <h3 class="info-box-text">부재중</h3>
+	                 <h3 class="info-box-text">부재중 열람석</h3>
 	                 <span class="info-box-number">${absenceMemberNo} <small>명</small></span>
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-6">
-	             <div class="info-box">
-	               <span class="info-box-icon bg-green"><i class="ion ion-android-close"></i></span>
-	               <div class="info-box-content">
-	                 <h3 class="info-box-text">미결제</h3>
-	                 <span class="info-box-number">${unpaidMemberNo} <small>명</small></span>
-	               </div><!-- /.info-box-content -->
-	             </div><!-- /.info-box -->
-	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-6">
+	          <div class="col-md-4 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-yellow"><i class="ion ion-happy-outline"></i></span>
 	               <div class="info-box-content">
@@ -134,7 +116,26 @@
 	               </div><!-- /.info-box-content -->
 	             </div><!-- /.info-box -->
 	         </div><!-- /.col -->
-	         <div class="col-md-2 col-sm-6 col-xs-6">
+	         
+             <div class="col-md-4 col-sm-6 col-xs-6">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-person-stalker"></i></span>
+                <div class="info-box-content">
+                  <h3 class="info-box-text"><b>${month}월</b> 등록 회원</h3>
+                  <span class="info-box-number">${monthMemberNo} <small>명</small></span>
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+             </div><!-- /.col -->
+	         <div class="col-md-4 col-sm-6 col-xs-6">
+	             <div class="info-box">
+	               <span class="info-box-icon bg-green"><i class="ion ion-android-close"></i></span>
+	               <div class="info-box-content">
+	                 <h3 class="info-box-text">미결제 열람석</h3>
+	                 <span class="info-box-number">${unpaidMemberNo} <small>명</small></span>
+	               </div><!-- /.info-box-content -->
+	             </div><!-- /.info-box -->
+	         </div><!-- /.col -->
+	         <div class="col-md-4 col-sm-6 col-xs-6">
 	             <div class="info-box">
 	               <span class="info-box-icon bg-yellow"><i class="ion ion-sad-outline"></i></span>
 	               <div class="info-box-content">
@@ -161,7 +162,7 @@
 							</div>
 						</div>
 						<div class="box-body">
-							<i class="fa fa-square" style="float: right; color: #FF4848;"> <b style="color: black; font-size: 14px;">: 여성 &nbsp;</b></i>
+							<i class="fa fa-square" style="float: right; color: #FF6C6C;"> <b style="color: black; font-size: 14px;">: 여성 &nbsp;</b></i>
 							<i class="fa fa-square" style="float: right; color: #3736FF;"> <b style="color: black; font-size: 14px;">: 남성 &nbsp;</b></i>
 							<i class="fa fa-square" style="float: right; color: #1DDB16;"> <b style="color: black; font-size: 14px;">: 합계 &nbsp;</b></i>
 		                	<canvas id="areaChart" height="250"></canvas>
@@ -265,7 +266,7 @@
 						</h3>
 					</div>
 					<div class="box-body">
-						<i class="fa fa-square" style="float: right; color: #86E57F;"> <b style="color: black; font-size: 14px;">: 합계 &nbsp;</b></i>
+						<i class="fa fa-square" style="float: right; color: #FF6C6C;"> <b style="color: black; font-size: 14px;">: 합계 &nbsp;</b></i>
 						<i class="fa fa-square" style="float: right; color: #5CD1E5;"> <b style="color: black; font-size: 14px;">: 지출 &nbsp;</b></i>
 						<i class="fa fa-square" style="float: right; color: #6799FF;"> <b style="color: black; font-size: 14px;">: 수입 &nbsp;</b></i>
 						
@@ -539,10 +540,10 @@
               label: "여성",
               fillColor: "#FFC6C6", // 그래프 바탕
               strokeColor: "#FFC6C6", //위 쪽 그래프 구분선
-              pointColor: "#FF4848", //점
+              pointColor: "#FF6C6C", //점
               pointStrokeColor: "#FFF", //점 테두리
               pointHighlightFill: "#FFC6C6", // 마우스 오버시 점
-              pointHighlightStroke: "#FF4848", // 마우스 오버시 점 테두리
+              pointHighlightStroke: "#FF6C6C", // 마우스 오버시 점 테두리
               data: [januaryWoman
             	  , februaryWoman
             	  , marchWoman
@@ -563,7 +564,7 @@
           //Boolean - 가로 세로 값
           showScale: true,
           //Boolean - 가로 세로 격자 눈금 
-          scaleShowGridLines: false,
+          scaleShowGridLines: true,
           //String - Colour of the grid lines
           scaleGridLineColor: "4B0000",
           //Number - Width of the grid lines
@@ -825,7 +826,7 @@
                  pointColor: "#B2EBF4", //점
                  pointStrokeColor: "#FFF", //점 테두리
                  pointHighlightFill: "#FFC6C6", // 마우스 오버시 점
-                 pointHighlightStroke: "#FF4848", // 마우스 오버시 점 테두리
+                 pointHighlightStroke: "#FF6C6C", // 마우스 오버시 점 테두리
                  data: [-januaryExpense
     	         	  , -februaryExpense
     	         	  , -marchExpense
@@ -841,9 +842,9 @@
              },
              {
               label: "합계",
-              fillColor: "#CEF279", // 그래프 바탕
-              strokeColor: "#CEF279", //위 쪽 그래프 구분선
-              pointColor: "#CEF279", //점
+              fillColor: "#FF6C6C", // 그래프 바탕
+              strokeColor: "#FF6C6C", //위 쪽 그래프 구분선
+              pointColor: "#FF6C6C", //점
               pointStrokeColor: "#FFF", //점 테두리
               pointHighlightFill: "#BFFFB8", // 마우스 오버시 점
               pointHighlightStroke: "#1DDB16", // 마우스 오버시 점 테두리

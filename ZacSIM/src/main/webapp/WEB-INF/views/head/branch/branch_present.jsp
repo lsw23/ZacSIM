@@ -53,9 +53,6 @@
 				<div class="col-sm-7">
 					<c:forEach var="l" items="${list}">
 						<div class="table-responsive">
-							<h2>
-								<i class="fa fa-info">_</i>
-							</h2>
 							<h3>${l.branch_nm}</h3>
 							<table class="table">
 								<tbody>
@@ -69,11 +66,11 @@
 									</tr>
 									<tr>
 										<td><div class="circle blue-bg"></div></td>
-										<td><label>사업자번호: ${l.owner_num}</label>
-										<td>
+										<td><label>사업자번호: ${l.owner_num}</label><td>
 									</tr>
 								</tbody>
 							</table>
+							<br>
 						</div>
 					</c:forEach>
 				</div>
@@ -116,10 +113,13 @@ var positions = [
         latlng: new daum.maps.LatLng(35.850013, 127.161777)
     },
     {
-        content: '<div>광주점</div>', 
-        latlng: new daum.maps.LatLng(35.165509, 126.909168)
+        content: '<div>신림점</div>', 
+        latlng: new daum.maps.LatLng(37.460450, 126.953609)
+    },
+    {
+        content: '<div>가양점</div>', 
+        latlng: new daum.maps.LatLng(36.341096, 127.442456)
     }
-   
 ];
 
 for (var i = 0; i < positions.length; i ++) {
